@@ -735,8 +735,8 @@ class Output(BaseModel):
     """
     output_to_vtk: bool = True
     output_displacement: bool = True
-    output_stress: bool = False
-    output_relative_volume: bool = False
+    output_stress: bool = True
+    output_relative_volume: bool = True
     extra_vars: list[str] = []
 
     def to_xml(self, parent, filepath: Path):

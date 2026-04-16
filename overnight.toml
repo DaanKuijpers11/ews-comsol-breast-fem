@@ -1,0 +1,166 @@
+[model.mesh]
+ls = 0.003
+density = 180
+optimize = true
+order = 2
+
+[model.geometry]
+radius = 0.07
+thickness_chest_wall = 0.002
+left_relative_position_ellipse = 0.4
+right_relative_position_ellipse = 0.05
+center_relative_position_ellipse = 0.3
+
+
+# -------------------------
+# MATERIAL (unchanged)
+# -------------------------
+[material.skin]
+density = 1100.0
+bulk_modulus = 480000.0
+pressure_model = "default"
+coef1 = 1200.0
+coef2 = 1200.0
+
+[material.adipose]
+density = 911.0
+bulk_modulus = 425000.0
+pressure_model = "default"
+coef1 = 109.0
+coef2 = 106.0
+
+[material.glandular]
+density = 1041.0
+bulk_modulus = 425000.0
+pressure_model = "default"
+coef1 = 230.0
+coef2 = 195.0
+
+
+# -------------------------
+# IMPORTANT: NUMERICAL STABILITY
+# -------------------------
+
+[simulation.control_step1]
+analysis = "STATIC"
+time_steps = 20.0
+step_size = 0.05
+plot_zero_state = "1"
+plot_range = "0,-1"
+plot_level = "PLOT_MUST_POINTS"
+output_level = "OUTPUT_MUST_POINTS"
+plot_stride = "1"
+output_stride = "1"
+adaptor_re_solve = "1"
+
+
+[simulation.timestepper_step1]
+max_retries = 60.0
+opt_iter = 20.0
+dtmin = 1e-5
+dtmax = 0.05
+aggressiveness = 0.0
+cutback = 0.25
+dtforce = 0.0
+
+
+[simulation.solver_step1]
+symmetric_stiffness = "symmetric"
+equation_scheme = "staggered"
+equation_order = "default"
+
+optimize_bw = 1.0
+lstol = 0.8
+lsmin = 0.01
+lsiter = 10.0
+
+max_refs = 30.0
+reform_each_time_step = 1.0
+diverge_reform = 1.0
+
+dtol = 0.0005
+etol = 0.005
+
+rhoi = -1.5
+alpha = 0.5
+beta = 0.25
+gamma = 0.25
+
+min_residual = 1e-20
+
+
+[simulation.qnmethod_step1]
+max_ups = 20.0
+cycle_buffer = 1.0
+cmax = 200000.0
+
+
+# -------------------------
+# DYNAMIC PHASE (IMPORTANT)
+# -------------------------
+
+[simulation.control_step2]
+analysis = "DYNAMIC"
+time_steps = 300.0
+step_size = 0.0015
+plot_zero_state = "1"
+plot_range = "0,-1"
+plot_level = "PLOT_MUST_POINTS"
+output_level = "OUTPUT_MUST_POINTS"
+plot_stride = "1"
+output_stride = "1"
+
+
+[simulation.timestepper_step2]
+max_retries = 60.0
+opt_iter = 20.0
+dtmin = 1e-6
+dtmax = 0.0015
+cutback = 0.2
+
+
+[simulation.solver_step2]
+symmetric_stiffness = "symmetric"
+equation_scheme = "staggered"
+
+optimize_bw = 1.0
+lstol = 0.8
+lsiter = 10.0
+
+reform_each_time_step = 1.0
+diverge_reform = 1.0
+
+dtol = 0.0005
+etol = 0.005
+rhoi = -1.5
+
+
+[simulation.qnmethod_step2]
+max_ups = 20.0
+cycle_buffer = 1.0
+cmax = 200000.0
+
+
+# -------------------------
+# PHYSICS HELPERS
+# -------------------------
+
+[simulation.gravity]
+n_steps = 50
+
+[simulation.parabolic_jump]
+max_height = 0.005
+n_steps = 120
+
+
+[simulation.animation]
+fps = 40
+dtmax = 0.005
+
+
+[simulation.output]
+output_to_vtk = true
+output_displacement = true
+output_stress = true
+output_relative_volume = true
+extra_vars = ["J", "strain", "stress"]

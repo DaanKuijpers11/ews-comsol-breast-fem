@@ -9,3 +9,110 @@
 2026-04-16 11:24:22,090 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
 # Finished, checking all result files
 2026-04-16 11:24:22,090 [INFO] ews_fem_pipeline.run_simulation.febio_runner: config.feb terminated unsuccessfully in 20.5753 seconds.
+2026-04-16 11:59:21,146 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-16 11:59:21,158 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-16 11:59:21,158 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-16 11:59:21,158 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-16 13:00:47,223 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-16 13:00:47,239 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-16 13:00:47,239 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-16 13:00:47,239 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-16 13:03:25,479 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-16 13:03:25,479 [INFO] ews_fem_pipeline.run_simulation.febio_runner: config.feb terminated unsuccessfully in 158.124 seconds.
+2026-04-16 13:23:27,886 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh generated:
+2026-04-16 13:23:27,886 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Nodes: 5064
+2026-04-16 13:23:27,886 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Skin elements: 669
+2026-04-16 13:23:27,886 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Glandular elements: 514
+2026-04-16 13:23:27,886 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Adipose elements: 2498
+2026-04-16 13:23:27,997 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-16 13:23:27,997 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-16 13:23:27,997 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-16 13:23:27,997 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-16 13:29:08,241 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Initializing mesh generation...
+2026-04-16 13:29:08,241 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: GMSH initialized and model created
+2026-04-16 13:29:08,241 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 1: Constructing 2D breast quadrant geometry
+2026-04-16 13:29:08,241 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 2: Secondary geometry constructed
+2026-04-16 13:29:08,241 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 3: Chest wall geometry added
+2026-04-16 13:29:08,257 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 4: Geometry fragmentation completed
+2026-04-16 13:29:08,257 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Entities found -> points: 11, lines: 15, surfaces: 6
+2026-04-16 13:29:08,257 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 5: Cleanup of intermediate geometry completed
+2026-04-16 13:29:08,257 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 6: Starting 3D revolution
+2026-04-16 13:29:08,257 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 7: 3D geometry revolution completed
+2026-04-16 13:29:08,257 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 8: Tissue volumes assigned
+2026-04-16 13:29:08,289 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 9: Geometry synchronized for meshing
+2026-04-16 13:29:08,289 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 10: Generating mesh
+2026-04-16 13:29:08,352 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 11: Mesh generation completed
+2026-04-16 13:29:08,368 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 12: Optimizing mesh (order=2)
+2026-04-16 13:29:28,609 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 13: Mesh optimization completed
+2026-04-16 13:29:28,609 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 14: Assigning elements to tissues
+2026-04-16 13:29:28,609 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Processing tissue: skin
+2026-04-16 13:29:28,609 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   skin: elements assigned
+2026-04-16 13:29:28,609 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Processing tissue: chest
+2026-04-16 13:29:28,609 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   chest: elements assigned
+2026-04-16 13:29:28,609 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Processing tissue: adipose
+2026-04-16 13:29:28,609 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   adipose: elements assigned
+2026-04-16 13:29:28,609 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Processing tissue: glandular
+2026-04-16 13:29:28,609 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   glandular: elements assigned
+2026-04-16 13:29:28,624 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Step 15: Extracting global nodes
+2026-04-16 13:29:28,624 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh summary -> nodes: 5064
+2026-04-16 13:29:28,624 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   skin elements: 669
+2026-04-16 13:29:28,625 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   glandular elements: 514
+2026-04-16 13:29:28,625 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   adipose elements: 2498
+2026-04-16 13:29:28,626 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh generation finished successfully
+2026-04-16 13:29:28,709 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-16 13:29:28,726 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-16 13:29:28,727 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-16 13:29:28,727 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-16 13:35:20,803 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-16 13:35:20,803 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 3012
+2026-04-16 13:35:20,803 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.1920
+2026-04-16 13:35:20,803 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.3923
+2026-04-16 13:35:20,803 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9822
+2026-04-16 13:35:20,803 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-16 13:35:20,898 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-16 13:35:20,898 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-16 13:35:20,914 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-16 13:35:20,914 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-16 13:35:48,234 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-16 13:35:48,234 [INFO] ews_fem_pipeline.run_simulation.febio_runner: config.feb terminated unsuccessfully in 27.2832 seconds.
+2026-04-16 13:59:31,290 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-16 13:59:31,290 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 3012
+2026-04-16 13:59:31,290 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.1920
+2026-04-16 13:59:31,290 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.3923
+2026-04-16 13:59:31,290 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9822
+2026-04-16 13:59:31,290 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-16 13:59:31,386 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-16 13:59:31,402 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-16 13:59:31,402 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-16 13:59:31,402 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-16 13:59:54,924 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-16 13:59:54,924 [INFO] ews_fem_pipeline.run_simulation.febio_runner: config.feb terminated unsuccessfully in 23.4678 seconds.
+2026-04-16 14:17:10,165 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-16 14:17:10,165 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 3012
+2026-04-16 14:17:10,165 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.1920
+2026-04-16 14:17:10,165 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.3923
+2026-04-16 14:17:10,165 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9822
+2026-04-16 14:17:10,165 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-16 14:17:10,269 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-16 14:17:10,271 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-16 14:17:10,271 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-16 14:17:10,271 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-16 14:17:34,104 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-16 14:17:34,104 [INFO] ews_fem_pipeline.run_simulation.febio_runner: config.feb terminated unsuccessfully in 23.7817 seconds.
+2026-04-16 14:42:50,505 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-16 14:42:50,505 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 3012
+2026-04-16 14:42:50,505 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.1920
+2026-04-16 14:42:50,505 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.3923
+2026-04-16 14:42:50,505 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9822
+2026-04-16 14:42:50,505 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-16 14:42:50,616 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-16 14:42:50,616 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-16 14:42:50,616 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-16 14:42:50,616 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-16 14:43:14,186 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-16 14:43:14,186 [INFO] ews_fem_pipeline.run_simulation.febio_runner: config.feb terminated unsuccessfully in 23.5144 seconds.

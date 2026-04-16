@@ -1,6 +1,6 @@
 [model.mesh]
 ls = 0.005
-density = 150
+density = 100
 optimize = true
 order = 2
 
@@ -155,7 +155,7 @@ cycle_buffer = 1.0
 cmax = 100000.0
 
 [simulation.gravity]
-n_steps = 30 
+n_steps = 100 
 
 [simulation.parabolic_jump]
 max_height = 0.01
@@ -168,9 +168,9 @@ dtmax = 0.01
 [simulation.output]
 output_to_vtk = true
 output_displacement = true
-output_stress = false
-output_relative_volume = false
-extra_vars = []
+output_stress = true
+output_relative_volume = true
+extra_vars = ["relative volume", "Lagrange strain", "c1", "c2", "density"]
 
 [material.skin.hetero]
 enabled = false
@@ -189,9 +189,9 @@ radial_alpha_c2 = 0.0
 radial_alpha_rho = 0.0
 
 [material.glandular.hetero]
-enabled = false
+enabled = true
 lobules = []
-radial_L = 0.02
-radial_alpha_c1 = 0.0
-radial_alpha_c2 = 0.0
-radial_alpha_rho = 0.0
+radial_L = 0.03
+radial_alpha_c1 = 0.5
+radial_alpha_c2 = 0.5
+radial_alpha_rho = 0.2
