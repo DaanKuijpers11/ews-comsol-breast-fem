@@ -1,0 +1,11 @@
+2026-04-16 11:21:51,245 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-16 11:21:51,245 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-16 11:21:51,252 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-16 11:21:51,252 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-16 11:24:01,461 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-16 11:24:01,461 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-16 11:24:01,461 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-16 11:24:01,461 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-16 11:24:22,090 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-16 11:24:22,090 [INFO] ews_fem_pipeline.run_simulation.febio_runner: config.feb terminated unsuccessfully in 20.5753 seconds.
