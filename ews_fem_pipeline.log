@@ -116,3 +116,510 @@
 2026-04-16 14:43:14,186 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
 # Finished, checking all result files
 2026-04-16 14:43:14,186 [INFO] ews_fem_pipeline.run_simulation.febio_runner: config.feb terminated unsuccessfully in 23.5144 seconds.
+2026-04-17 09:35:28,372 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-17 09:35:28,375 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 17549
+2026-04-17 09:35:28,377 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.2564
+2026-04-17 09:35:28,377 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.0690
+2026-04-17 09:35:28,377 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9920
+2026-04-17 09:35:28,379 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-17 09:35:28,937 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-17 09:35:28,939 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-17 09:35:28,939 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running overnight.feb
+2026-04-17 09:35:28,939 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\overnight.feb
+2026-04-17 09:35:29,305 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-17 09:35:29,305 [INFO] ews_fem_pipeline.run_simulation.febio_runner: overnight.feb terminated unexpectedly (no termination state found).
+2026-04-17 09:36:11,093 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-17 09:36:11,093 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 8207
+2026-04-17 09:36:11,093 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.3704
+2026-04-17 09:36:11,093 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.0517
+2026-04-17 09:36:11,093 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9864
+2026-04-17 09:36:11,093 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-17 09:36:11,359 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-17 09:36:11,363 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-17 09:36:11,363 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running overnight_hetero.feb
+2026-04-17 09:36:11,363 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\overnight_hetero.feb
+2026-04-17 09:39:31,891 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-17 09:39:31,891 [INFO] ews_fem_pipeline.run_simulation.febio_runner: overnight_hetero.feb terminated successfully in 200.433 seconds.
+2026-04-17 09:39:31,891 [INFO] ews_fem_pipeline.convert_simulation.feb_to_blender: Found 5 .vtk files
+2026-04-17 09:39:33,221 [DEBUG] matplotlib: matplotlib data path: C:\Users\20223231\.conda\envs\ews-fem\Lib\site-packages\matplotlib\mpl-data
+2026-04-17 09:39:33,252 [DEBUG] matplotlib: CONFIGDIR=C:\Users\20223231\.matplotlib
+2026-04-17 09:39:33,253 [DEBUG] matplotlib: interactive is False
+2026-04-17 09:39:33,253 [DEBUG] matplotlib: platform is win32
+2026-04-17 09:39:33,285 [DEBUG] matplotlib: CACHEDIR=C:\Users\20223231\.matplotlib
+2026-04-17 09:39:33,285 [DEBUG] matplotlib.font_manager: Using fontManager instance from C:\Users\20223231\.matplotlib\fontlist-v390.json
+2026-04-17 09:39:34,304 [INFO] ews_fem_pipeline.convert_simulation.feb_to_blender: Saving unperturbed mesh as .obj file at: C:\Users\20223231\ews_fem_clean\output\overnight_hetero.obj.
+2026-04-17 09:39:34,935 [INFO] ews_fem_pipeline.convert_simulation.feb_to_blender: Saving displacements: C:\Users\20223231\ews_fem_clean\output\overnight_hetero.npy.
+2026-04-17 09:46:23,250 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-17 09:46:23,250 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 23752
+2026-04-17 09:46:23,250 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.2096
+2026-04-17 09:46:23,250 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.0475
+2026-04-17 09:46:23,250 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9935
+2026-04-17 09:46:23,250 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-17 09:46:23,948 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-17 09:46:23,964 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-17 09:46:23,969 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running overnight_hetero_zwaar.feb
+2026-04-17 09:46:23,969 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\overnight_hetero_zwaar.feb
+2026-04-17 09:46:24,591 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-17 09:46:24,591 [INFO] ews_fem_pipeline.run_simulation.febio_runner: overnight_hetero_zwaar.feb terminated unexpectedly (no termination state found).
+2026-04-17 10:29:11,963 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-17 10:29:11,963 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 12182
+2026-04-17 10:29:11,963 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.2785
+2026-04-17 10:29:11,963 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.0017
+2026-04-17 10:29:11,963 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9898
+2026-04-17 10:29:11,963 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-17 10:29:12,319 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-17 10:29:12,323 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-17 10:29:12,325 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running overnight_hetero_zwaar.feb
+2026-04-17 10:29:12,325 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\overnight_hetero_zwaar.feb
+2026-04-17 10:33:13,174 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-17 10:33:13,174 [INFO] ews_fem_pipeline.run_simulation.febio_runner: overnight_hetero_zwaar.feb terminated successfully in 240.567 seconds.
+2026-04-17 10:33:13,174 [INFO] ews_fem_pipeline.convert_simulation.feb_to_blender: Found 4 .vtk files
+2026-04-17 10:33:14,597 [DEBUG] matplotlib: matplotlib data path: C:\Users\20223231\.conda\envs\ews-fem\Lib\site-packages\matplotlib\mpl-data
+2026-04-17 10:33:14,609 [DEBUG] matplotlib: CONFIGDIR=C:\Users\20223231\.matplotlib
+2026-04-17 10:33:14,609 [DEBUG] matplotlib: interactive is False
+2026-04-17 10:33:14,609 [DEBUG] matplotlib: platform is win32
+2026-04-17 10:33:14,659 [DEBUG] matplotlib: CACHEDIR=C:\Users\20223231\.matplotlib
+2026-04-17 10:33:14,665 [DEBUG] matplotlib.font_manager: Using fontManager instance from C:\Users\20223231\.matplotlib\fontlist-v390.json
+2026-04-17 10:33:15,610 [INFO] ews_fem_pipeline.convert_simulation.feb_to_blender: Saving unperturbed mesh as .obj file at: C:\Users\20223231\ews_fem_clean\output\overnight_hetero_zwaar.obj.
+2026-04-17 10:33:16,344 [INFO] ews_fem_pipeline.convert_simulation.feb_to_blender: Saving displacements: C:\Users\20223231\ews_fem_clean\output\overnight_hetero_zwaar.npy.
+2026-04-17 19:14:18,695 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-17 19:14:18,695 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 23471
+2026-04-17 19:14:18,695 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.2091
+2026-04-17 19:14:18,695 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.0475
+2026-04-17 19:14:18,695 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9933
+2026-04-17 19:14:18,695 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-17 19:14:19,441 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-17 19:14:19,441 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-17 19:14:19,441 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-17 19:14:19,441 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-17 19:14:20,027 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-17 19:14:20,027 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-17 19:16:31,277 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-17 19:16:31,277 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 23471
+2026-04-17 19:16:31,277 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.2091
+2026-04-17 19:16:31,277 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.0475
+2026-04-17 19:16:31,277 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9933
+2026-04-17 19:16:31,277 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-17 19:16:32,023 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-17 19:16:32,039 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-17 19:16:32,039 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-17 19:16:32,039 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-17 19:16:32,449 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-17 19:16:32,449 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 09:13:00,879 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 09:13:00,879 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 23471
+2026-04-20 09:13:00,879 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 0.2091
+2026-04-20 09:13:00,879 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 0.9933
+2026-04-20 09:13:00,879 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 09:13:00,879 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 09:13:00,879 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 09:13:01,615 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 09:13:01,615 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 09:13:01,615 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 09:13:01,615 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 09:13:02,183 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 09:13:02,183 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 09:27:45,992 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 09:27:45,992 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 23471
+2026-04-20 09:27:45,992 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 1.0000
+2026-04-20 09:27:45,992 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 1.0000
+2026-04-20 09:27:45,992 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 09:27:45,992 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 09:27:45,992 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 09:27:46,245 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 09:27:46,250 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 09:27:46,250 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 09:27:46,250 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 09:27:46,356 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 09:27:46,356 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 09:45:59,183 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 09:45:59,184 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 22675
+2026-04-20 09:45:59,184 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 1.0000
+2026-04-20 09:45:59,184 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 1.0000
+2026-04-20 09:45:59,184 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 09:45:59,185 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 09:45:59,186 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 09:50:09,269 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 09:50:09,269 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 22675
+2026-04-20 09:50:09,269 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 1.0000
+2026-04-20 09:50:09,269 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 1.0000
+2026-04-20 09:50:09,269 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 09:50:09,269 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 09:50:09,269 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 09:53:16,790 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 09:53:16,796 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 22675
+2026-04-20 09:53:16,796 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 1.0000
+2026-04-20 09:53:16,797 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 1.0000
+2026-04-20 09:53:16,797 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 09:53:16,797 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 09:53:16,797 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 09:54:24,907 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 09:54:24,907 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 23471
+2026-04-20 09:54:24,907 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 0.2091
+2026-04-20 09:54:24,907 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 0.9933
+2026-04-20 09:54:24,907 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 09:54:24,907 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 09:54:24,907 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 09:54:25,637 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 09:54:25,637 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 09:54:25,637 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 09:54:25,637 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 09:54:26,030 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 09:54:26,030 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 10:01:03,119 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 10:01:03,119 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 23471
+2026-04-20 10:01:03,119 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 0.2091
+2026-04-20 10:01:03,119 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 0.9933
+2026-04-20 10:01:03,119 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 10:01:03,119 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 10:01:03,119 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 10:01:03,869 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 10:01:03,869 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 10:01:03,869 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 10:01:03,884 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 10:01:04,274 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 10:01:04,274 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 10:09:41,877 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 10:09:41,893 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 23471
+2026-04-20 10:09:41,893 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: -10.1043
+2026-04-20 10:09:41,893 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 0.9929
+2026-04-20 10:09:41,893 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 1
+2026-04-20 10:09:41,893 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 1
+2026-04-20 10:09:41,893 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0043%
+2026-04-20 10:09:41,893 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: 1 inverted elements detected (0.004%). Simulation may be unstable.
+2026-04-20 10:09:41,893 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: 1 low-quality elements detected (<0.1).
+2026-04-20 10:09:42,638 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 10:09:42,638 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 10:09:42,638 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 10:09:42,638 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 10:09:42,981 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 10:09:42,981 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 10:17:20,136 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 10:17:20,136 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 23471
+2026-04-20 10:17:20,136 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: -10.1043
+2026-04-20 10:17:20,136 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 0.9929
+2026-04-20 10:17:20,136 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 1
+2026-04-20 10:17:20,136 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 1
+2026-04-20 10:17:20,136 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0043%
+2026-04-20 10:17:20,136 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: 1 inverted elements detected (0.004%). Simulation may be unstable.
+2026-04-20 10:17:20,136 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: 1 low-quality elements detected (<0.1).
+2026-04-20 10:17:20,881 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 10:17:20,881 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 10:17:20,881 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 10:17:20,881 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 10:17:21,228 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 10:17:21,228 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 10:18:22,474 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 10:18:22,474 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 23471
+2026-04-20 10:18:22,474 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 1.0000
+2026-04-20 10:18:22,474 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 1.0000
+2026-04-20 10:18:22,474 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 10:18:22,474 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 10:18:22,474 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 10:18:22,712 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 10:18:22,712 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 10:18:22,712 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 10:18:22,712 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 10:18:22,760 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 10:18:22,760 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 10:20:19,572 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 10:20:19,572 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 12182
+2026-04-20 10:20:19,572 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 0.2785
+2026-04-20 10:20:19,572 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 0.9898
+2026-04-20 10:20:19,572 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 10:20:19,572 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 10:20:19,572 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 10:20:19,938 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 10:20:19,938 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 10:20:19,938 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running overnight_hetero_zwaar.feb
+2026-04-20 10:20:19,938 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\overnight_hetero_zwaar.feb
+2026-04-20 10:26:10,479 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 10:26:10,479 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 23471
+2026-04-20 10:26:10,479 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 1.0000
+2026-04-20 10:26:10,479 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 1.0000
+2026-04-20 10:26:10,479 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 10:26:10,479 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 10:26:10,479 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 10:26:10,701 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 10:26:10,717 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 10:26:10,717 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 10:26:10,717 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 10:26:10,765 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 10:26:10,765 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 10:27:25,333 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 10:27:25,333 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 3012
+2026-04-20 10:27:25,333 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: -0.3506
+2026-04-20 10:27:25,333 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 0.9689
+2026-04-20 10:27:25,333 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 2
+2026-04-20 10:27:25,333 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 4
+2026-04-20 10:27:25,333 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0664%
+2026-04-20 10:27:25,333 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: 2 inverted elements detected (0.066%). Simulation may be unstable.
+2026-04-20 10:27:25,333 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: 4 low-quality elements detected (<0.1).
+2026-04-20 10:27:25,427 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 10:27:25,442 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 10:27:25,442 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 10:27:25,442 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 10:27:25,535 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 10:27:25,535 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 10:30:18,994 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 10:30:18,994 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 23471
+2026-04-20 10:30:18,994 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: -10.1043
+2026-04-20 10:30:18,994 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 0.9929
+2026-04-20 10:30:18,994 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 1
+2026-04-20 10:30:18,994 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 1
+2026-04-20 10:30:18,994 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0043%
+2026-04-20 10:30:18,994 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: 1 inverted elements detected (0.004%). Simulation may be unstable.
+2026-04-20 10:30:18,994 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: 1 low-quality elements detected (<0.1).
+2026-04-20 10:30:19,642 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 10:30:19,642 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 10:30:19,642 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 10:30:19,642 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 10:30:19,988 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 10:30:19,988 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 10:47:10,220 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 10:47:10,220 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 23471
+2026-04-20 10:47:10,220 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: -10.1043
+2026-04-20 10:47:10,220 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 0.9929
+2026-04-20 10:47:10,220 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 1
+2026-04-20 10:47:10,220 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 1
+2026-04-20 10:47:10,220 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0043%
+2026-04-20 10:47:10,220 [ERROR] ews_fem_pipeline.prepare_simulation.generate_mesh: Worst element index (local): 22599
+2026-04-20 10:47:10,220 [ERROR] ews_fem_pipeline.prepare_simulation.generate_mesh: Worst quality value: -10.104298823012464
+2026-04-20 10:47:10,236 [ERROR] ews_fem_pipeline.prepare_simulation.generate_mesh: Node IDs of worst element: 15594
+2026-04-20 10:47:10,236 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: 1 inverted elements detected (0.004%). Simulation may be unstable.
+2026-04-20 10:47:10,236 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: 1 low-quality elements detected (<0.1).
+2026-04-20 10:47:39,430 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 10:47:39,430 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 23471
+2026-04-20 10:47:39,430 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: -10.1043
+2026-04-20 10:47:39,430 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 0.9929
+2026-04-20 10:47:39,430 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 1
+2026-04-20 10:47:39,430 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 1
+2026-04-20 10:47:39,430 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0043%
+2026-04-20 10:47:39,430 [ERROR] ews_fem_pipeline.prepare_simulation.generate_mesh: Worst element index (local): 22599
+2026-04-20 10:47:39,430 [ERROR] ews_fem_pipeline.prepare_simulation.generate_mesh: Worst quality value: -10.104298823012464
+2026-04-20 10:47:39,430 [ERROR] ews_fem_pipeline.prepare_simulation.generate_mesh: Node IDs of worst element: 15594
+2026-04-20 10:47:39,430 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: 1 inverted elements detected (0.004%). Simulation may be unstable.
+2026-04-20 10:47:39,430 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: 1 low-quality elements detected (<0.1).
+2026-04-20 10:56:21,793 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check failed: Unknown quality name 'scaledJacobian'
+2026-04-20 10:59:31,957 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check failed: Unknown quality name 'scaledJacobian'
+2026-04-20 11:01:49,486 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check failed: Unknown quality name 'scaledJacobian'
+2026-04-20 11:04:26,917 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check failed: Unknown quality name 'scaledJacobian'
+2026-04-20 11:06:00,957 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 11:06:00,957 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 7769
+2026-04-20 11:06:00,957 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 1.0000
+2026-04-20 11:06:00,957 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 1.0000
+2026-04-20 11:06:00,957 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 11:06:00,957 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 11:06:00,957 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 11:10:43,073 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 11:10:43,073 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 7769
+2026-04-20 11:10:43,073 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 1.0000
+2026-04-20 11:10:43,073 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 1.0000
+2026-04-20 11:10:43,073 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 11:10:43,073 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 11:10:43,073 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 11:13:52,677 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 11:13:52,677 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 26719
+2026-04-20 11:13:52,677 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 1.0000
+2026-04-20 11:13:52,677 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 1.0000
+2026-04-20 11:13:52,677 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 11:13:52,677 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 11:13:52,677 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 11:14:35,602 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 11:14:35,602 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 11:14:35,602 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 11:14:35,602 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 11:14:35,666 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 11:14:35,666 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 11:17:28,308 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 11:17:28,308 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 26596
+2026-04-20 11:17:28,308 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 1.0000
+2026-04-20 11:17:28,308 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 1.0000
+2026-04-20 11:17:28,308 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 11:17:28,308 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 11:17:28,308 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 11:18:07,836 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 11:18:07,836 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 11:18:07,836 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 11:18:07,836 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 11:18:07,903 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 11:18:07,903 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 11:18:13,964 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 11:18:13,964 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 26596
+2026-04-20 11:18:13,964 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 1.0000
+2026-04-20 11:18:13,964 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 1.0000
+2026-04-20 11:18:13,964 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 11:18:13,964 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 11:18:13,964 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 11:23:46,827 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 11:23:46,827 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 26596
+2026-04-20 11:23:46,827 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 1.0000
+2026-04-20 11:23:46,827 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 1.0000
+2026-04-20 11:23:46,827 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 11:23:46,827 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 11:23:46,827 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 11:33:04,974 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 11:33:04,976 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 11:33:04,976 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 11:33:04,976 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 13:41:00,655 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 13:41:00,655 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 13:41:00,655 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 13:41:00,655 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 13:44:17,106 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 13:44:17,108 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 26596
+2026-04-20 13:44:17,108 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min scaled Jacobian: 1.0000
+2026-04-20 13:44:17,108 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean scaled Jacobian: 1.0000
+2026-04-20 13:44:17,108 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted elements (SJ < 0): 0
+2026-04-20 13:44:17,108 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (SJ < 0.1): 0
+2026-04-20 13:44:17,108 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Inverted ratio: 0.0000%
+2026-04-20 13:58:26,806 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Element type 11 has 10 nodes
+2026-04-20 13:58:27,154 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Min SJ: 0.9713
+2026-04-20 13:58:27,154 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mean SJ: 0.9999
+2026-04-20 14:00:11,219 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Element type 11 has 10 nodes
+2026-04-20 14:00:11,584 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Min SJ: 0.9713
+2026-04-20 14:00:11,584 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mean SJ: 0.9999
+2026-04-20 14:01:27,805 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Element type 11 has 10 nodes
+2026-04-20 14:01:28,168 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Min SJ: 0.9713
+2026-04-20 14:01:28,168 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mean SJ: 0.9999
+2026-04-20 14:05:02,404 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Element type 11 has 10 nodes
+2026-04-20 14:05:02,767 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Min SJ: 0.9713
+2026-04-20 14:05:02,767 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mean SJ: 0.9999
+2026-04-20 14:09:36,731 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Element type 11 has 10 nodes
+2026-04-20 14:09:37,079 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Min SJ: 0.9713
+2026-04-20 14:09:37,079 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mean SJ: 0.9999
+2026-04-20 14:09:37,364 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: adipose: 215976 elements assigned
+2026-04-20 14:16:15,297 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Element type 11 has 10 nodes
+2026-04-20 14:16:15,641 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Min SJ: 0.9713
+2026-04-20 14:16:15,641 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mean SJ: 0.9999
+2026-04-20 14:16:15,658 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: skin: no tags assigned -> skipping
+2026-04-20 14:16:15,658 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: chest: no tags assigned -> skipping
+2026-04-20 14:16:15,892 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: adipose: 215976 elements assigned
+2026-04-20 14:16:15,892 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: glandular: no tags assigned -> skipping
+2026-04-20 14:19:49,861 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Element type 11 has 10 nodes
+2026-04-20 14:19:50,213 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Min SJ: 0.9713
+2026-04-20 14:19:50,213 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mean SJ: 0.9999
+2026-04-20 14:19:50,220 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: skin: no tags assigned -> skipping
+2026-04-20 14:19:50,220 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: chest: no tags assigned -> skipping
+2026-04-20 14:19:50,455 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: adipose: 215976 elements assigned
+2026-04-20 14:19:50,455 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: glandular: no tags assigned -> skipping
+2026-04-20 14:23:13,475 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: skin: no tags assigned -> skipping
+2026-04-20 14:23:13,475 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: chest: no tags assigned -> skipping
+2026-04-20 14:26:04,580 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Element type 4 has 4 nodes
+2026-04-20 14:26:04,738 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Min SJ: 1.0000
+2026-04-20 14:26:04,738 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mean SJ: 1.0000
+2026-04-20 14:26:04,738 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: skin: no tags assigned -> skipping
+2026-04-20 14:26:04,738 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: chest: no tags assigned -> skipping
+2026-04-20 14:26:04,849 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: adipose: 197678 elements assigned
+2026-04-20 14:26:04,849 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: glandular: 18298 elements assigned
+2026-04-20 14:29:57,391 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Element type 11 has 10 nodes
+2026-04-20 14:29:57,738 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Min SJ: 0.9713
+2026-04-20 14:29:57,738 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mean SJ: 0.9999
+2026-04-20 14:29:57,754 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: skin: no tags assigned -> skipping
+2026-04-20 14:29:57,754 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: chest: no tags assigned -> skipping
+2026-04-20 14:29:57,975 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: adipose: 197678 elements assigned
+2026-04-20 14:29:57,991 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: glandular: 18298 elements assigned
+2026-04-20 14:30:50,047 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Element type 11 has 10 nodes
+2026-04-20 14:30:50,396 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Min SJ: 0.9713
+2026-04-20 14:30:50,396 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mean SJ: 0.9999
+2026-04-20 14:30:50,412 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: skin: no tags assigned -> skipping
+2026-04-20 14:30:50,412 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: chest: no tags assigned -> skipping
+2026-04-20 14:30:50,638 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: adipose: 197678 elements assigned
+2026-04-20 14:30:50,650 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: glandular: 18298 elements assigned
+2026-04-20 14:33:45,394 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Surfaces before revolve: [(2, 1), (2, 2)]
+2026-04-20 14:33:45,394 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Volumes after revolve: [(3, 1), (3, 2)]
+2026-04-20 14:33:51,445 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: adipose: 215976 elements assigned
+2026-04-20 14:39:26,664 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Surfaces before revolve: [(2, 1), (2, 2)]
+2026-04-20 14:39:26,664 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Volumes after revolve: [(3, 1), (3, 2)]
+2026-04-20 14:39:32,764 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: adipose: 215976 elements assigned
+2026-04-20 14:39:38,322 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 14:39:38,322 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 14:39:38,322 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 14:39:38,322 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 14:39:39,176 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 14:39:39,176 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 14:47:09,785 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Detected element type nodes: 4
+2026-04-20 14:47:09,800 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: skin: no tags assigned -> skipping
+2026-04-20 14:47:09,895 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: chest: 197678 elements assigned
+2026-04-20 14:47:09,911 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: adipose: 18298 elements assigned
+2026-04-20 14:47:09,911 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: glandular: no tags assigned -> skipping
+2026-04-20 14:47:11,433 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 14:47:11,433 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 14:47:11,450 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 14:47:11,450 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 14:47:11,592 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 14:47:11,592 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 14:52:14,794 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Element nodes detected: 4
+2026-04-20 14:52:14,794 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: skin: no tags assigned -> skipping
+2026-04-20 14:52:14,890 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: chest: 197678 elements assigned
+2026-04-20 14:52:14,906 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: adipose: 18298 elements assigned
+2026-04-20 14:52:14,906 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: glandular: no tags assigned -> skipping
+2026-04-20 14:52:16,423 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 14:52:16,439 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 14:52:16,439 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 14:52:16,439 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 14:52:16,582 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 14:52:16,598 [INFO] ews_fem_pipeline.run_simulation.febio_runner: gradient_lobules_6_fine_mesh.feb terminated unexpectedly (no termination state found).
+2026-04-20 14:55:58,070 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Element nodes detected: 4
+2026-04-20 14:55:58,070 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: skin: no tags assigned -> skipping
+2026-04-20 14:55:58,102 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: chest: 51827 elements assigned
+2026-04-20 14:55:58,102 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: adipose: 7269 elements assigned
+2026-04-20 14:55:58,102 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: glandular: no tags assigned -> skipping
+2026-04-20 14:55:58,529 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 14:55:58,545 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 14:55:58,545 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running overnight_hetero.feb
+2026-04-20 14:55:58,545 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\overnight_hetero.feb
+2026-04-20 14:55:58,608 [INFO] ews_fem_pipeline.run_simulation.febio_runner: 
+# Finished, checking all result files
+2026-04-20 14:55:58,608 [INFO] ews_fem_pipeline.run_simulation.febio_runner: overnight_hetero.feb most likely didn't run (no log file found).
+2026-04-20 15:05:02,092 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 15:05:02,096 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 15:05:02,096 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running overnight_hetero.feb
+2026-04-20 15:05:02,096 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\overnight_hetero.feb
+2026-04-20 15:07:48,508 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 15:07:48,508 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 15:07:48,508 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 15:07:48,508 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb
+2026-04-20 15:31:20,580 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: Unexpected number of volumes after revolve
+2026-04-20 15:31:59,199 [WARNING] ews_fem_pipeline.prepare_simulation.generate_mesh: Unexpected number of volumes after revolve
+2026-04-20 16:40:03,992 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 16:40:03,992 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 8207
+2026-04-20 16:40:03,992 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.3704
+2026-04-20 16:40:03,992 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.0517
+2026-04-20 16:40:03,992 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9864
+2026-04-20 16:40:03,992 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-20 16:40:04,261 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 16:40:04,263 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 16:40:04,266 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running overnight_hetero.feb
+2026-04-20 16:40:04,266 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\overnight_hetero.feb
+2026-04-20 16:42:44,854 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-20 16:42:44,854 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 80963
+2026-04-20 16:42:44,854 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.1917
+2026-04-20 16:42:44,869 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.0535
+2026-04-20 16:42:44,869 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9972
+2026-04-20 16:42:44,869 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-20 16:42:46,999 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-20 16:42:46,999 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-20 16:42:46,999 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running gradient_lobules_6_fine_mesh.feb
+2026-04-20 16:42:46,999 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\gradient_lobules_6_fine_mesh.feb

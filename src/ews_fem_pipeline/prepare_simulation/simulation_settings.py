@@ -461,6 +461,8 @@ def write_elements_to_xml(parent, mesh):
         else:
             elem_elem = ET.SubElement(parent, 'Elements', type=tissue.type, name=tissue.name)
             for i in range(len(tissue.elements)):
+                if tissue.elements is None:
+                    continue
                 tag = str(tissue.elements[i])
                 if tissue.type == "tet10":
                     # Switch tet10 node order when converting from gmsh to FEBio
@@ -783,6 +785,8 @@ class Output(BaseModel):
                 else:
                     field_ref = f"mesh data['{var_name}']"
                 ET.SubElement(Outfile, "var", type=field_ref)
+
+
 
 
 def write_xml(root, filepath: Path):

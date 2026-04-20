@@ -1,67 +1,100 @@
 """
-Configuration file for breast biomechanics analysis.
+Configuration file for breast biomechanics analysis pipeline.
 
-Defines paths, model directories, analysis parameters, tissue/model labels,
-color schemes, and literature reference values for use throughout the pipeline.
+This file defines:
+- Project paths (robust across machines)
+- Input/output structure for simulation runs
+- Model definitions for comparison
+- Analysis parameters (steps, landmarks)
+- Visualization settings
+- Literature reference values for validation
+
+IMPORTANT:
+All paths are relative to the project root to avoid OS/user-specific issues.
 """
+
 from pathlib import Path
 
-# ==================== PATHS ====================
-BASE_DIR = Path(
-    "/Users/ryanengels/Documents/limebv-ews_fem_pipeline-e5fe835fd1bf")
+# =========================
+# PROJECT ROOT
+# =========================
+# This assumes:
+#   config.py is in scripts/
+#   project root is one level up
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Directories for each model to be compared in the analysis
+
+# =========================
+# INPUT / OUTPUT STRUCTURE
+# =========================
+# Where your FEM runs are stored (IMPORTANT for your overnight runs)
+RUNS_DIR = BASE_DIR / "runs"
+
+# Default output folder for processed results (figures, csv, etc.)
+ANALYSIS_OUTPUT_DIR = BASE_DIR / "analysis_output"
+
+# Optional: central figures directory
+FIGURES_DIR = ANALYSIS_OUTPUT_DIR / "figures"
+
+
+# =========================
+# MODEL INPUTS
+# =========================
+# Each model points to its VTK output directory
+
 MODELS_TO_COMPARE = {
-    "Homogeneous_baseline": BASE_DIR / "output",
-    "Radial_density": BASE_DIR / "heterogeneous_density/output",
-    "Radial_coef": BASE_DIR / "heterogeneous_c/output",
-    "Lobular_only": BASE_DIR / "full_glandular/output",
-    "Heterogeneity_and_lobular": BASE_DIR / "gradient_lobules/output",
-    "full_adipose_density": BASE_DIR / "full_homogeneous_density/output",
-    "full_glandular_density": BASE_DIR / "full_glandular_density/output",
-    "full_density_and_coefs": BASE_DIR / "full_density_and_coefs/output",
-
+    "overnight_hetero": RUNS_DIR / "overnight_hetero/output",
+    #"overnight_hetero_zwaar": RUNS_DIR / "overnight_hetero_zwaar/output",
 }
 
-# ==================== ANALYSIS PARAMETERS ====================
-STEP_MIN = 0         # First time step to include
-STEP_MAX = 20        # Last time step (exclusive)
-STEP = 3             # Time step for landmark tracking
-TARGET_Y = 0.039     # Y-coordinate for extracting horizontal plane landmarks
 
-# ==================== LABELS ====================
-# Tissue type labels by part ID
+# =========================
+# ANALYSIS PARAMETERS
+# =========================
+STEP_MIN = 0          # first timestep included
+STEP_MAX = 20         # last timestep (exclusive)
+STEP = 3              # landmark evaluation timestep
+TARGET_Y = 0.039      # anatomical slice height for landmarks
+
+
+# =========================
+# NUMERICAL / QUALITY FLAGS
+# =========================
+# You can later use this for config scoring
+QUALITY_METRICS_ENABLED = True
+TRACK_INVERTED_ELEMENTS = True
+TRACK_NEGATIVE_J = True
+TRACK_J_DISTRIBUTION = True
+
+
+# =========================
+# TISSUE LABELS
+# =========================
+# Mapping from FEBio part IDs → human-readable names
 TISSUE_LABELS = {
     1: "Glandular",
     2: "Adipose"
 }
 
-# Human-readable model labels for plots and tables
+
+# =========================
+# LABELS (ONLY ACTIVE MODELS)
+# =========================
 MODEL_LABELS = {
-    "Homogeneous_baseline": "Baseline\n(Homogeneous)",
-    "Radial_density": "Radial Gradient\n(Density only)",
-    "Radial_coef": "Radial Gradient\n(coef only)",
-    "Lobular_only": "Lobular\n(Glandular only)",
-    "Heterogeneity_and_lobular": "Full Model\n(Radial + Lobular)",
-    "full_adipose_density": "Adipose-only Density",
-    "full_glandular_density": "Glandular-only Density ",
-    "full_density_and_coefs": "Complete\nHomogeneous",
+    "overnight_hetero": "Heterogeneous Model",
+    # "overnight_hetero_zwaar": "Heavy Heterogeneous Model",
 }
 
-# Color codes for each model (used in visualizations)
 MODEL_COLORS = {
-    "Homogeneous_baseline": "#1f77b4",
-    "Radial_density": "#ff7f0e",
-    "Radial_coef": "#17becf",
-    "Lobular_only": "#2ca02c",
-    "Heterogeneity_and_lobular": "#d62728",
-    "full_adipose_density": "#9467bd",
-    "full_glandular_density": "#8c564b",
-    "full_density_and_coefs": "#e377c2",
+    "overnight_hetero": "#d62728",
+    # "overnight_hetero_zwaar": "#1f77b4",
 }
 
-# ==================== LITERATURE REFERENCE VALUES ====================
-# Reference values from published studies for validation/comparison
+
+
+# =========================
+# LITERATURE REFERENCES
+# =========================
 LITERATURE_REFS = {
     "Chen_2025_Running_6kmh": {
         "Adipose_max_kPa": 10.56,
@@ -79,3 +112,23 @@ LITERATURE_REFS = {
         "vertical_acceleration_g": (2.8, 4.87),
     }
 }
+
+
+# =========================
+# OUTPUT STRUCTURE HELPERS
+# =========================
+def get_model_output_path(model_name: str) -> Path:
+    """Return output directory for a model."""
+    return MODELS_TO_COMPARE[model_name]
+
+
+def get_figures_path(run_name: str = "default") -> Path:
+    """Return figure output directory for a specific run."""
+    path = FIGURES_DIR / run_name
+    path.mkdir(parents=True, exist_ok=True)
+    return path
+
+
+def get_summary_csv_path(model_name: str) -> Path:
+    """Return path for cached summary statistics."""
+    return get_model_output_path(model_name).parent / "summary_statistics.csv"
