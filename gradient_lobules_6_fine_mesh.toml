@@ -12,7 +12,7 @@ right_relative_position_ellipse = 0.05
 center_relative_position_ellipse = 0.3
 
 [model.geometry.asymmetry]
-enabled = false
+enabled = true
 scale_y = 1.0
 scale_z = 1.0
 

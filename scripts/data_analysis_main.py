@@ -19,6 +19,8 @@ import helper_functions as helper
 import visualization as viz
 import config
 
+import os
+
 
 if __name__ == "__main__":
 
@@ -26,9 +28,18 @@ if __name__ == "__main__":
     # SELECT RUN (ONLY CHANGE THIS FOR DIFFERENT EXPERIMENTS)
     # ============================================================
 
-    run_name = "overnight_hetero"
+    # Old way: hardcoded run name
+    # run_name = "overnight_hetero"
+    # vtk_dir = config.MODELS_TO_COMPARE[run_name]
 
-    vtk_dir = config.MODELS_TO_COMPARE[run_name]
+    # New way: select run via env variable (set in run_sweep.py)
+    run_name = os.getenv("RUN_NAME", "sweep_config")
+    vtk_dir = Path("runs") / run_name / "output"
+    config.MODELS_TO_COMPARE = {
+        run_name: vtk_dir
+    }
+
+
     feb_path = vtk_dir.parent / f"{run_name}.feb"
 
     # Output dirs

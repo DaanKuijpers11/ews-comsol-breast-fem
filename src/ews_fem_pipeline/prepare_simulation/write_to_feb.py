@@ -270,5 +270,25 @@ def write_to_feb(filepath: Path, mesh: MeshParts, settings: Settings):
     # Write to .feb #
     #################
 
+    # # ADDED
+    # def sanitize(obj):
+    #     for k, v in vars(obj).items():
+    #         if v is None:
+    #             setattr(obj, k, "")
+
+    # # sanitize all tissues  
+    # tissues = mesh.tissue_parts
+    # for name in tissues.model_fields:
+    #     t = getattr(tissues, name)
+    #     sanitize(t)
+
+    # for name in tissues.model_fields:
+    #     obj = getattr(tissues, name)
+    #     for k, v in vars(obj).items():
+    #         if v is None:
+    #             print(f"[ERROR] {name}.{k} is None")    
+    # # ADDED END
+
+
     write_xml(root=root, filepath=filepath)
 

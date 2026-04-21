@@ -1,6 +1,6 @@
 [model.mesh]
 ls = 0.0025
-density = 300.0
+density = 300
 optimize = true
 order = 2
 
@@ -173,21 +173,12 @@ output_relative_volume = true
 extra_vars = [ "density_map",]
 
 [model.geometry.asymmetry]
-enabled = false
-scale_y = 1.0
-scale_z = 1.0
-
-[material.skin.hetero]
-enabled = false
-lobules = []
-radial_L = 0.02
-radial_alpha_c1 = 0.0
-radial_alpha_c2 = 0.0
-radial_alpha_rho = 0.0
+enabled = true
+scale_y = 0.9
+scale_z = 0.9
 
 [material.adipose.hetero]
 enabled = false
-lobules = []
 radial_center = [ 0.0, 0.0, 0.0,]
 radial_L = 0.055
 radial_alpha_c1 = 0.0
@@ -196,10 +187,6 @@ radial_alpha_rho = 0.0
 
 [material.glandular.hetero]
 enabled = false
-radial_L = 0.02
-radial_alpha_c1 = 0.0
-radial_alpha_c2 = 0.0
-radial_alpha_rho = 0.0
 [[material.glandular.hetero.lobules]]
 center = [ 0.02, 0.048, 0.0,]
 width = 0.005

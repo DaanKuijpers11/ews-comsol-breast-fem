@@ -25,10 +25,26 @@ class FEBField:
     elem_set: str | None = None
     node_set: str | None = None
 
+
     @property
     def xml_dict(self) -> dict:
         return {k: v for k, v in asdict(self).items()
                 if k not in ["tag", "val"] and v is not None}
+
+    # ADDED
+    # @property
+    # def xml_dict(self) -> dict:
+    #     out = {}
+    #     for k, v in asdict(self).items():
+    #         if k in ["tag", "val"]:
+    #             continue
+    #         if v is None:
+    #             print(f"[XML DEBUG] dropping None: {self.tag}.{k}")
+    #             continue
+
+    #         out[k] = str(v)
+
+    #     return out
 
     def to_xml(self, parent):
         kwargs = self.xml_dict
@@ -812,7 +828,30 @@ def write_xml(root, filepath: Path):
     filepath_feb = Path(parent_path / filepath.stem).with_suffix(".feb")
     tree = ET.ElementTree(root)
     ET.indent(tree, space="\t", level=0)
-    tree.write(filepath_feb, encoding="ISO-8859-1")
+    #tree.write(filepath_feb, encoding="ISO-8859-1")
+    tree.write(str(filepath_feb), encoding="ISO-8859-1")
+
+    # ADDED
+    # def clean_none(elem):
+    #     # verwijder None attributes
+    #     if elem.attrib:
+    #         elem.attrib = {k: v for k, v in elem.attrib.items() if v is not None}
+
+    #     # verwijder None children recursively
+    #     for child in list(elem):
+    #         clean_none(child)
+
+    #     # verwijder text=None
+    #     if elem.text is None:
+    #         elem.text = ""
+
+    #     return elem
+
+    # cleaned_root = clean_none(root)
+    # tree = ET.ElementTree(cleaned_root)
+    # tree.write(str(filepath_feb), encoding="ISO-8859-1")
+
+    # ADDED end
 
     return filepath_feb
 

@@ -249,3 +249,12 @@ Reforming stiffness matrix: reformation #1
 	Nr of equations ........................... : 370734
 	Nr of nonzeroes in stiffness matrix ....... : 15693969
  1
+ Nonlinear solution status: time= 0.1
+	stiffness updates             = 0
+	right hand side evaluations   = 2
+	stiffness matrix reformations = 1
+	step from line search         = 1.000000
+	convergence norms :     INITIAL         CURRENT         REQUIRED
+	   residual            8.986418e-06    2.727062e-01    0.000000e+00 
+	   energy              1.153184e-03    2.567238e-04    1.153184e-05 
+	   displacement        4.749381e-01    4.749381e-01    4.749381e-07 

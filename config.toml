@@ -1,6 +1,6 @@
 [model.mesh]
-ls = 0.005
-density = 100
+ls = 0.0025
+density = 300
 optimize = true
 order = 2
 
@@ -10,6 +10,11 @@ thickness_chest_wall = 0.002
 left_relative_position_ellipse = 0.4
 right_relative_position_ellipse = 0.05
 center_relative_position_ellipse = 0.3
+
+[model.geometry.asymmetry]
+enabled = true
+scale_y = 1.0
+scale_z = 1.0
 
 [material.skin]
 density = 1100.0
@@ -25,22 +30,75 @@ pressure_model = "default"
 coef1 = 109.0
 coef2 = 106.0
 
+[material.adipose.hetero]
+enabled = false
+radial_center = [0.0, 0.0, 0.0]
+radial_L = 0.055
+radial_alpha_c1 = 0.0
+radial_alpha_c2 = 0.0
+radial_alpha_rho = 0.0
+
 [material.glandular]
-density = 1041.0
+density = 911.0
 bulk_modulus = 425000.0
 pressure_model = "default"
 coef1 = 230.0
 coef2 = 195.0
 
+[material.glandular.hetero]
+enabled = false
+
+[[material.glandular.hetero.lobules]]
+center = [0.020, 0.048, 0.00]
+width = 0.005
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [0.010, 0.048, 0.01732]
+width = 0.005
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [-0.010, 0.048, 0.01732]
+width = 0.005
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [-0.020, 0.048, 0.00]
+width = 0.005
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [-0.010, 0.048, -0.01732]
+width = 0.005
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [0.010, 0.048, -0.01732]
+width = 0.005
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
 [material.tumor]
 tumorous = false
-density = 1079
+density = 1079.0
 radius = 0.005
-position = [ 0.035, 0.04, 0,]
-coef1_adipose = 971
-coef2_adipose = 939
-coef1_glandular = 920
-coef2_glandular = 870
+position = [ 0.035, 0.04, 0.0,]
+coef1_adipose = 971.0
+coef2_adipose = 939.0
+coef1_glandular = 920.0
+coef2_glandular = 870.0
 
 [simulation.control_step1]
 analysis = "STATIC"
@@ -101,7 +159,7 @@ cmax = 100000.0
 [simulation.control_step2]
 analysis = "DYNAMIC"
 time_steps = 120.0
-step_size = 0.001          
+step_size = 0.01
 plot_zero_state = "0"
 plot_range = "0,-1"
 plot_level = "PLOT_MUST_POINTS"
@@ -114,7 +172,7 @@ adaptor_re_solve = "1"
 max_retries = 20.0
 opt_iter = 11.0
 dtmin = 0.0
-dtmax = 0.001             
+dtmax = 0.01
 aggressiveness = 0.0
 cutback = 0.5
 dtforce = 0.0
@@ -142,8 +200,8 @@ etol = 0.01
 rtol = 0.0
 rhoi = -2.0
 alpha = 1.0
-beta = 0.5
-gamma = 1.1
+beta = 1.0
+gamma = 1.5
 logSolve = 0.0
 arc_length = 0.0
 arc_length_scale = 0.0
@@ -155,11 +213,11 @@ cycle_buffer = 1.0
 cmax = 100000.0
 
 [simulation.gravity]
-n_steps = 100 
+n_steps = 10
 
 [simulation.parabolic_jump]
 max_height = 0.01
-n_steps = 80
+n_steps = 51
 
 [simulation.animation]
 fps = 40
@@ -170,28 +228,5 @@ output_to_vtk = true
 output_displacement = true
 output_stress = true
 output_relative_volume = true
-extra_vars = ["relative volume", "Lagrange strain", "c1", "c2", "density"]
+extra_vars = ["density_map"]
 
-[material.skin.hetero]
-enabled = false
-lobules = []
-radial_L = 0.02
-radial_alpha_c1 = 0.0
-radial_alpha_c2 = 0.0
-radial_alpha_rho = 0.0
-
-[material.adipose.hetero]
-enabled = false
-lobules = []
-radial_L = 0.02
-radial_alpha_c1 = 0.0
-radial_alpha_c2 = 0.0
-radial_alpha_rho = 0.0
-
-[material.glandular.hetero]
-enabled = true
-lobules = []
-radial_L = 0.03
-radial_alpha_c1 = 0.5
-radial_alpha_c2 = 0.5
-radial_alpha_rho = 0.2

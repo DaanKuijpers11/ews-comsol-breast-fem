@@ -6,6 +6,9 @@ import gmsh
 
 from ews_fem_pipeline.prepare_simulation import MeshParts, Settings
 
+# Added for anatomy features
+#from anatomy_features import add_anatomy_features
+
 logger = logging.getLogger(__name__)
 
 
@@ -113,8 +116,7 @@ def generate_mesh(settings: Settings()):
     build.remove(all_surfaces)
 
     build.remove(
-        [(dim1, l3), (dim1, l4), (dim1, l5), (dim1, l7), (dim1, l8), (dim1, l9), (dim1, l11), (dim1, l12),
-         (dim1, l14)]
+        [(dim1, l3), (dim1, l4), (dim1, l5), (dim1, l7), (dim1, l8), (dim1, l9), (dim1, l11), (dim1, l12), (dim1, l14)]
     )
     build.remove([(dim0, p6), (dim0, p10), (dim0, p12), (dim0, p14)])
 

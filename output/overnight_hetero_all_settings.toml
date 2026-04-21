@@ -176,7 +176,7 @@ extra_vars = [ "relative volume", "Lagrange strain", "J", "c1", "c2", "density",
 [model.geometry.asymmetry]
 enabled = true
 scale_y = 1.0
-scale_z = 0.5
+scale_z = 1.0
 
 [material.skin.hetero]
 enabled = false

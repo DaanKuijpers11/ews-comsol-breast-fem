@@ -43,7 +43,7 @@ FIGURES_DIR = ANALYSIS_OUTPUT_DIR / "figures"
 # Each model points to its VTK output directory
 
 MODELS_TO_COMPARE = {
-    "overnight_hetero": RUNS_DIR / "overnight_hetero/output",
+    "sweep_config": RUNS_DIR / "sweep_config/output",
     #"overnight_hetero_zwaar": RUNS_DIR / "overnight_hetero_zwaar/output",
 }
 
@@ -81,12 +81,12 @@ TISSUE_LABELS = {
 # LABELS (ONLY ACTIVE MODELS)
 # =========================
 MODEL_LABELS = {
-    "overnight_hetero": "Heterogeneous Model",
+    "sweep_config": "Sweep Config Model",
     # "overnight_hetero_zwaar": "Heavy Heterogeneous Model",
 }
 
 MODEL_COLORS = {
-    "overnight_hetero": "#d62728",
+    "sweep_config": "#d62728",
     # "overnight_hetero_zwaar": "#1f77b4",
 }
 
