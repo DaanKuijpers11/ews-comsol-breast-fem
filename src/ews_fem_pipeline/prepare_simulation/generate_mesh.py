@@ -34,6 +34,7 @@ def generate_mesh(settings: Settings()):
     #############################
 
     p1 = build.addPoint(0, 0, 0, settings.model.mesh.ls, 1)
+
     p2 = build.addPoint(0, settings.model.geometry.radius, 0, settings.model.mesh.ls, 2)
     p3 = build.addPoint(0, 0, settings.model.geometry.radius, settings.model.mesh.ls, 3)
 
@@ -44,12 +45,37 @@ def generate_mesh(settings: Settings()):
     loop1 = build.addCurveLoop([l1, l2, l3], 1)
     s1 = build.addPlaneSurface([loop1], 1)
 
-    p4 = build.addPoint(0, -settings.model.geometry.left_position_ellipse, 0, settings.model.mesh.ls, 4)
-    p5 = build.addPoint(0, settings.model.geometry.radius + settings.model.geometry.position_nipple, 0, settings.model.mesh.ls, 5)
+    # Read asymmetry settings (only affects glandular ellipse)
+    asym = settings.model.geometry.asymmetry
+
+    scale_y = 1.0
+    scale_z = 1.0
+
+    if asym.enabled:
+        scale_y = asym.scale_y
+        scale_z = asym.scale_z
+
+    p4 = build.addPoint(
+        0,
+        -settings.model.geometry.left_position_ellipse * scale_y,
+        0,
+        settings.model.mesh.ls,
+        4
+    )
+    
+    p5 = build.addPoint(
+        0,
+        (settings.model.geometry.radius + settings.model.geometry.position_nipple) * scale_y,
+        0,
+        settings.model.mesh.ls,
+        5
+    )
+
     p6 = build.addPoint(
         0,
-        (settings.model.geometry.radius + settings.model.geometry.position_nipple - settings.model.geometry.left_position_ellipse) / 2,
-        -settings.model.geometry.position_center_ellipse,
+        ((settings.model.geometry.radius + settings.model.geometry.position_nipple
+        - settings.model.geometry.left_position_ellipse) / 2) * scale_y,
+        -settings.model.geometry.position_center_ellipse * scale_z,
         settings.model.mesh.ls,
         6
     )
@@ -218,6 +244,10 @@ def generate_mesh(settings: Settings()):
     sorted_ids = node_tags.argsort()
     mesh_parts.nodes.tags = node_tags[sorted_ids]
     mesh_parts.nodes.coords = node_coords[sorted_ids]
+
+    # Run the GUI to visualize the mesh (optional, can be commented out if not needed)
+    if settings.model.mesh.debug_view:
+        gmsh.fltk.run()
 
     gmsh.finalize()
 

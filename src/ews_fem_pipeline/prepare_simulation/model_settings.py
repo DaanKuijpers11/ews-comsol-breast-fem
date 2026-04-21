@@ -1,6 +1,15 @@
 from pydantic import BaseModel, Field
 
 
+class AsymmetrySettings(BaseModel):
+    """
+    Controls simple geometric asymmetry scaling in Y and Z directions.
+    """
+
+    enabled: bool = False
+    scale_y: float = 1.0
+    scale_z: float = 1.0
+
 class GeometrySettings(BaseModel):
     """
     ================
@@ -20,6 +29,7 @@ class GeometrySettings(BaseModel):
     - center_relative position_ellipse: float [m > 0]   Sets the center point of the ellipse. This parameter shifts the
                                                         glandular part down/up, which causes sharper/obtuse angles in
                                                         the nipple.
+    - asymmetry: AsymmetrySettings                      Controls simple geometric asymmetry scaling in Y and Z directions.                                                
     """
 
     radius: float = 0.07
@@ -27,6 +37,8 @@ class GeometrySettings(BaseModel):
     left_relative_position_ellipse: float = 0.4
     right_relative_position_ellipse: float = 0.05
     center_relative_position_ellipse: float = 0.3
+
+    asymmetry: AsymmetrySettings = AsymmetrySettings()
 
     @property
     def left_position_ellipse(self):
@@ -55,11 +67,13 @@ class MeshSettings(BaseModel):
                             "HighOrder" optimizer for high order meshes (see input parameter "order").
     - order: int [1 or 2]   Sets the order of the elements. Can only be 1 or 2. Order 1 implies tri3 en tet4 elements,
                             while order 2 implies tri6 and tet10 elements.
+    - debug_view: bool      If True, runs the gmsh GUI to visualize the mesh after generation. Can be helpful for debugging                        
     """
 
     ls: float = 0.005
     density: float = 260
     optimize: bool = True
+    debug_view: bool = False
     order: int = Field(2, ge=1, le=2)
 
     _surface_map = {1: ' tri3', 2: 'tri6'}

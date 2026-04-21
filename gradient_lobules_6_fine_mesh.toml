@@ -11,6 +11,11 @@ left_relative_position_ellipse = 0.4
 right_relative_position_ellipse = 0.05
 center_relative_position_ellipse = 0.3
 
+[model.geometry.asymmetry]
+enabled = false
+scale_y = 1.0
+scale_z = 1.0
+
 [material.skin]
 density = 1100.0
 bulk_modulus = 480000.0
@@ -225,3 +230,4 @@ output_displacement = true
 output_stress = true
 output_relative_volume = true
 extra_vars = ["density_map"]
+

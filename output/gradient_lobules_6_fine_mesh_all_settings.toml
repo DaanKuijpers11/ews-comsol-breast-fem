@@ -172,6 +172,11 @@ output_stress = true
 output_relative_volume = true
 extra_vars = [ "density_map",]
 
+[model.geometry.asymmetry]
+enabled = false
+scale_y = 1.0
+scale_z = 1.0
+
 [material.skin.hetero]
 enabled = false
 lobules = []

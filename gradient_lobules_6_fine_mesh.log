@@ -224,4 +224,28 @@ load controller   2 - LC2 (type: loadcurve)
 	points ............................................ : (can't display value)
 ---------------------------------------------------------------------------
 load controller   3 - LC3 (type: loadcurve)
-	interpolate ..........
+	interpolate ....................................... : LINEAR (0)
+	extend ............................................ : CONSTANT (0)
+	points ............................................ : (can't display value)
+
+
+ OUTPUT DATA
+===========================================================================
+ LINEAR SOLVER DATA
+===========================================================================
+	Default linear solver ............................. : pardiso
+
+
+ *************************************************************************
+ * Selecting linear solver pardiso                                       *
+ *************************************************************************
+
+===== beginning time step 1 : 0.1 =====
+
+
+Reforming stiffness matrix: reformation #1
+
+===== reforming stiffness matrix:
+	Nr of equations ........................... : 370734
+	Nr of nonzeroes in stiffness matrix ....... : 15693969
+ 1

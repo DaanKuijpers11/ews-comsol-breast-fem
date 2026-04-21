@@ -2,6 +2,7 @@
 ls = 0.004
 density = 140.0
 optimize = true
+debug_view = true
 order = 2
 
 [model.geometry]
@@ -171,6 +172,11 @@ output_displacement = true
 output_stress = true
 output_relative_volume = true
 extra_vars = [ "relative volume", "Lagrange strain", "J", "c1", "c2", "density",]
+
+[model.geometry.asymmetry]
+enabled = true
+scale_y = 1.0
+scale_z = 0.5
 
 [material.skin.hetero]
 enabled = false
