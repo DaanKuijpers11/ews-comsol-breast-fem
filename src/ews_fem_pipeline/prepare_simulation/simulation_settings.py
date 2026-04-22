@@ -882,28 +882,6 @@ def write_xml(root, filepath: Path):
     #tree.write(filepath_feb, encoding="ISO-8859-1")
     tree.write(str(filepath_feb), encoding="ISO-8859-1")
 
-    # ADDED
-    # def clean_none(elem):
-    #     # verwijder None attributes
-    #     if elem.attrib:
-    #         elem.attrib = {k: v for k, v in elem.attrib.items() if v is not None}
-
-    #     # verwijder None children recursively
-    #     for child in list(elem):
-    #         clean_none(child)
-
-    #     # verwijder text=None
-    #     if elem.text is None:
-    #         elem.text = ""
-
-    #     return elem
-
-    # cleaned_root = clean_none(root)
-    # tree = ET.ElementTree(cleaned_root)
-    # tree.write(str(filepath_feb), encoding="ISO-8859-1")
-
-    # ADDED end
-
     return filepath_feb
 
 

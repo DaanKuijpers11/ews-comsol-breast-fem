@@ -4,6 +4,53 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
+def generate_lobes(
+    n_lobes,
+    n_per_lobe,
+    nipple,
+    lobe_length,
+    spread_angle,
+    width,
+    amp_c1,
+    amp_c2,
+    amp_rho,
+):
+    lobules = []
+
+    nipple = np.array(nipple)
+
+    # verdeel lobes rondom nipple (fan shape)
+    angles = np.linspace(-spread_angle, spread_angle, n_lobes)
+
+    for theta in angles:
+        # direction vector (in Y-Z plane)
+        direction = np.array([
+            0,
+            np.cos(theta),
+            np.sin(theta)
+        ])
+
+        for i in range(n_per_lobe):
+            # positie langs duct
+            t = (i + 1) / n_per_lobe
+            base_pos = nipple + direction * lobe_length * t
+
+            # kleine random offset (voor natuurlijkheid)
+            noise = np.random.normal(scale=0.002, size=3)
+
+            pos = base_pos + noise
+
+            lobules.append({
+                "center": pos.tolist(),
+                "width": width,
+                "amp_c1": amp_c1,
+                "amp_c2": amp_c2,
+                "amp_rho": amp_rho,
+            })
+
+    return lobules
+
 ########################################
 # Function for adding anatomy features #
 ########################################

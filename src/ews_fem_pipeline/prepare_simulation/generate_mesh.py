@@ -8,6 +8,7 @@ from ews_fem_pipeline.prepare_simulation import MeshParts, Settings
 
 # New import for anatomy features
 from .anatomy_features import add_anatomy_features
+from .visualization import visualize_lobules_2D
 
 logger = logging.getLogger(__name__)
 
@@ -148,17 +149,25 @@ def generate_mesh(settings: Settings()):
     build.synchronize()
 
     ###############################
-    # Add anatomy features (new part)
+    # DEBUG: ANATOMY FEATURES
     ###############################
 
     # mesh_parts = add_anatomy_features(settings, mesh_parts)
 
+    lobules = settings.material.glandular.hetero.build_lobules()
+
+    print("LOBULES:")
+    for l in lobules:
+        print(l.center, l.width)
+
+    
+    if settings.model.mesh.debug_view:
+        visualize_lobules_2D(lobules, settings, plane="xy", resolution=200)
+    
+
     ####################
     # MESH GENERATION
     ####################
-
-    print("LOBULES:")
-    print(settings.material.glandular.hetero.lobules)
 
     curve_list = build.getEntities(dim1)
     for curve in curve_list:
@@ -272,11 +281,6 @@ def generate_mesh(settings: Settings()):
     # Run the GUI to visualize the mesh (optional, can be commented out if not needed)
     if settings.model.mesh.debug_view:
         gmsh.fltk.run()
-
-    # Finalize gmsh and run further (optional, can be commented out if you want to keep the GUI open)
-    # if getattr(settings.model.mesh, "debug_stop_after_mesh", False):
-    #     gmsh.finalize()
-    #     return mesh_parts
     
     gmsh.finalize()
 
