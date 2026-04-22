@@ -253,6 +253,55 @@ class Heterogeneity(BaseModel):
     radial_alpha_c2: float = 0.0
     radial_alpha_rho: float = 0.0
 
+    # Added for auto-generating lobules
+    auto_generate: bool = False
+
+    n_lobes: int = 6
+    n_per_lobe: int = 5
+
+    nipple: tuple[float, float, float] = (0.0, 0.035, 0.0)
+    lobe_length: float = 0.03
+    spread_angle: float = 2.0
+
+    width: float = 0.004
+
+    amp_c1: float = 70.0
+    amp_c2: float = 55.0
+    amp_rho: float = 35.0
+
+    def build_lobules(self) -> list[Lobule]:
+        """
+        Returns final lobule list:
+        - either user-defined
+        - or auto-generated anatomical structure
+        """
+
+        if not self.enabled:
+            return []
+
+        # CASE 1: manual TOML lobules
+        if self.lobules and not self.auto_generate:
+            return self.lobules
+
+        # CASE 2: auto-generated anatomical model
+        if self.auto_generate:
+            from ews_fem_pipeline.prepare_simulation.anatomy_features import generate_lobes
+
+            raw = generate_lobes(
+                n_lobes=self.n_lobes,
+                n_per_lobe=self.n_per_lobe,
+                nipple=self.nipple,
+                lobe_length=self.lobe_length,
+                spread_angle=self.spread_angle,
+                width=self.width,
+                amp_c1=self.amp_c1,
+                amp_c2=self.amp_c2,
+                amp_rho=self.amp_rho,
+            )
+
+            return [Lobule(**l) for l in raw]
+
+        return []
 
 class MaterialProperties(ExtendedBaseModel):
     density: Annotated[float | str, FEBField("density")]
@@ -293,7 +342,9 @@ class MaterialProperties(ExtendedBaseModel):
         expr = f"{base}"
         if h and h.enabled:
             # Add Gaussian lobule contributions
-            for L in h.lobules:
+            lobules = h.build_lobules()
+
+            for L in lobules:
                 x, y, z = L.center
                 s = L.width # Width/standard deviation of Gaussian
 

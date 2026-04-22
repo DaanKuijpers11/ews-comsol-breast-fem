@@ -1,6 +1,6 @@
 [model.mesh]
-ls = 0.0025   
-density = 300   
+ls = 0.005  
+density = 150   
 optimize = true
 order = 2
 debug_view = true

@@ -151,11 +151,14 @@ def generate_mesh(settings: Settings()):
     # Add anatomy features (new part)
     ###############################
 
-    mesh_parts = add_anatomy_features(settings, mesh_parts)
+    # mesh_parts = add_anatomy_features(settings, mesh_parts)
 
     ####################
     # MESH GENERATION
     ####################
+
+    print("LOBULES:")
+    print(settings.material.glandular.hetero.lobules)
 
     curve_list = build.getEntities(dim1)
     for curve in curve_list:
@@ -275,6 +278,6 @@ def generate_mesh(settings: Settings()):
     #     gmsh.finalize()
     #     return mesh_parts
     
-    # gmsh.finalize()
+    gmsh.finalize()
 
-    # return mesh_parts
+    return mesh_parts

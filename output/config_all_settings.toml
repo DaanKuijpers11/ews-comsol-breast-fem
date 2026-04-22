@@ -1,9 +1,9 @@
 [model.mesh]
-ls = 0.0025
-density = 300.0
+ls = 0.005
+density = 150.0
 optimize = true
 debug_view = true
-debug_stop_after_mesh = true
+debug_stop_after_mesh = false
 order = 2
 
 [model.geometry]
@@ -28,7 +28,7 @@ coef1 = 109.0
 coef2 = 106.0
 
 [material.glandular]
-density = 1041.0
+density = 911.0
 bulk_modulus = 425000.0
 pressure_model = "default"
 coef1 = 230.0
@@ -186,6 +186,16 @@ radial_L = 0.02
 radial_alpha_c1 = 0.0
 radial_alpha_c2 = 0.0
 radial_alpha_rho = 0.0
+auto_generate = false
+n_lobes = 6
+n_per_lobe = 5
+nipple = [ 0.0, 0.035, 0.0,]
+lobe_length = 0.03
+spread_angle = 2.0
+width = 0.004
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
 
 [material.adipose.hetero]
 enabled = false
@@ -194,16 +204,37 @@ radial_L = 0.02
 radial_alpha_c1 = 0.0
 radial_alpha_c2 = 0.0
 radial_alpha_rho = 0.0
+auto_generate = false
+n_lobes = 6
+n_per_lobe = 5
+nipple = [ 0.0, 0.035, 0.0,]
+lobe_length = 0.03
+spread_angle = 2.0
+width = 0.004
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
 
 [material.glandular.hetero]
 enabled = true
+radial_center = [ 0.0, 0.0, 0.0,]
 radial_L = 0.02
 radial_alpha_c1 = 0.0
 radial_alpha_c2 = 0.0
 radial_alpha_rho = 0.0
+auto_generate = false
+n_lobes = 6
+n_per_lobe = 5
+nipple = [ 0.0, 0.035, 0.0,]
+lobe_length = 0.03
+spread_angle = 2.0
+width = 0.004
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
 [[material.glandular.hetero.lobules]]
 center = [ 0.02, 0.045, 0.0,]
-width = 0.005
+width = 0.004
 amp_c1 = 70.0
 amp_c2 = 55.0
 amp_rho = 35.0

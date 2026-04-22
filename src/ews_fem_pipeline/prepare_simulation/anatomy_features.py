@@ -4,14 +4,19 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+########################################
+# Function for adding anatomy features #
+########################################
+
 def add_anatomy_features(settings, mesh_parts):
     """
     Adds anatomical structures on top of an existing gmsh model.
     Does NOT modify base geometry construction logic.
     """
 
-    if settings.model.geometry.asymmetry.enabled:
-        add_asymmetry_field(settings)
+    # Glandular field model (no gmsh geometry)
+    if getattr(settings.material.glandular.hetero, "enabled", True):
+        inject_glandular_field(settings)
 
     if getattr(settings.material.glandular.hetero, "enabled", False):
         add_gland_lobules(settings)
@@ -21,22 +26,38 @@ def add_anatomy_features(settings, mesh_parts):
 
     return mesh_parts
 
-def add_gland_lobules(settings):
-    lobules = settings.material.glandular.hetero.lobules
+##########################################
+# Glandular lobules part (heterogeneity) #
+##########################################
 
-    lc = settings.model.mesh.ls
 
-    for i, l in enumerate(lobules):
-        cx, cy, cz = l.center
-        r = l.width
+def inject_glandular_field(settings):
+    """
+    Builds Chen-style anatomical glandular field
+    (replaces geometric lobules)
+    """
 
-        tag = 1000 + i
-        gmsh.model.occ.addSphere(cx, cy, cz, r, tag)
+    gland = settings.material.glandular
+    hetero = gland.hetero
 
-    gmsh.model.occ.synchronize()
+    if not hetero.enabled:
+        return
 
-    # IMPORTANT: prevent size collapse
-    gmsh.model.mesh.setSize(gmsh.model.getEntities(0), lc)
+    # store parameters for FEBio field construction
+    gland._anatomy_model = {
+        "nipple": hetero.nipple,
+        "base_rho": gland.density,
+        "gland_strength": hetero.gland_strength,
+        "n_lobes": hetero.n_lobes,
+        "lobe_anisotropy": hetero.lobe_anisotropy,
+        "radial_decay_length": hetero.radial_decay_length,
+        "depth_decay_length": hetero.depth_decay_length,
+    }
+
+
+###########################
+# Cooper's ligaments part #
+###########################
 
 def add_cooper_ligaments(settings):
     radius = settings.model.geometry.radius
@@ -54,6 +75,10 @@ def add_cooper_ligaments(settings):
         gmsh.model.occ.addLine((i+1)*100, x0, y0, z0, x1, y1, z1)
 
     gmsh.model.occ.synchronize()
+
+########################    
+# Asymmetry field part #
+########################     
 
 def add_asymmetry_field(settings):
     asym = settings.model.geometry.asymmetry
