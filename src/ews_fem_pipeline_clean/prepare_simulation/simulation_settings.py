@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 from pydantic import BaseModel, field_validator, Field
 from pydantic_core.core_schema import ValidationInfo
 
-from ews_fem_pipeline.prepare_simulation import MeshSettings, GeometrySettings
+from ews_fem_pipeline_clean.prepare_simulation import MeshSettings, GeometrySettings
 
 
 @dataclass
@@ -285,9 +285,9 @@ class Heterogeneity(BaseModel):
 
         # CASE 2: auto-generated anatomical model
         if self.auto_generate:
-            from ews_fem_pipeline.prepare_simulation.anatomy_features import generate_lobes
+            from ews_fem_pipeline_clean.prepare_simulation.lobule_tools import generate_lobules
 
-            raw = generate_lobes(
+            raw = generate_lobules(
                 n_lobes=self.n_lobes,
                 n_per_lobe=self.n_per_lobe,
                 nipple=self.nipple,

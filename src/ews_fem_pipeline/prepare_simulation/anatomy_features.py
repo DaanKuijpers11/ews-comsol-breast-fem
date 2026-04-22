@@ -15,35 +15,51 @@ def generate_lobes(
     amp_c1,
     amp_c2,
     amp_rho,
+    seed=42,
 ):
+    rng = np.random.default_rng(seed)
+
     lobules = []
+    nipple = np.array(nipple, dtype=float)
 
-    nipple = np.array(nipple)
-
-    # verdeel lobes rondom nipple (fan shape)
+    # deterministic angular spacing
     angles = np.linspace(-spread_angle, spread_angle, n_lobes)
 
-    for theta in angles:
-        # direction vector (in Y-Z plane)
+    for l_idx, theta in enumerate(angles):
+
+        # fixed anatomical plane (Y-Z fan)
         direction = np.array([
-            0,
+            0.0,
             np.cos(theta),
             np.sin(theta)
         ])
 
+        # normalize for safety
+        direction /= np.linalg.norm(direction)
+
         for i in range(n_per_lobe):
-            # positie langs duct
-            t = (i + 1) / n_per_lobe
+
+            # deterministic spacing (NOT random)
+            t = (i + 1) / (n_per_lobe + 1)
+
+            # smooth anatomical tapering (Chen-like)
+            radial_decay = 1.0 - 0.35 * t
+
             base_pos = nipple + direction * lobe_length * t
 
-            # kleine random offset (voor natuurlijkheid)
-            noise = np.random.normal(scale=0.002, size=3)
+            # controlled micro-variation (NOT random noise explosion)
+            jitter_strength = width * 0.25
 
-            pos = base_pos + noise
+            jitter = rng.normal(0, jitter_strength, size=3)
+
+            # constrain jitter to tangential plane (important!)
+            jitter -= direction * np.dot(jitter, direction)
+
+            pos = base_pos + jitter * radial_decay
 
             lobules.append({
                 "center": pos.tolist(),
-                "width": width,
+                "width": width * radial_decay,
                 "amp_c1": amp_c1,
                 "amp_c2": amp_c2,
                 "amp_rho": amp_rho,

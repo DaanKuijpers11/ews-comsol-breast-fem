@@ -1,0 +1,13 @@
+[model.mesh]
+density = 110
+debug_view = false
+
+[material.tumor]
+tumorous = false
+
+[material.glandular.hetero]
+enabled = false
+auto_generate = false
+
+[simulation.output]
+extra_vars = [ "relative volume", "J",]

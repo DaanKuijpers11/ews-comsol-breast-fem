@@ -1,0 +1,16 @@
+2026-04-22 16:15:46,993 [DEBUG] matplotlib: matplotlib data path: C:\Users\20223231\.conda\envs\ews-fem\Lib\site-packages\matplotlib\mpl-data
+2026-04-22 16:15:47,070 [DEBUG] matplotlib: CONFIGDIR=C:\Users\20223231\.matplotlib
+2026-04-22 16:15:47,075 [DEBUG] matplotlib: interactive is False
+2026-04-22 16:15:47,075 [DEBUG] matplotlib: platform is win32
+2026-04-22 16:15:47,136 [DEBUG] matplotlib: CACHEDIR=C:\Users\20223231\.matplotlib
+2026-04-22 16:15:47,142 [DEBUG] matplotlib.font_manager: Using fontManager instance from C:\Users\20223231\.matplotlib\fontlist-v390.json
+2026-04-22 16:15:50,288 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-22 16:15:50,288 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 53042
+2026-04-22 16:15:50,291 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.5976
+2026-04-22 16:15:50,292 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0373
+2026-04-22 16:15:50,292 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9963
+2026-04-22 16:15:50,292 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-22 16:16:37,818 [DEBUG] ews_fem_pipeline_clean.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-22 16:16:37,823 [DEBUG] ews_fem_pipeline_clean.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-22 16:16:37,823 [INFO] ews_fem_pipeline_clean.run_simulation.febio_runner: Started running my_clean_config.feb
+2026-04-22 16:16:37,823 [DEBUG] ews_fem_pipeline_clean.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE my_clean_config.feb

@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 import numpy as np
 
-from ews_fem_pipeline.prepare_simulation import MeshParts, Settings, FEBElement, Constants, BoundaryCondition, \
+from ews_fem_pipeline_clean.prepare_simulation import MeshParts, Settings, FEBElement, Constants, BoundaryCondition, \
     Loads, write_nodes_to_xml, write_elements_to_xml, write_xml
 
 

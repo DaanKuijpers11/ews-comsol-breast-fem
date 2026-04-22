@@ -11,7 +11,7 @@ from pathlib import Path
 
 from tqdm import tqdm
 
-from ews_fem_pipeline.febio_settings import Settings
+from ews_fem_pipeline_clean.febio_settings import Settings
 
 logger = logging.getLogger(__name__)
 
