@@ -752,3 +752,87 @@
 2026-04-21 15:05:53,301 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
 2026-04-21 15:05:53,301 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running overnight_hetero.feb
 2026-04-21 15:05:53,301 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\overnight_hetero.feb
+2026-04-21 15:09:43,691 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-21 15:09:43,691 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 80963
+2026-04-21 15:09:43,691 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.1917
+2026-04-21 15:09:43,691 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.0535
+2026-04-21 15:09:43,691 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9972
+2026-04-21 15:09:43,691 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-21 15:09:45,969 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-21 15:09:45,969 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-21 15:09:45,985 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-21 15:09:45,985 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-21 15:12:45,304 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-21 15:12:45,320 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 80963
+2026-04-21 15:12:45,320 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.1917
+2026-04-21 15:12:45,320 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.0535
+2026-04-21 15:12:45,320 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9972
+2026-04-21 15:12:45,320 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-21 16:05:17,099 [INFO] ews_fem_pipeline.prepare_simulation.anatomy_features: Adding lobule 0
+2026-04-21 16:05:17,099 [INFO] ews_fem_pipeline.prepare_simulation.anatomy_features: Adding lobule 1
+2026-04-21 16:05:17,115 [INFO] ews_fem_pipeline.prepare_simulation.anatomy_features: Adding lobule 2
+2026-04-21 16:05:17,115 [INFO] ews_fem_pipeline.prepare_simulation.anatomy_features: Adding lobule 3
+2026-04-21 16:05:17,116 [INFO] ews_fem_pipeline.prepare_simulation.anatomy_features: Adding lobule 4
+2026-04-21 16:05:17,116 [INFO] ews_fem_pipeline.prepare_simulation.anatomy_features: Adding lobule 5
+2026-04-21 16:11:48,957 [INFO] ews_fem_pipeline.prepare_simulation.anatomy_features: Adding lobule 0
+2026-04-21 16:11:48,957 [INFO] ews_fem_pipeline.prepare_simulation.anatomy_features: Adding lobule 1
+2026-04-21 16:11:48,957 [INFO] ews_fem_pipeline.prepare_simulation.anatomy_features: Adding lobule 2
+2026-04-21 16:11:48,957 [INFO] ews_fem_pipeline.prepare_simulation.anatomy_features: Adding lobule 3
+2026-04-21 16:11:48,957 [INFO] ews_fem_pipeline.prepare_simulation.anatomy_features: Adding lobule 4
+2026-04-21 16:11:48,957 [INFO] ews_fem_pipeline.prepare_simulation.anatomy_features: Adding lobule 5
+2026-04-21 16:21:37,799 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-21 16:21:37,800 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 80963
+2026-04-21 16:21:37,800 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.1917
+2026-04-21 16:21:37,800 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.0535
+2026-04-21 16:21:37,801 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9972
+2026-04-21 16:21:37,801 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-21 16:21:50,423 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-21 16:21:50,439 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-21 16:21:50,443 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-21 16:21:50,443 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-21 16:28:50,963 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-21 16:28:50,963 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 80963
+2026-04-21 16:28:50,963 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.1917
+2026-04-21 16:28:50,963 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.0535
+2026-04-21 16:28:50,963 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9972
+2026-04-21 16:28:50,963 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-21 16:28:57,505 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-21 16:28:57,505 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-21 16:28:57,520 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-21 16:28:57,520 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-22 08:38:59,018 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-22 08:38:59,018 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 10512
+2026-04-22 08:38:59,018 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.1887
+2026-04-22 08:38:59,018 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.0967
+2026-04-22 08:38:59,018 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9881
+2026-04-22 08:38:59,018 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-22 08:39:05,779 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-22 08:39:05,782 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-22 08:39:05,782 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-22 08:39:05,782 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-22 08:47:15,310 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-22 08:47:15,310 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 80986
+2026-04-22 08:47:15,310 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.4101
+2026-04-22 08:47:15,310 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 1.8943
+2026-04-22 08:47:15,310 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9972
+2026-04-22 08:47:15,310 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-22 08:55:11,568 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-22 08:55:11,568 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-22 08:55:11,568 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-22 08:55:11,568 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-22 09:04:33,029 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-22 09:04:33,029 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 81003
+2026-04-22 09:04:33,029 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.1917
+2026-04-22 09:04:33,029 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 2.5323
+2026-04-22 09:04:33,029 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9973
+2026-04-22 09:04:33,029 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-22 09:05:50,402 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Looking for febio on the (extended) system path.
+2026-04-22 09:05:50,402 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner: Found FEBio executable: C:\Program Files\FEBioStudio\bin\febio4.EXE.
+2026-04-22 09:05:50,417 [INFO] ews_fem_pipeline.run_simulation.febio_runner: Started running config.feb
+2026-04-22 09:05:50,417 [DEBUG] ews_fem_pipeline.run_simulation.febio_runner:  C:\Program Files\FEBioStudio\bin\febio4.EXE C:\Users\20223231\ews_fem_clean\config.feb
+2026-04-22 09:07:03,452 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-22 09:07:03,456 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Elements checked: 81003
+2026-04-22 09:07:03,458 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Min quality: 0.1917
+2026-04-22 09:07:03,461 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Max quality: 7.5397
+2026-04-22 09:07:03,461 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Mean quality: 0.9973
+2026-04-22 09:07:03,461 [INFO] ews_fem_pipeline.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0

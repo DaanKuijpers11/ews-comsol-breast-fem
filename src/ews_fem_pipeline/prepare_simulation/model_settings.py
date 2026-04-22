@@ -74,6 +74,7 @@ class MeshSettings(BaseModel):
     density: float = 260
     optimize: bool = True
     debug_view: bool = False
+    debug_stop_after_mesh: bool = False
     order: int = Field(2, ge=1, le=2)
 
     _surface_map = {1: ' tri3', 2: 'tri6'}

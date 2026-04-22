@@ -6,8 +6,8 @@ import gmsh
 
 from ews_fem_pipeline.prepare_simulation import MeshParts, Settings
 
-# Added for anatomy features
-#from anatomy_features import add_anatomy_features
+# New import for anatomy features
+from .anatomy_features import add_anatomy_features
 
 logger = logging.getLogger(__name__)
 
@@ -147,6 +147,12 @@ def generate_mesh(settings: Settings()):
 
     build.synchronize()
 
+    ###############################
+    # Add anatomy features (new part)
+    ###############################
+
+    mesh_parts = add_anatomy_features(settings, mesh_parts)
+
     ####################
     # MESH GENERATION
     ####################
@@ -155,6 +161,19 @@ def generate_mesh(settings: Settings()):
     for curve in curve_list:
         length_curve = build.getMass(dim1, curve[1])
         mesh.setTransfiniteCurve(curve[1], int(settings.model.mesh.density * length_curve))
+
+    field_ids = []
+    try:
+        field_ids = gmsh.model.mesh.field.getNames()
+    except:
+        field_ids = ["unknown API version"]
+
+    print("DEBUG fields:", field_ids)
+    
+    
+    print("DEBUG curves:", gmsh.model.occ.getEntities(1))
+    print("DEBUG surfaces:", gmsh.model.occ.getEntities(2))
+
 
     mesh.generate(dim3)
 
@@ -251,6 +270,11 @@ def generate_mesh(settings: Settings()):
     if settings.model.mesh.debug_view:
         gmsh.fltk.run()
 
-    gmsh.finalize()
+    # Finalize gmsh and run further (optional, can be commented out if you want to keep the GUI open)
+    # if getattr(settings.model.mesh, "debug_stop_after_mesh", False):
+    #     gmsh.finalize()
+    #     return mesh_parts
+    
+    # gmsh.finalize()
 
-    return mesh_parts
+    # return mesh_parts

@@ -1,0 +1,18 @@
+[model.mesh]
+ls = 0.0025   
+density = 300   
+optimize = true
+order = 2
+debug_view = true
+
+[model.geometry]
+radius = 0.07
+thickness_chest_wall = 0.002
+left_relative_position_ellipse = 0.4
+right_relative_position_ellipse = 0.05
+center_relative_position_ellipse = 0.3
+
+[model.geometry.asymmetry]
+enabled = false
+scale_y = 1.0
+scale_z = 1.0

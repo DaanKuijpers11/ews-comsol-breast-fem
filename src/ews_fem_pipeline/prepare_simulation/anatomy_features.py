@@ -24,16 +24,19 @@ def add_anatomy_features(settings, mesh_parts):
 def add_gland_lobules(settings):
     lobules = settings.material.glandular.hetero.lobules
 
+    lc = settings.model.mesh.ls
+
     for i, l in enumerate(lobules):
         cx, cy, cz = l.center
         r = l.width
 
-        logger.info(f"Adding lobule {i}")
-
-        # sphere-ish approximation (stable in Gmsh)
-        gmsh.model.occ.addSphere(cx, cy, cz, r, tag=1000 + i)
+        tag = 1000 + i
+        gmsh.model.occ.addSphere(cx, cy, cz, r, tag)
 
     gmsh.model.occ.synchronize()
+
+    # IMPORTANT: prevent size collapse
+    gmsh.model.mesh.setSize(gmsh.model.getEntities(0), lc)
 
 def add_cooper_ligaments(settings):
     radius = settings.model.geometry.radius
