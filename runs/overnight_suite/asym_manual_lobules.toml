@@ -1,0 +1,36 @@
+[model.mesh]
+density = 145
+debug_view = false
+
+[model.geometry.asymmetry]
+enabled = true
+scale_y = 1.08
+scale_z = 0.92
+
+[material.tumor]
+tumorous = false
+
+[material.glandular.hetero]
+enabled = true
+auto_generate = false
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.02, 0.045, 0.0,]
+width = 0.004
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.025, 0.047, 0.002,]
+width = 0.004
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.018, 0.043, -0.002,]
+width = 0.004
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0

@@ -489,7 +489,7 @@ class MaterialSettings(ExtendedBaseModel):
         hetero=Heterogeneity(enabled=False),
     )
     glandular: MaterialProperties = MaterialProperties(
-        density=1041,
+        density=911,
         bulk_modulus=425000,
         pressure_model="default",
         coef1=230,

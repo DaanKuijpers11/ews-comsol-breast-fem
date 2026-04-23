@@ -60,10 +60,9 @@ def run_full_pipeline(input_files: tuple[Path, ...], jobs: int = 0) -> tuple[Pat
 
 
 def evaluate_cases(input_files: tuple[Path, ...]) -> tuple[str, ...]:
-    from ews_fem_pipeline_clean.evaluation import evaluate_runs, resolve_run_name
+    from ews_fem_pipeline_clean.evaluation import evaluate_runs
 
-    run_names = tuple(resolve_run_name(path) for path in input_files)
-    return evaluate_runs(run_names)
+    return evaluate_runs(input_files)
 
 
 def sweep_cases(input_files: tuple[Path, ...], jobs: int = 0, evaluate: bool = False) -> tuple[Path, ...]:

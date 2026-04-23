@@ -1,0 +1,18 @@
+[model.mesh]
+density = 140
+debug_view = false
+
+[material.tumor]
+tumorous = false
+
+[material.glandular.hetero]
+enabled = true
+auto_generate = true
+n_lobes = 4
+n_per_lobe = 3
+lobe_length = 0.026
+spread_angle = 1.5
+width = 0.0038
+amp_c1 = 55.0
+amp_c2 = 42.0
+amp_rho = 25.0

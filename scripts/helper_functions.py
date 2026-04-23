@@ -1,4 +1,5 @@
 import re
+import os
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -41,8 +42,11 @@ def von_mises_any(sig):
 
 def list_vtks(vtk_dir: Path, step_min: int, step_max: int) -> List[Path]:
     vtks = []
+    prefix = os.getenv("RUN_VTK_PREFIX")
 
     for p in vtk_dir.glob("*.vtk"):
+        if prefix and not p.name.startswith(f"{prefix}."):
+            continue
         m = re.search(r"\.(\d+)\.vtk$", p.name)
         if m:
             step = int(m.group(1))
@@ -286,7 +290,7 @@ def extract_landmark_displacements(model_dirs: dict, landmarks: dict,
     results = []
 
     for model, vtk_dir in model_dirs.items():
-        vtks_all = list(vtk_dir.glob("*.vtk"))
+        vtks_all = list_vtks(vtk_dir, step, step + 1000)
         if not vtks_all:
             continue
 

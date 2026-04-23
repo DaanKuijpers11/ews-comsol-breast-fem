@@ -1,6 +1,6 @@
 model,landmark,disp_mm
-overnight_hetero,nipple,53.119183
-overnight_hetero,left,22.963316
-overnight_hetero,right,23.14084
-overnight_hetero,superior,33.151806
-overnight_hetero,inferior,36.129166
+adipose_radial_gradient,nipple,32.662323
+adipose_radial_gradient,left,18.565481
+adipose_radial_gradient,right,18.488419
+adipose_radial_gradient,superior,23.664797
+adipose_radial_gradient,inferior,25.025742

@@ -97,15 +97,8 @@ def plot_surface_displacement_evolution(vtk_dir: Path, surface_nodes: set,
                                         output_dir: Path, times: np.ndarray,
                                         model_labels: Dict, model_key: str):
 
-    vtks = []
-    for x in vtk_dir.glob("*.vtk"):
-        m = re.search(r"\.(\d+)\.vtk", x.name)
-        if m:
-            step = int(m.group(1))
-            if step_min <= step < step_max:
-                vtks.append((step, x))
-
-    vtks.sort()
+    vtks = [(int(re.search(r"\.(\d+)\.vtk", path.name).group(1)), path)
+            for path in helper.list_vtks(vtk_dir, step_min, step_max)]
 
     stats = []
 
@@ -168,7 +161,8 @@ def plot_landmark_spatial(vtk_dir: Path, landmarks: dict,
 
     model_name = model_labels.get(model_key, model_key)
 
-    vtk_files = list(vtk_dir.glob(f"*.{step}.vtk"))
+    vtk_files = [path for path in helper.list_vtks(vtk_dir, step, step + 1)
+                 if re.search(rf"\.{step}\.vtk$", path.name)]
     if not vtk_files:
         return
 
@@ -255,14 +249,11 @@ def plot_spatial_displacement_comparison(model_dirs: dict,
 
     for ax, (name, vtk_dir) in zip(axes, model_dirs.items()):
 
-        vtk_files = list(vtk_dir.glob("*.vtk"))
+        vtk_files = helper.list_vtks(vtk_dir, 0, 10_000)
 
         if not vtk_files:
             print(f"WARNING: No VTK files for {name}")
             continue
-
-        # sorteer op step index
-        vtk_files.sort(key=lambda x: int(re.search(r"\.(\d+)\.vtk", x.name).group(1)))
 
         # pak laatste timestep
         vtk_path = vtk_files[-1]

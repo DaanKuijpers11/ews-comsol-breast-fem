@@ -34,13 +34,13 @@ if __name__ == "__main__":
 
     # New way: select run via env variable (set in run_sweep.py)
     run_name = os.getenv("RUN_NAME", "sweep_config")
-    vtk_dir = Path("runs") / run_name / "output"
+    vtk_dir = Path(os.getenv("RUN_OUTPUT_DIR", str(Path("runs") / run_name / "output")))
     config.MODELS_TO_COMPARE = {
         run_name: vtk_dir
     }
 
 
-    feb_path = vtk_dir.parent / f"{run_name}.feb"
+    feb_path = Path(os.getenv("RUN_FEB_PATH", str(vtk_dir.parent / f"{run_name}.feb")))
 
     # Output dirs
     fig_dir = config.get_figures_path(run_name)
@@ -122,7 +122,7 @@ if __name__ == "__main__":
 
         print(f"Steps processed: {len(df)}")
 
-        summary_csv = model_path.parent / "summary_statistics.csv"
+        summary_csv = model_path.parent / f"{model_name}_summary_statistics.csv"
         df.to_csv(summary_csv, index=False)
 
         # --------------------------------------------------------
@@ -203,7 +203,7 @@ if __name__ == "__main__":
 
     for model_name, model_path in config.MODELS_TO_COMPARE.items():
 
-        summary_csv = model_path.parent / "summary_statistics.csv"
+        summary_csv = model_path.parent / f"{model_name}_summary_statistics.csv"
 
         if summary_csv.exists():
             df = pd.read_csv(summary_csv)
