@@ -31,21 +31,6 @@ class FEBField:
         return {k: v for k, v in asdict(self).items()
                 if k not in ["tag", "val"] and v is not None}
 
-    # ADDED
-    # @property
-    # def xml_dict(self) -> dict:
-    #     out = {}
-    #     for k, v in asdict(self).items():
-    #         if k in ["tag", "val"]:
-    #             continue
-    #         if v is None:
-    #             print(f"[XML DEBUG] dropping None: {self.tag}.{k}")
-    #             continue
-
-    #         out[k] = str(v)
-
-    #     return out
-
     def to_xml(self, parent):
         kwargs = self.xml_dict
 
