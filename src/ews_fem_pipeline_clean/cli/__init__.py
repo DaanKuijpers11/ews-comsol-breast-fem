@@ -38,6 +38,10 @@ def _build_parser() -> argparse.ArgumentParser:
     evaluate_parser = subparsers.add_parser("evaluate", help="Evaluate one or more completed runs.")
     evaluate_parser.add_argument("input_files", nargs="+", type=Path)
 
+    compare_parser = subparsers.add_parser("compare", help="Build a compact comparison summary for multiple cases.")
+    compare_parser.add_argument("input_files", nargs="+", type=Path)
+    compare_parser.add_argument("--baseline", type=str, default=None, help="Case name to use as baseline.")
+
     return parser
 
 
@@ -85,6 +89,12 @@ def cli_main(argv: list[str] | None = None) -> int:
         from ews_fem_pipeline_clean.pipeline import evaluate_cases
 
         evaluate_cases(tuple(args.input_files))
+        return 0
+
+    if args.command == "compare":
+        from ews_fem_pipeline_clean.pipeline import compare_case_summaries
+
+        compare_case_summaries(tuple(args.input_files), baseline=args.baseline)
         return 0
 
     parser.error(f"Unknown command: {args.command}")

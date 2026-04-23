@@ -73,3 +73,9 @@ def sweep_cases(input_files: tuple[Path, ...], jobs: int = 0, evaluate: bool = F
     if evaluate:
         evaluate_cases(input_files)
     return output_files
+
+
+def compare_case_summaries(input_files: tuple[Path, ...], baseline: str | None = None) -> Path:
+    from ews_fem_pipeline_clean.compare import compare_cases
+
+    return compare_cases(input_files, baseline=baseline)
