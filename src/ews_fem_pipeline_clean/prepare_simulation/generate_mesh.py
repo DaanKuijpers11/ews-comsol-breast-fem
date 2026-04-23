@@ -148,7 +148,8 @@ def generate_mesh(settings: Settings()):
     lobules = settings.material.glandular.hetero.build_lobules()
 
     if settings.model.mesh.debug_view:
-        visualize_lobules_2d(lobules, settings, resolution=200)
+        visualize_lobules_2d(lobules, settings, plane="xy", resolution=200)
+        visualize_lobules_2d(lobules, settings, plane="yz", resolution=200)
 
     ####################
     # MESH GENERATION

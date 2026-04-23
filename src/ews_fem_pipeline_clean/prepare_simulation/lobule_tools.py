@@ -48,7 +48,7 @@ def generate_lobules(
     return lobules
 
 
-def visualize_lobules_2d(lobules, settings, resolution=200):
+def visualize_lobules_2d_old(lobules, settings, resolution=200):
     """
     Visualize the projected glandular field in the x-y plane.
     """
@@ -82,6 +82,83 @@ def visualize_lobules_2d(lobules, settings, resolution=200):
     plt.xlabel("x")
     plt.ylabel("y")
     plt.title("Glandular field")
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+def visualize_lobules_2d(lobules, settings, plane="xy", resolution=200):
+    """
+    Visualize projected glandular field in xy or yz plane.
+    """
+    radius = settings.model.geometry.radius
+    nipple = settings.material.glandular.hetero.nipple
+
+    if plane == "xy":
+        a = np.linspace(-radius, radius, resolution)   # x
+        b = np.linspace(0.0, radius, resolution)       # y
+        label_a, label_b = "x", "y"
+
+    elif plane == "yz":
+        a = np.linspace(0.0, radius, resolution)       # y
+        b = np.linspace(-radius, radius, resolution)   # z
+        label_a, label_b = "y", "z"
+
+    else:
+        raise ValueError("plane must be 'xy' or 'yz'")
+
+    grid_a, grid_b = np.meshgrid(a, b)
+    field = np.zeros_like(grid_a)
+
+    for lobule in lobules:
+        cx, cy, cz = lobule.center
+        sigma = lobule.width
+        amplitude = lobule.amp_rho
+
+        if plane == "xy":
+            da = grid_a - cx
+            db = grid_b - cy
+        else:  # yz
+            da = grid_a - cy
+            db = grid_b - cz
+
+        field += amplitude * np.exp(-(da**2 + db**2) / (sigma**2))
+
+    plt.figure(figsize=(6, 6))
+    plt.imshow(field, extent=[a.min(), a.max(), b.min(), b.max()], origin="lower")
+    plt.colorbar(label="Glandular density")
+
+    # 🔵 Breast boundary (halve cirkel)
+    theta = np.linspace(0, np.pi, 200)
+    if plane == "xy":
+        boundary_a = radius * np.cos(theta)
+        boundary_b = radius * np.sin(theta)
+    else:  # yz
+        boundary_a = radius * np.sin(theta)   # y
+        boundary_b = radius * np.cos(theta)   # z
+
+    plt.plot(boundary_a, boundary_b, "w--", label="breast boundary")
+
+    # 🔴 Nipple
+    if plane == "xy":
+        plt.scatter(nipple[0], nipple[1], c="red", s=80, label="nipple")
+    else:
+        plt.scatter(nipple[1], nipple[2], c="red", s=80, label="nipple")
+
+    # ⚫ Lobules
+    for lobule in lobules:
+        if plane == "xy":
+            plt.scatter(lobule.center[0], lobule.center[1], c="black", s=10)
+        else:
+            plt.scatter(lobule.center[1], lobule.center[2], c="black", s=10)
+
+    # 🟫 Chest wall (alleen zinvol in yz)
+    if plane == "yz":
+        # aannemen: chest wall op y = 0
+        plt.axvline(x=0.0, color="cyan", linestyle="--", label="chest wall")
+
+    plt.xlabel(label_a)
+    plt.ylabel(label_b)
+    plt.title(f"Glandular field ({plane}-plane)")
     plt.legend()
     plt.tight_layout()
     plt.show()

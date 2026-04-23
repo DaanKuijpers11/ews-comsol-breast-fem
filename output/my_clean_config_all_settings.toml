@@ -1,9 +1,9 @@
 [model]
 [model.mesh]
 ls = 0.005
-density = 260.0
+density = 140.0
 optimize = true
-debug_view = false
+debug_view = true
 debug_stop_after_mesh = false
 order = 2
 
@@ -53,11 +53,12 @@ coef1 = 109.0
 coef2 = 106.0
 
 [material.adipose.hetero]
-enabled = false
-radial_L = 0.02
-radial_alpha_c1 = 0.0
-radial_alpha_c2 = 0.0
-radial_alpha_rho = 0.0
+enabled = true
+radial_center = [ 0.0, 0.0, 0.0,]
+radial_L = 0.05
+radial_alpha_c1 = 20.0
+radial_alpha_c2 = 15.0
+radial_alpha_rho = 25.0
 auto_generate = false
 n_lobes = 6
 n_per_lobe = 5
@@ -71,14 +72,14 @@ amp_rho = 35.0
 
 
 [material.glandular]
-density = 1041.0
+density = 911.0
 bulk_modulus = 425000.0
 pressure_model = "default"
 coef1 = 230.0
 coef2 = 195.0
 
 [material.glandular.hetero]
-enabled = false
+enabled = true
 radial_L = 0.02
 radial_alpha_c1 = 0.0
 radial_alpha_c2 = 0.0
@@ -86,7 +87,7 @@ radial_alpha_rho = 0.0
 auto_generate = false
 n_lobes = 6
 n_per_lobe = 5
-nipple = [ 0.0, 0.035, 0.0,]
+nipple = [ 0.0, 0.068, 0.0,]
 lobe_length = 0.03
 spread_angle = 2.0
 width = 0.004
@@ -94,9 +95,134 @@ amp_c1 = 70.0
 amp_c2 = 55.0
 amp_rho = 35.0
 
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.06292, -0.00335,]
+width = 0.0037
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.05483, -0.0067,]
+width = 0.0034
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.04675, -0.01005,]
+width = 0.0031
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.06249, -0.00204,]
+width = 0.0037
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.05398, -0.00409,]
+width = 0.0034
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.04548, -0.00613,]
+width = 0.0031
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.06228, -0.00069,]
+width = 0.0037
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.05355, -0.00137,]
+width = 0.0034
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.04483, -0.00206,]
+width = 0.0031
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.06228, 0.00069,]
+width = 0.0037
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.05355, 0.00137,]
+width = 0.0034
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.04483, 0.00206,]
+width = 0.0031
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.06249, 0.00204,]
+width = 0.0037
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.05398, 0.00409,]
+width = 0.0034
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.04548, 0.00613,]
+width = 0.0031
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.06292, 0.00335,]
+width = 0.0037
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.05483, 0.0067,]
+width = 0.0034
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.0, 0.04675, 0.01005,]
+width = 0.0031
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
 
 [material.tumor]
-tumorous = true
+tumorous = false
 density = 1079.0
 radius = 0.005
 position = [ 0.035, 0.04, 0.0,]
