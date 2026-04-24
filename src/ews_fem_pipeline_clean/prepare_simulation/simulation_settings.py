@@ -1,6 +1,6 @@
 import numpy as np
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Literal
 from dataclasses import dataclass, asdict
 import xml.etree.ElementTree as ET
 
@@ -251,7 +251,7 @@ class Heterogeneity(BaseModel):
     n_lobes: int = 6
     n_per_lobe: int = 5
 
-    nipple: tuple[float, float, float] = (0.0, 0.035, 0.0)
+    nipple: tuple[float, float, float] = (0.0, 0.068, 0.0)
     lobe_length: float = 0.03
     spread_angle: float = 2.0
 
@@ -260,6 +260,20 @@ class Heterogeneity(BaseModel):
     amp_c1: float = 70.0
     amp_c2: float = 55.0
     amp_rho: float = 35.0
+    seed: int = 42
+
+    # Auto-generator selection
+    generator_mode: Literal["fan", "chen_2024_double_ring"] = "fan"
+
+    # Chen-inspired double-ring lobe layout
+    inner_ring_count: int = 8
+    outer_ring_count: int = 10
+    inner_ring_radius: float = 0.005
+    outer_ring_radius: float = 0.009
+    inner_depth: float = 0.012
+    outer_depth: float = 0.020
+    droplet_length: float = 0.007
+    droplet_components: int = 2
 
     def build_lobules(self) -> list[Lobule]:
         """
@@ -289,6 +303,16 @@ class Heterogeneity(BaseModel):
                 amp_c1=self.amp_c1,
                 amp_c2=self.amp_c2,
                 amp_rho=self.amp_rho,
+                generator_mode=self.generator_mode,
+                inner_ring_count=self.inner_ring_count,
+                outer_ring_count=self.outer_ring_count,
+                inner_ring_radius=self.inner_ring_radius,
+                outer_ring_radius=self.outer_ring_radius,
+                inner_depth=self.inner_depth,
+                outer_depth=self.outer_depth,
+                droplet_length=self.droplet_length,
+                droplet_components=self.droplet_components,
+                seed=self.seed,
             )
 
             return [Lobule(**l) for l in raw]

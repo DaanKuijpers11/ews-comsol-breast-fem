@@ -1,7 +1,7 @@
 # Large ellipsoidal lobules, 50% wider.
 [model.mesh]
 density = 140
-debug_view = true
+debug_view = false
 
 [material.tumor]
 tumorous = false

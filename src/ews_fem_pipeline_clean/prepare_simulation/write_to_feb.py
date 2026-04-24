@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 from pathlib import Path
 import numpy as np
+import os
 
 from ews_fem_pipeline_clean.prepare_simulation import MeshParts, Settings, FEBElement, Constants, BoundaryCondition, \
     Loads, write_nodes_to_xml, write_elements_to_xml, write_xml
@@ -71,13 +72,18 @@ def add_density_map_math(root, settings, mesh):
                 # Add Gaussian lobule contributions
                 for L in h.build_lobules():
                     lx, ly, lz = L.center
-                    s = float(L.width)
+                    sx = float(L.width_x) if getattr(L, "width_x", None) is not None else float(L.width)
+                    sy = float(L.width_y) if getattr(L, "width_y", None) is not None else float(L.width)
+                    sz = float(L.width_z) if getattr(L, "width_z", None) is not None else float(L.width)
                     amp = float(getattr(L, "amp_rho", 0.0))
 
                     if amp:
-                        # Evaluate 3D Gaussian: amp * exp(-r²/σ²)
-                        dist_sq = (x - lx) ** 2 + (y - ly) ** 2 + (z - lz) ** 2
-                        rho += amp * np.exp(-dist_sq / (s ** 2))
+                        # Evaluate anisotropic 3D Gaussian:
+                        # amp * exp(-(dx²/sx² + dy²/sy² + dz²/sz²))
+                        dx_sq = (x - lx) ** 2 / (sx ** 2)
+                        dy_sq = (y - ly) ** 2 / (sy ** 2)
+                        dz_sq = (z - lz) ** 2 / (sz ** 2)
+                        rho += amp * np.exp(-(dx_sq + dy_sq + dz_sq))
 
                 # Add radial background gradient (increases with distance from center)
                 if h.radial_center is not None:
@@ -170,8 +176,9 @@ def write_to_feb(filepath: Path, mesh: MeshParts, settings: Settings):
     FEB_element.solid_domain_glandular.to_xml(parent=mesh_domains_elem)
     FEB_element.solid_domain_adipose.to_xml(parent=mesh_domains_elem)
 
-    # Add all material property maps for visualizations in paraview
-    add_density_map_math(root, settings, mesh)
+    # Add density map only when enabled (can be disabled for FEBio compatibility debugging).
+    if os.environ.get("EWS_DISABLE_DENSITY_MAP", "0") not in {"1", "true", "TRUE", "yes", "YES"}:
+        add_density_map_math(root, settings, mesh)
 
     # Loads
     loads_elem = FEB_element.loads.to_xml(parent=root)

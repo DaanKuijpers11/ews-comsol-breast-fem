@@ -1,0 +1,8 @@
+Command: C:/Program Files/COMSOL/COMSOL64/Multiphysics/bin/win64/comsolbatch.exe -inputfile C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\default_comsol_comsol_builder.java -outputfile C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\default_comsol_generated.mph -batchlog C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\default_comsol_comsol_build.log
+Return code: 0
+
+=== STDOUT ===
+<empty>
+
+=== STDERR ===
+<empty>

@@ -1,0 +1,37 @@
+Command: C:\Program Files\FEBioStudio\bin\febio4.EXE -i C:\Users\20223231\ews_fem_clean\runs\elipse_lobules_testcases\base_ellipsoid\base_ellipsoid.feb -o C:\Users\20223231\ews_fem_clean\runs\elipse_lobules_testcases\base_ellipsoid\base_ellipsoid.log
+Return code: 3221226505
+
+=== STDOUT ===
+===========================================================================
+         ________    _________   _______       __     _________            
+        |        |\ |        |\ |       \\    |  |\  /         \\          
+        |    ____|| |    ____|| |    __  ||   |__|| |    ___    ||         
+        |   |\___\| |   |\___\| |   |\_| ||    \_\| |   //  \   ||         
+        |   ||__    |   ||__    |   ||_| ||   |  |\ |  ||    |  ||         
+        |       |\  |       |\  |         \\  |  || |  ||    |  ||         
+        |    ___||  |    ___||  |    ___   || |  || |  ||    |  ||         
+        |   |\__\|  |   |\__\|  |   |\__|  || |  || |  ||    |  ||         
+        |   ||      |   ||___   |   ||__|  || |  || |   \\__/   ||         
+        |   ||      |        |\ |          || |  || |           ||         
+        |___||      |________|| |_________//  |__||  \_________//          
+                                                                           
+      F I N I T E   E L E M E N T S   F O R   B I O M E C H A N I C S      
+                                                                           
+  version 4.12.0
+  FEBio is a registered trademark.                                         
+  copyright (c) 2006-2026 - All rights reserved                            
+                                                                           
+===========================================================================
+
+Starting without configuration file
+Default linear solver: pardiso
+Reading file C:\Users\20223231\ews_fem_clean\runs\elipse_lobules_testcases\base_ellipsoid\base_ellipsoid.feb ...SUCCESS!
+
+ *************************************************************************
+ *                               WARNING                                 *
+ * dtmax is ignored when specifying must points.                         *
+ *************************************************************************
+
+
+=== STDERR ===
+<empty>

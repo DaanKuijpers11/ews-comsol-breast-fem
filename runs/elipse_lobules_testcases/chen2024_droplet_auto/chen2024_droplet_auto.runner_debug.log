@@ -1,3 +1,7 @@
+Command: C:\Program Files\FEBioStudio\bin\febio4.EXE -config C:\Users\20223231\ews_fem_clean\runs\elipse_lobules_testcases\chen2024_droplet_auto\chen2024_droplet_auto.febio_config.xml -i C:\Users\20223231\ews_fem_clean\runs\elipse_lobules_testcases\chen2024_droplet_auto\chen2024_droplet_auto.feb -o C:\Users\20223231\ews_fem_clean\runs\elipse_lobules_testcases\chen2024_droplet_auto\chen2024_droplet_auto.log
+Return code: 3221226505
+
+=== STDOUT ===
 ===========================================================================
          ________    _________   _______       __     _________            
         |        |\ |        |\ |       \\    |  |\  /         \\          
@@ -19,23 +23,15 @@
                                                                            
 ===========================================================================
 
+Reading configuration file: C:\Users\20223231\ews_fem_clean\runs\elipse_lobules_testcases\chen2024_droplet_auto\chen2024_droplet_auto.febio_config.xml
+Default linear solver: skyline
+Reading file C:\Users\20223231\ews_fem_clean\runs\elipse_lobules_testcases\chen2024_droplet_auto\chen2024_droplet_auto.feb ...SUCCESS!
 
  *************************************************************************
  *                               WARNING                                 *
  * dtmax is ignored when specifying must points.                         *
  *************************************************************************
 
- *************************************************************************
- *                                ERROR                                  *
- * Failed to initialize parameter density                                *
- *************************************************************************
 
- *************************************************************************
- *                                ERROR                                  *
- * Failed initializing material 3 (name="glandular")                     *
- *************************************************************************
-
- *************************************************************************
- *                                ERROR                                  *
- * Model initialization failed                                           *
- *************************************************************************
+=== STDERR ===
+<empty>

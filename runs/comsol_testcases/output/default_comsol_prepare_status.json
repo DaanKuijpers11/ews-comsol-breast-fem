@@ -1,0 +1,4 @@
+{
+  "mesh_export": "skipped",
+  "message": "Mesh export skipped because required module is missing: gmsh. Install gmsh in the active environment."
+}

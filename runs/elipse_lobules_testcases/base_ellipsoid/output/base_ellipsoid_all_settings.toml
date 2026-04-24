@@ -3,7 +3,7 @@
 ls = 0.005
 density = 140.0
 optimize = true
-debug_view = true
+debug_view = false
 debug_stop_after_mesh = false
 order = 2
 
