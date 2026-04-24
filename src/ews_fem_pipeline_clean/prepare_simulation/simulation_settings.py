@@ -193,17 +193,24 @@ class Lobule(BaseModel):
 
         Represents a small tissue structure (lobule) where material properties
         differ from the baseline. The spatial variation follows a 3D Gaussian
-        distribution centered at `center` with characteristic width `width`.
+        distribution centered at `center` with characteristic widths along the
+        principal axes.
 
         Attributes:
             center: (x, y, z) coordinates of the lobule center in meters
-            width: Characteristic width/standard deviation of the Gaussian in meters
+            width: Characteristic isotropic width/standard deviation (fallback)
+            width_x: Standard deviation in x-direction
+            width_y: Standard deviation in y-direction
+            width_z: Standard deviation in z-direction
             amp_c1: Amplitude of variation in Mooney-Rivlin coefficient c1 (Pa)
             amp_c2: Amplitude of variation in Mooney-Rivlin coefficient c2 (Pa)
             amp_rho: Amplitude of variation in density (kg/m³)
         """
     center: tuple[float, float, float]
     width: float
+    width_x: float | None = None
+    width_y: float | None = None
+    width_z: float | None = None
     amp_c1: float = 0.0
     amp_c2: float = 0.0
     amp_rho: float = 0.0
@@ -348,7 +355,9 @@ class MaterialProperties(ExtendedBaseModel):
 
             for L in lobules:
                 x, y, z = L.center
-                s = self._fmt_math_value(L.width)  # Width/standard deviation of Gaussian
+                sx = self._fmt_math_value(L.width_x if L.width_x is not None else L.width)
+                sy = self._fmt_math_value(L.width_y if L.width_y is not None else L.width)
+                sz = self._fmt_math_value(L.width_z if L.width_z is not None else L.width)
                 dx = self._coord_expr("X", x)
                 dy = self._coord_expr("Y", y)
                 dz = self._coord_expr("Z", z)
@@ -356,13 +365,13 @@ class MaterialProperties(ExtendedBaseModel):
                 # Add contribution for this parameter if amplitude is non-zero
                 if param == "c1" and L.amp_c1:
                     amp = self._fmt_math_value(L.amp_c1)
-                    expr += f"+({amp})*exp(-({dx}^2+{dy}^2+{dz}^2)/({s}^2))"
+                    expr += f"+({amp})*exp(-({dx}^2/({sx}^2)+{dy}^2/({sy}^2)+{dz}^2/({sz}^2)))"
                 if param == "c2" and L.amp_c2:
                     amp = self._fmt_math_value(L.amp_c2)
-                    expr += f"+({amp})*exp(-({dx}^2+{dy}^2+{dz}^2)/({s}^2))"
+                    expr += f"+({amp})*exp(-({dx}^2/({sx}^2)+{dy}^2/({sy}^2)+{dz}^2/({sz}^2)))"
                 if param == "rho" and L.amp_rho:
                     amp = self._fmt_math_value(L.amp_rho)
-                    expr += f"+({amp})*exp(-({dx}^2+{dy}^2+{dz}^2)/({s}^2))"
+                    expr += f"+({amp})*exp(-({dx}^2/({sx}^2)+{dy}^2/({sy}^2)+{dz}^2/({sz}^2)))"
 
             # Add radial gradient contribution (increases with distance from center)
             if h.radial_center is not None:

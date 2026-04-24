@@ -39,6 +39,9 @@ def generate_lobules(
                 {
                     "center": pos.tolist(),
                     "width": width * radial_decay,
+                    "width_x": width * 0.80 * radial_decay,
+                    "width_y": width * 1.10 * radial_decay,
+                    "width_z": width * (1.0 + 0.4 * abs(direction[2])) * radial_decay,
                     "amp_c1": amp_c1,
                     "amp_c2": amp_c2,
                     "amp_rho": amp_rho,
@@ -111,17 +114,19 @@ def visualize_lobules_2d(lobules, settings, plane="xy", resolution=200):
 
     for lobule in lobules:
         cx, cy, cz = lobule.center
-        sigma = lobule.width
+        sigma_x = lobule.width_x if hasattr(lobule, "width_x") and lobule.width_x is not None else lobule.width
+        sigma_y = lobule.width_y if hasattr(lobule, "width_y") and lobule.width_y is not None else lobule.width
+        sigma_z = lobule.width_z if hasattr(lobule, "width_z") and lobule.width_z is not None else lobule.width
         amplitude = lobule.amp_rho
 
         if plane == "xy":
             da = grid_a - cx
             db = grid_b - cy
+            field += amplitude * np.exp(-(da**2 / (sigma_x**2) + db**2 / (sigma_y**2)))
         else:  # yz
             da = grid_a - cy
             db = grid_b - cz
-
-        field += amplitude * np.exp(-(da**2 + db**2) / (sigma**2))
+            field += amplitude * np.exp(-(da**2 / (sigma_y**2) + db**2 / (sigma_z**2)))
 
     plt.figure(figsize=(6, 6))
     plt.imshow(field, extent=[a.min(), a.max(), b.min(), b.max()], origin="lower")

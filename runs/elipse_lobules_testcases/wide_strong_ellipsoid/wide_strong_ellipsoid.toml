@@ -1,0 +1,201 @@
+# Large ellipsoidal lobules with 25% stronger amplitude contrast.
+[model.mesh]
+density = 140
+debug_view = false
+
+[material.tumor]
+tumorous = false
+
+[material.glandular.hetero]
+enabled = true
+auto_generate = false
+nipple = [ 0.0, 0.068, 0.0,]
+# Systematically placed lobules in anatomical fan configuration (6 lobes × 3 per lobe)
+# Nipple is placed near the outer breast surface; lobules are inside toward the chest wall.
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.06292, -0.00335,]
+width = 0.00555
+width_x = 0.00444
+width_y = 0.00666
+width_z = 0.00555
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.05483, -0.00670,]
+width = 0.00510
+width_x = 0.00408
+width_y = 0.00612
+width_z = 0.00510
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.04675, -0.01005,]
+width = 0.00465
+width_x = 0.00372
+width_y = 0.00558
+width_z = 0.00465
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.06249, -0.00204,]
+width = 0.00555
+width_x = 0.00444
+width_y = 0.00666
+width_z = 0.00555
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.05398, -0.00409,]
+width = 0.00510
+width_x = 0.00408
+width_y = 0.00612
+width_z = 0.00510
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.04548, -0.00613,]
+width = 0.00465
+width_x = 0.00372
+width_y = 0.00558
+width_z = 0.00465
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.06228, -0.00069,]
+width = 0.00555
+width_x = 0.00444
+width_y = 0.00666
+width_z = 0.00555
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.05355, -0.00137,]
+width = 0.00510
+width_x = 0.00408
+width_y = 0.00612
+width_z = 0.00510
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.04483, -0.00206,]
+width = 0.00465
+width_x = 0.00372
+width_y = 0.00558
+width_z = 0.00465
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.06228, 0.00069,]
+width = 0.00555
+width_x = 0.00444
+width_y = 0.00666
+width_z = 0.00555
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.05355, 0.00137,]
+width = 0.00510
+width_x = 0.00408
+width_y = 0.00612
+width_z = 0.00510
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.04483, 0.00206,]
+width = 0.00465
+width_x = 0.00372
+width_y = 0.00558
+width_z = 0.00465
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.06249, 0.00204,]
+width = 0.00555
+width_x = 0.00444
+width_y = 0.00666
+width_z = 0.00555
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.05398, 0.00409,]
+width = 0.00510
+width_x = 0.00408
+width_y = 0.00612
+width_z = 0.00510
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.04548, 0.00613,]
+width = 0.00465
+width_x = 0.00372
+width_y = 0.00558
+width_z = 0.00465
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.06292, 0.00335,]
+width = 0.00555
+width_x = 0.00444
+width_y = 0.00666
+width_z = 0.00555
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.05483, 0.00670,]
+width = 0.00510
+width_x = 0.00408
+width_y = 0.00612
+width_z = 0.00510
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+
+[[material.glandular.hetero.lobules]]
+center = [ 0.00000, 0.04675, 0.01005,]
+width = 0.00465
+width_x = 0.00372
+width_y = 0.00558
+width_z = 0.00465
+amp_c1 = 87.50000
+amp_c2 = 68.75000
+amp_rho = 43.75000
+[material.adipose.hetero]
+enabled = true
+radial_center = [ 0.0, 0.0, 0.0,]
+radial_L = 0.05
+radial_alpha_c1 = 20.0
+radial_alpha_c2 = 15.0
+radial_alpha_rho = 25.0
