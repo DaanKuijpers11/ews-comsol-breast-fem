@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from ews_fem_pipeline_comsol.paths import ensure_output_tree
 from ews_fem_pipeline_comsol.prepare_from_febio import prepare_case_from_febio
 from ews_fem_pipeline_comsol.script_builder import generate_comsol_java_builder
 from ews_fem_pipeline_comsol.settings import (
@@ -16,19 +17,21 @@ def generate_cases(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
     generated: list[Path] = []
     for filepath in input_files:
         settings = load_settings_from_toml(filepath)
-        output_dir = filepath.parent / settings.pipeline.output_subdir
-        output_dir.mkdir(parents=True, exist_ok=True)
+        output_paths = ensure_output_tree(filepath.parent, settings)
+        output_root = output_paths["root"]
+        prepare_dir = output_paths["prepare"]
+        build_dir = output_paths["build"]
 
-        write_settings_to_toml(output_dir / f"{filepath.stem}_all_settings.toml", settings)
+        write_settings_to_toml(output_root / f"{filepath.stem}_all_settings.toml", settings)
         prepare_artefacts = prepare_case_from_febio(
             case_name=filepath.stem,
             comsol_case_toml=filepath,
-            output_dir=output_dir,
+            output_dir=prepare_dir,
             settings=settings,
         )
         script_artefacts = generate_comsol_java_builder(
             case_name=filepath.stem,
-            output_dir=output_dir,
+            output_dir=build_dir,
             prepare_artefacts=prepare_artefacts,
         )
         prepare_artefacts.update(script_artefacts)
@@ -39,9 +42,12 @@ def generate_cases(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
             "settings_file": str(filepath.resolve()),
             "model_name": settings.pipeline.model_name,
             "prepare_artefacts": prepare_artefacts,
+            "output_layout": {name: str(path.resolve()) for name, path in output_paths.items()},
         }
-        json_file = output_dir / f"{filepath.stem}_comsol_input.json"
+        json_file = build_dir / f"{filepath.stem}_comsol_input.json"
         json_file.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        manifest_file = output_root / f"{filepath.stem}_output_manifest.json"
+        manifest_file.write_text(json.dumps(payload, indent=2), encoding="utf-8")
         generated.append(json_file)
 
     return tuple(generated)
@@ -56,7 +62,8 @@ def solve_cases(input_files: tuple[Path, ...], settings_map: dict[Path, Settings
     if settings_map is None:
         settings_map = {}
         for filepath in input_files:
-            source_toml = filepath.parent.parent / f"{filepath.stem.replace('_comsol_input', '')}.toml"
+            payload = json.loads(filepath.read_text(encoding="utf-8"))
+            source_toml = Path(payload["settings_file"])
             settings_map[filepath] = load_settings_from_toml(source_toml)
 
     return COMSOLRunner().run(input_files, settings_map=settings_map)

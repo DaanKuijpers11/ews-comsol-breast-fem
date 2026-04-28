@@ -115,7 +115,22 @@ def prepare_case_from_febio(
     write_febio_settings_to_toml(expanded_settings, febio_settings)
     artefacts["source_settings_expanded_toml"] = str(expanded_settings.resolve())
 
-    prepare_status = {"mesh_export": "not_requested", "message": ""}
+    prepare_status = {
+        "mesh_export": "not_requested",
+        "message": "",
+        "builder_scope": (
+            "Current COMSOL builder is a scaffold: it exports geometry/material/lobule inputs "
+            "from the FEBio-side pipeline, but does not yet recreate the full COMSOL physics "
+            "model automatically."
+        ),
+        "recommended_next_steps": [
+            "Import or reconstruct the breast mesh/geometry inside COMSOL.",
+            "Create explicit COMSOL selections for skin, adipose, glandular, and chest-wall regions.",
+            "Map FEBio material parameters to COMSOL material models.",
+            "Define gravity and motion studies equivalent to the FEBio baseline.",
+            "Validate the COMSOL model first with a static gravity load before dynamic motion.",
+        ],
+    }
     if settings.source.export_mesh_csv or settings.source.export_mesh_npz:
         try:
             mesh = generate_mesh(settings=febio_settings)

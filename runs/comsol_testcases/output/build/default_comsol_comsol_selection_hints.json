@@ -1,0 +1,27 @@
+{
+  "component_domain_selections": {
+    "geom1_breast_union_dom": "Final union of adipose, glandular, and chest-wall domains",
+    "geom1_adipose_diff_dom": "Adipose region after subtracting glandular volume from outer breast",
+    "geom1_gland_clip_dom": "Glandular ellipsoid clipped to the outer breast",
+    "geom1_chest_cyl_dom": "Chest-wall support cylinder"
+  },
+  "component_boundary_selections": {
+    "geom1_breast_union_bnd": "Exterior boundaries of the full assembled breast/chest geometry",
+    "geom1_adipose_diff_bnd": "Boundaries of the adipose domain",
+    "geom1_gland_clip_bnd": "Boundaries of the glandular domain",
+    "geom1_chest_cyl_bnd": "Boundaries of the chest-wall support domain"
+  },
+  "geometry_feature_tags": {
+    "breast_outer": "Outer breast hemisphere generated from sphere/block intersection",
+    "gland_clip": "Glandular ellipsoid clipped to the breast outer volume",
+    "adipose_diff": "Adipose outer volume minus glandular volume",
+    "chest_cyl": "Chest-wall cylindrical support",
+    "breast_union": "Final union used for meshing/physics"
+  },
+  "recommended_physics_targets": {
+    "full_breast_domain_selection": "geom1_breast_union_dom",
+    "adipose_domain_selection": "geom1_adipose_diff_dom",
+    "glandular_domain_selection": "geom1_gland_clip_dom",
+    "chest_domain_selection": "geom1_chest_cyl_dom"
+  }
+}

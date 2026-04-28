@@ -2,11 +2,7 @@ Command: C:/Program Files/COMSOL/COMSOL64/Multiphysics/bin/win64/comsolbatch.exe
 Return code: 0
 
 === STDOUT ===
-
-ERROR: Failed to start COMSOL. For details, see the log file null
-ERROR: Additional information: License error: -15.
-Cannot connect to license server system.
-
+<empty>
 
 === STDERR ===
 <empty>

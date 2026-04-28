@@ -7,6 +7,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
+from ews_fem_pipeline_comsol.paths import ensure_output_tree
 from ews_fem_pipeline_comsol.settings import Settings
 
 logger = logging.getLogger(__name__)
@@ -50,16 +51,17 @@ class COMSOLRunner:
         if not batch_executable:
             return False, "COMSOL batch executable not found."
 
-        output_dir = (workdir / "output").resolve()
-        output_dir.mkdir(parents=True, exist_ok=True)
-        configuration_dir = self._resolve_configuration_dir(settings, output_dir)
-        log_file = output_dir / "comsol_license_check.log"
-        debug_file = output_dir / "comsol_license_check_debug.log"
+        output_paths = ensure_output_tree(workdir, settings)
+        build_dir = output_paths["build"]
+        logs_dir = output_paths["logs"]
+        configuration_dir = self._resolve_configuration_dir(settings, build_dir)
+        log_file = logs_dir / "comsol_license_check.log"
+        debug_file = logs_dir / "comsol_license_check_debug.log"
 
         # Intentionally pass a non-existing input file:
         # - If license is down: COMSOL returns license error (-15 etc.)
         # - If license is up: COMSOL proceeds further and reports file/read issue.
-        dummy_input = output_dir / "__license_probe_input__.mph"
+        dummy_input = build_dir / "__license_probe_input__.mph"
         args = [
             str(batch_executable),
             "-configuration",
@@ -324,11 +326,13 @@ class COMSOLRunner:
         payload = json.loads(input_file.read_text(encoding="utf-8"))
         case_name = payload["case_name"]
         case_dir = Path(payload["case_dir"])
-        output_dir = case_dir / settings.pipeline.output_subdir
-        output_dir.mkdir(parents=True, exist_ok=True)
-        command_preview_file = output_dir / f"{case_name}.comsol_command.txt"
+        output_paths = ensure_output_tree(case_dir, settings)
+        build_dir = output_paths["build"]
+        solve_dir = output_paths["solve"]
+        logs_dir = output_paths["logs"]
+        command_preview_file = logs_dir / f"{case_name}.comsol_command.txt"
         prepare_artefacts = payload.get("prepare_artefacts", {})
-        configuration_dir = self._resolve_configuration_dir(settings, output_dir)
+        configuration_dir = self._resolve_configuration_dir(settings, build_dir)
 
         batch_executable = self._resolve_batch_executable(settings)
         comsol_executable = self._resolve_comsol_executable(settings, batch_executable)
@@ -346,9 +350,12 @@ class COMSOLRunner:
         source_mph = configured_mph if configured_mph and configured_mph.exists() else None
         planned_commands: list[str] = []
         build_failure_reason = ""
+        build_attempted = False
+        build_succeeded = False
 
         if source_mph is None and settings.comsol.auto_build_from_java and builder_java and generated_mph_target:
-            build_log = output_dir / f"{case_name}_comsol_build.log"
+            build_attempted = settings.comsol.execute
+            build_log = logs_dir / f"{case_name}_comsol_build.log"
             planned_build_cmd = " ".join(
                 [
                     str(batch_executable),
@@ -372,7 +379,7 @@ class COMSOLRunner:
                 built, reason = self._try_build_mph_from_java(
                     case_name=case_name,
                     case_dir=case_dir,
-                    output_dir=output_dir,
+                    output_dir=logs_dir,
                     configuration_dir=configuration_dir,
                     batch_executable=batch_executable,
                     comsol_executable=comsol_executable,
@@ -382,13 +389,16 @@ class COMSOLRunner:
                     settings=settings,
                 )
                 if built:
+                    build_succeeded = True
                     source_mph = self._resolve_generated_mph_candidate(generated_mph_target)
                 else:
                     build_failure_reason = reason
 
         if source_mph is None and configured_mph and configured_mph.exists():
             source_mph = configured_mph
-        if source_mph is None and generated_mph_target:
+        if source_mph is None and generated_mph_target and not build_attempted:
+            source_mph = self._resolve_generated_mph_candidate(generated_mph_target)
+        if source_mph is None and generated_mph_target and build_attempted and build_succeeded:
             source_mph = self._resolve_generated_mph_candidate(generated_mph_target)
         if source_mph is None:
             if build_failure_reason:
@@ -407,8 +417,8 @@ class COMSOLRunner:
                 command_preview_file.write_text("\n".join(planned_commands) + "\n", encoding="utf-8")
             return not settings.comsol.execute
 
-        output_mph = output_dir / f"{case_name}_result.mph"
-        log_file = output_dir / f"{case_name}_comsol.log"
+        output_mph = solve_dir / f"{case_name}_result.mph"
+        log_file = logs_dir / f"{case_name}_comsol.log"
 
         proc_args = [
             str(batch_executable),
@@ -432,7 +442,7 @@ class COMSOLRunner:
             return True
 
         logger.info("Running COMSOL for %s", case_name)
-        debug_path = output_dir / f"{case_name}_comsol_runner_debug.log"
+        debug_path = logs_dir / f"{case_name}_comsol_runner_debug.log"
         code, _, _ = self._run_logged_command(proc_args, case_dir, debug_path)
         if code != 0:
             logger.error("COMSOL failed for %s. Debug: %s", case_name, debug_path)

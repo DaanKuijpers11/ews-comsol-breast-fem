@@ -1,0 +1,53 @@
+*******************************************
+***COMSOL 6.4.0.378 progress output file***
+*******************************************
+Tue Apr 28 09:34:20 CEST 2026
+COMSOL Multiphysics 6.4 (Build: 378) starting in batch mode
+Running: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_comsol_builder.class
+---------- Current Progress: 100 % - Updating selections
+Memory: 433/442 470/482
+           Current Progress:   0 % - Sphere
+Memory: 445/445 613/613
+           Current Progress:   8 % - Block
+Memory: 453/453 616/618
+-          Current Progress:  17 % - Intersection
+-          Current Progress:  17 % - Performing Boolean operation
+Memory: 455/455 617/618
+           Current Progress:   0 % - Cylinder
+Memory: 456/456 618/618
+           Current Progress:   0 % - Ellipsoid
+Memory: 458/458 618/618
+           Current Progress:   9 % - Intersection 2
+Memory: 461/461 618/619
+           Current Progress:   9 % - Performing Boolean operation
+Memory: 461/461 619/619
+           Current Progress:   0 % - Difference
+Memory: 462/462 619/619
+           Current Progress:   0 % - Performing Boolean operation
+Memory: 463/463 619/619
+           Current Progress:   0 % - Union
+Memory: 464/464 619/619
+           Current Progress:   0 % - Performing Boolean operation
+Memory: 465/465 620/620
+           Current Progress:   0 % - Geometry 1
+Memory: 466/466 620/620
+           Current Progress:   0 % - Form Union
+           Current Progress:   0 % - Performing Boolean operation
+--         Current Progress:  20 % - Updating selections
+--         Current Progress:  20 % - Free tetrahedral
+Memory: 482/482 624/624
+Number of vertex elements: 27
+---        Current Progress:  38 % - Creating boundary mesh
+Memory: 497/497 638/638
+Number of edge elements: 430
+Number of boundary elements: 7606
+-----      Current Progress:  56 % - Creating initial tetrahedra
+Memory: 503/503 640/640
+---------- Current Progress: 100 % - Finalizing mesh
+Memory: 466/510 618/652
+Number of elements: 26934
+Minimum element quality: 0.18
+Class run time: 9 s.
+Saving model: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_generated_Model.mph
+Save time: 0 s.
+Total time: 9 s.

@@ -1,0 +1,57 @@
+*******************************************
+***COMSOL 6.4.0.378 progress output file***
+*******************************************
+Tue Apr 28 09:34:37 CEST 2026
+COMSOL Multiphysics 6.4 (Build: 378) starting in batch mode
+Opening file: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_generated.mph
+Open time: 10 s.
+Running: Study 1
+           Current Progress:   2 % - Generating equations
+Memory: 486/486 521/521
+           Current Progress:   3 % - Study 1
+Memory: 523/531 562/570
+<---- Compile Equations: Stationary in Study 1/Solution 1 (sol1) ---------------
+Started at Apr 28, 2026, 9:34:48 AM.
+Geometry shape function: Quadratic Lagrange
+Running on Intel64 Family 6 Model 141 Stepping 1, GenuineIntel.
+Using 1 socket with 8 cores in total on S20223231.
+Available memory: 16.05 GB.
+           Current Progress:   3 % - Compile Equations: Stationary
+Memory: 529/534 565/571
+           Current Progress:   7 % - Compile Equations: Stationary
+Memory: 550/563 607/619
+Time: 1 s.
+Physical memory: 595 MB
+Virtual memory: 656 MB
+Ended at Apr 28, 2026, 9:34:49 AM.
+----- Compile Equations: Stationary in Study 1/Solution 1 (sol1) -------------->
+<---- Dependent Variables 1 in Study 1/Solution 1 (sol1) -----------------------
+Started at Apr 28, 2026, 9:34:49 AM.
+           Current Progress:   7 % - Dependent Variables 1
+Memory: 593/595 652/656
+Solution time: 0 s.
+Physical memory: 593 MB
+Virtual memory: 653 MB
+Ended at Apr 28, 2026, 9:34:49 AM.
+----- Dependent Variables 1 in Study 1/Solution 1 (sol1) ---------------------->
+<---- Stationary Solver 1 in Study 1/Solution 1 (sol1) -------------------------
+Started at Apr 28, 2026, 9:34:49 AM.
+Linear solver
+Number of degrees of freedom solved for: 0.
+Symmetric matrices found.
+Orthonormal null-space function used.
+Iter      SolEst     Damping    Stepsize #Res #Jac #Sol   LinErr   LinRes
+   1           0   1.0000000           0    1    1    1        0        0
+---------- Current Progress: 100 % - 
+Memory: 597/610 656/670
+Solution time: 1 s.
+Physical memory: 610 MB
+Virtual memory: 682 MB
+Ended at Apr 28, 2026, 9:34:50 AM.
+----- Stationary Solver 1 in Study 1/Solution 1 (sol1) ------------------------>
+Run time: 3 s.
+Saving model: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\solve\default_comsol_result.mph
+Save time: 1 s.
+Total time: 14 s.
+---------- Current Progress: 100 % - Done
+Memory: 570/610 625/682

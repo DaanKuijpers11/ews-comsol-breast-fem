@@ -1,13 +1,16 @@
+*******************************************
+***COMSOL 6.4.0.378 progress output file***
+*******************************************
+Tue Apr 28 08:53:10 CEST 2026
+COMSOL Multiphysics 6.4 (Build: 378) starting in batch mode
+Opening file: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\default_comsol_generated.mph
+Open time: 5 s.
 
 /******************/
 /*****Error********/
 /******************/
-License error: -15.
-Cannot connect to license server system.
- The license server manager (lmgrd) has not been started yet,
- the wrong port@host or license file is being used, or the
- port or hostname in the license file has been changed.
-Feature:       SERIAL
-Server name:   131.155.10.39
-License path:  C:\Program Files\COMSOL\COMSOL64\Multiphysics\license\license.dat;
-FlexNet Licensing error:-15,10.  System Error: 10013 "WinSock: Access denied"
+Unknown study.
+ - Tag: std1
+Saving model: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\default_comsol_result.mph
+Save time: 1 s.
+Total time: 6 s.
