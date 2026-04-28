@@ -1,0 +1,132 @@
+!SESSION 2026-04-24 15:35:22.299 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=21.0.7
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  batch -inputfile C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\default_comsol_generated_Model.mph -outputfile C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\default_comsol_result.mph -study std1 -batchlog C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\default_comsol_comsol.log
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 batch -inputfile C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\default_comsol_generated_Model.mph -outputfile C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\default_comsol_result.mph -study std1 -batchlog C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\default_comsol_comsol.log
+
+!ENTRY com.comsol.util 4 0 2026-04-24 15:35:26.227
+!MESSAGE Exception in com.comsol.logger.internal.CsPlugin.start() of bundle com.comsol.logger.
+!STACK 0
+org.osgi.framework.BundleException: Exception in com.comsol.logger.internal.CsPlugin.start() of bundle com.comsol.logger.
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:847)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:768)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1066)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:394)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:643)
+	at org.eclipse.osgi.container.Module.start(Module.java:500)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:471)
+	at com.comsol.util.methods.PluginUtil.d(SourceFile:480)
+	at com.comsol.util.application.CsBaseApplication.start(SourceFile:103)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)
+Caused by: java.lang.RuntimeException: Unable to determine a suitable log file path.
+	at com.comsol.logger.c.b(SourceFile:44)
+	at com.comsol.logger.c.a(SourceFile:90)
+	at com.comsol.logger.internal.CsPlugin.internalLog(SourceFile:285)
+	at com.comsol.logger.internal.CsPlugin.start(SourceFile:151)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$2.run(BundleContextImpl.java:826)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$2.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(Unknown Source)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:818)
+	... 18 more
+Root exception:
+java.lang.RuntimeException: Unable to determine a suitable log file path.
+	at com.comsol.logger.c.b(SourceFile:44)
+	at com.comsol.logger.c.a(SourceFile:90)
+	at com.comsol.logger.internal.CsPlugin.internalLog(SourceFile:285)
+	at com.comsol.logger.internal.CsPlugin.start(SourceFile:151)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$2.run(BundleContextImpl.java:826)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$2.run(BundleContextImpl.java:1)
+	at java.base/java.security.AccessController.doPrivileged(Unknown Source)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:818)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:768)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1066)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:394)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:643)
+	at org.eclipse.osgi.container.Module.start(Module.java:500)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:471)
+	at com.comsol.util.methods.PluginUtil.d(SourceFile:480)
+	at com.comsol.util.application.CsBaseApplication.start(SourceFile:103)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)
+
+!ENTRY com.comsol.bridge 4 0 2026-04-24 15:35:35.431
+!MESSAGE 
+!STACK 0
+Exception:
+	com.comsol.nativejni.FlNativeException: License error: -15.
+Cannot connect to license server system.
+Messages:
+	License error -15 Cannot connect to license server system
+
+Stack trace:
+	at license.cpp, row 856, (Cannot connect to license server system.
+ The license server manager (lmgrd) has not been started yet,
+ the wrong port@host or license file is being used, or the
+ port or hostname in the license file has been changed.
+Feature:       SERIAL
+Server name:   131.155.10.39
+License path:  C:\Program Files\COMSOL\COMSOL64\Multiphysics\license\license.dat;
+FlexNet Licensing error:-15,10.  System Error: 10013 "WinSock: Access denied")
+at com.comsol.nativejni.util.FlLicense.getVendorString(Native Method)
+	at com.comsol.nativejni.util.FlLicense.getVendorString(SourceFile:620)
+	at com.comsol.nativejni.util.FlLicense.getVendorString(SourceFile:616)
+	at com.comsol.nativeutil.e.d.o(SourceFile:211)
+	at com.comsol.nativeutil.e.c.z(SourceFile:61)
+	at com.comsol.nativeutil.e.c.c(SourceFile:99)
+	at com.comsol.nativeutil.e.c$a.a(SourceFile:857)
+	at com.comsol.util.license.d.a(SourceFile:153)
+	at com.comsol.nativeutil.preferences.Preferences.J(SourceFile:2947)
+	at com.comsol.nativeutil.preferences.Preferences.a(SourceFile:400)
+	at com.comsol.nativeutil.preferences.Preferences.create(SourceFile:260)
+	at com.comsol.bridge.command.bp.run(SourceFile:55)
+	at com.comsol.bridge.command.k.c(SourceFile:227)
+	at com.comsol.bridge.command.k$1.run(SourceFile:100)
+	at com.comsol.util.thread.SuspendableTasks$1.run(SourceFile:111)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+!ENTRY com.comsol.util 4 0 2026-04-24 15:35:35.448
+!MESSAGE License_error_-15_Cannot_connect_to_license_server_system
+
+!ENTRY com.comsol.util 4 0 2026-04-24 15:35:35.448
+!MESSAGE License_error_-15_Cannot_connect_to_license_server_system
+
+!ENTRY com.comsol.util 4 0 2026-04-24 15:35:35.493
+!MESSAGE Failed to start COMSOL. Error: License error: -15.
+Cannot connect to license server system.
+!STACK 0
+java.lang.RuntimeException: License error: -15.
+Cannot connect to license server system.
+	at com.comsol.batch.BatchApplication.a(SourceFile:1236)
+	at com.comsol.batch.BatchApplication.doStart(SourceFile:460)
+	at com.comsol.util.application.ComsolApplication.doStart(SourceFile:271)
+	at com.comsol.util.application.CsBaseApplication.start(SourceFile:190)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)

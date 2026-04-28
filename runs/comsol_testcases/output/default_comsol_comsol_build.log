@@ -1,12 +1,35 @@
 *******************************************
 ***COMSOL 6.4.0.378 progress output file***
 *******************************************
-Fri Apr 24 14:17:23 CEST 2026
+Fri Apr 24 15:33:15 CEST 2026
 COMSOL Multiphysics 6.4 (Build: 378) starting in batch mode
-Opening file: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\default_comsol_comsol_builder.java
+Running: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\default_comsol_comsol_builder.class
+---------- Current Progress: 100 % - Updating selections
+Memory: 501/501 555/611
+           Current Progress:   0 % - Form Union
+Memory: 491/507 538/611
+---------- Current Progress: 100 % - Updating selections
+Memory: 496/507 543/611
 
 /******************/
 /*****Error********/
 /******************/
-java.lang.IllegalStateException: java.io.IOException: COMSOL Multiphysics model file is damaged or not valid.
-Total time: 1 s.
+Error running java class.
+The system cannot find the path specified
+ - Class: default_comsol_comsol_builder
+Saving model: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\default_comsol_generated_Model.mph
+Save time: 3 s.
+Total time: 9 s.
+
+/******************/
+/*****Error********/
+/******************/
+License error: -15.
+Cannot connect to license server system.
+ The license server manager (lmgrd) has not been started yet,
+ the wrong port@host or license file is being used, or the
+ port or hostname in the license file has been changed.
+Feature:       SERIAL
+Server name:   131.155.10.39
+License path:  C:\Program Files\COMSOL\COMSOL64\Multiphysics\license\license.dat;
+FlexNet Licensing error:-15,10.  System Error: 10013 "WinSock: Access denied"

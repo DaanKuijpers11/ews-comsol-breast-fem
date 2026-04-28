@@ -1,0 +1,13 @@
+
+/******************/
+/*****Error********/
+/******************/
+License error: -15.
+Cannot connect to license server system.
+ The license server manager (lmgrd) has not been started yet,
+ the wrong port@host or license file is being used, or the
+ port or hostname in the license file has been changed.
+Feature:       SERIAL
+Server name:   131.155.10.39
+License path:  C:\Program Files\COMSOL\COMSOL64\Multiphysics\license\license.dat;
+FlexNet Licensing error:-15,10.  System Error: 10013 "WinSock: Access denied"

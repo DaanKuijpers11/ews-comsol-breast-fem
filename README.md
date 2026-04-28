@@ -47,6 +47,12 @@ set COMSOL_BATCH_EXE=C:\Program Files\COMSOL\COMSOL61\Multiphysics\bin\win64\com
 python -m ews_fem_pipeline_comsol run runs/comsol_testcases/default_comsol.toml
 ```
 
+Check license connectivity before running:
+
+```powershell
+python -m ews_fem_pipeline_comsol license-check runs/comsol_testcases/default_comsol.toml
+```
+
 If `comsol.mph_file` is empty, the runner will first try to auto-build an MPH from the generated Java builder scaffold and then run batch solve.
 If build fails with `License error: -15`, COMSOL cannot reach the license server yet; check your COMSOL license connection before rerunning.
 

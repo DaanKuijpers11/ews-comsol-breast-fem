@@ -2444,3 +2444,22 @@
 2026-04-24 14:35:58,732 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
 2026-04-24 14:36:29,553 [WARNING] ews_fem_pipeline_comsol.run_simulation.comsol_runner: default_comsol: Java compile failed: no .class generated. Check compile debug log.
 2026-04-24 14:36:29,553 [WARNING] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Skipping default_comsol: no readable MPH available. Configure comsol.mph_file or enable Java auto-build with generated artefacts.
+2026-04-24 14:48:12,320 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-24 14:49:32,743 [WARNING] ews_fem_pipeline_comsol.run_simulation.comsol_runner: default_comsol: Java compile failed: no .class generated. Check compile debug log.
+2026-04-24 14:49:32,743 [WARNING] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Skipping default_comsol: no readable MPH available. Configure comsol.mph_file or enable Java auto-build with generated artefacts.
+2026-04-24 14:53:48,749 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-24 14:57:03,842 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-24 15:02:04,460 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-24 15:03:00,344 [WARNING] ews_fem_pipeline_comsol.run_simulation.comsol_runner: default_comsol: COMSOL license error during class-based MPH build (license server unreachable).
+2026-04-24 15:03:00,344 [WARNING] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Skipping default_comsol: no readable MPH available. Configure comsol.mph_file or enable Java auto-build with generated artefacts.
+2026-04-24 15:33:03,195 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-24 15:33:03,195 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-24 15:33:03,195 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-24 15:33:03,195 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-24 15:33:03,195 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-24 15:33:03,195 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-24 15:33:03,454 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-24 15:33:25,720 [WARNING] ews_fem_pipeline_comsol.run_simulation.comsol_runner: default_comsol: Class-based build executed but no MPH file was produced.
+2026-04-24 15:33:25,720 [WARNING] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Skipping default_comsol: no readable MPH available. Configure comsol.mph_file or enable Java auto-build with generated artefacts.
+2026-04-24 15:35:05,040 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-24 15:35:22,032 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Running COMSOL for default_comsol

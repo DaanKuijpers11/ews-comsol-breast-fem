@@ -72,3 +72,12 @@ def run_full_pipeline(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
 
 def sweep_cases(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
     return run_full_pipeline(input_files)
+
+
+def check_license(settings_file: Path) -> bool:
+    from ews_fem_pipeline_comsol.run_simulation import COMSOLRunner
+
+    settings = load_settings_from_toml(settings_file)
+    ok, message = COMSOLRunner().check_license(settings=settings, workdir=settings_file.parent.resolve())
+    print(message)
+    return ok

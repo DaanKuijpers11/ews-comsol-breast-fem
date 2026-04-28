@@ -32,6 +32,58 @@ class COMSOLRunner:
         candidate.mkdir(parents=True, exist_ok=True)
         return candidate
 
+    @staticmethod
+    def _resolve_generated_mph_candidate(generated_mph: Path) -> Path | None:
+        if generated_mph.exists():
+            return generated_mph.resolve()
+        fallback = generated_mph.with_name(f"{generated_mph.stem}_Model{generated_mph.suffix}")
+        if fallback.exists():
+            return fallback.resolve()
+        return None
+
+    def check_license(self, settings: Settings, workdir: Path) -> tuple[bool, str]:
+        """
+        Fast COMSOL license probe.
+        Returns (ok, message).
+        """
+        batch_executable = self._resolve_batch_executable(settings)
+        if not batch_executable:
+            return False, "COMSOL batch executable not found."
+
+        output_dir = (workdir / "output").resolve()
+        output_dir.mkdir(parents=True, exist_ok=True)
+        configuration_dir = self._resolve_configuration_dir(settings, output_dir)
+        log_file = output_dir / "comsol_license_check.log"
+        debug_file = output_dir / "comsol_license_check_debug.log"
+
+        # Intentionally pass a non-existing input file:
+        # - If license is down: COMSOL returns license error (-15 etc.)
+        # - If license is up: COMSOL proceeds further and reports file/read issue.
+        dummy_input = output_dir / "__license_probe_input__.mph"
+        args = [
+            str(batch_executable),
+            "-configuration",
+            str(configuration_dir),
+            "-inputfile",
+            str(dummy_input),
+            "-batchlog",
+            str(log_file),
+        ]
+        code, out, err = self._run_logged_command(args, workdir, debug_file, timeout_s=40)
+        text_parts = [out, err]
+        if log_file.exists():
+            text_parts.append(log_file.read_text(encoding="utf-8", errors="replace"))
+        combined = "\n".join(text_parts).lower()
+
+        if self._detect_license_error(combined):
+            return False, "License check failed: COMSOL cannot reach a valid license."
+
+        if code == 124:
+            return False, "License check timed out (possible environment/VPN/session issue)."
+
+        # No license error found; treat as license reachable.
+        return True, "License check passed: no COMSOL license error detected."
+
     def _resolve_batch_executable(self, settings: Settings) -> str | None:
         if settings.comsol.batch_executable:
             return settings.comsol.batch_executable
@@ -71,32 +123,57 @@ class COMSOLRunner:
         return None
 
     @staticmethod
-    def _run_logged_command(proc_args: list[str], cwd: Path, debug_path: Path) -> tuple[int, str, str]:
-        result = subprocess.run(
-            proc_args,
-            cwd=str(cwd),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-        )
+    def _resolve_javac_executable(jdk_root: str | None) -> str | None:
+        if not jdk_root:
+            return None
+        candidate = Path(jdk_root) / "bin" / "javac.exe"
+        if candidate.exists():
+            return str(candidate)
+        return None
+
+    @staticmethod
+    def _run_logged_command(
+        proc_args: list[str],
+        cwd: Path,
+        debug_path: Path,
+        timeout_s: int = 120,
+    ) -> tuple[int, str, str]:
+        try:
+            result = subprocess.run(
+                proc_args,
+                cwd=str(cwd),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                timeout=timeout_s,
+            )
+            code = result.returncode
+            stdout = result.stdout or ""
+            stderr = result.stderr or ""
+        except subprocess.TimeoutExpired as exc:
+            code = 124
+            stdout = (exc.stdout or "") if isinstance(exc.stdout, str) else ""
+            stderr = (exc.stderr or "") if isinstance(exc.stderr, str) else ""
+            stderr = (stderr + "\nCommand timed out.").strip()
+
         debug_path.write_text(
             "\n".join(
                 [
                     f"Command: {' '.join(proc_args)}",
-                    f"Return code: {result.returncode}",
+                    f"Return code: {code}",
                     "",
                     "=== STDOUT ===",
-                    result.stdout or "<empty>",
+                    stdout or "<empty>",
                     "",
                     "=== STDERR ===",
-                    result.stderr or "<empty>",
+                    stderr or "<empty>",
                 ]
             ),
             encoding="utf-8",
         )
-        return result.returncode, result.stdout or "", result.stderr or ""
+        return code, stdout, stderr
 
     def _try_build_mph_from_java(
         self,
@@ -115,8 +192,55 @@ class COMSOLRunner:
         build_log = output_dir / f"{case_name}_comsol_build.log"
         class_file = builder_java.with_suffix(".class")
         jdk_root = settings.comsol.jdk_root or os.environ.get("JAVA_HOME")
+        javac_executable = self._resolve_javac_executable(jdk_root)
+        multiphysics_root = Path(batch_executable).resolve().parents[2]
+        plugins_dir = multiphysics_root / "plugins"
 
-        # Preferred route: compile Java source to class, then run class via comsolbatch.
+        # Preferred route: plain javac with COMSOL plugin jars on classpath.
+        if javac_executable and plugins_dir.exists():
+            javac_cp = str(plugins_dir / "*")
+            javac_args = [
+                str(javac_executable),
+                "-proc:none",
+                "-cp",
+                javac_cp,
+                "-d",
+                str(builder_java.parent.resolve()),
+                str(builder_java.resolve()),
+            ]
+            javac_debug = output_dir / f"{case_name}_javac_compile_debug.log"
+            javac_code, javac_out, javac_err = self._run_logged_command(javac_args, case_dir, javac_debug)
+            if javac_code == 0 and class_file.exists():
+                class_args = [
+                    str(batch_executable),
+                    "-configuration",
+                    str(configuration_dir),
+                    "-inputfile",
+                    str(class_file.resolve()),
+                    "-outputfile",
+                    str(generated_mph.resolve()),
+                    "-batchlog",
+                    str(build_log.resolve()),
+                    *settings.comsol.extra_args,
+                ]
+                class_debug = output_dir / f"{case_name}_comsol_build_class_debug.log"
+                class_code, class_out, class_err = self._run_logged_command(class_args, case_dir, class_debug)
+                class_log_text = build_log.read_text(encoding="utf-8", errors="replace") if build_log.exists() else ""
+                class_text = "\n".join([class_out, class_err, class_log_text])
+                generated_candidate = self._resolve_generated_mph_candidate(generated_mph)
+                if class_code == 0 and generated_candidate is not None:
+                    return True, ""
+                if self._detect_license_error(class_text):
+                    return False, "COMSOL license error during class-based MPH build (license server unreachable)."
+                if "model file is damaged or not valid" in class_text.lower():
+                    return False, "COMSOL rejected compiled class input. Check class execution route."
+                return False, "Class-based build executed but no MPH file was produced."
+
+            javac_text = "\n".join([javac_out, javac_err])
+            if "error:" in javac_text.lower():
+                return False, "javac compile failed. See *_javac_compile_debug.log for details."
+
+        # Secondary route: COMSOL's own compiler.
         if comsolcompile_executable:
             compile_args = [str(comsolcompile_executable)]
             if jdk_root:
@@ -125,7 +249,10 @@ class COMSOLRunner:
             compile_debug = output_dir / f"{case_name}_comsol_compile_debug.log"
             compile_code, compile_out, compile_err = self._run_logged_command(compile_args, case_dir, compile_debug)
             compile_text = "\n".join([compile_out, compile_err])
-
+            if self._detect_license_error(compile_text):
+                return False, "COMSOL license error during Java compile step (license server unreachable)."
+            if compile_code == 124:
+                return False, "comsolcompile timed out. Check *_comsol_compile_debug.log."
             if compile_code == 0 and class_file.exists():
                 class_args = [
                     str(batch_executable),
@@ -143,24 +270,19 @@ class COMSOLRunner:
                 class_code, class_out, class_err = self._run_logged_command(class_args, case_dir, class_debug)
                 class_log_text = build_log.read_text(encoding="utf-8", errors="replace") if build_log.exists() else ""
                 class_text = "\n".join([class_out, class_err, class_log_text])
-                if class_code == 0 and generated_mph.exists():
+                generated_candidate = self._resolve_generated_mph_candidate(generated_mph)
+                if class_code == 0 and generated_candidate is not None:
                     return True, ""
                 if self._detect_license_error(class_text):
                     return False, "COMSOL license error during class-based MPH build (license server unreachable)."
-                if "model file is damaged or not valid" in class_text.lower():
-                    return False, "COMSOL could not execute compiled class input. Check class generation and COMSOL batch syntax."
-                return False, "Class-based build executed but no MPH file was produced."
-
-            if not class_file.exists():
-                if not jdk_root:
-                    return False, "Java compile failed: no JDK detected. Install a JDK and set JAVA_HOME (or comsol.jdk_root)."
-                return False, "Java compile failed: no .class generated. Check compile debug log."
-            if self._detect_license_error(compile_text):
-                return False, "COMSOL license error during Java compile step (license server unreachable)."
-            return False, "Java compile step failed before class execution."
+                return False, "Class-based build after comsolcompile did not produce MPH."
 
         if settings.comsol.java_compile_first:
-            return False, "comsolcompile executable not found. Cannot auto-build from Java without compiler."
+            if not comsolcompile_executable and not javac_executable:
+                return False, "No Java compiler available. Install JDK and set JAVA_HOME (or comsol.jdk_root)."
+            if jdk_root and not javac_executable:
+                return False, "JDK root configured but javac.exe not found under jdk_root/bin."
+            return False, "Java compile failed: no .class generated. Check compile debug logs."
 
         # Fallback route: direct Java source as input file (often unsupported).
         direct_args = [
@@ -179,7 +301,8 @@ class COMSOLRunner:
         code, stdout, stderr = self._run_logged_command(direct_args, case_dir, direct_debug)
         build_log_text = build_log.read_text(encoding="utf-8", errors="replace") if build_log.exists() else ""
         direct_text = "\n".join([stdout, stderr, build_log_text])
-        if code == 0 and generated_mph.exists():
+        generated_candidate = self._resolve_generated_mph_candidate(generated_mph)
+        if code == 0 and generated_candidate is not None:
             return True, ""
         if self._detect_license_error(direct_text):
             return False, "COMSOL license error during Java->MPH build (license server unreachable)."
@@ -259,14 +382,14 @@ class COMSOLRunner:
                     settings=settings,
                 )
                 if built:
-                    source_mph = generated_mph_target.resolve()
+                    source_mph = self._resolve_generated_mph_candidate(generated_mph_target)
                 else:
                     build_failure_reason = reason
 
         if source_mph is None and configured_mph and configured_mph.exists():
             source_mph = configured_mph
-        if source_mph is None and generated_mph_target and generated_mph_target.exists():
-            source_mph = generated_mph_target.resolve()
+        if source_mph is None and generated_mph_target:
+            source_mph = self._resolve_generated_mph_candidate(generated_mph_target)
         if source_mph is None:
             if build_failure_reason:
                 logger.warning("%s: %s", case_name, build_failure_reason)

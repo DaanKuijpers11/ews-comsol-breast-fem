@@ -28,6 +28,9 @@ def _build_parser() -> argparse.ArgumentParser:
     defaults_parser = subparsers.add_parser("write-default-settings", help="Write a default COMSOL TOML settings file.")
     defaults_parser.add_argument("filepath", type=Path)
 
+    license_parser = subparsers.add_parser("license-check", help="Check whether COMSOL license is reachable.")
+    license_parser.add_argument("settings_file", type=Path)
+
     return parser
 
 
@@ -65,6 +68,11 @@ def cli_main(argv: list[str] | None = None) -> int:
         write_settings(args.filepath, default_settings())
         return 0
 
+    if args.command == "license-check":
+        from ews_fem_pipeline_comsol.pipeline import check_license
+
+        ok = check_license(args.settings_file)
+        return 0 if ok else 1
+
     parser.error(f"Unknown command: {args.command}")
     return 2
-

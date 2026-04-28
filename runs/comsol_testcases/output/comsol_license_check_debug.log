@@ -1,0 +1,8 @@
+Command: C:/Program Files/COMSOL/COMSOL64/Multiphysics/bin/win64/comsolbatch.exe -configuration C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\comsol_configuration -inputfile C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\__license_probe_input__.mph -batchlog C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\comsol_license_check.log
+Return code: 0
+
+=== STDOUT ===
+<empty>
+
+=== STDERR ===
+<empty>

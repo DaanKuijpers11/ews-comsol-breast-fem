@@ -24,7 +24,7 @@ def generate_comsol_java_builder(
     Generate COMSOL Java API scaffolding from exported prepare artefacts.
     """
     output_dir.mkdir(parents=True, exist_ok=True)
-    class_name = _safe_java_identifier(f"{case_name}_builder")
+    class_name = _safe_java_identifier(f"{case_name}_comsol_builder")
 
     build_plan_path = prepare_artefacts.get("comsol_build_plan_json", "")
     build_plan_summary = {"lobule_count": 0}
@@ -32,8 +32,8 @@ def generate_comsol_java_builder(
         plan = json.loads(Path(build_plan_path).read_text(encoding="utf-8"))
         build_plan_summary["lobule_count"] = len(plan.get("lobules", []))
 
-    script_path = output_dir / f"{case_name}_comsol_builder.java"
-    result_mph = output_dir / f"{case_name}_generated.mph"
+    script_path = output_dir / f"{class_name}.java"
+    result_mph = (output_dir / f"{case_name}_generated.mph").resolve()
 
     java_source = f"""import com.comsol.model.*;
 import com.comsol.model.util.*;
@@ -63,7 +63,7 @@ public class {class_name} {{
     return model;
   }}
 
-  public static void main(String[] args) {{
+  public static void main(String[] args) throws Exception {{
     Model model = run();
     model.save("{result_mph.as_posix()}");
     ModelUtil.disconnect();
@@ -96,4 +96,3 @@ public class {class_name} {{
         "comsol_builder_readme": str(readme_path.resolve()),
         "comsol_generated_mph_target": str(result_mph.resolve()),
     }
-
