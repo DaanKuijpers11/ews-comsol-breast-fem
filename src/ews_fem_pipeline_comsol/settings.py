@@ -20,6 +20,10 @@ class ComsolSettings:
     java_compile_first: bool = False
     jdk_root: str | None = None
     extra_args: list[str] = field(default_factory=list)
+    java_compile_timeout_s: int | None = 300
+    java_build_timeout_s: int | None = 1800
+    solve_timeout_s: int | None = 7200
+    postprocess_timeout_s: int | None = 600
 
 
 @dataclass

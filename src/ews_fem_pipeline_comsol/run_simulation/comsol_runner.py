@@ -13,6 +13,14 @@ from ews_fem_pipeline_comsol.settings import Settings
 logger = logging.getLogger(__name__)
 
 
+def _normalize_timeout_seconds(value: int | None, minimum_if_enabled: int) -> int | None:
+    if value is None:
+        return None
+    if int(value) <= 0:
+        return None
+    return max(minimum_if_enabled, int(value))
+
+
 class COMSOLRunner:
     @staticmethod
     def _detect_license_error(text: str) -> bool:
@@ -138,7 +146,7 @@ class COMSOLRunner:
         proc_args: list[str],
         cwd: Path,
         debug_path: Path,
-        timeout_s: int = 120,
+        timeout_s: int | None = 120,
     ) -> tuple[int, str, str]:
         try:
             result = subprocess.run(
@@ -149,7 +157,7 @@ class COMSOLRunner:
                 text=True,
                 encoding="utf-8",
                 errors="replace",
-                timeout=timeout_s,
+                timeout=(timeout_s if timeout_s and timeout_s > 0 else None),
             )
             code = result.returncode
             stdout = result.stdout or ""
@@ -164,6 +172,7 @@ class COMSOLRunner:
             "\n".join(
                 [
                     f"Command: {' '.join(proc_args)}",
+                    f"Timeout seconds: {timeout_s if timeout_s and timeout_s > 0 else 'disabled'}",
                     f"Return code: {code}",
                     "",
                     "=== STDOUT ===",
@@ -211,7 +220,12 @@ class COMSOLRunner:
                 str(builder_java.resolve()),
             ]
             javac_debug = output_dir / f"{case_name}_javac_compile_debug.log"
-            javac_code, javac_out, javac_err = self._run_logged_command(javac_args, case_dir, javac_debug)
+            javac_code, javac_out, javac_err = self._run_logged_command(
+                javac_args,
+                case_dir,
+                javac_debug,
+                timeout_s=_normalize_timeout_seconds(settings.comsol.java_compile_timeout_s, 30),
+            )
             if javac_code == 0 and class_file.exists():
                 class_args = [
                     str(batch_executable),
@@ -226,12 +240,19 @@ class COMSOLRunner:
                     *settings.comsol.extra_args,
                 ]
                 class_debug = output_dir / f"{case_name}_comsol_build_class_debug.log"
-                class_code, class_out, class_err = self._run_logged_command(class_args, case_dir, class_debug)
+                class_code, class_out, class_err = self._run_logged_command(
+                    class_args,
+                    case_dir,
+                    class_debug,
+                    timeout_s=_normalize_timeout_seconds(settings.comsol.java_build_timeout_s, 60),
+                )
                 class_log_text = build_log.read_text(encoding="utf-8", errors="replace") if build_log.exists() else ""
                 class_text = "\n".join([class_out, class_err, class_log_text])
                 generated_candidate = self._resolve_generated_mph_candidate(generated_mph)
                 if class_code == 0 and generated_candidate is not None:
                     return True, ""
+                if class_code == 124:
+                    return False, "Class-based COMSOL build timed out before saving the MPH. Increase build timeout or simplify geometry."
                 if self._detect_license_error(class_text):
                     return False, "COMSOL license error during class-based MPH build (license server unreachable)."
                 if "model file is damaged or not valid" in class_text.lower():
@@ -249,7 +270,12 @@ class COMSOLRunner:
                 compile_args.extend(["-jdkroot", str(jdk_root)])
             compile_args.append(str(builder_java.resolve()))
             compile_debug = output_dir / f"{case_name}_comsol_compile_debug.log"
-            compile_code, compile_out, compile_err = self._run_logged_command(compile_args, case_dir, compile_debug)
+            compile_code, compile_out, compile_err = self._run_logged_command(
+                compile_args,
+                case_dir,
+                compile_debug,
+                timeout_s=_normalize_timeout_seconds(settings.comsol.java_compile_timeout_s, 30),
+            )
             compile_text = "\n".join([compile_out, compile_err])
             if self._detect_license_error(compile_text):
                 return False, "COMSOL license error during Java compile step (license server unreachable)."
@@ -269,12 +295,19 @@ class COMSOLRunner:
                     *settings.comsol.extra_args,
                 ]
                 class_debug = output_dir / f"{case_name}_comsol_build_class_debug.log"
-                class_code, class_out, class_err = self._run_logged_command(class_args, case_dir, class_debug)
+                class_code, class_out, class_err = self._run_logged_command(
+                    class_args,
+                    case_dir,
+                    class_debug,
+                    timeout_s=_normalize_timeout_seconds(settings.comsol.java_build_timeout_s, 60),
+                )
                 class_log_text = build_log.read_text(encoding="utf-8", errors="replace") if build_log.exists() else ""
                 class_text = "\n".join([class_out, class_err, class_log_text])
                 generated_candidate = self._resolve_generated_mph_candidate(generated_mph)
                 if class_code == 0 and generated_candidate is not None:
                     return True, ""
+                if class_code == 124:
+                    return False, "Class-based COMSOL build timed out before saving the MPH. Increase build timeout or simplify geometry."
                 if self._detect_license_error(class_text):
                     return False, "COMSOL license error during class-based MPH build (license server unreachable)."
                 return False, "Class-based build after comsolcompile did not produce MPH."
@@ -300,7 +333,12 @@ class COMSOLRunner:
             *settings.comsol.extra_args,
         ]
         direct_debug = output_dir / f"{case_name}_comsol_build_direct_debug.log"
-        code, stdout, stderr = self._run_logged_command(direct_args, case_dir, direct_debug)
+        code, stdout, stderr = self._run_logged_command(
+            direct_args,
+            case_dir,
+            direct_debug,
+            timeout_s=_normalize_timeout_seconds(settings.comsol.java_build_timeout_s, 60),
+        )
         build_log_text = build_log.read_text(encoding="utf-8", errors="replace") if build_log.exists() else ""
         direct_text = "\n".join([stdout, stderr, build_log_text])
         generated_candidate = self._resolve_generated_mph_candidate(generated_mph)
@@ -343,7 +381,12 @@ class COMSOLRunner:
             str(java_file.resolve()),
         ]
         javac_debug = logs_dir / f"{case_name}_{java_file.stem}_javac_debug.log"
-        javac_code, javac_out, javac_err = self._run_logged_command(javac_args, case_dir, javac_debug)
+        javac_code, javac_out, javac_err = self._run_logged_command(
+            javac_args,
+            case_dir,
+            javac_debug,
+            timeout_s=_normalize_timeout_seconds(settings.comsol.java_compile_timeout_s, 30),
+        )
         if javac_code != 0 or not class_file.exists():
             return False, f"Failed to compile auxiliary COMSOL Java class {java_file.name}.", ""
 
@@ -361,7 +404,12 @@ class COMSOLRunner:
             *settings.comsol.extra_args,
         ]
         class_debug = logs_dir / f"{case_name}_{java_file.stem}_debug.log"
-        class_code, class_out, class_err = self._run_logged_command(class_args, case_dir, class_debug)
+        class_code, class_out, class_err = self._run_logged_command(
+            class_args,
+            case_dir,
+            class_debug,
+            timeout_s=_normalize_timeout_seconds(settings.comsol.postprocess_timeout_s, 60),
+        )
         run_log_text = run_log.read_text(encoding="utf-8", errors="replace") if run_log.exists() else ""
         run_text = "\n".join([class_out, class_err, run_log_text])
         if class_code != 0:
@@ -370,15 +418,15 @@ class COMSOLRunner:
             return False, "COMSOL license error during postprocess metrics export.", class_out
         return True, "", class_out
 
-    def run(self, input_files: tuple[Path, ...], settings_map: dict[Path, Settings]) -> tuple[Path, ...]:
+    def run(self, input_files: tuple[Path, ...], settings_map: dict[Path, Settings], *, build_only: bool = False) -> tuple[Path, ...]:
         completed: list[Path] = []
         for input_file in input_files:
             settings = settings_map[input_file]
-            if self.run_case(input_file, settings):
+            if self.run_case(input_file, settings, build_only=build_only):
                 completed.append(input_file)
         return tuple(completed)
 
-    def run_case(self, input_file: Path, settings: Settings) -> bool:
+    def run_case(self, input_file: Path, settings: Settings, *, build_only: bool = False) -> bool:
         assert input_file.suffix == ".json", "COMSOL runner expects JSON case input files."
         payload = json.loads(input_file.read_text(encoding="utf-8"))
         case_name = payload["case_name"]
@@ -411,7 +459,7 @@ class COMSOLRunner:
         build_succeeded = False
 
         if source_mph is None and settings.comsol.auto_build_from_java and builder_java and generated_mph_target:
-            build_attempted = settings.comsol.execute
+            build_attempted = True
             build_log = logs_dir / f"{case_name}_comsol_build.log"
             planned_build_cmd = " ".join(
                 [
@@ -431,7 +479,7 @@ class COMSOLRunner:
             if settings.comsol.java_compile_first and comsol_executable:
                 planned_commands.append(f"{comsol_executable} compile {builder_java.resolve()}")
 
-            if settings.comsol.execute:
+            if True:
                 logger.info("Building MPH from Java scaffold for %s", case_name)
                 built, reason = self._try_build_mph_from_java(
                     case_name=case_name,
@@ -460,7 +508,7 @@ class COMSOLRunner:
         if source_mph is None:
             if build_failure_reason:
                 logger.warning("%s: %s", case_name, build_failure_reason)
-            if settings.comsol.execute:
+            if not build_only and settings.comsol.execute:
                 logger.warning(
                     "Skipping %s: no readable MPH available. Configure comsol.mph_file or enable Java auto-build with generated artefacts.",
                     case_name,
@@ -472,7 +520,7 @@ class COMSOLRunner:
                 )
             if planned_commands:
                 command_preview_file.write_text("\n".join(planned_commands) + "\n", encoding="utf-8")
-            return not settings.comsol.execute
+            return False
 
         output_mph = solve_dir / f"{case_name}_result.mph"
         log_file = logs_dir / f"{case_name}_comsol.log"
@@ -494,13 +542,22 @@ class COMSOLRunner:
         planned_commands.append(" ".join(proc_args))
         command_preview_file.write_text("\n".join(planned_commands) + "\n", encoding="utf-8")
 
+        if build_only:
+            logger.info("Built COMSOL MPH for %s without starting solve.", case_name)
+            return True
+
         if not settings.comsol.execute:
             logger.info("Prepared COMSOL command for %s (execute=false).", case_name)
             return True
 
         logger.info("Running COMSOL for %s", case_name)
         debug_path = logs_dir / f"{case_name}_comsol_runner_debug.log"
-        code, _, _ = self._run_logged_command(proc_args, case_dir, debug_path)
+        code, _, _ = self._run_logged_command(
+            proc_args,
+            case_dir,
+            debug_path,
+            timeout_s=_normalize_timeout_seconds(settings.comsol.solve_timeout_s, 120),
+        )
         if code != 0:
             logger.error("COMSOL failed for %s. Debug: %s", case_name, debug_path)
             return False

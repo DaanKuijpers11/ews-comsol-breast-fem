@@ -12,10 +12,10 @@
     "geom1_chest_cyl_bnd": "Boundaries of the chest-wall support domain"
   },
   "geometry_feature_tags": {
-    "breast_outer": "Outer breast base plus anterior nipple cap",
-    "nipple_cap": "Anterior nipple cap added so the front geometry extends beyond the base hemisphere",
+    "breast_outer": "Outer breast base derived from the FEBio-style half-sphere baseline",
     "gland_keep_anterior": "Anterior half-space used to clip the glandular ellipsoid flat at the chest wall",
-    "gland_clip": "Glandular ellipsoid clipped to the breast outer volume",
+    "gland_clip": "Glandular source volume clipped to the breast outer volume",
+    "gland_lobules": "Union of COMSOL-native lobule ellipsoids derived from the exported FEBio lobule layout",
     "adipose_diff": "Adipose outer volume minus glandular volume",
     "chest_cyl": "Chest-wall cylindrical support",
     "breast_union": "Final union used for meshing/physics"

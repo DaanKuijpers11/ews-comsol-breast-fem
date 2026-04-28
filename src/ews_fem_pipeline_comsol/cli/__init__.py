@@ -19,6 +19,9 @@ def _build_parser() -> argparse.ArgumentParser:
     solve_parser = subparsers.add_parser("solve", help="Run COMSOL batch for one or more generated JSON files.")
     solve_parser.add_argument("input_files", nargs="+", type=Path)
 
+    build_parser = subparsers.add_parser("build-only", help="Generate and build the COMSOL MPH without starting the solve.")
+    build_parser.add_argument("input_files", nargs="+", type=Path)
+
     run_parser = subparsers.add_parser("run", help="Run generate and solve in sequence.")
     run_parser.add_argument("input_files", nargs="+", type=Path)
 
@@ -52,6 +55,12 @@ def cli_main(argv: list[str] | None = None) -> int:
         from ews_fem_pipeline_comsol.pipeline import solve_cases
 
         solve_cases(tuple(args.input_files))
+        return 0
+
+    if args.command == "build-only":
+        from ews_fem_pipeline_comsol.pipeline import build_only_pipeline
+
+        build_only_pipeline(tuple(args.input_files))
         return 0
 
     if args.command == "run":

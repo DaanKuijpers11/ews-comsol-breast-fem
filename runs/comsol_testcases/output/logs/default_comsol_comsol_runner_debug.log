@@ -1,8 +1,8 @@
 Command: C:/Program Files/COMSOL/COMSOL64/Multiphysics/bin/win64/comsolbatch.exe -configuration C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\comsol_configuration -inputfile C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_generated.mph -outputfile C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\solve\default_comsol_result.mph -study std1 -batchlog C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\logs\default_comsol_comsol.log
-Return code: 0
+Return code: 124
 
 === STDOUT ===
 <empty>
 
 === STDERR ===
-<empty>
+Command timed out.

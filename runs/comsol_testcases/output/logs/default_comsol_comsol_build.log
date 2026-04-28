@@ -1,63 +1,236 @@
 *******************************************
 ***COMSOL 6.4.0.378 progress output file***
 *******************************************
-Tue Apr 28 11:11:33 CEST 2026
+Tue Apr 28 11:32:12 CEST 2026
 COMSOL Multiphysics 6.4 (Build: 378) starting in batch mode
 Running: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_comsol_builder.class
 ---------- Current Progress: 100 % - Updating selections
-Memory: 458/523 496/563
+Memory: 468/469 516/518
            Current Progress:   0 % - Sphere
-Memory: 479/523 517/563
+Memory: 465/484 514/530
            Current Progress:   8 % - Block
-Memory: 487/523 521/563
+Memory: 477/484 522/530
 -          Current Progress:  17 % - Intersection
+Memory: 478/484 523/530
 -          Current Progress:  17 % - Performing Boolean operation
-Memory: 490/523 521/563
-           Current Progress:   0 % - Ellipsoid
-Memory: 491/523 522/563
+Memory: 480/484 523/530
            Current Progress:   0 % - Union
-Memory: 495/523 524/563
+Memory: 490/490 524/530
            Current Progress:   0 % - Performing Boolean operation
-Memory: 496/523 524/563
            Current Progress:   0 % - Cylinder
+Memory: 490/490 525/530
            Current Progress:   0 % - Block 2
-Memory: 497/523 525/563
-           Current Progress:   0 % - Ellipsoid 2
+Memory: 492/492 525/530
+           Current Progress:   0 % - Ellipsoid
+Memory: 493/493 526/530
+           Current Progress:   0 % - Ellipsoid 1
+Memory: 534/536 563/565
+           Current Progress:   2 % - Ellipsoid 2
+Memory: 546/548 576/578
+           Current Progress:   3 % - Ellipsoid 3
+Memory: 550/550 580/580
+           Current Progress:   5 % - Ellipsoid 4
+Memory: 559/559 590/590
+           Current Progress:   6 % - Ellipsoid 5
+Memory: 560/563 590/593
+           Current Progress:   8 % - Ellipsoid 6
+Memory: 562/563 591/593
+           Current Progress:   9 % - Ellipsoid 7
+Memory: 552/563 580/593
+-          Current Progress:  11 % - Ellipsoid 8
+Memory: 554/563 584/593
+-          Current Progress:  13 % - Ellipsoid 9
+Memory: 547/563 576/593
+-          Current Progress:  14 % - Ellipsoid 10
+Memory: 551/563 579/593
+-          Current Progress:  16 % - Ellipsoid 11
+Memory: 552/563 580/593
+-          Current Progress:  17 % - Ellipsoid 12
+Memory: 512/563 550/593
+-          Current Progress:  19 % - Ellipsoid 13
+Memory: 518/563 555/593
+--         Current Progress:  20 % - Ellipsoid 14
+Memory: 522/563 560/593
+--         Current Progress:  22 % - Ellipsoid 15
+Memory: 510/563 538/593
+--         Current Progress:  23 % - Ellipsoid 16
+Memory: 514/563 542/593
+--         Current Progress:  25 % - Ellipsoid 17
+Memory: 514/563 543/593
+--         Current Progress:  27 % - Ellipsoid 18
+--         Current Progress:  28 % - Ellipsoid 19
+Memory: 514/563 542/593
+---        Current Progress:  30 % - Ellipsoid 20
+---        Current Progress:  31 % - Ellipsoid 21
+---        Current Progress:  33 % - Ellipsoid 22
+Memory: 517/563 545/593
+---        Current Progress:  34 % - Ellipsoid 23
+---        Current Progress:  36 % - Ellipsoid 24
+Memory: 517/563 546/593
+---        Current Progress:  38 % - Ellipsoid 25
+Memory: 518/563 546/593
+---        Current Progress:  39 % - Ellipsoid 26
+Memory: 519/563 547/593
+----       Current Progress:  41 % - Ellipsoid 27
+Memory: 520/563 548/593
+----       Current Progress:  42 % - Ellipsoid 28
+Memory: 522/563 550/593
+----       Current Progress:  44 % - Ellipsoid 29
+Memory: 524/563 552/593
+----       Current Progress:  45 % - Ellipsoid 30
+----       Current Progress:  47 % - Ellipsoid 31
+Memory: 525/563 552/593
+----       Current Progress:  48 % - Ellipsoid 32
+Memory: 526/563 553/593
+-----      Current Progress:  50 % - Ellipsoid 33
+Memory: 526/563 554/593
+-----      Current Progress:  52 % - Ellipsoid 34
+-----      Current Progress:  53 % - Ellipsoid 35
+-----      Current Progress:  55 % - Ellipsoid 36
+-----      Current Progress:  56 % - Ellipsoid 1a
+-----      Current Progress:  58 % - Ellipsoid 3a
+-----      Current Progress:  59 % - Ellipsoid 5a
+Memory: 527/563 554/593
+------     Current Progress:  61 % - Ellipsoid 7a
+------     Current Progress:  63 % - Ellipsoid 9a
+Memory: 527/563 555/593
+------     Current Progress:  64 % - Ellipsoid 11a
+------     Current Progress:  66 % - Ellipsoid 13a
+------     Current Progress:  67 % - Ellipsoid 15a
+------     Current Progress:  69 % - Ellipsoid 17a
+Memory: 527/563 559/593
+-------    Current Progress:  70 % - Ellipsoid 19a
+-------    Current Progress:  72 % - Ellipsoid 21a
+Memory: 528/563 559/593
+-------    Current Progress:  73 % - Ellipsoid 23a
+-------    Current Progress:  75 % - Ellipsoid 25a
+-------    Current Progress:  77 % - Ellipsoid 27a
+-------    Current Progress:  78 % - Ellipsoid 29a
+Memory: 528/563 560/593
+--------   Current Progress:  80 % - Ellipsoid 31a
+--------   Current Progress:  81 % - Ellipsoid 33a
+--------   Current Progress:  83 % - Ellipsoid 35a
+--------   Current Progress:  84 % - Union 2
+--------   Current Progress:  84 % - Performing Boolean operation
+Memory: 533/563 564/593
            Current Progress:   0 % - Intersection 2
-Memory: 498/523 526/563
+Memory: 607/702 636/735
            Current Progress:   0 % - Performing Boolean operation
-Memory: 499/523 527/563
+Memory: 641/702 672/735
            Current Progress:   0 % - Difference
-Memory: 500/523 528/563
+Memory: 672/702 702/735
            Current Progress:   0 % - Performing Boolean operation
-Memory: 501/523 529/563
-           Current Progress:   0 % - Union 2
-Memory: 883/920 979/1022
+Memory: 712/712 741/741
+           Current Progress:   0 % - Union 3
+Memory: 1019/1020 1094/1099
            Current Progress:   0 % - Performing Boolean operation
-Memory: 895/920 992/1022
+Memory: 1030/1040 1106/1116
            Current Progress:   0 % - Geometry 1
-Memory: 896/920 992/1022
+Memory: 1132/1220 1227/1302
            Current Progress:   0 % - Form Union
            Current Progress:   0 % - Performing Boolean operation
+Memory: 1121/1220 1216/1302
 --         Current Progress:  20 % - Updating selections
-Memory: 897/920 992/1022
+Memory: 1305/3556 1394/3665
 --         Current Progress:  20 % - Free tetrahedral
-Memory: 957/957 1026/1026
-Number of vertex elements: 40
+Memory: 1447/3556 1529/3665
+--         Current Progress:  20 % - Creating boundary mesh
+Memory: 1487/3556 1559/3665
+Number of vertex elements: 4201
+--         Current Progress:  21 % - Creating boundary mesh
+Memory: 1761/3556 1823/3665
+--         Current Progress:  24 % - Creating boundary mesh
+Memory: 1895/3556 1967/3665
+--         Current Progress:  24 % - Analyzing domains
+Memory: 1970/3556 2056/3665
+--         Current Progress:  26 % - Analyzing domains
+Memory: 2815/3556 2988/3665
+--         Current Progress:  28 % - Analyzing domains
+Memory: 2942/3556 3126/3665
+--         Current Progress:  28 % - Adjusting boundary mesh
+Memory: 2955/3556 3126/3665
+--         Current Progress:  29 % - Adjusting boundary mesh
+Memory: 2957/3556 3090/3665
+---        Current Progress:  30 % - Adjusting boundary mesh
+Memory: 2958/3556 3090/3665
+---        Current Progress:  35 % - Adjusting boundary mesh
+Memory: 2960/3556 3090/3665
+---        Current Progress:  36 % - Creating boundary mesh
+Memory: 2996/3556 3122/3665
 ---        Current Progress:  37 % - Creating boundary mesh
-Memory: 933/961 1002/1033
----        Current Progress:  38 % - Creating boundary mesh
-Memory: 934/961 1003/1033
-Number of edge elements: 660
-Number of boundary elements: 8738
----------  Current Progress:  99 % - Finalizing mesh
-Memory: 955/961 1029/1033
-Number of elements: 29944
-Minimum element quality: 0.005807
-Warning: Low minimum element quality
+Memory: 3003/3556 3124/3665
+---        Current Progress:  39 % - Creating boundary mesh
+Memory: 3016/3556 3140/3665
+----       Current Progress:  40 % - Creating boundary mesh
+Memory: 3020/3556 3140/3665
+----       Current Progress:  41 % - Creating boundary mesh
+Memory: 3021/3556 3140/3665
+Number of edge elements: 43516
+Number of boundary elements: 352868
+----       Current Progress:  47 % - Creating boundary mesh
+Memory: 3032/3556 3154/3665
+----       Current Progress:  48 % - Meshing domains
+Memory: 4022/4028 4227/4234
+----       Current Progress:  48 % - Creating initial tetrahedra
+Memory: 4026/4028 4230/4234
+----       Current Progress:  48 % - Respecting boundaries
+Memory: 4034/4034 4233/4234
+----       Current Progress:  48 % - Inserting interior points
+Memory: 4049/4049 4253/4253
+----       Current Progress:  48 % - Improving element quality
+Memory: 4053/4054 4251/4253
+----       Current Progress:  48 % - Respecting boundaries
+Memory: 4049/4055 4243/4253
+----       Current Progress:  49 % - Improving element quality
+Memory: 4055/4055 4259/4259
+----       Current Progress:  49 % - Inserting interior points
+Memory: 4057/4057 4259/4259
+----       Current Progress:  49 % - Creating initial tetrahedra
+Memory: 4058/4058 4259/4259
+----       Current Progress:  49 % - Improving element quality
+Memory: 4060/4060 4259/4259
+----       Current Progress:  49 % - Respecting boundaries
+Memory: 4063/4063 4263/4263
+----       Current Progress:  49 % - Improving element quality
+Memory: 4065/4065 4263/4263
+-----      Current Progress:  50 % - Improving element quality
+Memory: 4067/4067 4267/4267
+-----      Current Progress:  50 % - Respecting boundaries
+-----      Current Progress:  50 % - Improving element quality
+Memory: 4068/4068 4267/4267
+-----      Current Progress:  50 % - Creating initial tetrahedra
+Memory: 4071/4071 4271/4271
+-----      Current Progress:  50 % - Improving element quality
+Memory: 4073/4073 4275/4275
+-----      Current Progress:  50 % - Inserting interior points
+Memory: 4079/4079 4279/4279
+-----      Current Progress:  51 % - Inserting interior points
+Memory: 4082/4082 4283/4283
+-----      Current Progress:  51 % - Respecting boundaries
+Memory: 4083/4085 4298/4300
+-----      Current Progress:  51 % - Improving element quality
+Memory: 4087/4087 4298/4300
+-----      Current Progress:  52 % - Improving element quality
+Memory: 4103/4103 4311/4311
+-----      Current Progress:  52 % - Inserting interior points
+Memory: 4112/4112 4323/4323
+-----      Current Progress:  52 % - Improving element quality
+Memory: 4117/4117 4328/4328
+-----      Current Progress:  53 % - Respecting boundaries
+Memory: 4120/4120 4328/4328
+-----      Current Progress:  53 % - Creating initial tetrahedra
+Memory: 4121/4121 4329/4329
+-----      Current Progress:  53 % - Improving element quality
+-----      Current Progress:  54 % - Improving element quality
+Memory: 4122/4122 4345/4345
+-----      Current Progress:  55 % - Improving element quality
+Memory: 4123/4123 4345/4345
 ---------- Current Progress: 100 % - Finalizing mesh
-Memory: 956/961 1026/1033
-Class run time: 12 s.
+Memory: 4133/4133 4371/4371
+Number of elements: 1509071
+Minimum element quality: 0.002669
+Warning: Low minimum element quality
+Class run time: 642 s.
 Saving model: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_generated_Model.mph
-Save time: 0 s.
-Total time: 12 s.
+Save time: 3 s.
+Total time: 644 s.

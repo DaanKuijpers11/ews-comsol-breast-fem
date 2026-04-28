@@ -69,12 +69,36 @@ def solve_cases(input_files: tuple[Path, ...], settings_map: dict[Path, Settings
     return COMSOLRunner().run(input_files, settings_map=settings_map)
 
 
+def build_cases(input_files: tuple[Path, ...], settings_map: dict[Path, Settings] | None = None) -> tuple[Path, ...]:
+    from ews_fem_pipeline_comsol.run_simulation import COMSOLRunner
+
+    for filepath in input_files:
+        assert filepath.suffix == ".json", "Input file must be a generated COMSOL JSON input."
+
+    if settings_map is None:
+        settings_map = {}
+        for filepath in input_files:
+            payload = json.loads(filepath.read_text(encoding="utf-8"))
+            source_toml = Path(payload["settings_file"])
+            settings_map[filepath] = load_settings_from_toml(source_toml)
+
+    return COMSOLRunner().run(input_files, settings_map=settings_map, build_only=True)
+
+
 def run_full_pipeline(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
     generated = generate_cases(input_files)
     settings_map: dict[Path, Settings] = {}
     for source_toml, generated_json in zip(input_files, generated):
         settings_map[generated_json] = load_settings_from_toml(source_toml)
     return solve_cases(generated, settings_map=settings_map)
+
+
+def build_only_pipeline(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
+    generated = generate_cases(input_files)
+    settings_map: dict[Path, Settings] = {}
+    for source_toml, generated_json in zip(input_files, generated):
+        settings_map[generated_json] = load_settings_from_toml(source_toml)
+    return build_cases(generated, settings_map=settings_map)
 
 
 def sweep_cases(input_files: tuple[Path, ...]) -> tuple[Path, ...]:

@@ -1,73 +1,72 @@
 *******************************************
 ***COMSOL 6.4.0.378 progress output file***
 *******************************************
-Tue Apr 28 11:11:54 CEST 2026
+Tue Apr 28 11:43:05 CEST 2026
 COMSOL Multiphysics 6.4 (Build: 378) starting in batch mode
 Opening file: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_generated.mph
-Open time: 9 s.
+Open time: 21 s.
 Running: Study 1
            Current Progress:   1 % - Generating equations
-Memory: 877/877 911/911
+Memory: 1009/1014 1146/1151
            Current Progress:   2 % - Generating equations
-Memory: 872/885 906/920
+Memory: 1030/1030 1143/1151
            Current Progress:   3 % - Generating equations
-Memory: 891/905 926/939
+Memory: 1029/1038 1131/1151
 <---- Compile Equations: Stationary in Study 1/Solution 1 (sol1) ---------------
-Started at Apr 28, 2026, 11:12:05 AM.
+Started at Apr 28, 2026, 11:43:33 AM.
 Geometry shape function: Quadratic serendipity
 Running on Intel64 Family 6 Model 141 Stepping 1, GenuineIntel.
 Using 1 socket with 8 cores in total on S20223231.
 Available memory: 16.05 GB.
+           Current Progress:   3 % - Compile Equations: Stationary
+Memory: 1235/1239 1287/1295
+           Current Progress:   4 % - Compile Equations: Stationary
+Memory: 2050/2508 2169/2647
+           Current Progress:   5 % - Compile Equations: Stationary
+Memory: 2225/2508 2355/2647
            Current Progress:   6 % - Compile Equations: Stationary
-Memory: 938/938 988/988
+Memory: 2287/2508 2419/2647
+Moved 23 higher-order node points away from 'Geometry 1' to avoid badly shaped elements.
+Maximum distance from a point to the geometry is 0.000002 m.
            Current Progress:   7 % - Compile Equations: Stationary
-Memory: 938/952 987/1004
-Time: 2 s.
-Physical memory: 963 MB
-Virtual memory: 1011 MB
-Ended at Apr 28, 2026, 11:12:07 AM.
+Memory: 2279/3819 2363/4133
+Time: 46 s.
+Physical memory: 3.82 GB
+Virtual memory: 4.13 GB
+Ended at Apr 28, 2026, 11:44:19 AM.
 ----- Compile Equations: Stationary in Study 1/Solution 1 (sol1) -------------->
 <---- Dependent Variables 1 in Study 1/Solution 1 (sol1) -----------------------
-Started at Apr 28, 2026, 11:12:07 AM.
+Started at Apr 28, 2026, 11:44:19 AM.
            Current Progress:   7 % - Dependent Variables 1
-Memory: 969/969 1014/1014
-Solution time: 0 s.
-Physical memory: 969 MB
-Virtual memory: 1014 MB
-Ended at Apr 28, 2026, 11:12:07 AM.
+Memory: 3082/3819 3177/4133
+Solution time: 3 s.
+Physical memory: 3.32 GB
+Virtual memory: 3.44 GB
+Ended at Apr 28, 2026, 11:44:22 AM.
 ----- Dependent Variables 1 in Study 1/Solution 1 (sol1) ---------------------->
 <---- Stationary Solver 1 in Study 1/Solution 1 (sol1) -------------------------
-Started at Apr 28, 2026, 11:12:07 AM.
+Started at Apr 28, 2026, 11:44:22 AM.
+-          Current Progress:  12 % - Stationary Solver 1
+Memory: 3108/3819 3202/4133
 Linear solver
-Number of degrees of freedom solved for: 135006 (plus 1 internal DOFs).
+Number of degrees of freedom solved for: 6067842 (plus 1 internal DOFs).
+--         Current Progress:  21 % - Assembling residual
+Memory: 3205/3819 3308/4133
+--         Current Progress:  21 % - 
+Memory: 3273/3819 3377/4133
 --         Current Progress:  24 % - Assembling sparsity pattern
-Memory: 1089/1211 1121/1250
----        Current Progress:  33 % - Assembling matrices
-Memory: 1307/1311 1345/1353
+Memory: 3568/3819 3680/4133
+--         Current Progress:  24 % - Assembling matrices
+Memory: 6137/7713 13123/13223
+---        Current Progress:  38 % - Assembling matrices
+Memory: 6345/7713 13080/13223
+---        Current Progress:  38 % - 
+Memory: 6125/9115 11865/13979
 Symmetric matrices found.
 Scales for dependent variables:
 Displacement Field (comp1.u): 1
 Orthonormal null-space function used.
----        Current Progress:  38 % - 
-Memory: 1276/1366 1312/1409
 ---        Current Progress:  38 % - Matrix factorization
-Memory: 1447/1447 1496/1496
--------    Current Progress:  75 % - Matrix factorization
-Memory: 1819/1819 2056/2056
---------   Current Progress:  89 % - Matrix factorization
-Memory: 1904/1904 2056/2056
-Iter      SolEst     Damping    Stepsize #Res #Jac #Sol   LinErr   LinRes
-   1         0.6   1.0000000         0.6    1    1    1  6.7e-13  2.3e-11
----------- Current Progress: 100 % - 
-Memory: 1279/1909 1312/2056
-Solution time: 3 s.
-Physical memory: 1.91 GB
-Virtual memory: 2.06 GB
-Ended at Apr 28, 2026, 11:12:10 AM.
------ Stationary Solver 1 in Study 1/Solution 1 (sol1) ------------------------>
-Run time: 7 s.
-Saving model: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\solve\default_comsol_result.mph
-Save time: 1 s.
-Total time: 17 s.
----------- Current Progress: 100 % - Done
-Memory: 1314/1909 1350/2056
+Memory: 4883/9707 8450/13979
+Information: PARDISO is switching to out-of-core mode.
+Information: PARDISO in core memory increased to 22714 MB.
