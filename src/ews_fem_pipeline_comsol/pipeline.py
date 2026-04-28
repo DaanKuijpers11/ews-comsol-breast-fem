@@ -81,6 +81,12 @@ def sweep_cases(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
     return run_full_pipeline(input_files)
 
 
+def compare_metrics_cases(input_files: tuple[Path, ...], baseline: str | None = None) -> Path:
+    from ews_fem_pipeline_comsol.metrics_compare import compare_metrics
+
+    return compare_metrics(input_files, baseline=baseline)
+
+
 def check_license(settings_file: Path) -> bool:
     from ews_fem_pipeline_comsol.run_simulation import COMSOLRunner
 

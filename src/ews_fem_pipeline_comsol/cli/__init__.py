@@ -25,6 +25,10 @@ def _build_parser() -> argparse.ArgumentParser:
     sweep_parser = subparsers.add_parser("sweep", help="Batch run multiple TOML cases through COMSOL pipeline.")
     sweep_parser.add_argument("input_files", nargs="+", type=Path)
 
+    compare_parser = subparsers.add_parser("compare-metrics", help="Compare COMSOL/FEBio metrics across runs.")
+    compare_parser.add_argument("input_files", nargs="+", type=Path)
+    compare_parser.add_argument("--baseline", type=str, default=None, help="Case name to use as baseline.")
+
     defaults_parser = subparsers.add_parser("write-default-settings", help="Write a default COMSOL TOML settings file.")
     defaults_parser.add_argument("filepath", type=Path)
 
@@ -60,6 +64,12 @@ def cli_main(argv: list[str] | None = None) -> int:
         from ews_fem_pipeline_comsol.pipeline import sweep_cases
 
         sweep_cases(tuple(args.input_files))
+        return 0
+
+    if args.command == "compare-metrics":
+        from ews_fem_pipeline_comsol.pipeline import compare_metrics_cases
+
+        compare_metrics_cases(tuple(args.input_files), baseline=args.baseline)
         return 0
 
     if args.command == "write-default-settings":

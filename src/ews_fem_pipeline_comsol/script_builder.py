@@ -55,6 +55,7 @@ def generate_comsol_java_builder(
         "geometry": {},
         "mesh": {},
         "material": {},
+        "lobules": [],
     }
     if build_plan_path and Path(build_plan_path).exists():
         plan = json.loads(Path(build_plan_path).read_text(encoding="utf-8"))
@@ -62,6 +63,7 @@ def generate_comsol_java_builder(
         build_plan_summary["geometry"] = plan.get("geometry", {})
         build_plan_summary["mesh"] = plan.get("mesh", {})
         build_plan_summary["material"] = plan.get("material", {})
+        build_plan_summary["lobules"] = plan.get("lobules", [])
 
     skin_material = build_plan_summary["material"].get("skin", {})
     adipose_material = build_plan_summary["material"].get("adipose", {})
@@ -80,22 +82,32 @@ def generate_comsol_java_builder(
     scale_y = float(asymmetry.get("scale_y", 1.0))
     scale_z = float(asymmetry.get("scale_z", 1.0))
     asym_enabled = bool(asymmetry.get("enabled", False))
+    gland_hetero = build_plan_summary["material"].get("glandular", {}).get("hetero", {}) or {}
+    droplet_components = max(1, int(gland_hetero.get("droplet_components", 1)))
 
     left_pos = left_rel * radius
     nipple_pos = nipple_rel * radius
     center_pos = center_rel * radius
 
-    gland_center_y = (radius + nipple_pos - left_pos) / 2.0
-    gland_semiaxis_y = max((radius + nipple_pos + left_pos) / 2.0, radius * 0.05)
-    gland_semiaxis_x = max(center_pos, radius * 0.08)
-    gland_semiaxis_z = max(center_pos * (scale_z if asym_enabled else 1.0), radius * 0.08)
+    # Model the glandular core as a half-ellipsoid clipped at the chest-wall plane.
+    # The clipping plane y=0 should coincide with the ellipse midline so the gland
+    # remains broad at the chest wall, while the anterior reach is preserved toward
+    # the nipple side.
+    gland_center_y = 0.0
+    gland_semiaxis_y = max(radius + nipple_pos, radius * 0.05)
+    gland_semiaxis_x = max(center_pos * 1.15, radius * 0.09)
+    gland_semiaxis_z = max(center_pos * (scale_z if asym_enabled else 1.0) * 1.10, radius * 0.09)
     gland_center_z = -0.15 * center_pos if asym_enabled else 0.0
+    lobules: list[dict[str, object]] = list(build_plan_summary["lobules"])
 
     script_path = output_dir / f"{class_name}.java"
     result_mph = (output_dir / f"{case_name}_generated.mph").resolve()
     build_plan_java = _comsol_safe_name(build_plan_path)
     output_dir_java = _comsol_safe_name(str(output_dir.resolve()))
     result_mph_java = result_mph.as_posix()
+    output_root = output_dir.parent
+    solve_dir = output_root / "solve"
+    metrics_json_path = solve_dir / f"{case_name}_metrics.json"
     selection_hints_path = output_dir / f"{case_name}_comsol_selection_hints.json"
     selection_hints = {
         "component_domain_selections": {
@@ -111,8 +123,10 @@ def generate_comsol_java_builder(
             "geom1_chest_cyl_bnd": "Boundaries of the chest-wall support domain",
         },
         "geometry_feature_tags": {
-            "breast_outer": "Outer breast hemisphere generated from sphere/block intersection",
-            "gland_clip": "Glandular ellipsoid clipped to the breast outer volume",
+            "breast_outer": "Outer breast base derived from the FEBio-style half-sphere baseline",
+            "gland_keep_anterior": "Anterior half-space used to clip the glandular ellipsoid flat at the chest wall",
+            "gland_clip": "Glandular source volume clipped to the breast outer volume",
+            "gland_lobules": "Union of COMSOL-native lobule ellipsoids derived from the exported FEBio lobule layout",
             "adipose_diff": "Adipose outer volume minus glandular volume",
             "chest_cyl": "Chest-wall cylindrical support",
             "breast_union": "Final union used for meshing/physics",
@@ -130,9 +144,103 @@ def generate_comsol_java_builder(
             "adipose": {"youngs_modulus_pa": adipose_E, "poissons_ratio": adipose_nu},
             "glandular": {"youngs_modulus_pa": glandular_E, "poissons_ratio": glandular_nu},
         },
+        "planned_metrics_export": {
+            "metrics_json": str(metrics_json_path.resolve()),
+            "metrics": [
+                "breast_volume",
+                "glandular_volume",
+                "adipose_volume",
+                "max_displacement_breast",
+                "avg_displacement_breast",
+                "max_von_mises_breast",
+                "max_von_mises_glandular",
+            ],
+        },
     }
     selection_hints_path.write_text(json.dumps(selection_hints, indent=2), encoding="utf-8")
     selection_hints_java = selection_hints_path.as_posix()
+
+    lobule_feature_tags: list[str] = []
+    lobule_specs: list[dict[str, float | str]] = []
+    lobule_java_blocks: list[str] = []
+    for idx, lobule in enumerate(lobules, start=1):
+        center = lobule.get("center", [0.0, 0.0, 0.0])
+        if not isinstance(center, list) or len(center) != 3:
+            continue
+        cx, cy, cz = (float(center[0]), float(center[1]), float(center[2]))
+        sx = max(float(lobule.get("width_x", lobule.get("width", 0.002))) * 1.08, radius * 0.01)
+        sy = max(float(lobule.get("width_y", lobule.get("width", 0.002))) * 1.08, radius * 0.01)
+        sz = max(float(lobule.get("width_z", lobule.get("width", 0.002))) * 1.08, radius * 0.01)
+        tag = f"lobule_{idx:02d}"
+        lobule_feature_tags.append(tag)
+        lobule_specs.append({"tag": tag, "cx": cx, "cy": cy, "cz": cz, "sx": sx, "sy": sy, "sz": sz})
+        lobule_java_blocks.append(
+            f"""
+    model.component("comp1").geom("geom1").create("{tag}", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("{tag}").set("semiaxes", "{sx:.8f} {sz:.8f} {sy:.8f}");
+    model.component("comp1").geom("geom1").feature("{tag}").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("{tag}").set("pos", "{cx:.8f} {cy:.8f} {cz:.8f}");
+    model.component("comp1").geom("geom1").feature("{tag}").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("{tag}").set("selresultshow", "all");
+"""
+        )
+    bridge_feature_tags: list[str] = []
+    bridge_java_blocks: list[str] = []
+    if droplet_components > 1:
+        for start in range(0, len(lobule_specs), droplet_components):
+            group = lobule_specs[start : start + droplet_components]
+            if len(group) < 2:
+                continue
+            for left_idx in range(len(group) - 1):
+                left = group[left_idx]
+                right = group[left_idx + 1]
+                cx = (float(left["cx"]) + float(right["cx"])) / 2.0
+                cy = (float(left["cy"]) + float(right["cy"])) / 2.0
+                cz = (float(left["cz"]) + float(right["cz"])) / 2.0
+                sx = max(
+                    (float(left["sx"]) + float(right["sx"])) * 0.55,
+                    abs(float(right["cx"]) - float(left["cx"])) * 0.60 + min(float(left["sx"]), float(right["sx"])) * 0.55,
+                )
+                sy = max(
+                    (float(left["sy"]) + float(right["sy"])) * 0.55,
+                    abs(float(right["cy"]) - float(left["cy"])) * 0.60 + min(float(left["sy"]), float(right["sy"])) * 0.55,
+                )
+                sz = max(
+                    (float(left["sz"]) + float(right["sz"])) * 0.55,
+                    abs(float(right["cz"]) - float(left["cz"])) * 0.60 + min(float(left["sz"]), float(right["sz"])) * 0.55,
+                )
+                tag = f"lobule_bridge_{start + left_idx + 1:02d}"
+                bridge_feature_tags.append(tag)
+                bridge_java_blocks.append(
+                    f"""
+    model.component("comp1").geom("geom1").create("{tag}", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("{tag}").set("semiaxes", "{sx:.8f} {sz:.8f} {sy:.8f}");
+    model.component("comp1").geom("geom1").feature("{tag}").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("{tag}").set("pos", "{cx:.8f} {cy:.8f} {cz:.8f}");
+    model.component("comp1").geom("geom1").feature("{tag}").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("{tag}").set("selresultshow", "all");
+"""
+                )
+    lobule_union_inputs = ", ".join(f'"{tag}"' for tag in [*lobule_feature_tags, *bridge_feature_tags])
+    use_lobules = bool(lobule_feature_tags)
+    lobule_java = "".join([*lobule_java_blocks, *bridge_java_blocks])
+    gland_source_tag = "gland_lobules" if use_lobules else "gland_seed"
+    gland_source_objects_var = "glandLobuleObjs" if use_lobules else "glandSeedObjs"
+    lobule_union_java = (
+        f"""
+    {lobule_java}
+    model.component("comp1").geom("geom1").create("gland_lobules", "Union");
+    model.component("comp1").geom("geom1").feature("gland_lobules").selection("input").set({lobule_union_inputs});
+    model.component("comp1").geom("geom1").feature("gland_lobules").set("intbnd", "on");
+    model.component("comp1").geom("geom1").feature("gland_lobules").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("gland_lobules").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("gland_lobules").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").run("gland_lobules");
+    String[] glandLobuleObjs = model.component("comp1").geom("geom1").feature("gland_lobules").objectNames();
+"""
+        if use_lobules
+        else ""
+    )
 
     java_source = f"""import com.comsol.model.*;
 import com.comsol.model.util.*;
@@ -181,8 +289,17 @@ public class {class_name} {{
     model.component("comp1").geom("geom1").feature("blk_half").set("selresult", "on");
     model.component("comp1").geom("geom1").feature("blk_half").set("selresultshow", "all");
 
-    model.component("comp1").geom("geom1").create("breast_outer", "Intersection");
-    model.component("comp1").geom("geom1").feature("breast_outer").selection("input").set("sph_outer", "blk_half");
+    model.component("comp1").geom("geom1").create("breast_base", "Intersection");
+    model.component("comp1").geom("geom1").feature("breast_base").selection("input").set("sph_outer", "blk_half");
+    model.component("comp1").geom("geom1").feature("breast_base").set("intbnd", "on");
+    model.component("comp1").geom("geom1").feature("breast_base").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("breast_base").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("breast_base").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").run("breast_base");
+    String[] breastBaseObjs = model.component("comp1").geom("geom1").feature("breast_base").objectNames();
+
+    model.component("comp1").geom("geom1").create("breast_outer", "Union");
+    model.component("comp1").geom("geom1").feature("breast_outer").selection("input").set(breastBaseObjs);
     model.component("comp1").geom("geom1").feature("breast_outer").set("intbnd", "on");
     model.component("comp1").geom("geom1").feature("breast_outer").set("propagatesel", "on");
     model.component("comp1").geom("geom1").feature("breast_outer").set("selresult", "on");
@@ -200,15 +317,26 @@ public class {class_name} {{
     model.component("comp1").geom("geom1").run("chest_cyl");
     String[] chestObjs = model.component("comp1").geom("geom1").feature("chest_cyl").objectNames();
 
+    model.component("comp1").geom("geom1").create("gland_keep_anterior", "Block");
+    model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("size", "2*breast_radius 2*breast_radius 2*breast_radius");
+    model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("pos", "-breast_radius 0 -breast_radius");
+    model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").run("gland_keep_anterior");
+    String[] glandKeepAnteriorObjs = model.component("comp1").geom("geom1").feature("gland_keep_anterior").objectNames();
+
     model.component("comp1").geom("geom1").create("gland_seed", "Ellipsoid");
     model.component("comp1").geom("geom1").feature("gland_seed").set("semiaxes", "{gland_semiaxis_x:.8f} {gland_semiaxis_z:.8f} {gland_semiaxis_y:.8f}");
     model.component("comp1").geom("geom1").feature("gland_seed").set("axistype", "y");
     model.component("comp1").geom("geom1").feature("gland_seed").set("pos", "0 {gland_center_y:.8f} {gland_center_z:.8f}");
     model.component("comp1").geom("geom1").feature("gland_seed").set("selresult", "on");
     model.component("comp1").geom("geom1").feature("gland_seed").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").run("gland_seed");
+    String[] glandSeedObjs = model.component("comp1").geom("geom1").feature("gland_seed").objectNames();
+{lobule_union_java}
 
     model.component("comp1").geom("geom1").create("gland_clip", "Intersection");
-    model.component("comp1").geom("geom1").feature("gland_clip").selection("input").set("gland_seed", breastOuterObjs[0]);
+    model.component("comp1").geom("geom1").feature("gland_clip").selection("input").set({gland_source_objects_var}[0], breastOuterObjs[0], glandKeepAnteriorObjs[0]);
     model.component("comp1").geom("geom1").feature("gland_clip").set("keep", "on");
     model.component("comp1").geom("geom1").feature("gland_clip").set("intbnd", "on");
     model.component("comp1").geom("geom1").feature("gland_clip").set("propagatesel", "on");
@@ -310,6 +438,76 @@ public class {class_name} {{
     script_path.write_text(java_source, encoding="utf-8")
 
     readme_path = output_dir / f"{case_name}_comsol_builder_README.txt"
+    postprocess_class_name = _safe_java_identifier(f"{case_name}_comsol_postprocess")
+    postprocess_java_path = output_dir / f"{postprocess_class_name}.java"
+    postprocess_result_mph_java = (solve_dir / f"{case_name}_result.mph").resolve().as_posix()
+    postprocess_metrics_json_java = metrics_json_path.resolve().as_posix()
+    postprocess_java = f"""import com.comsol.model.*;
+import com.comsol.model.util.*;
+
+public class {postprocess_class_name} {{
+  private static double firstReal(double[][] values) {{
+    if (values == null || values.length == 0 || values[0].length == 0) {{
+      return Double.NaN;
+    }}
+    return values[0][0];
+  }}
+
+  private static double evalIntVolume(Model model, String tag, String selectionTag, String expr) {{
+    model.result().numerical().create(tag, "IntVolume");
+    model.result().numerical(tag).selection().named(selectionTag);
+    model.result().numerical(tag).set("expr", new String[] {{ expr }});
+    return firstReal(model.result().numerical(tag).getReal());
+  }}
+
+  private static double evalMaxVolume(Model model, String tag, String selectionTag, String expr) {{
+    model.result().numerical().create(tag, "MaxVolume");
+    model.result().numerical(tag).selection().named(selectionTag);
+    model.result().numerical(tag).set("expr", new String[] {{ expr }});
+    return firstReal(model.result().numerical(tag).getReal());
+  }}
+
+  public static Model run() throws Exception {{
+    ModelUtil.initStandalone(true);
+    Model model = ModelUtil.load("PostModel", "{postprocess_result_mph_java}");
+
+    double breastVolume = evalIntVolume(model, "ivBreastVol", "geom1_breast_union_dom", "1");
+    double glandVolume = evalIntVolume(model, "ivGlandVol", "geom1_gland_clip_dom", "1");
+    double adiposeVolume = evalIntVolume(model, "ivAdiposeVol", "geom1_adipose_diff_dom", "1");
+
+    double maxDispBreast = evalMaxVolume(model, "mvDispBreast", "geom1_breast_union_dom", "solid.disp");
+    double intDispBreast = evalIntVolume(model, "ivDispBreast", "geom1_breast_union_dom", "solid.disp");
+    double avgDispBreast = breastVolume != 0.0 ? intDispBreast / breastVolume : Double.NaN;
+
+    double maxMisesBreast = evalMaxVolume(model, "mvMisesBreast", "geom1_breast_union_dom", "solid.mises");
+    double maxMisesGland = evalMaxVolume(model, "mvMisesGland", "geom1_gland_clip_dom", "solid.mises");
+
+    String json = ""
+      + "{{\\n"
+      + "  \\"case_name\\": \\"{case_name}\\",\\n"
+      + "  \\"source\\": \\"COMSOL\\",\\n"
+      + "  \\"breast_volume\\": " + breastVolume + ",\\n"
+      + "  \\"glandular_volume\\": " + glandVolume + ",\\n"
+      + "  \\"adipose_volume\\": " + adiposeVolume + ",\\n"
+      + "  \\"max_displacement_breast\\": " + maxDispBreast + ",\\n"
+      + "  \\"avg_displacement_breast\\": " + avgDispBreast + ",\\n"
+      + "  \\"max_von_mises_breast\\": " + maxMisesBreast + ",\\n"
+      + "  \\"max_von_mises_glandular\\": " + maxMisesGland + "\\n"
+      + "}}\\n";
+
+    System.out.println("COMSOL_METRICS_JSON_BEGIN");
+    System.out.print(json);
+    System.out.println("COMSOL_METRICS_JSON_END");
+    return model;
+  }}
+
+  public static void main(String[] args) throws Exception {{
+    run();
+    ModelUtil.disconnect();
+  }}
+}}
+"""
+    postprocess_java_path.write_text(postprocess_java, encoding="utf-8")
     readme_path.write_text(
         "\n".join(
             [
@@ -317,6 +515,8 @@ public class {class_name} {{
                 f"Java source: {script_path}",
                 f"Build plan: {build_plan_path}",
                 f"Selection hints: {selection_hints_path}",
+                f"Metrics postprocess Java: {postprocess_java_path}",
+                f"Metrics JSON target: {metrics_json_path}",
                 f"Target MPH: {result_mph}",
                 "",
                 "Typical next step:",
@@ -327,7 +527,7 @@ public class {class_name} {{
                 "5) Add the dynamic motion case after the static setup is stable",
                 "",
                 "Important:",
-                "This Java file now builds real geometry and region selections, but material laws and loading are still the next step.",
+            "This Java file now builds real geometry and region selections, but material laws and loading are still the next step.",
             ]
         )
         + "\n",
@@ -339,4 +539,6 @@ public class {class_name} {{
         "comsol_builder_readme": str(readme_path.resolve()),
         "comsol_generated_mph_target": str(result_mph.resolve()),
         "comsol_selection_hints_json": str(selection_hints_path.resolve()),
+        "comsol_postprocess_java": str(postprocess_java_path.resolve()),
+        "comsol_metrics_json_target": str(metrics_json_path.resolve()),
     }

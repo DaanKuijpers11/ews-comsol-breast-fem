@@ -313,6 +313,63 @@ class COMSOLRunner:
 
         return False, "Java builder ran but no MPH file was produced."
 
+    def _run_aux_java_class(
+        self,
+        *,
+        case_name: str,
+        case_dir: Path,
+        logs_dir: Path,
+        configuration_dir: Path,
+        batch_executable: str,
+        java_file: Path,
+        settings: Settings,
+    ) -> tuple[bool, str, str]:
+        class_file = java_file.with_suffix(".class")
+        jdk_root = settings.comsol.jdk_root or os.environ.get("JAVA_HOME")
+        javac_executable = self._resolve_javac_executable(jdk_root)
+        multiphysics_root = Path(batch_executable).resolve().parents[2]
+        plugins_dir = multiphysics_root / "plugins"
+
+        if not javac_executable or not plugins_dir.exists():
+            return False, "No Java compiler available for COMSOL postprocess step.", ""
+
+        javac_args = [
+            str(javac_executable),
+            "-proc:none",
+            "-cp",
+            str(plugins_dir / "*"),
+            "-d",
+            str(java_file.parent.resolve()),
+            str(java_file.resolve()),
+        ]
+        javac_debug = logs_dir / f"{case_name}_{java_file.stem}_javac_debug.log"
+        javac_code, javac_out, javac_err = self._run_logged_command(javac_args, case_dir, javac_debug)
+        if javac_code != 0 or not class_file.exists():
+            return False, f"Failed to compile auxiliary COMSOL Java class {java_file.name}.", ""
+
+        run_log = logs_dir / f"{case_name}_{java_file.stem}.log"
+        class_args = [
+            str(batch_executable),
+            "-configuration",
+            str(configuration_dir),
+            "-inputfile",
+            str(class_file.resolve()),
+            "-outputfile",
+            str(class_file.with_name(f"{java_file.stem}_output.mph").resolve()),
+            "-batchlog",
+            str(run_log.resolve()),
+            *settings.comsol.extra_args,
+        ]
+        class_debug = logs_dir / f"{case_name}_{java_file.stem}_debug.log"
+        class_code, class_out, class_err = self._run_logged_command(class_args, case_dir, class_debug)
+        run_log_text = run_log.read_text(encoding="utf-8", errors="replace") if run_log.exists() else ""
+        run_text = "\n".join([class_out, class_err, run_log_text])
+        if class_code != 0:
+            return False, f"Auxiliary COMSOL Java class {java_file.name} failed.", class_out
+        if self._detect_license_error(run_text):
+            return False, "COMSOL license error during postprocess metrics export.", class_out
+        return True, "", class_out
+
     def run(self, input_files: tuple[Path, ...], settings_map: dict[Path, Settings]) -> tuple[Path, ...]:
         completed: list[Path] = []
         for input_file in input_files:
@@ -447,5 +504,40 @@ class COMSOLRunner:
         if code != 0:
             logger.error("COMSOL failed for %s. Debug: %s", case_name, debug_path)
             return False
+
+        postprocess_java = (
+            Path(prepare_artefacts.get("comsol_postprocess_java", ""))
+            if prepare_artefacts.get("comsol_postprocess_java")
+            else None
+        )
+        if postprocess_java and postprocess_java.exists():
+            ok, reason, aux_stdout = self._run_aux_java_class(
+                case_name=case_name,
+                case_dir=case_dir,
+                logs_dir=logs_dir,
+                configuration_dir=configuration_dir,
+                batch_executable=batch_executable,
+                java_file=postprocess_java,
+                settings=settings,
+            )
+            if not ok:
+                logger.warning("%s: %s", case_name, reason)
+            else:
+                metrics_target = (
+                    Path(prepare_artefacts.get("comsol_metrics_json_target", ""))
+                    if prepare_artefacts.get("comsol_metrics_json_target")
+                    else None
+                )
+                if metrics_target:
+                    begin_marker = "COMSOL_METRICS_JSON_BEGIN"
+                    end_marker = "COMSOL_METRICS_JSON_END"
+                    start_idx = aux_stdout.find(begin_marker)
+                    end_idx = aux_stdout.find(end_marker)
+                    if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
+                        metrics_json = aux_stdout[start_idx + len(begin_marker):end_idx].strip()
+                        metrics_target.parent.mkdir(parents=True, exist_ok=True)
+                        metrics_target.write_text(metrics_json + "\n", encoding="utf-8")
+                    else:
+                        logger.warning("%s: postprocess ran but did not emit metrics JSON markers.", case_name)
 
         return True

@@ -15,7 +15,9 @@
     "comsol_builder_java": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\build\\default_comsol_comsol_builder.java",
     "comsol_builder_readme": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\build\\default_comsol_comsol_builder_README.txt",
     "comsol_generated_mph_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\build\\default_comsol_generated.mph",
-    "comsol_selection_hints_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\build\\default_comsol_comsol_selection_hints.json"
+    "comsol_selection_hints_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\build\\default_comsol_comsol_selection_hints.json",
+    "comsol_postprocess_java": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\build\\default_comsol_comsol_postprocess.java",
+    "comsol_metrics_json_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\solve\\default_comsol_metrics.json"
   },
   "output_layout": {
     "root": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output",

@@ -1,53 +1,63 @@
 *******************************************
 ***COMSOL 6.4.0.378 progress output file***
 *******************************************
-Tue Apr 28 09:34:20 CEST 2026
+Tue Apr 28 11:11:33 CEST 2026
 COMSOL Multiphysics 6.4 (Build: 378) starting in batch mode
 Running: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_comsol_builder.class
 ---------- Current Progress: 100 % - Updating selections
-Memory: 433/442 470/482
+Memory: 458/523 496/563
            Current Progress:   0 % - Sphere
-Memory: 445/445 613/613
+Memory: 479/523 517/563
            Current Progress:   8 % - Block
-Memory: 453/453 616/618
+Memory: 487/523 521/563
 -          Current Progress:  17 % - Intersection
 -          Current Progress:  17 % - Performing Boolean operation
-Memory: 455/455 617/618
-           Current Progress:   0 % - Cylinder
-Memory: 456/456 618/618
+Memory: 490/523 521/563
            Current Progress:   0 % - Ellipsoid
-Memory: 458/458 618/618
-           Current Progress:   9 % - Intersection 2
-Memory: 461/461 618/619
-           Current Progress:   9 % - Performing Boolean operation
-Memory: 461/461 619/619
-           Current Progress:   0 % - Difference
-Memory: 462/462 619/619
-           Current Progress:   0 % - Performing Boolean operation
-Memory: 463/463 619/619
+Memory: 491/523 522/563
            Current Progress:   0 % - Union
-Memory: 464/464 619/619
+Memory: 495/523 524/563
            Current Progress:   0 % - Performing Boolean operation
-Memory: 465/465 620/620
+Memory: 496/523 524/563
+           Current Progress:   0 % - Cylinder
+           Current Progress:   0 % - Block 2
+Memory: 497/523 525/563
+           Current Progress:   0 % - Ellipsoid 2
+           Current Progress:   0 % - Intersection 2
+Memory: 498/523 526/563
+           Current Progress:   0 % - Performing Boolean operation
+Memory: 499/523 527/563
+           Current Progress:   0 % - Difference
+Memory: 500/523 528/563
+           Current Progress:   0 % - Performing Boolean operation
+Memory: 501/523 529/563
+           Current Progress:   0 % - Union 2
+Memory: 883/920 979/1022
+           Current Progress:   0 % - Performing Boolean operation
+Memory: 895/920 992/1022
            Current Progress:   0 % - Geometry 1
-Memory: 466/466 620/620
+Memory: 896/920 992/1022
            Current Progress:   0 % - Form Union
            Current Progress:   0 % - Performing Boolean operation
 --         Current Progress:  20 % - Updating selections
+Memory: 897/920 992/1022
 --         Current Progress:  20 % - Free tetrahedral
-Memory: 482/482 624/624
-Number of vertex elements: 27
+Memory: 957/957 1026/1026
+Number of vertex elements: 40
+---        Current Progress:  37 % - Creating boundary mesh
+Memory: 933/961 1002/1033
 ---        Current Progress:  38 % - Creating boundary mesh
-Memory: 497/497 638/638
-Number of edge elements: 430
-Number of boundary elements: 7606
------      Current Progress:  56 % - Creating initial tetrahedra
-Memory: 503/503 640/640
+Memory: 934/961 1003/1033
+Number of edge elements: 660
+Number of boundary elements: 8738
+---------  Current Progress:  99 % - Finalizing mesh
+Memory: 955/961 1029/1033
+Number of elements: 29944
+Minimum element quality: 0.005807
+Warning: Low minimum element quality
 ---------- Current Progress: 100 % - Finalizing mesh
-Memory: 466/510 618/652
-Number of elements: 26934
-Minimum element quality: 0.18
-Class run time: 9 s.
+Memory: 956/961 1026/1033
+Class run time: 12 s.
 Saving model: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_generated_Model.mph
 Save time: 0 s.
-Total time: 9 s.
+Total time: 12 s.

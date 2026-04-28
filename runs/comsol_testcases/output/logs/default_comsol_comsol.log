@@ -1,57 +1,73 @@
 *******************************************
 ***COMSOL 6.4.0.378 progress output file***
 *******************************************
-Tue Apr 28 09:34:37 CEST 2026
+Tue Apr 28 11:11:54 CEST 2026
 COMSOL Multiphysics 6.4 (Build: 378) starting in batch mode
 Opening file: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_generated.mph
-Open time: 10 s.
+Open time: 9 s.
 Running: Study 1
+           Current Progress:   1 % - Generating equations
+Memory: 877/877 911/911
            Current Progress:   2 % - Generating equations
-Memory: 486/486 521/521
-           Current Progress:   3 % - Study 1
-Memory: 523/531 562/570
+Memory: 872/885 906/920
+           Current Progress:   3 % - Generating equations
+Memory: 891/905 926/939
 <---- Compile Equations: Stationary in Study 1/Solution 1 (sol1) ---------------
-Started at Apr 28, 2026, 9:34:48 AM.
-Geometry shape function: Quadratic Lagrange
+Started at Apr 28, 2026, 11:12:05 AM.
+Geometry shape function: Quadratic serendipity
 Running on Intel64 Family 6 Model 141 Stepping 1, GenuineIntel.
 Using 1 socket with 8 cores in total on S20223231.
 Available memory: 16.05 GB.
-           Current Progress:   3 % - Compile Equations: Stationary
-Memory: 529/534 565/571
+           Current Progress:   6 % - Compile Equations: Stationary
+Memory: 938/938 988/988
            Current Progress:   7 % - Compile Equations: Stationary
-Memory: 550/563 607/619
-Time: 1 s.
-Physical memory: 595 MB
-Virtual memory: 656 MB
-Ended at Apr 28, 2026, 9:34:49 AM.
+Memory: 938/952 987/1004
+Time: 2 s.
+Physical memory: 963 MB
+Virtual memory: 1011 MB
+Ended at Apr 28, 2026, 11:12:07 AM.
 ----- Compile Equations: Stationary in Study 1/Solution 1 (sol1) -------------->
 <---- Dependent Variables 1 in Study 1/Solution 1 (sol1) -----------------------
-Started at Apr 28, 2026, 9:34:49 AM.
+Started at Apr 28, 2026, 11:12:07 AM.
            Current Progress:   7 % - Dependent Variables 1
-Memory: 593/595 652/656
+Memory: 969/969 1014/1014
 Solution time: 0 s.
-Physical memory: 593 MB
-Virtual memory: 653 MB
-Ended at Apr 28, 2026, 9:34:49 AM.
+Physical memory: 969 MB
+Virtual memory: 1014 MB
+Ended at Apr 28, 2026, 11:12:07 AM.
 ----- Dependent Variables 1 in Study 1/Solution 1 (sol1) ---------------------->
 <---- Stationary Solver 1 in Study 1/Solution 1 (sol1) -------------------------
-Started at Apr 28, 2026, 9:34:49 AM.
+Started at Apr 28, 2026, 11:12:07 AM.
 Linear solver
-Number of degrees of freedom solved for: 0.
+Number of degrees of freedom solved for: 135006 (plus 1 internal DOFs).
+--         Current Progress:  24 % - Assembling sparsity pattern
+Memory: 1089/1211 1121/1250
+---        Current Progress:  33 % - Assembling matrices
+Memory: 1307/1311 1345/1353
 Symmetric matrices found.
+Scales for dependent variables:
+Displacement Field (comp1.u): 1
 Orthonormal null-space function used.
+---        Current Progress:  38 % - 
+Memory: 1276/1366 1312/1409
+---        Current Progress:  38 % - Matrix factorization
+Memory: 1447/1447 1496/1496
+-------    Current Progress:  75 % - Matrix factorization
+Memory: 1819/1819 2056/2056
+--------   Current Progress:  89 % - Matrix factorization
+Memory: 1904/1904 2056/2056
 Iter      SolEst     Damping    Stepsize #Res #Jac #Sol   LinErr   LinRes
-   1           0   1.0000000           0    1    1    1        0        0
+   1         0.6   1.0000000         0.6    1    1    1  6.7e-13  2.3e-11
 ---------- Current Progress: 100 % - 
-Memory: 597/610 656/670
-Solution time: 1 s.
-Physical memory: 610 MB
-Virtual memory: 682 MB
-Ended at Apr 28, 2026, 9:34:50 AM.
+Memory: 1279/1909 1312/2056
+Solution time: 3 s.
+Physical memory: 1.91 GB
+Virtual memory: 2.06 GB
+Ended at Apr 28, 2026, 11:12:10 AM.
 ----- Stationary Solver 1 in Study 1/Solution 1 (sol1) ------------------------>
-Run time: 3 s.
+Run time: 7 s.
 Saving model: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\solve\default_comsol_result.mph
 Save time: 1 s.
-Total time: 14 s.
+Total time: 17 s.
 ---------- Current Progress: 100 % - Done
-Memory: 570/610 625/682
+Memory: 1314/1909 1350/2056
