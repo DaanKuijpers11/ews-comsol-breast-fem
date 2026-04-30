@@ -1,0 +1,9 @@
+Command: C:/Program Files/COMSOL/COMSOL64/Multiphysics/bin/win64/comsolbatch.exe -configuration C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output_skin_chest_fast\build\comsol_configuration -inputfile C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output_skin_chest_fast\build\skin_chest_fast_comsol_builder.class -outputfile C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output_skin_chest_fast\build\skin_chest_fast_generated.mph -batchlog C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output_skin_chest_fast\logs\skin_chest_fast_comsol_build.log
+Timeout seconds: disabled
+Return code: 0
+
+=== STDOUT ===
+<empty>
+
+=== STDERR ===
+<empty>

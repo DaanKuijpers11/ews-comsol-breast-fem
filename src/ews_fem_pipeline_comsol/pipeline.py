@@ -33,6 +33,7 @@ def generate_cases(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
             case_name=filepath.stem,
             output_dir=build_dir,
             prepare_artefacts=prepare_artefacts,
+            comsol_settings=settings.comsol,
         )
         prepare_artefacts.update(script_artefacts)
 

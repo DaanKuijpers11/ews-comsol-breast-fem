@@ -6,6 +6,8 @@ from collections import defaultdict
 from pathlib import Path
 import numpy as np
 
+from ews_fem_pipeline_comsol.settings import ComsolSettings
+
 
 def _comsol_safe_name(text: str) -> str:
     return text.replace("\\", "/")
@@ -48,6 +50,7 @@ def generate_comsol_java_builder(
     case_name: str,
     output_dir: Path,
     prepare_artefacts: dict[str, str],
+    comsol_settings: ComsolSettings | None = None,
 ) -> dict[str, str]:
     """
     Generate COMSOL Java API scaffolding from exported prepare artefacts.
@@ -74,6 +77,11 @@ def generate_comsol_java_builder(
     skin_material = build_plan_summary["material"].get("skin", {})
     adipose_material = build_plan_summary["material"].get("adipose", {})
     glandular_material = build_plan_summary["material"].get("glandular", {})
+    shell_physics_enabled = bool(comsol_settings.enable_skin_shell_physics) if comsol_settings else False
+    shell_coupling_enabled = bool(comsol_settings.enable_skin_solid_coupling_scaffold) if comsol_settings else False
+    skin_shell_thickness_m = float(comsol_settings.skin_shell_thickness_m) if comsol_settings else 0.0001
+    curved_chestwall_enabled = bool(comsol_settings.enable_curved_chestwall) if comsol_settings else False
+    chestwall_curve_depth_m = float(comsol_settings.chestwall_curve_depth_m) if comsol_settings else 0.0007
     skin_E, skin_nu = _linearize_mooney_rivlin(skin_material)
     adipose_E, adipose_nu = _linearize_mooney_rivlin(adipose_material)
     glandular_E, glandular_nu = _linearize_mooney_rivlin(glandular_material)
@@ -97,6 +105,9 @@ def generate_comsol_java_builder(
     left_pos = left_rel * radius
     nipple_pos = nipple_rel * radius
     center_pos = center_rel * radius
+    chest_curve_depth = min(max(chestwall_curve_depth_m, chest_thickness * 0.05), radius * 0.2)
+    chest_curve_radius = ((radius * radius) + (chest_curve_depth * chest_curve_depth)) / max(2.0 * chest_curve_depth, 1e-9)
+    chest_curve_center_y = chest_curve_radius - chest_curve_depth
 
     # Model the glandular core as a half-ellipsoid clipped at the chest-wall plane.
     # The clipping plane y=0 should coincide with the ellipse midline so the gland
@@ -123,7 +134,7 @@ def generate_comsol_java_builder(
             "geom1_breast_union_dom": "Final union of adipose, glandular, and chest-wall domains",
             "geom1_adipose_diff_dom": "Adipose region after subtracting glandular volume from outer breast",
             "geom1_gland_clip_dom": "Glandular ellipsoid clipped to the outer breast",
-            "geom1_chest_cyl_dom": "Chest-wall support cylinder",
+            "geom1_chest_cyl_dom": "Chest-wall support domain",
         },
         "component_boundary_selections": {
             "geom1_breast_union_bnd": "Exterior boundaries of the full assembled breast/chest geometry",
@@ -133,12 +144,12 @@ def generate_comsol_java_builder(
             "geom1_chest_cyl_bnd": "Boundaries of the chest-wall support domain",
         },
         "geometry_feature_tags": {
-            "breast_outer": "Outer breast base derived from the FEBio-style half-sphere baseline",
-            "gland_keep_anterior": "Anterior half-space used to clip the glandular ellipsoid flat at the chest wall",
+            "breast_outer": "Outer breast envelope with FEBio-style baseline and optional light thorax curvature",
+            "gland_keep_anterior": "Anterior keep region used to clip the glandular ellipsoid at the chest wall",
             "gland_clip": "Glandular source volume clipped to the breast outer volume",
             "gland_lobules": "Union of COMSOL-native lobule ellipsoids derived from the exported FEBio lobule layout",
             "adipose_diff": "Adipose outer volume minus glandular volume",
-            "chest_cyl": "Chest-wall cylindrical support",
+            "chest_cyl": "Chest-wall support body; cylindrical in baseline mode, lightly curved in curved mode",
             "breast_union": "Final union used for meshing/physics",
         },
         "recommended_physics_targets": {
@@ -148,6 +159,26 @@ def generate_comsol_java_builder(
             "glandular_domain_selection": "geom1_gland_clip_dom",
             "chest_domain_selection": "geom1_chest_cyl_dom",
             "fixed_boundary_selection": "geom1_chest_cyl_bnd",
+        },
+        "skin_shell_scaffold": {
+            "enabled": shell_physics_enabled,
+            "solid_coupling_scaffold_enabled": shell_coupling_enabled,
+            "skin_shell_thickness_m": skin_shell_thickness_m,
+            "shell_boundary_selection": "geom1_breast_outer_bnd",
+            "notes": [
+                "The shell scaffold is generated defensively because COMSOL API identifiers can vary by version/license.",
+                "The Solid-Thin Structure Connection is emitted as a scaffold on the same outer boundary selection and may need manual refinement in COMSOL.",
+            ],
+        },
+        "chest_wall_scaffold": {
+            "curved_enabled": curved_chestwall_enabled,
+            "curve_depth_m": chest_curve_depth,
+            "curve_radius_m": chest_curve_radius,
+            "curve_center_y_m": -chest_curve_center_y,
+            "notes": [
+                "Curved mode replaces the flat posterior clip plane with a shallow cylindrical arc in the yz side-view, so the chest wall reads as a ')' style curve.",
+                "The chest-wall support domain reuses that same interface so the breast and chest wall remain conformal.",
+            ],
         },
         "linearized_material_inference": {
             "note": "Young's modulus and Poisson's ratio are inferred from FEBio Mooney-Rivlin inputs for an initial small-strain COMSOL model.",
@@ -599,6 +630,30 @@ def generate_comsol_java_builder(
         else ""
     )
 
+    shell_physics_java = ""
+    if shell_physics_enabled:
+        shell_physics_java = f"""
+    StringBuilder shellScaffoldNotes = new StringBuilder();
+    String shellPhysicsTag = tryCreatePhysics(model, "shell1", new String[] {{ "Shell", "shell" }}, "geom1", shellScaffoldNotes);
+    if (shellPhysicsTag != null) {{
+      model.component("comp1").physics(shellPhysicsTag).selection().named("geom1_breast_outer_bnd");
+      tryConfigureShellThickness(model, shellPhysicsTag, "skin_shell_thickness", shellScaffoldNotes);
+    }}
+    if ({str(shell_coupling_enabled).lower()} && shellPhysicsTag != null) {{
+      tryCreateSolidThinStructureConnection(
+        model,
+        "sthin1",
+        new String[] {{ "SolidThinStructureConnection", "SolidShellConnection", "solidthin", "sthin" }},
+        "geom1",
+        "geom1_breast_outer_bnd",
+        "solid",
+        shellPhysicsTag,
+        shellScaffoldNotes
+      );
+    }}
+    model.param().set("skin_shell_scaffold_notes", shellScaffoldNotes.toString());
+"""
+
     java_source = f"""import com.comsol.model.*;
 import com.comsol.model.util.*;
 
@@ -611,7 +666,10 @@ public class {class_name} {{
 
     model.param().set("breast_radius", "{build_plan_summary["geometry"].get("radius", 0.07)}[m]");
     model.param().set("chest_thickness", "{build_plan_summary["geometry"].get("thickness_chest_wall", 0.002)}[m]");
-    model.param().set("skin_shell_thickness", "0.0001[m]");
+    model.param().set("skin_shell_thickness", "{skin_shell_thickness_m:.10f}[m]");
+    model.param().set("chest_curve_depth", "{chest_curve_depth:.10f}[m]");
+    model.param().set("chest_curve_radius", "{chest_curve_radius:.10f}[m]");
+    model.param().set("chest_curve_center_y", "{-chest_curve_center_y:.10f}[m]");
     model.param().set("mesh_density_hint", "{build_plan_summary["mesh"].get("density", 140.0)}");
     model.param().set("skin_density", "{build_plan_summary["material"].get("skin", {}).get("density", 1100.0)}[kg/m^3]");
     model.param().set("adipose_density", "{build_plan_summary["material"].get("adipose", {}).get("density", 911.0)}[kg/m^3]");
@@ -641,20 +699,55 @@ public class {class_name} {{
     model.component("comp1").geom("geom1").feature("sph_outer").set("selresult", "on");
     model.component("comp1").geom("geom1").feature("sph_outer").set("selresultshow", "all");
 
-    model.component("comp1").geom("geom1").create("blk_half", "Block");
-    model.component("comp1").geom("geom1").feature("blk_half").set("size", "2*breast_radius breast_radius 2*breast_radius");
-    model.component("comp1").geom("geom1").feature("blk_half").set("pos", "-breast_radius 0 -breast_radius");
-    model.component("comp1").geom("geom1").feature("blk_half").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("blk_half").set("selresultshow", "all");
+    String[] breastBaseObjs;
+    if ({str(curved_chestwall_enabled).lower()}) {{
+      model.component("comp1").geom("geom1").create("thorax_keep_blk", "Block");
+      model.component("comp1").geom("geom1").feature("thorax_keep_blk").set("size", "2*breast_radius 2*breast_radius 2*breast_radius");
+      model.component("comp1").geom("geom1").feature("thorax_keep_blk").set("pos", "-breast_radius 0 -breast_radius");
+      model.component("comp1").geom("geom1").feature("thorax_keep_blk").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("thorax_keep_blk").set("selresultshow", "all");
 
-    model.component("comp1").geom("geom1").create("breast_base", "Intersection");
-    model.component("comp1").geom("geom1").feature("breast_base").selection("input").set("sph_outer", "blk_half");
-    model.component("comp1").geom("geom1").feature("breast_base").set("intbnd", "on");
-    model.component("comp1").geom("geom1").feature("breast_base").set("propagatesel", "on");
-    model.component("comp1").geom("geom1").feature("breast_base").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("breast_base").set("selresultshow", "all");
-    model.component("comp1").geom("geom1").run("breast_base");
-    String[] breastBaseObjs = model.component("comp1").geom("geom1").feature("breast_base").objectNames();
+      model.component("comp1").geom("geom1").create("thorax_keep", "Cylinder");
+      model.component("comp1").geom("geom1").feature("thorax_keep").set("axistype", "x");
+      model.component("comp1").geom("geom1").feature("thorax_keep").set("r", "chest_curve_radius");
+      model.component("comp1").geom("geom1").feature("thorax_keep").set("h", "2*breast_radius");
+      model.component("comp1").geom("geom1").feature("thorax_keep").set("pos", "-breast_radius chest_curve_center_y 0");
+      model.component("comp1").geom("geom1").feature("thorax_keep").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("thorax_keep").set("selresultshow", "all");
+
+      model.component("comp1").geom("geom1").create("thorax_keep_reg", "Difference");
+      model.component("comp1").geom("geom1").feature("thorax_keep_reg").selection("input").set("thorax_keep_blk");
+      model.component("comp1").geom("geom1").feature("thorax_keep_reg").selection("input2").set("thorax_keep");
+      model.component("comp1").geom("geom1").feature("thorax_keep_reg").set("intbnd", "on");
+      model.component("comp1").geom("geom1").feature("thorax_keep_reg").set("propagatesel", "on");
+      model.component("comp1").geom("geom1").feature("thorax_keep_reg").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("thorax_keep_reg").set("selresultshow", "all");
+      model.component("comp1").geom("geom1").run("thorax_keep_reg");
+
+      model.component("comp1").geom("geom1").create("breast_base", "Intersection");
+      model.component("comp1").geom("geom1").feature("breast_base").selection("input").set("sph_outer", "thorax_keep_reg");
+      model.component("comp1").geom("geom1").feature("breast_base").set("intbnd", "on");
+      model.component("comp1").geom("geom1").feature("breast_base").set("propagatesel", "on");
+      model.component("comp1").geom("geom1").feature("breast_base").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("breast_base").set("selresultshow", "all");
+      model.component("comp1").geom("geom1").run("breast_base");
+      breastBaseObjs = model.component("comp1").geom("geom1").feature("breast_base").objectNames();
+    }} else {{
+      model.component("comp1").geom("geom1").create("blk_half", "Block");
+      model.component("comp1").geom("geom1").feature("blk_half").set("size", "2*breast_radius breast_radius 2*breast_radius");
+      model.component("comp1").geom("geom1").feature("blk_half").set("pos", "-breast_radius 0 -breast_radius");
+      model.component("comp1").geom("geom1").feature("blk_half").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("blk_half").set("selresultshow", "all");
+
+      model.component("comp1").geom("geom1").create("breast_base", "Intersection");
+      model.component("comp1").geom("geom1").feature("breast_base").selection("input").set("sph_outer", "blk_half");
+      model.component("comp1").geom("geom1").feature("breast_base").set("intbnd", "on");
+      model.component("comp1").geom("geom1").feature("breast_base").set("propagatesel", "on");
+      model.component("comp1").geom("geom1").feature("breast_base").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("breast_base").set("selresultshow", "all");
+      model.component("comp1").geom("geom1").run("breast_base");
+      breastBaseObjs = model.component("comp1").geom("geom1").feature("breast_base").objectNames();
+    }}
 
     model.component("comp1").geom("geom1").create("breast_outer", "Union");
     model.component("comp1").geom("geom1").feature("breast_outer").selection("input").set(breastBaseObjs);
@@ -665,21 +758,72 @@ public class {class_name} {{
     model.component("comp1").geom("geom1").run("breast_outer");
     String[] breastOuterObjs = model.component("comp1").geom("geom1").feature("breast_outer").objectNames();
 
-    model.component("comp1").geom("geom1").create("chest_cyl", "Cylinder");
-    model.component("comp1").geom("geom1").feature("chest_cyl").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("chest_cyl").set("r", "breast_radius");
-    model.component("comp1").geom("geom1").feature("chest_cyl").set("h", "chest_thickness");
-    model.component("comp1").geom("geom1").feature("chest_cyl").set("pos", "0 -chest_thickness 0");
-    model.component("comp1").geom("geom1").feature("chest_cyl").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("chest_cyl").set("selresultshow", "all");
-    model.component("comp1").geom("geom1").run("chest_cyl");
-    String[] chestObjs = model.component("comp1").geom("geom1").feature("chest_cyl").objectNames();
+    String[] chestObjs;
+    if ({str(curved_chestwall_enabled).lower()}) {{
+      model.component("comp1").geom("geom1").create("thorax_outer", "Cylinder");
+      model.component("comp1").geom("geom1").feature("thorax_outer").set("axistype", "x");
+      model.component("comp1").geom("geom1").feature("thorax_outer").set("r", "chest_curve_radius+chest_thickness");
+      model.component("comp1").geom("geom1").feature("thorax_outer").set("h", "2*breast_radius");
+      model.component("comp1").geom("geom1").feature("thorax_outer").set("pos", "-breast_radius chest_curve_center_y 0");
+      model.component("comp1").geom("geom1").feature("thorax_outer").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("thorax_outer").set("selresultshow", "all");
 
-    model.component("comp1").geom("geom1").create("gland_keep_anterior", "Block");
-    model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("size", "2*breast_radius 2*breast_radius 2*breast_radius");
-    model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("pos", "-breast_radius 0 -breast_radius");
-    model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("selresultshow", "all");
+      model.component("comp1").geom("geom1").create("chest_trim_blk", "Block");
+      model.component("comp1").geom("geom1").feature("chest_trim_blk").set("size", "2*breast_radius chest_thickness+chest_curve_depth breast_radius*2");
+      model.component("comp1").geom("geom1").feature("chest_trim_blk").set("pos", "-breast_radius -chest_thickness -breast_radius");
+      model.component("comp1").geom("geom1").feature("chest_trim_blk").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("chest_trim_blk").set("selresultshow", "all");
+
+      model.component("comp1").geom("geom1").create("chest_band", "Difference");
+      model.component("comp1").geom("geom1").feature("chest_band").selection("input").set("thorax_outer");
+      model.component("comp1").geom("geom1").feature("chest_band").selection("input2").set("thorax_keep");
+      model.component("comp1").geom("geom1").feature("chest_band").set("intbnd", "on");
+      model.component("comp1").geom("geom1").feature("chest_band").set("propagatesel", "on");
+      model.component("comp1").geom("geom1").feature("chest_band").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("chest_band").set("selresultshow", "all");
+      model.component("comp1").geom("geom1").run("chest_band");
+
+      model.component("comp1").geom("geom1").create("chest_cyl", "Intersection");
+      model.component("comp1").geom("geom1").feature("chest_cyl").selection("input").set("chest_band", "chest_trim_blk");
+      model.component("comp1").geom("geom1").feature("chest_cyl").set("intbnd", "on");
+      model.component("comp1").geom("geom1").feature("chest_cyl").set("propagatesel", "on");
+      model.component("comp1").geom("geom1").feature("chest_cyl").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("chest_cyl").set("selresultshow", "all");
+      model.component("comp1").geom("geom1").run("chest_cyl");
+      chestObjs = model.component("comp1").geom("geom1").feature("chest_cyl").objectNames();
+    }} else {{
+      model.component("comp1").geom("geom1").create("chest_cyl", "Cylinder");
+      model.component("comp1").geom("geom1").feature("chest_cyl").set("axistype", "y");
+      model.component("comp1").geom("geom1").feature("chest_cyl").set("r", "breast_radius");
+      model.component("comp1").geom("geom1").feature("chest_cyl").set("h", "chest_thickness");
+      model.component("comp1").geom("geom1").feature("chest_cyl").set("pos", "0 -chest_thickness 0");
+      model.component("comp1").geom("geom1").feature("chest_cyl").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("chest_cyl").set("selresultshow", "all");
+      model.component("comp1").geom("geom1").run("chest_cyl");
+      chestObjs = model.component("comp1").geom("geom1").feature("chest_cyl").objectNames();
+    }}
+
+    if ({str(curved_chestwall_enabled).lower()}) {{
+      model.component("comp1").geom("geom1").create("gland_keep_blk", "Block");
+      model.component("comp1").geom("geom1").feature("gland_keep_blk").set("size", "2*breast_radius 2*breast_radius 2*breast_radius");
+      model.component("comp1").geom("geom1").feature("gland_keep_blk").set("pos", "-breast_radius 0 -breast_radius");
+      model.component("comp1").geom("geom1").feature("gland_keep_blk").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("gland_keep_blk").set("selresultshow", "all");
+
+      model.component("comp1").geom("geom1").create("gland_keep_anterior", "Difference");
+      model.component("comp1").geom("geom1").feature("gland_keep_anterior").selection("input").set("gland_keep_blk");
+      model.component("comp1").geom("geom1").feature("gland_keep_anterior").selection("input2").set("thorax_keep");
+      model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("intbnd", "on");
+      model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("propagatesel", "on");
+      model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("selresultshow", "all");
+    }} else {{
+      model.component("comp1").geom("geom1").create("gland_keep_anterior", "Block");
+      model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("size", "2*breast_radius 2*breast_radius 2*breast_radius");
+      model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("pos", "-breast_radius 0 -breast_radius");
+      model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("gland_keep_anterior").set("selresultshow", "all");
+    }}
     model.component("comp1").geom("geom1").run("gland_keep_anterior");
     String[] glandKeepAnteriorObjs = model.component("comp1").geom("geom1").feature("gland_keep_anterior").objectNames();
 
@@ -777,12 +921,14 @@ public class {class_name} {{
     model.component("comp1").physics("solid").feature("fix1").selection().named("geom1_chest_cyl_bnd");
     model.component("comp1").physics("solid").create("gacc1", "GravityAcceleration", -1);
     model.component("comp1").physics("solid").feature("gacc1").set("g", new String[] {{ "0", "0", "-g_acc" }});
+{shell_physics_java}
 
     // Current builder scope:
     // 1) build a COMSOL-native outer breast, glandular core, and chest-wall support
     // 2) expose stable finalized geometry selections for the main regions
     // 3) attach initial linearized materials and a skin-shell scaffold boundary selection
-    // 4) run and save MPH
+    // 4) optionally scaffold a COMSOL Shell interface and a first Solid-Thin Structure Connection attempt
+    // 5) run and save MPH
     //
     // Note:
     // This file is still a scaffold. It now creates real geometry, materials, and
@@ -798,6 +944,102 @@ public class {class_name} {{
     Model model = run();
     model.save("{result_mph_java}");
     ModelUtil.disconnect();
+  }}
+  private static String tryCreatePhysics(Model model, String tag, String[] candidateIds, String geomTag, StringBuilder notes) {{
+    for (String candidateId : candidateIds) {{
+      try {{
+        model.component("comp1").physics().create(tag, candidateId, geomTag);
+        notes.append("Created physics ").append(tag).append(" with id ").append(candidateId).append("\\n");
+        return tag;
+      }} catch (Exception ex) {{
+        notes.append("Physics id ").append(candidateId).append(" failed: ").append(ex.getMessage()).append("\\n");
+      }}
+    }}
+    return null;
+  }}
+
+  private static void tryConfigureShellThickness(Model model, String physicsTag, String thicknessExpr, StringBuilder notes) {{
+    String[] candidateFeatureTags = new String[] {{ "thick1", "thk1", "to1", "t1" }};
+    for (String featureTag : candidateFeatureTags) {{
+      try {{
+        model.component("comp1").physics(physicsTag).feature(featureTag).set("d0", thicknessExpr);
+        notes.append("Assigned shell thickness on feature ").append(featureTag).append("\\n");
+        return;
+      }} catch (Exception ignored) {{
+      }}
+      try {{
+        model.component("comp1").physics(physicsTag).feature(featureTag).set("thickness", thicknessExpr);
+        notes.append("Assigned shell thickness on feature ").append(featureTag).append(" via thickness property\\n");
+        return;
+      }} catch (Exception ignored) {{
+      }}
+    }}
+    try {{
+      for (String featureTag : model.component("comp1").physics(physicsTag).feature().tags()) {{
+        try {{
+          model.component("comp1").physics(physicsTag).feature(featureTag).set("d0", thicknessExpr);
+          notes.append("Assigned shell thickness on discovered feature ").append(featureTag).append("\\n");
+          return;
+        }} catch (Exception ignored) {{
+        }}
+        try {{
+          model.component("comp1").physics(physicsTag).feature(featureTag).set("thickness", thicknessExpr);
+          notes.append("Assigned shell thickness on discovered feature ").append(featureTag).append(" via thickness property\\n");
+          return;
+        }} catch (Exception ignored) {{
+        }}
+      }}
+    }} catch (Exception ex) {{
+      notes.append("Could not inspect shell features for thickness assignment: ").append(ex.getMessage()).append("\\n");
+      return;
+    }}
+    notes.append("Shell physics was created, but no thickness feature accepted skin_shell_thickness automatically.\\n");
+  }}
+
+  private static String tryCreateSolidThinStructureConnection(
+    Model model,
+    String tag,
+    String[] candidateIds,
+    String geomTag,
+    String selectionName,
+    String solidPhysicsTag,
+    String shellPhysicsTag,
+    StringBuilder notes
+  ) {{
+    for (String candidateId : candidateIds) {{
+      try {{
+        model.multiphysics().create(tag, candidateId, geomTag);
+        try {{
+          model.multiphysics(tag).selection().named(selectionName);
+        }} catch (Exception selectionEx) {{
+          notes.append("Created ").append(tag).append(" but selection binding failed: ").append(selectionEx.getMessage()).append("\\n");
+        }}
+        trySetStringProperties(model, tag, new String[] {{ "solid", "solidphys", "solidtag", "solidphysics" }}, solidPhysicsTag, notes);
+        trySetStringProperties(model, tag, new String[] {{ "shell", "thinstructure", "shellphys", "shelltag", "shellphysics" }}, shellPhysicsTag, notes);
+        notes.append("Created multiphysics ").append(tag).append(" with id ").append(candidateId).append("\\n");
+        return tag;
+      }} catch (Exception ex) {{
+        notes.append("Multiphysics id ").append(candidateId).append(" failed: ").append(ex.getMessage()).append("\\n");
+      }}
+    }}
+    return null;
+  }}
+
+  private static void trySetStringProperties(Model model, String multiphysicsTag, String[] keys, String value, StringBuilder notes) {{
+    for (String key : keys) {{
+      try {{
+        model.multiphysics(multiphysicsTag).set(key, value);
+        notes.append("Set ").append(multiphysicsTag).append(".").append(key).append("=").append(value).append("\\n");
+        return;
+      }} catch (Exception ignored) {{
+      }}
+      try {{
+        model.multiphysics(multiphysicsTag).set(key, new String[] {{ value }});
+        notes.append("Set ").append(multiphysicsTag).append(".").append(key).append("=[").append(value).append("]\\n");
+        return;
+      }} catch (Exception ignored) {{
+      }}
+    }}
   }}
 {lobule_builder_method_java}
 {lobule_helper_methods_java}

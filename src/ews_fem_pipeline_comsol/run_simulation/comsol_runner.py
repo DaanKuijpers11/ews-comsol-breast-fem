@@ -23,6 +23,85 @@ def _normalize_timeout_seconds(value: int | None, minimum_if_enabled: int) -> in
 
 class COMSOLRunner:
     @staticmethod
+    def _safe_unlink(path: Path) -> None:
+        try:
+            if path.exists() or path.is_symlink():
+                path.unlink()
+        except OSError:
+            pass
+
+    @staticmethod
+    def _safe_rmtree(path: Path) -> None:
+        try:
+            if path.exists():
+                shutil.rmtree(path, ignore_errors=True)
+        except OSError:
+            pass
+
+    def _prune_output_artefacts(
+        self,
+        *,
+        case_name: str,
+        output_paths: dict[str, Path],
+        prepare_artefacts: dict[str, str],
+        input_file: Path,
+        settings: Settings,
+    ) -> None:
+        if not settings.comsol.compact_output:
+            return
+
+        root_dir = output_paths["root"]
+        build_dir = output_paths["build"]
+        solve_dir = output_paths["solve"]
+        logs_dir = output_paths["logs"]
+
+        removable_prepare_keys = (
+            "source_settings_expanded_toml",
+            "mesh_nodes_csv",
+            "mesh_data_npz",
+            "mesh_summary_json",
+            "lobules_json",
+            "comsol_build_plan_json",
+            "prepare_status_json",
+            "comsol_builder_java",
+            "comsol_builder_readme",
+            "comsol_postprocess_java",
+        )
+        for key in removable_prepare_keys:
+            value = prepare_artefacts.get(key)
+            if not value:
+                continue
+            path = Path(value)
+            self._safe_unlink(path)
+            if path.suffix == ".java":
+                self._safe_unlink(path.with_suffix(".class"))
+
+        self._safe_unlink(build_dir / f"{case_name}_comsol_input.json")
+        self._safe_unlink(root_dir / f"{case_name}_all_settings.toml")
+
+        for pattern in (
+            "*.comsol_command.txt",
+            "*debug*.log",
+            "*javac*.log",
+            "*compile*.log",
+        ):
+            for path in logs_dir.glob(pattern):
+                self._safe_unlink(path)
+
+        for pattern in (
+            "*.status",
+            "*.recovery",
+            "*.lock",
+            "*postprocess_output*.mph",
+        ):
+            for path in solve_dir.glob(pattern):
+                self._safe_unlink(path)
+            for path in build_dir.glob(pattern):
+                self._safe_unlink(path)
+
+        self._safe_rmtree(build_dir / "comsol_configuration")
+
+    @staticmethod
     def _detect_license_error(text: str) -> bool:
         lower = text.lower()
         return "license error" in lower or "cannot connect to license server" in lower
@@ -544,6 +623,13 @@ class COMSOLRunner:
 
         if build_only:
             logger.info("Built COMSOL MPH for %s without starting solve.", case_name)
+            self._prune_output_artefacts(
+                case_name=case_name,
+                output_paths=output_paths,
+                prepare_artefacts=prepare_artefacts,
+                input_file=input_file,
+                settings=settings,
+            )
             return True
 
         if not settings.comsol.execute:
@@ -597,4 +683,11 @@ class COMSOLRunner:
                     else:
                         logger.warning("%s: postprocess ran but did not emit metrics JSON markers.", case_name)
 
+        self._prune_output_artefacts(
+            case_name=case_name,
+            output_paths=output_paths,
+            prepare_artefacts=prepare_artefacts,
+            input_file=input_file,
+            settings=settings,
+        )
         return True

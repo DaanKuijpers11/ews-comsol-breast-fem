@@ -24,6 +24,12 @@ class ComsolSettings:
     java_build_timeout_s: int | None = 1800
     solve_timeout_s: int | None = 7200
     postprocess_timeout_s: int | None = 600
+    enable_skin_shell_physics: bool = False
+    enable_skin_solid_coupling_scaffold: bool = False
+    skin_shell_thickness_m: float = 0.0001
+    enable_curved_chestwall: bool = False
+    chestwall_curve_depth_m: float = 0.0007
+    compact_output: bool = False
 
 
 @dataclass
