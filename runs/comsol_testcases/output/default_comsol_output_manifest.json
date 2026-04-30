@@ -17,8 +17,14 @@
     "comsol_generated_mph_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\build\\default_comsol_generated.mph",
     "comsol_selection_hints_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\build\\default_comsol_comsol_selection_hints.json",
     "comsol_postprocess_java": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\build\\default_comsol_comsol_postprocess.java",
-    "comsol_metrics_json_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\solve\\default_comsol_metrics.json"
+    "comsol_metrics_json_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\solve\\default_comsol_metrics.json",
+    "comsol_build_verification_java": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\build\\default_comsol_comsol_verify_build.java",
+    "comsol_solve_verification_java": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\solve\\default_comsol_comsol_verify_solve.java",
+    "comsol_build_verification_json_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\build\\default_comsol_build_verification.json",
+    "comsol_solve_verification_json_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\solve\\default_comsol_solve_verification.json"
   },
+  "resolved_case_toml": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\default_comsol_resolved_case.toml",
+  "single_file_case_toml": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\default_comsol_single_file_case.toml",
   "output_layout": {
     "root": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output",
     "prepare": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\prepare",

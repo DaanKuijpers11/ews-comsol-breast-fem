@@ -30,6 +30,9 @@ class ComsolSettings:
     enable_curved_chestwall: bool = False
     chestwall_curve_depth_m: float = 0.0007
     compact_output: bool = False
+    chest_density_kg_m3: float = 1050.0
+    chest_youngs_modulus_pa: float = 10000.0
+    chest_poissons_ratio: float = 0.49
 
 
 @dataclass
@@ -101,19 +104,28 @@ def _format_toml_value(value: Any) -> str:
     if isinstance(value, str):
         escaped = value.replace("\\", "\\\\").replace('"', '\\"')
         return f'"{escaped}"'
+    if isinstance(value, tuple):
+        value = list(value)
     if isinstance(value, list):
         return "[ " + ", ".join(_format_toml_value(item) for item in value) + " ]"
     raise TypeError(f"Unsupported TOML value type: {type(value)!r}")
 
 
+def _is_list_of_tables(value: Any) -> bool:
+    return isinstance(value, list) and all(isinstance(item, dict) for item in value)
+
+
 def _write_dict(lines: list[str], prefix: str, data: dict[str, Any]) -> None:
     scalars: list[tuple[str, Any]] = []
     tables: list[tuple[str, dict[str, Any]]] = []
+    array_tables: list[tuple[str, list[dict[str, Any]]]] = []
     for key, value in data.items():
         if value is None:
             continue
         if isinstance(value, dict):
             tables.append((key, value))
+        elif _is_list_of_tables(value):
+            array_tables.append((key, value))
         else:
             scalars.append((key, value))
 
@@ -121,13 +133,25 @@ def _write_dict(lines: list[str], prefix: str, data: dict[str, Any]) -> None:
         lines.append(f"[{prefix}]")
     for key, value in scalars:
         lines.append(f"{key} = {_format_toml_value(value)}")
-    if scalars and tables:
+    if scalars and (tables or array_tables):
         lines.append("")
 
     for index, (key, table_data) in enumerate(tables):
         nested_prefix = f"{prefix}.{key}" if prefix else key
         _write_dict(lines, nested_prefix, table_data)
-        if index != len(tables) - 1:
+        if index != len(tables) - 1 or array_tables:
+            lines.append("")
+
+    for table_index, (key, items) in enumerate(array_tables):
+        nested_prefix = f"{prefix}.{key}" if prefix else key
+        for item_index, item in enumerate(items):
+            lines.append(f"[[{nested_prefix}]]")
+            item_lines: list[str] = []
+            _write_dict(item_lines, "", item)
+            lines.extend(item_lines)
+            if item_index != len(items) - 1:
+                lines.append("")
+        if table_index != len(array_tables) - 1:
             lines.append("")
 
 
@@ -135,6 +159,14 @@ def write_settings_to_toml(filepath: Path, settings: Settings) -> None:
     assert filepath.suffix == ".toml", "Output file must have .toml extension."
     filepath.parent.mkdir(parents=True, exist_ok=True)
     payload = _to_dict(settings)
+    lines: list[str] = []
+    _write_dict(lines, "", payload)
+    filepath.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+
+
+def write_dict_to_toml(filepath: Path, payload: dict[str, Any]) -> None:
+    assert filepath.suffix == ".toml", "Output file must have .toml extension."
+    filepath.parent.mkdir(parents=True, exist_ok=True)
     lines: list[str] = []
     _write_dict(lines, "", payload)
     filepath.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")

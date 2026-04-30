@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import tomllib
 from pathlib import Path
 
 import numpy as np
@@ -10,7 +11,7 @@ from ews_fem_pipeline_clean.prepare_simulation import (
     load_settings_from_toml as load_febio_settings_from_toml,
     write_settings_to_toml as write_febio_settings_to_toml,
 )
-from ews_fem_pipeline_comsol.settings import Settings
+from ews_fem_pipeline_comsol.settings import Settings, write_dict_to_toml
 
 
 def _resolve_base_case_toml(comsol_case_toml: Path, settings: Settings) -> Path:
@@ -27,6 +28,28 @@ def _resolve_base_case_toml(comsol_case_toml: Path, settings: Settings) -> Path:
         else:
             base_case = base_case.resolve()
     return base_case
+
+
+def _extract_inline_source_case(comsol_case_toml: Path) -> dict | None:
+    with open(comsol_case_toml, "rb") as handle:
+        raw = tomllib.load(handle)
+    source_case = raw.get("source_case")
+    return source_case if isinstance(source_case, dict) and source_case else None
+
+
+def resolve_source_case_toml(
+    *,
+    case_name: str,
+    comsol_case_toml: Path,
+    output_dir: Path,
+    settings: Settings,
+) -> tuple[Path, str]:
+    inline_source_case = _extract_inline_source_case(comsol_case_toml)
+    if inline_source_case:
+        inline_path = output_dir / f"{case_name}_inline_source_case.toml"
+        write_dict_to_toml(inline_path, inline_source_case)
+        return inline_path, "inline_source_case"
+    return _resolve_base_case_toml(comsol_case_toml, settings), "base_case_toml"
 
 
 def _to_np_array(value):
@@ -106,7 +129,12 @@ def prepare_case_from_febio(
     if not settings.source.reuse_febio_prepare:
         return {}
 
-    base_case_toml = _resolve_base_case_toml(comsol_case_toml, settings)
+    base_case_toml, source_case_mode = resolve_source_case_toml(
+        case_name=case_name,
+        comsol_case_toml=comsol_case_toml,
+        output_dir=output_dir,
+        settings=settings,
+    )
     febio_settings = load_febio_settings_from_toml(base_case_toml)
 
     artefacts: dict[str, str] = {}
@@ -130,6 +158,8 @@ def prepare_case_from_febio(
             "Define gravity and motion studies equivalent to the FEBio baseline.",
             "Validate the COMSOL model first with a static gravity load before dynamic motion.",
         ],
+        "source_case_mode": source_case_mode,
+        "source_case_toml": str(base_case_toml.resolve()),
     }
     if settings.source.export_mesh_csv or settings.source.export_mesh_npz:
         try:

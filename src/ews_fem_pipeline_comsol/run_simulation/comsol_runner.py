@@ -66,6 +66,8 @@ class COMSOLRunner:
             "comsol_builder_java",
             "comsol_builder_readme",
             "comsol_postprocess_java",
+            "comsol_build_verification_java",
+            "comsol_solve_verification_java",
         )
         for key in removable_prepare_keys:
             value = prepare_artefacts.get(key)
@@ -505,6 +507,87 @@ class COMSOLRunner:
                 completed.append(input_file)
         return tuple(completed)
 
+    def _capture_verification_json(
+        self,
+        *,
+        case_name: str,
+        case_dir: Path,
+        logs_dir: Path,
+        configuration_dir: Path,
+        batch_executable: str,
+        verification_java: Path | None,
+        verification_target: Path | None,
+        settings: Settings,
+    ) -> tuple[bool, str]:
+        if not verification_java or not verification_java.exists() or verification_target is None:
+            return False, "Verification Java or target missing."
+        ok, reason, aux_stdout = self._run_aux_java_class(
+            case_name=case_name,
+            case_dir=case_dir,
+            logs_dir=logs_dir,
+            configuration_dir=configuration_dir,
+            batch_executable=batch_executable,
+            java_file=verification_java,
+            settings=settings,
+        )
+        if not ok:
+            logger.warning("%s: %s", case_name, reason)
+            return False, reason
+        begin_marker = "COMSOL_VERIFICATION_JSON_BEGIN"
+        end_marker = "COMSOL_VERIFICATION_JSON_END"
+        start_idx = aux_stdout.find(begin_marker)
+        end_idx = aux_stdout.find(end_marker)
+        if start_idx == -1 or end_idx == -1 or end_idx <= start_idx:
+            logger.warning("%s: verification export ran but did not emit JSON markers.", case_name)
+            return False, "Verification Java ran but did not emit JSON markers."
+        verification_json = aux_stdout[start_idx + len(begin_marker):end_idx].strip()
+        verification_target.parent.mkdir(parents=True, exist_ok=True)
+        verification_target.write_text(verification_json + "\n", encoding="utf-8")
+        return True, ""
+
+    def _write_fallback_verification_json(
+        self,
+        *,
+        case_name: str,
+        verification_target: Path | None,
+        prepare_artefacts: dict[str, str],
+        loaded_model_path: Path | None,
+        phase: str,
+        reason: str,
+    ) -> None:
+        if verification_target is None:
+            return
+        builder_java = Path(prepare_artefacts.get("comsol_builder_java", "")) if prepare_artefacts.get("comsol_builder_java") else None
+        selection_hints_json = (
+            Path(prepare_artefacts.get("comsol_selection_hints_json", ""))
+            if prepare_artefacts.get("comsol_selection_hints_json")
+            else None
+        )
+        builder_text = builder_java.read_text(encoding="utf-8", errors="replace") if builder_java and builder_java.exists() else ""
+        payload = {
+            "case_name": case_name,
+            "verification_mode": "fallback_builder_artifacts",
+            "phase": phase,
+            "reason": reason,
+            "loaded_model_path": str(loaded_model_path.resolve()) if loaded_model_path and loaded_model_path.exists() else "",
+            "loaded_model_exists": bool(loaded_model_path and loaded_model_path.exists()),
+            "builder_java_exists": bool(builder_java and builder_java.exists()),
+            "selection_hints_exists": bool(selection_hints_json and selection_hints_json.exists()),
+            "builder_signals": {
+                "solid_hmat_adipose": '"hmat_adipose"' in builder_text,
+                "solid_hmat_glandular": '"hmat_glandular"' in builder_text,
+                "shell_hmat_skin": '"hmat_skin"' in builder_text,
+                "solid_thin_connection": '"sthin1"' in builder_text,
+                "mat_chest": '"mat_chest"' in builder_text,
+                "mooney_rivlin_parameters": all(
+                    token in builder_text
+                    for token in ('"skin_c10"', '"adipose_c10"', '"glandular_c10"', '"skin_bulk_modulus"')
+                ),
+            },
+        }
+        verification_target.parent.mkdir(parents=True, exist_ok=True)
+        verification_target.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
     def run_case(self, input_file: Path, settings: Settings, *, build_only: bool = False) -> bool:
         assert input_file.suffix == ".json", "COMSOL runner expects JSON case input files."
         payload = json.loads(input_file.read_text(encoding="utf-8"))
@@ -517,6 +600,26 @@ class COMSOLRunner:
         command_preview_file = logs_dir / f"{case_name}.comsol_command.txt"
         prepare_artefacts = payload.get("prepare_artefacts", {})
         configuration_dir = self._resolve_configuration_dir(settings, build_dir)
+        build_verification_java = (
+            Path(prepare_artefacts.get("comsol_build_verification_java", ""))
+            if prepare_artefacts.get("comsol_build_verification_java")
+            else None
+        )
+        solve_verification_java = (
+            Path(prepare_artefacts.get("comsol_solve_verification_java", ""))
+            if prepare_artefacts.get("comsol_solve_verification_java")
+            else None
+        )
+        build_verification_target = (
+            Path(prepare_artefacts.get("comsol_build_verification_json_target", ""))
+            if prepare_artefacts.get("comsol_build_verification_json_target")
+            else None
+        )
+        solve_verification_target = (
+            Path(prepare_artefacts.get("comsol_solve_verification_json_target", ""))
+            if prepare_artefacts.get("comsol_solve_verification_json_target")
+            else None
+        )
 
         batch_executable = self._resolve_batch_executable(settings)
         comsol_executable = self._resolve_comsol_executable(settings, batch_executable)
@@ -622,6 +725,25 @@ class COMSOLRunner:
         command_preview_file.write_text("\n".join(planned_commands) + "\n", encoding="utf-8")
 
         if build_only:
+            verify_ok, verify_reason = self._capture_verification_json(
+                case_name=case_name,
+                case_dir=case_dir,
+                logs_dir=logs_dir,
+                configuration_dir=configuration_dir,
+                batch_executable=batch_executable,
+                verification_java=build_verification_java,
+                verification_target=build_verification_target,
+                settings=settings,
+            )
+            if not verify_ok:
+                self._write_fallback_verification_json(
+                    case_name=case_name,
+                    verification_target=build_verification_target,
+                    prepare_artefacts=prepare_artefacts,
+                    loaded_model_path=source_mph,
+                    phase="build_only",
+                    reason=verify_reason,
+                )
             logger.info("Built COMSOL MPH for %s without starting solve.", case_name)
             self._prune_output_artefacts(
                 case_name=case_name,
@@ -682,6 +804,26 @@ class COMSOLRunner:
                         metrics_target.write_text(metrics_json + "\n", encoding="utf-8")
                     else:
                         logger.warning("%s: postprocess ran but did not emit metrics JSON markers.", case_name)
+
+        verify_ok, verify_reason = self._capture_verification_json(
+            case_name=case_name,
+            case_dir=case_dir,
+            logs_dir=logs_dir,
+            configuration_dir=configuration_dir,
+            batch_executable=batch_executable,
+            verification_java=solve_verification_java,
+            verification_target=solve_verification_target,
+            settings=settings,
+        )
+        if not verify_ok:
+            self._write_fallback_verification_json(
+                case_name=case_name,
+                verification_target=solve_verification_target,
+                prepare_artefacts=prepare_artefacts,
+                loaded_model_path=output_mph,
+                phase="solve",
+                reason=verify_reason,
+            )
 
         self._prune_output_artefacts(
             case_name=case_name,

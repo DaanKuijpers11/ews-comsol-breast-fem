@@ -82,9 +82,18 @@ def generate_comsol_java_builder(
     skin_shell_thickness_m = float(comsol_settings.skin_shell_thickness_m) if comsol_settings else 0.0001
     curved_chestwall_enabled = bool(comsol_settings.enable_curved_chestwall) if comsol_settings else False
     chestwall_curve_depth_m = float(comsol_settings.chestwall_curve_depth_m) if comsol_settings else 0.0007
-    skin_E, skin_nu = _linearize_mooney_rivlin(skin_material)
-    adipose_E, adipose_nu = _linearize_mooney_rivlin(adipose_material)
-    glandular_E, glandular_nu = _linearize_mooney_rivlin(glandular_material)
+    chest_density = float(comsol_settings.chest_density_kg_m3) if comsol_settings else 1050.0
+    chest_E = float(comsol_settings.chest_youngs_modulus_pa) if comsol_settings else 10000.0
+    chest_nu = float(comsol_settings.chest_poissons_ratio) if comsol_settings else 0.49
+    skin_bulk_modulus = float(skin_material.get("bulk_modulus", 1.0))
+    skin_coef1 = float(skin_material.get("coef1", 0.0))
+    skin_coef2 = float(skin_material.get("coef2", 0.0))
+    adipose_bulk_modulus = float(adipose_material.get("bulk_modulus", 1.0))
+    adipose_coef1 = float(adipose_material.get("coef1", 0.0))
+    adipose_coef2 = float(adipose_material.get("coef2", 0.0))
+    glandular_bulk_modulus = float(glandular_material.get("bulk_modulus", 1.0))
+    glandular_coef1 = float(glandular_material.get("coef1", 0.0))
+    glandular_coef2 = float(glandular_material.get("coef2", 0.0))
 
     geometry = build_plan_summary["geometry"]
     radius = float(geometry.get("radius", 0.07))
@@ -180,11 +189,36 @@ def generate_comsol_java_builder(
                 "The chest-wall support domain reuses that same interface so the breast and chest wall remain conformal.",
             ],
         },
-        "linearized_material_inference": {
-            "note": "Young's modulus and Poisson's ratio are inferred from FEBio Mooney-Rivlin inputs for an initial small-strain COMSOL model.",
-            "skin": {"youngs_modulus_pa": skin_E, "poissons_ratio": skin_nu},
-            "adipose": {"youngs_modulus_pa": adipose_E, "poissons_ratio": adipose_nu},
-            "glandular": {"youngs_modulus_pa": glandular_E, "poissons_ratio": glandular_nu},
+        "mooney_rivlin_material_mapping": {
+            "note": (
+                "The COMSOL builder now scaffolds Mooney-Rivlin two-parameter hyperelastic features from the "
+                "FEBio inputs bulk_modulus, coef1, and coef2. The chest wall remains a separate linear elastic "
+                "placeholder material."
+            ),
+            "skin": {
+                "density_kg_m3": float(skin_material.get("density", 1100.0)),
+                "bulk_modulus_pa": skin_bulk_modulus,
+                "c10_pa": skin_coef1,
+                "c01_pa": skin_coef2,
+            },
+            "adipose": {
+                "density_kg_m3": float(adipose_material.get("density", 911.0)),
+                "bulk_modulus_pa": adipose_bulk_modulus,
+                "c10_pa": adipose_coef1,
+                "c01_pa": adipose_coef2,
+            },
+            "glandular": {
+                "density_kg_m3": float(glandular_material.get("density", 911.0)),
+                "bulk_modulus_pa": glandular_bulk_modulus,
+                "c10_pa": glandular_coef1,
+                "c01_pa": glandular_coef2,
+            },
+        },
+        "chest_material_assignment": {
+            "density_kg_m3": chest_density,
+            "youngs_modulus_pa": chest_E,
+            "poissons_ratio": chest_nu,
+            "source": "Explicit COMSOL chest-wall placeholder values, independent from FEBio breast-tissue materials.",
         },
         "planned_metrics_export": {
             "metrics_json": str(metrics_json_path.resolve()),
@@ -633,11 +667,60 @@ def generate_comsol_java_builder(
     shell_physics_java = ""
     if shell_physics_enabled:
         shell_physics_java = f"""
+    StringBuilder hyperelasticNotes = new StringBuilder();
+    boolean solidHyperelasticReady = true;
+    solidHyperelasticReady = tryCreateMooneyRivlinFeature(
+      model,
+      "solid",
+      "hmat_adipose",
+      3,
+      "geom1_adipose_diff_dom",
+      "adipose_density",
+      "adipose_c10",
+      "adipose_c01",
+      "adipose_bulk_modulus",
+      hyperelasticNotes
+    ) && solidHyperelasticReady;
+    solidHyperelasticReady = tryCreateMooneyRivlinFeature(
+      model,
+      "solid",
+      "hmat_glandular",
+      3,
+      "geom1_gland_clip_dom",
+      "glandular_density",
+      "glandular_c10",
+      "glandular_c01",
+      "glandular_bulk_modulus",
+      hyperelasticNotes
+    ) && solidHyperelasticReady;
+    if (solidHyperelasticReady) {{
+      tryRestrictLinearElasticFeature(model, "solid", "geom1_chest_cyl_dom", hyperelasticNotes);
+    }} else {{
+      hyperelasticNotes.append("Solid Mooney-Rivlin scaffold incomplete; keeping default linear elastic fallback on solid.\\n");
+    }}
+
     StringBuilder shellScaffoldNotes = new StringBuilder();
     String shellPhysicsTag = tryCreatePhysics(model, "shell1", new String[] {{ "Shell", "shell" }}, "geom1", shellScaffoldNotes);
     if (shellPhysicsTag != null) {{
       model.component("comp1").physics(shellPhysicsTag).selection().named("geom1_breast_outer_bnd");
       tryConfigureShellThickness(model, shellPhysicsTag, "skin_shell_thickness", shellScaffoldNotes);
+      boolean shellHyperelasticReady = tryCreateMooneyRivlinFeature(
+        model,
+        shellPhysicsTag,
+        "hmat_skin",
+        2,
+        "geom1_breast_outer_bnd",
+        "skin_density",
+        "skin_c10",
+        "skin_c01",
+        "skin_bulk_modulus",
+        hyperelasticNotes
+      );
+      if (shellHyperelasticReady) {{
+        tryDeactivateLinearElasticFeatures(model, shellPhysicsTag, hyperelasticNotes);
+      }} else {{
+        hyperelasticNotes.append("Shell Mooney-Rivlin scaffold incomplete; leaving default shell constitutive fallback active.\\n");
+      }}
     }}
     if ({str(shell_coupling_enabled).lower()} && shellPhysicsTag != null) {{
       tryCreateSolidThinStructureConnection(
@@ -652,6 +735,42 @@ def generate_comsol_java_builder(
       );
     }}
     model.param().set("skin_shell_scaffold_notes", shellScaffoldNotes.toString());
+    model.param().set("hyperelastic_scaffold_notes", hyperelasticNotes.toString());
+"""
+    else:
+        shell_physics_java = """
+    StringBuilder hyperelasticNotes = new StringBuilder();
+    boolean solidHyperelasticReady = true;
+    solidHyperelasticReady = tryCreateMooneyRivlinFeature(
+      model,
+      "solid",
+      "hmat_adipose",
+      3,
+      "geom1_adipose_diff_dom",
+      "adipose_density",
+      "adipose_c10",
+      "adipose_c01",
+      "adipose_bulk_modulus",
+      hyperelasticNotes
+    ) && solidHyperelasticReady;
+    solidHyperelasticReady = tryCreateMooneyRivlinFeature(
+      model,
+      "solid",
+      "hmat_glandular",
+      3,
+      "geom1_gland_clip_dom",
+      "glandular_density",
+      "glandular_c10",
+      "glandular_c01",
+      "glandular_bulk_modulus",
+      hyperelasticNotes
+    ) && solidHyperelasticReady;
+    if (solidHyperelasticReady) {
+      tryRestrictLinearElasticFeature(model, "solid", "geom1_chest_cyl_dom", hyperelasticNotes);
+    } else {
+      hyperelasticNotes.append("Solid Mooney-Rivlin scaffold incomplete; keeping default linear elastic fallback on solid.\\n");
+    }
+    model.param().set("hyperelastic_scaffold_notes", hyperelasticNotes.toString());
 """
 
     java_source = f"""import com.comsol.model.*;
@@ -674,13 +793,19 @@ public class {class_name} {{
     model.param().set("skin_density", "{build_plan_summary["material"].get("skin", {}).get("density", 1100.0)}[kg/m^3]");
     model.param().set("adipose_density", "{build_plan_summary["material"].get("adipose", {}).get("density", 911.0)}[kg/m^3]");
     model.param().set("glandular_density", "{build_plan_summary["material"].get("glandular", {}).get("density", 911.0)}[kg/m^3]");
+    model.param().set("chest_density", "{chest_density:.12f}[kg/m^3]");
     model.param().set("g_acc", "9.81[m/s^2]");
-    model.param().set("skin_E", "{skin_E:.12f}[Pa]");
-    model.param().set("skin_nu", "{skin_nu:.12f}");
-    model.param().set("adipose_E", "{adipose_E:.12f}[Pa]");
-    model.param().set("adipose_nu", "{adipose_nu:.12f}");
-    model.param().set("glandular_E", "{glandular_E:.12f}[Pa]");
-    model.param().set("glandular_nu", "{glandular_nu:.12f}");
+    model.param().set("skin_bulk_modulus", "{skin_bulk_modulus:.12f}[Pa]");
+    model.param().set("skin_c10", "{skin_coef1:.12f}[Pa]");
+    model.param().set("skin_c01", "{skin_coef2:.12f}[Pa]");
+    model.param().set("adipose_bulk_modulus", "{adipose_bulk_modulus:.12f}[Pa]");
+    model.param().set("adipose_c10", "{adipose_coef1:.12f}[Pa]");
+    model.param().set("adipose_c01", "{adipose_coef2:.12f}[Pa]");
+    model.param().set("glandular_bulk_modulus", "{glandular_bulk_modulus:.12f}[Pa]");
+    model.param().set("glandular_c10", "{glandular_coef1:.12f}[Pa]");
+    model.param().set("glandular_c01", "{glandular_coef2:.12f}[Pa]");
+    model.param().set("chest_E", "{chest_E:.12f}[Pa]");
+    model.param().set("chest_nu", "{chest_nu:.12f}");
 
     // Base component/geometry
     model.component().create("comp1", true);
@@ -885,35 +1010,32 @@ public class {class_name} {{
     // - skin density: {build_plan_summary["material"].get("skin", {}).get("density", "n/a")}
     // - adipose density: {build_plan_summary["material"].get("adipose", {}).get("density", "n/a")}
     // - glandular density: {build_plan_summary["material"].get("glandular", {}).get("density", "n/a")}
+    // - chest density (COMSOL explicit): {chest_density}
+    // - chest E (COMSOL explicit): {chest_E}
+    // - chest nu (COMSOL explicit): {chest_nu}
     //
     // Physics scaffold:
     model.component("comp1").material().create("mat_chest", "Common");
     model.component("comp1").material("mat_chest").label("ChestWall");
     model.component("comp1").material("mat_chest").selection().named("geom1_chest_cyl_dom");
-    model.component("comp1").material("mat_chest").propertyGroup("def").set("density", new String[] {{ "skin_density" }});
-    model.component("comp1").material("mat_chest").propertyGroup("def").set("youngsmodulus", new String[] {{ "skin_E" }});
-    model.component("comp1").material("mat_chest").propertyGroup("def").set("poissonsratio", new String[] {{ "skin_nu" }});
+    model.component("comp1").material("mat_chest").propertyGroup("def").set("density", new String[] {{ "chest_density" }});
+    model.component("comp1").material("mat_chest").propertyGroup("def").set("youngsmodulus", new String[] {{ "chest_E" }});
+    model.component("comp1").material("mat_chest").propertyGroup("def").set("poissonsratio", new String[] {{ "chest_nu" }});
 
     model.component("comp1").material().create("mat_skin_shell", "Common");
     model.component("comp1").material("mat_skin_shell").label("SkinShellScaffold");
     model.component("comp1").material("mat_skin_shell").selection().named("geom1_breast_outer_bnd");
     model.component("comp1").material("mat_skin_shell").propertyGroup("def").set("density", new String[] {{ "skin_density" }});
-    model.component("comp1").material("mat_skin_shell").propertyGroup("def").set("youngsmodulus", new String[] {{ "skin_E" }});
-    model.component("comp1").material("mat_skin_shell").propertyGroup("def").set("poissonsratio", new String[] {{ "skin_nu" }});
 
     model.component("comp1").material().create("mat_adipose", "Common");
     model.component("comp1").material("mat_adipose").label("Adipose");
     model.component("comp1").material("mat_adipose").selection().named("geom1_adipose_diff_dom");
     model.component("comp1").material("mat_adipose").propertyGroup("def").set("density", new String[] {{ "adipose_density" }});
-    model.component("comp1").material("mat_adipose").propertyGroup("def").set("youngsmodulus", new String[] {{ "adipose_E" }});
-    model.component("comp1").material("mat_adipose").propertyGroup("def").set("poissonsratio", new String[] {{ "adipose_nu" }});
 
     model.component("comp1").material().create("mat_glandular", "Common");
     model.component("comp1").material("mat_glandular").label("Glandular");
     model.component("comp1").material("mat_glandular").selection().named("geom1_gland_clip_dom");
     model.component("comp1").material("mat_glandular").propertyGroup("def").set("density", new String[] {{ "glandular_density" }});
-    model.component("comp1").material("mat_glandular").propertyGroup("def").set("youngsmodulus", new String[] {{ "glandular_E" }});
-    model.component("comp1").material("mat_glandular").propertyGroup("def").set("poissonsratio", new String[] {{ "glandular_nu" }});
 
     model.component("comp1").physics().create("solid", "SolidMechanics", "geom1");
     model.component("comp1").physics("solid").selection().named("geom1_breast_union_dom");
@@ -926,14 +1048,16 @@ public class {class_name} {{
     // Current builder scope:
     // 1) build a COMSOL-native outer breast, glandular core, and chest-wall support
     // 2) expose stable finalized geometry selections for the main regions
-    // 3) attach initial linearized materials and a skin-shell scaffold boundary selection
+    // 3) attach a separate linear chest-wall material and Mooney-Rivlin FEBio-derived
+    //    hyperelastic scaffolds for adipose, glandular, and optional skin shell
     // 4) optionally scaffold a COMSOL Shell interface and a first Solid-Thin Structure Connection attempt
     // 5) run and save MPH
     //
     // Note:
-    // This file is still a scaffold. It now creates real geometry, materials, and
-    // a first solid mechanics solve, but it does not yet reproduce the full FEBio
-    // hyperelastic material law or dynamic motion pipeline automatically.
+    // This file is still a scaffold. It now creates real geometry, a separate chest
+    // wall material, and a best-effort Mooney-Rivlin hyperelastic setup from the
+    // FEBio inputs, but dynamic motion and heterogeneous field mapping still need
+    // further work.
 
     model.component("comp1").geom("geom1").run("breast_union");
     model.component("comp1").mesh("mesh1").run();
@@ -1041,6 +1165,138 @@ public class {class_name} {{
       }}
     }}
   }}
+
+  private static boolean tryCreateMooneyRivlinFeature(
+    Model model,
+    String physicsTag,
+    String featureTag,
+    int entityDim,
+    String selectionName,
+    String densityExpr,
+    String c10Expr,
+    String c01Expr,
+    String bulkExpr,
+    StringBuilder notes
+  ) {{
+    String[] candidateIds = new String[] {{ "HyperelasticMaterial", "Hyperelastic", "hyperelastic" }};
+    for (String candidateId : candidateIds) {{
+      try {{
+        model.component("comp1").physics(physicsTag).create(featureTag, candidateId, entityDim);
+        bindFeatureSelection(model, physicsTag, featureTag, selectionName, notes);
+        trySetFeatureProperty(model, physicsTag, featureTag, new String[] {{ "materialmodel", "MaterialModel", "model" }}, new String[] {{ "MooneyRivlin2", "MooneyRivlin", "Mooney-Rivlin, Two Parameters" }}, notes);
+        trySetFeatureProperty(model, physicsTag, featureTag, new String[] {{ "compressibility", "Compressibility", "comp" }}, new String[] {{ "NearlyIncompressible", "nearlyincompressible", "Nearly incompressible" }}, notes);
+        trySetFeatureProperty(model, physicsTag, featureTag, new String[] {{ "c10", "C10" }}, new String[] {{ c10Expr }}, notes);
+        trySetFeatureProperty(model, physicsTag, featureTag, new String[] {{ "c01", "C01" }}, new String[] {{ c01Expr }}, notes);
+        trySetFeatureProperty(model, physicsTag, featureTag, new String[] {{ "kappa", "K", "bulkmodulus", "bulkModulus" }}, new String[] {{ bulkExpr }}, notes);
+        trySetFeatureProperty(model, physicsTag, featureTag, new String[] {{ "rho", "density" }}, new String[] {{ densityExpr }}, notes);
+        trySetFeatureProperty(model, physicsTag, featureTag, new String[] {{ "usemixedformulation", "mixedformulation", "mixed" }}, new String[] {{ "Pressure formulation", "PressureFormulation", "pressure" }}, notes);
+        notes.append("Created Mooney-Rivlin hyperelastic feature ").append(featureTag).append(" on physics ").append(physicsTag).append(" with id ").append(candidateId).append("\\n");
+        return true;
+      }} catch (Exception ex) {{
+        notes.append("Hyperelastic feature id ").append(candidateId).append(" failed on ").append(physicsTag).append(": ").append(ex.getMessage()).append("\\n");
+      }}
+    }}
+    return false;
+  }}
+
+  private static void bindFeatureSelection(Model model, String physicsTag, String featureTag, String selectionName, StringBuilder notes) {{
+    try {{
+      model.component("comp1").physics(physicsTag).feature(featureTag).selection().named(selectionName);
+      notes.append("Bound ").append(featureTag).append(" to selection ").append(selectionName).append("\\n");
+    }} catch (Exception ex) {{
+      notes.append("Selection binding failed for ").append(featureTag).append(": ").append(ex.getMessage()).append("\\n");
+    }}
+  }}
+
+  private static void trySetFeatureProperty(
+    Model model,
+    String physicsTag,
+    String featureTag,
+    String[] keys,
+    String[] values,
+    StringBuilder notes
+  ) {{
+    for (String key : keys) {{
+      for (String value : values) {{
+        try {{
+          model.component("comp1").physics(physicsTag).feature(featureTag).set(key, value);
+          notes.append("Set ").append(featureTag).append(".").append(key).append("=").append(value).append("\\n");
+          return;
+        }} catch (Exception ignored) {{
+        }}
+        try {{
+          model.component("comp1").physics(physicsTag).feature(featureTag).set(key, new String[] {{ value }});
+          notes.append("Set ").append(featureTag).append(".").append(key).append("=[").append(value).append("]\\n");
+          return;
+        }} catch (Exception ignored) {{
+        }}
+      }}
+    }}
+  }}
+
+  private static void tryRestrictLinearElasticFeature(Model model, String physicsTag, String selectionName, StringBuilder notes) {{
+    String[] candidateTags = new String[] {{ "lemm1", "lemm", "linel1", "linel" }};
+    for (String candidateTag : candidateTags) {{
+      try {{
+        model.component("comp1").physics(physicsTag).feature(candidateTag).selection().named(selectionName);
+        notes.append("Restricted linear elastic feature ").append(candidateTag).append(" to ").append(selectionName).append("\\n");
+        return;
+      }} catch (Exception ignored) {{
+      }}
+    }}
+    try {{
+      for (String featureTag : model.component("comp1").physics(physicsTag).feature().tags()) {{
+        String normalized = featureTag.toLowerCase();
+        if (!(normalized.contains("lemm") || normalized.contains("linel"))) {{
+          continue;
+        }}
+        try {{
+          model.component("comp1").physics(physicsTag).feature(featureTag).selection().named(selectionName);
+          notes.append("Restricted discovered linear elastic feature ").append(featureTag).append(" to ").append(selectionName).append("\\n");
+          return;
+        }} catch (Exception ignored) {{
+        }}
+      }}
+    }} catch (Exception ex) {{
+      notes.append("Could not inspect linear elastic features on ").append(physicsTag).append(": ").append(ex.getMessage()).append("\\n");
+      return;
+    }}
+    notes.append("Could not automatically restrict default linear elastic feature on ").append(physicsTag).append(".\\n");
+  }}
+
+  private static void tryDeactivateLinearElasticFeatures(Model model, String physicsTag, StringBuilder notes) {{
+    String[] candidateTags = new String[] {{ "lemm1", "lemm", "linel1", "linel" }};
+    for (String candidateTag : candidateTags) {{
+      if (tryDeactivateFeature(model, physicsTag, candidateTag, notes)) {{
+        return;
+      }}
+    }}
+    try {{
+      for (String featureTag : model.component("comp1").physics(physicsTag).feature().tags()) {{
+        String normalized = featureTag.toLowerCase();
+        if (!(normalized.contains("lemm") || normalized.contains("linel"))) {{
+          continue;
+        }}
+        if (tryDeactivateFeature(model, physicsTag, featureTag, notes)) {{
+          return;
+        }}
+      }}
+    }} catch (Exception ex) {{
+      notes.append("Could not inspect shell linear elastic features on ").append(physicsTag).append(": ").append(ex.getMessage()).append("\\n");
+      return;
+    }}
+    notes.append("Could not automatically deactivate default linear elastic feature on ").append(physicsTag).append(".\\n");
+  }}
+
+  private static boolean tryDeactivateFeature(Model model, String physicsTag, String featureTag, StringBuilder notes) {{
+    try {{
+      model.component("comp1").physics(physicsTag).feature(featureTag).active(false);
+      notes.append("Deactivated feature ").append(featureTag).append(" on ").append(physicsTag).append("\\n");
+      return true;
+    }} catch (Exception ignored) {{
+    }}
+    return false;
+  }}
 {lobule_builder_method_java}
 {lobule_helper_methods_java}
 }}
@@ -1052,6 +1308,14 @@ public class {class_name} {{
     postprocess_java_path = output_dir / f"{postprocess_class_name}.java"
     postprocess_result_mph_java = (solve_dir / f"{case_name}_result.mph").resolve().as_posix()
     postprocess_metrics_json_java = metrics_json_path.resolve().as_posix()
+    build_verification_class_name = _safe_java_identifier(f"{case_name}_comsol_verify_build")
+    build_verification_java_path = output_dir / f"{build_verification_class_name}.java"
+    solve_verification_class_name = _safe_java_identifier(f"{case_name}_comsol_verify_solve")
+    solve_verification_java_path = solve_dir / f"{solve_verification_class_name}.java"
+    generated_verify_json_path = output_dir / f"{case_name}_build_verification.json"
+    solve_verify_json_path = solve_dir / f"{case_name}_solve_verification.json"
+    generated_mph_java = result_mph.resolve().as_posix()
+    generated_mph_fallback_java = result_mph.with_name(f"{result_mph.stem}_Model{result_mph.suffix}").resolve().as_posix()
     postprocess_java = f"""import com.comsol.model.*;
 import com.comsol.model.util.*;
 
@@ -1117,6 +1381,143 @@ public class {postprocess_class_name} {{
   }}
 }}
 """
+    def _verification_java_source(*, class_name: str, model_path_candidates: list[str], loaded_role_expr: str) -> str:
+        path_lines = "\n".join(
+            [
+                f'    String candidate{idx} = "{candidate}";\n'
+                f'    if (new File(candidate{idx}).exists()) {{\n'
+                f'      return candidate{idx};\n'
+                f'    }}'
+                for idx, candidate in enumerate(model_path_candidates, start=1)
+            ]
+        )
+        return f"""import com.comsol.model.*;
+import com.comsol.model.util.*;
+import java.io.File;
+
+public class {class_name} {{
+  private static boolean hasPhysics(Model model, String tag) {{
+    try {{
+      model.component("comp1").physics(tag);
+      return true;
+    }} catch (Exception ex) {{
+      return false;
+    }}
+  }}
+
+  private static boolean hasPhysicsFeature(Model model, String physicsTag, String featureTag) {{
+    try {{
+      model.component("comp1").physics(physicsTag).feature(featureTag);
+      return true;
+    }} catch (Exception ex) {{
+      return false;
+    }}
+  }}
+
+  private static boolean hasMaterial(Model model, String tag) {{
+    try {{
+      model.component("comp1").material(tag);
+      return true;
+    }} catch (Exception ex) {{
+      return false;
+    }}
+  }}
+
+  private static boolean hasMultiphysics(Model model, String tag) {{
+    try {{
+      model.multiphysics(tag);
+      return true;
+    }} catch (Exception ex) {{
+      return false;
+    }}
+  }}
+
+  private static String paramOrEmpty(Model model, String name) {{
+    try {{
+      String value = model.param().get(name);
+      return value == null ? "" : value.replace("\\\\", "/");
+    }} catch (Exception ex) {{
+      return "";
+    }}
+  }}
+
+  private static String chooseModelPath() {{
+{path_lines}
+    return "{model_path_candidates[0]}";
+  }}
+
+  public static Model run() throws Exception {{
+    ModelUtil.initStandalone(true);
+    String modelPath = chooseModelPath();
+    Model model = ModelUtil.load("VerifyModel", modelPath);
+
+    boolean hasSolid = hasPhysics(model, "solid");
+    boolean hasShell = hasPhysics(model, "shell1");
+    boolean hasHmatAdipose = hasPhysicsFeature(model, "solid", "hmat_adipose");
+    boolean hasHmatGlandular = hasPhysicsFeature(model, "solid", "hmat_glandular");
+    boolean hasHmatSkin = hasShell && hasPhysicsFeature(model, "shell1", "hmat_skin");
+    boolean hasSthin = hasMultiphysics(model, "sthin1");
+
+    StringBuilder json = new StringBuilder();
+    json.append("{{\\n");
+    json.append("  \\"case_name\\": \\"{case_name}\\",\\n");
+    json.append("  \\"loaded_model_path\\": \\"").append(modelPath.replace("\\\\", "/")).append("\\",\\n");
+    json.append("  \\"loaded_model_role\\": \\"").append({loaded_role_expr}).append("\\",\\n");
+    json.append("  \\"physics\\": {{\\n");
+    json.append("    \\"solid\\": ").append(hasSolid).append(",\\n");
+    json.append("    \\"shell1\\": ").append(hasShell).append(",\\n");
+    json.append("    \\"sthin1\\": ").append(hasSthin).append("\\n");
+    json.append("  }},\\n");
+    json.append("  \\"hyperelastic_features\\": {{\\n");
+    json.append("    \\"hmat_adipose\\": ").append(hasHmatAdipose).append(",\\n");
+    json.append("    \\"hmat_glandular\\": ").append(hasHmatGlandular).append(",\\n");
+    json.append("    \\"hmat_skin\\": ").append(hasHmatSkin).append("\\n");
+    json.append("  }},\\n");
+    json.append("  \\"materials\\": {{\\n");
+    json.append("    \\"mat_chest\\": ").append(hasMaterial(model, "mat_chest")).append(",\\n");
+    json.append("    \\"mat_adipose\\": ").append(hasMaterial(model, "mat_adipose")).append(",\\n");
+    json.append("    \\"mat_glandular\\": ").append(hasMaterial(model, "mat_glandular")).append(",\\n");
+    json.append("    \\"mat_skin_shell\\": ").append(hasMaterial(model, "mat_skin_shell")).append("\\n");
+    json.append("  }},\\n");
+    json.append("  \\"source_parameters\\": {{\\n");
+    json.append("    \\"skin_c10\\": \\"").append(paramOrEmpty(model, "skin_c10")).append("\\",\\n");
+    json.append("    \\"skin_c01\\": \\"").append(paramOrEmpty(model, "skin_c01")).append("\\",\\n");
+    json.append("    \\"skin_bulk_modulus\\": \\"").append(paramOrEmpty(model, "skin_bulk_modulus")).append("\\",\\n");
+    json.append("    \\"adipose_c10\\": \\"").append(paramOrEmpty(model, "adipose_c10")).append("\\",\\n");
+    json.append("    \\"adipose_c01\\": \\"").append(paramOrEmpty(model, "adipose_c01")).append("\\",\\n");
+    json.append("    \\"adipose_bulk_modulus\\": \\"").append(paramOrEmpty(model, "adipose_bulk_modulus")).append("\\",\\n");
+    json.append("    \\"glandular_c10\\": \\"").append(paramOrEmpty(model, "glandular_c10")).append("\\",\\n");
+    json.append("    \\"glandular_c01\\": \\"").append(paramOrEmpty(model, "glandular_c01")).append("\\",\\n");
+    json.append("    \\"glandular_bulk_modulus\\": \\"").append(paramOrEmpty(model, "glandular_bulk_modulus")).append("\\",\\n");
+    json.append("    \\"chest_E\\": \\"").append(paramOrEmpty(model, "chest_E")).append("\\",\\n");
+    json.append("    \\"chest_nu\\": \\"").append(paramOrEmpty(model, "chest_nu")).append("\\"\\n");
+    json.append("  }}\\n");
+    json.append("}}");
+
+    System.out.println("COMSOL_VERIFICATION_JSON_BEGIN");
+    System.out.println(json.toString());
+    System.out.println("COMSOL_VERIFICATION_JSON_END");
+    return model;
+  }}
+
+  public static void main(String[] args) throws Exception {{
+    run();
+    ModelUtil.disconnect();
+  }}
+}}
+"""
+    build_verification_java = _verification_java_source(
+        class_name=build_verification_class_name,
+        model_path_candidates=[generated_mph_java, generated_mph_fallback_java],
+        loaded_role_expr='"generated_build"',
+    )
+    solve_verification_java = _verification_java_source(
+        class_name=solve_verification_class_name,
+        model_path_candidates=[postprocess_result_mph_java, generated_mph_java, generated_mph_fallback_java],
+        loaded_role_expr='modelPath.endsWith("_result.mph") ? "solve_result" : "generated_build_fallback"',
+    )
+    build_verification_java_path.write_text(build_verification_java, encoding="utf-8")
+    solve_verification_java_path.write_text(solve_verification_java, encoding="utf-8")
     postprocess_java_path.write_text(postprocess_java, encoding="utf-8")
     readme_path.write_text(
         "\n".join(
@@ -1127,6 +1528,10 @@ public class {postprocess_class_name} {{
                 f"Selection hints: {selection_hints_path}",
                 f"Metrics postprocess Java: {postprocess_java_path}",
                 f"Metrics JSON target: {metrics_json_path}",
+                f"Build verification Java: {build_verification_java_path}",
+                f"Solve verification Java: {solve_verification_java_path}",
+                f"Build verification JSON target: {generated_verify_json_path}",
+                f"Solve verification JSON target: {solve_verify_json_path}",
                 f"Target MPH: {result_mph}",
                 "",
                 "Typical next step:",
@@ -1151,4 +1556,8 @@ public class {postprocess_class_name} {{
         "comsol_selection_hints_json": str(selection_hints_path.resolve()),
         "comsol_postprocess_java": str(postprocess_java_path.resolve()),
         "comsol_metrics_json_target": str(metrics_json_path.resolve()),
+        "comsol_build_verification_java": str(build_verification_java_path.resolve()),
+        "comsol_solve_verification_java": str(solve_verification_java_path.resolve()),
+        "comsol_build_verification_json_target": str(generated_verify_json_path.resolve()),
+        "comsol_solve_verification_json_target": str(solve_verify_json_path.resolve()),
     }

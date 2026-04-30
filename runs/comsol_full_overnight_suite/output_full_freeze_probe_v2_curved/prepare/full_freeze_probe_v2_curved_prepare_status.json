@@ -1,0 +1,14 @@
+{
+  "mesh_export": "ok",
+  "message": "",
+  "builder_scope": "Current COMSOL builder is a scaffold: it exports geometry/material/lobule inputs from the FEBio-side pipeline, but does not yet recreate the full COMSOL physics model automatically.",
+  "recommended_next_steps": [
+    "Import or reconstruct the breast mesh/geometry inside COMSOL.",
+    "Create explicit COMSOL selections for skin, adipose, glandular, and chest-wall regions.",
+    "Map FEBio material parameters to COMSOL material models.",
+    "Define gravity and motion studies equivalent to the FEBio baseline.",
+    "Validate the COMSOL model first with a static gravity load before dynamic motion."
+  ],
+  "source_case_mode": "inline_source_case",
+  "source_case_toml": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v2_curved\\prepare\\full_freeze_probe_v2_curved_inline_source_case.toml"
+}

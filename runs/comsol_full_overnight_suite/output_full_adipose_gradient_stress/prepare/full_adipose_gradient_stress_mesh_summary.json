@@ -1,0 +1,25 @@
+{
+  "node_count": 18749,
+  "parts": {
+    "skin": {
+      "dimension": 2,
+      "element_count": 1735,
+      "node_ref_count": 10410
+    },
+    "chest": {
+      "dimension": 2,
+      "element_count": 903,
+      "node_ref_count": 5418
+    },
+    "adipose": {
+      "dimension": 3,
+      "element_count": 9564,
+      "node_ref_count": 95640
+    },
+    "glandular": {
+      "dimension": 3,
+      "element_count": 2550,
+      "node_ref_count": 25500
+    }
+  }
+}

@@ -1,0 +1,799 @@
+{
+  "case_name": "full_curved_chest_reference",
+  "geometry": {
+    "radius": 0.07,
+    "thickness_chest_wall": 0.002,
+    "left_relative_position_ellipse": 0.4,
+    "right_relative_position_ellipse": 0.05,
+    "center_relative_position_ellipse": 0.3,
+    "asymmetry": {
+      "enabled": false,
+      "scale_y": 1.0,
+      "scale_z": 1.0
+    }
+  },
+  "mesh": {
+    "ls": 0.005,
+    "density": 140.0,
+    "optimize": true,
+    "debug_view": false,
+    "debug_stop_after_mesh": false,
+    "order": 2
+  },
+  "material": {
+    "skin": {
+      "density": 1100.0,
+      "bulk_modulus": 480000.0,
+      "pressure_model": "default",
+      "coef1": 1200.0,
+      "coef2": 1200.0,
+      "hetero": {
+        "enabled": false,
+        "lobules": [],
+        "radial_center": null,
+        "radial_L": 0.02,
+        "radial_alpha_c1": 0.0,
+        "radial_alpha_c2": 0.0,
+        "radial_alpha_rho": 0.0,
+        "auto_generate": false,
+        "n_lobes": 6,
+        "n_per_lobe": 5,
+        "nipple": [
+          0.0,
+          0.068,
+          0.0
+        ],
+        "lobe_length": 0.03,
+        "spread_angle": 2.0,
+        "width": 0.004,
+        "amp_c1": 70.0,
+        "amp_c2": 55.0,
+        "amp_rho": 35.0,
+        "seed": 42,
+        "generator_mode": "fan",
+        "inner_ring_count": 8,
+        "outer_ring_count": 10,
+        "inner_ring_radius": 0.005,
+        "outer_ring_radius": 0.009,
+        "inner_depth": 0.012,
+        "outer_depth": 0.02,
+        "droplet_length": 0.007,
+        "droplet_components": 2,
+        "hub_offset_y": 0.0125,
+        "nipple_clearance_mid": 0.015,
+        "nipple_clearance_tip": 0.011,
+        "comsol_geometry_detail_mode": "full",
+        "comsol_petal_segments": 0,
+        "comsol_duct_beads": 0
+      }
+    },
+    "adipose": {
+      "density": 911.0,
+      "bulk_modulus": 425000.0,
+      "pressure_model": "default",
+      "coef1": 109.0,
+      "coef2": 106.0,
+      "hetero": {
+        "enabled": true,
+        "lobules": [],
+        "radial_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "radial_L": 0.05,
+        "radial_alpha_c1": 20.0,
+        "radial_alpha_c2": 15.0,
+        "radial_alpha_rho": 25.0,
+        "auto_generate": false,
+        "n_lobes": 6,
+        "n_per_lobe": 5,
+        "nipple": [
+          0.0,
+          0.068,
+          0.0
+        ],
+        "lobe_length": 0.03,
+        "spread_angle": 2.0,
+        "width": 0.004,
+        "amp_c1": 70.0,
+        "amp_c2": 55.0,
+        "amp_rho": 35.0,
+        "seed": 42,
+        "generator_mode": "fan",
+        "inner_ring_count": 8,
+        "outer_ring_count": 10,
+        "inner_ring_radius": 0.005,
+        "outer_ring_radius": 0.009,
+        "inner_depth": 0.012,
+        "outer_depth": 0.02,
+        "droplet_length": 0.007,
+        "droplet_components": 2,
+        "hub_offset_y": 0.0125,
+        "nipple_clearance_mid": 0.015,
+        "nipple_clearance_tip": 0.011,
+        "comsol_geometry_detail_mode": "full",
+        "comsol_petal_segments": 0,
+        "comsol_duct_beads": 0
+      }
+    },
+    "glandular": {
+      "density": 911.0,
+      "bulk_modulus": 425000.0,
+      "pressure_model": "default",
+      "coef1": 230.0,
+      "coef2": 195.0,
+      "hetero": {
+        "enabled": true,
+        "lobules": [],
+        "radial_center": null,
+        "radial_L": 0.02,
+        "radial_alpha_c1": 0.0,
+        "radial_alpha_c2": 0.0,
+        "radial_alpha_rho": 0.0,
+        "auto_generate": true,
+        "n_lobes": 6,
+        "n_per_lobe": 5,
+        "nipple": [
+          0.0,
+          0.068,
+          0.0
+        ],
+        "lobe_length": 0.03,
+        "spread_angle": 2.0,
+        "width": 0.0076,
+        "amp_c1": 70.0,
+        "amp_c2": 55.0,
+        "amp_rho": 35.0,
+        "seed": 42,
+        "generator_mode": "chen_2024_template_lobes",
+        "inner_ring_count": 6,
+        "outer_ring_count": 12,
+        "inner_ring_radius": 0.0135,
+        "outer_ring_radius": 0.027,
+        "inner_depth": 0.03,
+        "outer_depth": 0.046,
+        "droplet_length": 0.022,
+        "droplet_components": 2,
+        "hub_offset_y": 0.0125,
+        "nipple_clearance_mid": 0.015,
+        "nipple_clearance_tip": 0.011,
+        "comsol_geometry_detail_mode": "full",
+        "comsol_petal_segments": 0,
+        "comsol_duct_beads": 0
+      }
+    }
+  },
+  "lobules": [
+    {
+      "center": [
+        0.013523158498061337,
+        0.038000000000000006,
+        5.703429088129076e-05
+      ],
+      "width": 0.008816,
+      "width_x": 0.007229119999999999,
+      "width_y": 0.01692672,
+      "width_z": 0.007581759999999999,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 1,
+      "ring_name": "inner",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        0.004837834417158295,
+        0.04914112294383019,
+        0.0007207242310685689
+      ],
+      "duct_tip": [
+        0.0003,
+        0.05550000000000001,
+        0.0006
+      ],
+      "bulb_sidecar": [
+        0.020752278498061334,
+        0.03641312000000001,
+        -0.0008245657091187093
+      ]
+    },
+    {
+      "center": [
+        0.006821482918445734,
+        0.038000000000000006,
+        0.011592377308568385
+      ],
+      "width": 0.008816,
+      "width_x": 0.007229119999999999,
+      "width_y": 0.01692672,
+      "width_z": 0.007581759999999999,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 2,
+      "ring_name": "inner",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        0.0018257245707816066,
+        0.04916354915759491,
+        0.0044815837243041496
+      ],
+      "duct_tip": [
+        -0.0003696152422706631,
+        0.05550000000000001,
+        0.0005598076211353316
+      ],
+      "bulb_sidecar": [
+        0.011199530914422095,
+        0.03641312000000001,
+        0.017412178875574544
+      ]
+    },
+    {
+      "center": [
+        -0.006740284129359284,
+        0.038000000000000006,
+        0.011690066063119597
+      ],
+      "width": 0.008816,
+      "width_x": 0.007229119999999999,
+      "width_y": 0.01692672,
+      "width_z": 0.007581759999999999,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 3,
+      "ring_name": "inner",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        -0.003013927610766876,
+        0.04915013088904765,
+        0.003825918606409274
+      ],
+      "duct_tip": [
+        -0.0006696152422706632,
+        0.05550000000000001,
+        -4.0192378864668246e-05
+      ],
+      "bulb_sidecar": [
+        -0.009591356133382922,
+        0.03641312000000001,
+        0.018391467630125755
+      ]
+    },
+    {
+      "center": [
+        -0.013564831338495592,
+        0.038000000000000006,
+        5.9112187092601725e-05
+      ],
+      "width": 0.008816,
+      "width_x": 0.007229119999999999,
+      "width_y": 0.01692672,
+      "width_z": 0.007581759999999999,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 4,
+      "ring_name": "inner",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        -0.004862926853315769,
+        0.04912828642861611,
+        -0.0006784773757295934
+      ],
+      "duct_tip": [
+        -0.0002999999999999999,
+        0.05550000000000001,
+        0.0006
+      ],
+      "bulb_sidecar": [
+        -0.02079395133849559,
+        0.03641312000000001,
+        0.0009407121870926026
+      ]
+    },
+    {
+      "center": [
+        -0.006744981666985354,
+        0.038000000000000006,
+        -0.011655812241078764
+      ],
+      "width": 0.008816,
+      "width_x": 0.007229119999999999,
+      "width_y": 0.01692672,
+      "width_z": 0.007581759999999999,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 5,
+      "ring_name": "inner",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        -0.001799952851114222,
+        0.04915854672367472,
+        -0.004507884282136457
+      ],
+      "duct_tip": [
+        -0.0006696152422706631,
+        0.05550000000000001,
+        4.0192378864668734e-05
+      ],
+      "bulb_sidecar": [
+        -0.011123029662961716,
+        0.03641312000000001,
+        -0.017475613808084923
+      ]
+    },
+    {
+      "center": [
+        0.006684693772820865,
+        0.038000000000000006,
+        -0.011764218028752932
+      ],
+      "width": 0.008816,
+      "width_x": 0.007229119999999999,
+      "width_y": 0.01692672,
+      "width_z": 0.007581759999999999,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 6,
+      "ring_name": "inner",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        0.0029980798946983686,
+        0.049138813024800984,
+        -0.0038604329549069326
+      ],
+      "duct_tip": [
+        -0.00036961524227066355,
+        0.05550000000000001,
+        -0.0005598076211353313
+      ],
+      "bulb_sidecar": [
+        0.009535765776844497,
+        0.03641312000000001,
+        -0.018465619595759094
+      ]
+    },
+    {
+      "center": [
+        0.027066762222899353,
+        0.022000000000000006,
+        -1.4049539629439804e-05
+      ],
+      "width": 0.008968,
+      "width_x": 0.00699504,
+      "width_y": 0.0183844,
+      "width_z": 0.00735376,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 7,
+      "ring_name": "outer",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        0.016959884295440576,
+        0.03432095689257311,
+        0.0011911177371507042
+      ],
+      "duct_tip": [
+        0.0005,
+        0.05550000000000001,
+        0.001
+      ],
+      "bulb_sidecar": [
+        0.034420522222899354,
+        0.020385760000000006,
+        -0.0009108495396294399
+      ]
+    },
+    {
+      "center": [
+        0.023330935256805147,
+        0.022000000000000006,
+        0.01348825575936277
+      ],
+      "width": 0.008968,
+      "width_x": 0.00699504,
+      "width_y": 0.0183844,
+      "width_z": 0.00735376,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 8,
+      "ring_name": "outer",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        0.014003707896158719,
+        0.03434208196354218,
+        0.00948213824010484
+      ],
+      "duct_tip": [
+        -6.698729810778055e-05,
+        0.05550000000000001,
+        0.0011160254037844387
+      ],
+      "bulb_sidecar": [
+        0.030147878230139,
+        0.020385760000000006,
+        0.016388484177248884
+      ]
+    },
+    {
+      "center": [
+        0.013467447085515607,
+        0.022000000000000006,
+        0.023423141400281896
+      ],
+      "width": 0.008968,
+      "width_x": 0.00699504,
+      "width_y": 0.0183844,
+      "width_z": 0.00735376,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 9,
+      "ring_name": "outer",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        0.007395560196178975,
+        0.03432958173188067,
+        0.0152706835594388
+      ],
+      "duct_tip": [
+        -0.0006160254037844385,
+        0.05550000000000001,
+        0.0009330127018922195
+      ],
+      "bulb_sidecar": [
+        0.017920978667629494,
+        0.020385760000000006,
+        0.029343284373615747
+      ]
+    },
+    {
+      "center": [
+        2.777374889167161e-05,
+        0.022000000000000006,
+        0.0270327423962286
+      ],
+      "width": 0.008968,
+      "width_x": 0.00699504,
+      "width_y": 0.0183844,
+      "width_z": 0.00735376,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 10,
+      "ring_name": "outer",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        -0.0011824462214710992,
+        0.03432707217481505,
+        0.016933441900661657
+      ],
+      "duct_tip": [
+        -0.001,
+        0.05550000000000001,
+        0.0005000000000000001
+      ],
+      "bulb_sidecar": [
+        0.0009245737488916721,
+        0.020385760000000006,
+        0.0343865023962286
+      ]
+    },
+    {
+      "center": [
+        -0.01333723478233384,
+        0.022000000000000006,
+        0.02334375545477041
+      ],
+      "width": 0.008968,
+      "width_x": 0.00699504,
+      "width_y": 0.0183844,
+      "width_z": 0.00735376,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 11,
+      "ring_name": "outer",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        -0.009382160880258329,
+        0.03435362499353353,
+        0.01400376135969409
+      ],
+      "duct_tip": [
+        -0.0011160254037844387,
+        0.05550000000000001,
+        -6.698729810778039e-05
+      ],
+      "bulb_sidecar": [
+        -0.016237463200219956,
+        0.020385760000000006,
+        0.030160698428104267
+      ]
+    },
+    {
+      "center": [
+        -0.023444532629526678,
+        0.022000000000000006,
+        0.013585801894246796
+      ],
+      "width": 0.008968,
+      "width_x": 0.00699504,
+      "width_y": 0.0183844,
+      "width_z": 0.00735376,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 12,
+      "ring_name": "outer",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        -0.015293978259859155,
+        0.03431561211265746,
+        0.007476020174811427
+      ],
+      "duct_tip": [
+        -0.0009330127018922196,
+        0.05550000000000001,
+        -0.0006160254037844383
+      ],
+      "bulb_sidecar": [
+        -0.02936467560286053,
+        0.020385760000000006,
+        0.018039333476360685
+      ]
+    },
+    {
+      "center": [
+        -0.02700866000678177,
+        0.022000000000000006,
+        -6.26605723925309e-05
+      ],
+      "width": 0.008968,
+      "width_x": 0.00699504,
+      "width_y": 0.0183844,
+      "width_z": 0.00735376,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 13,
+      "ring_name": "outer",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        -0.016914737722542973,
+        0.034331392836163335,
+        -0.0012395951355713025
+      ],
+      "duct_tip": [
+        -0.0004999999999999999,
+        0.05550000000000001,
+        0.001
+      ],
+      "bulb_sidecar": [
+        -0.03436242000678177,
+        0.020385760000000006,
+        0.0008341394276074701
+      ]
+    },
+    {
+      "center": [
+        -0.02333324085030517,
+        0.022000000000000006,
+        -0.013458720275608798
+      ],
+      "width": 0.008968,
+      "width_x": 0.00699504,
+      "width_y": 0.0183844,
+      "width_z": 0.00735376,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 14,
+      "ring_name": "outer",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        -0.014003563152657895,
+        0.034344380421176955,
+        -0.00946256081793154
+      ],
+      "duct_tip": [
+        -0.000933012701892219,
+        0.05550000000000001,
+        0.0006160254037844389
+      ],
+      "bulb_sidecar": [
+        -0.030150183823639026,
+        0.020385760000000006,
+        -0.016358948693494912
+      ]
+    },
+    {
+      "center": [
+        -0.013550578737753952,
+        0.022000000000000006,
+        -0.023373817780685143
+      ],
+      "width": 0.008968,
+      "width_x": 0.00699504,
+      "width_y": 0.0183844,
+      "width_z": 0.00735376,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 15,
+      "ring_name": "outer",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        -0.007448011813642063,
+        0.03432978856173248,
+        -0.015239369050166306
+      ],
+      "duct_tip": [
+        -0.0011160254037844387,
+        0.05550000000000001,
+        6.69872981077812e-05
+      ],
+      "bulb_sidecar": [
+        -0.01800411031986784,
+        0.020385760000000006,
+        -0.029293960754018994
+      ]
+    },
+    {
+      "center": [
+        1.6620333351400025e-05,
+        0.022000000000000006,
+        -0.026983006738293125
+      ],
+      "width": 0.008968,
+      "width_x": 0.00699504,
+      "width_y": 0.0183844,
+      "width_z": 0.00735376,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 16,
+      "ring_name": "outer",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        0.0012105000719935754,
+        0.03433601944992607,
+        -0.01689480088930596
+      ],
+      "duct_tip": [
+        -0.001,
+        0.05550000000000001,
+        -0.0004999999999999998
+      ],
+      "bulb_sidecar": [
+        -0.0008801796666486015,
+        0.020385760000000006,
+        -0.034336766738293126
+      ]
+    },
+    {
+      "center": [
+        0.013551597430793446,
+        0.022000000000000006,
+        -0.023360712827879417
+      ],
+      "width": 0.008968,
+      "width_x": 0.00699504,
+      "width_y": 0.0183844,
+      "width_z": 0.00735376,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 17,
+      "ring_name": "outer",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        0.009526328905051215,
+        0.03433173562732632,
+        -0.014029729663241517
+      ],
+      "duct_tip": [
+        -0.0006160254037844393,
+        0.05550000000000001,
+        -0.0009330127018922188
+      ],
+      "bulb_sidecar": [
+        0.016451825848679557,
+        0.020385760000000006,
+        -0.03017765580121327
+      ]
+    },
+    {
+      "center": [
+        0.023430663807343564,
+        0.022000000000000006,
+        -0.013524295012443167
+      ],
+      "width": 0.008968,
+      "width_x": 0.00699504,
+      "width_y": 0.0183844,
+      "width_z": 0.00735376,
+      "amp_c1": 70.0,
+      "amp_c2": 55.0,
+      "amp_rho": 35.0,
+      "lobe_id": 18,
+      "ring_name": "outer",
+      "component_index": 0,
+      "component_count": 1,
+      "component_role": "bulb",
+      "template_kind": "duct_lobe",
+      "duct_mid": [
+        0.015279826380028888,
+        0.03432330653681585,
+        -0.007434018762747609
+      ],
+      "duct_tip": [
+        -6.698729810778126e-05,
+        0.05550000000000001,
+        -0.0011160254037844387
+      ],
+      "bulb_sidecar": [
+        0.029350806780677415,
+        0.020385760000000006,
+        -0.017977826594557055
+      ]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "component_domain_selections": {
+    "geom1_breast_union_dom": "Final union of adipose, glandular, and chest-wall domains",
+    "geom1_adipose_diff_dom": "Adipose region after subtracting glandular volume from outer breast",
+    "geom1_gland_clip_dom": "Glandular ellipsoid clipped to the outer breast",
+    "geom1_chest_cyl_dom": "Chest-wall support domain"
+  },
+  "component_boundary_selections": {
+    "geom1_breast_union_bnd": "Exterior boundaries of the full assembled breast/chest geometry",
+    "geom1_breast_outer_bnd": "Outer breast envelope boundary; used as the current skin-shell carrier boundary",
+    "geom1_adipose_diff_bnd": "Boundaries of the adipose domain",
+    "geom1_gland_clip_bnd": "Boundaries of the glandular domain",
+    "geom1_chest_cyl_bnd": "Boundaries of the chest-wall support domain"
+  },
+  "geometry_feature_tags": {
+    "breast_outer": "Outer breast envelope with FEBio-style baseline and optional light thorax curvature",
+    "gland_keep_anterior": "Anterior keep region used to clip the glandular ellipsoid at the chest wall",
+    "gland_clip": "Glandular source volume clipped to the breast outer volume",
+    "gland_lobules": "Union of COMSOL-native lobule ellipsoids derived from the exported FEBio lobule layout",
+    "adipose_diff": "Adipose outer volume minus glandular volume",
+    "chest_cyl": "Chest-wall support body; cylindrical in baseline mode, lightly curved in curved mode",
+    "breast_union": "Final union used for meshing/physics"
+  },
+  "recommended_physics_targets": {
+    "full_breast_domain_selection": "geom1_breast_union_dom",
+    "skin_shell_boundary_selection": "geom1_breast_outer_bnd",
+    "adipose_domain_selection": "geom1_adipose_diff_dom",
+    "glandular_domain_selection": "geom1_gland_clip_dom",
+    "chest_domain_selection": "geom1_chest_cyl_dom",
+    "fixed_boundary_selection": "geom1_chest_cyl_bnd"
+  },
+  "skin_shell_scaffold": {
+    "enabled": true,
+    "solid_coupling_scaffold_enabled": true,
+    "skin_shell_thickness_m": 0.0001,
+    "shell_boundary_selection": "geom1_breast_outer_bnd",
+    "notes": [
+      "The shell scaffold is generated defensively because COMSOL API identifiers can vary by version/license.",
+      "The Solid-Thin Structure Connection is emitted as a scaffold on the same outer boundary selection and may need manual refinement in COMSOL."
+    ]
+  },
+  "chest_wall_scaffold": {
+    "curved_enabled": true,
+    "curve_depth_m": 0.0012,
+    "curve_radius_m": 2.0422666666666673,
+    "curve_center_y_m": -2.0410666666666675,
+    "notes": [
+      "Curved mode replaces the flat posterior clip plane with a shallow cylindrical arc in the yz side-view, so the chest wall reads as a ')' style curve.",
+      "The chest-wall support domain reuses that same interface so the breast and chest wall remain conformal."
+    ]
+  },
+  "mooney_rivlin_material_mapping": {
+    "note": "The COMSOL builder now scaffolds Mooney-Rivlin two-parameter hyperelastic features from the FEBio inputs bulk_modulus, coef1, and coef2. The chest wall remains a separate linear elastic placeholder material.",
+    "skin": {
+      "density_kg_m3": 1100.0,
+      "bulk_modulus_pa": 480000.0,
+      "c10_pa": 1200.0,
+      "c01_pa": 1200.0
+    },
+    "adipose": {
+      "density_kg_m3": 911.0,
+      "bulk_modulus_pa": 425000.0,
+      "c10_pa": 109.0,
+      "c01_pa": 106.0
+    },
+    "glandular": {
+      "density_kg_m3": 911.0,
+      "bulk_modulus_pa": 425000.0,
+      "c10_pa": 230.0,
+      "c01_pa": 195.0
+    }
+  },
+  "chest_material_assignment": {
+    "density_kg_m3": 1050.0,
+    "youngs_modulus_pa": 10000.0,
+    "poissons_ratio": 0.49,
+    "source": "Explicit COMSOL chest-wall placeholder values, independent from FEBio breast-tissue materials."
+  },
+  "planned_metrics_export": {
+    "metrics_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v2_curved\\solve\\full_freeze_probe_v2_curved_metrics.json",
+    "metrics": [
+      "breast_volume",
+      "glandular_volume",
+      "adipose_volume",
+      "max_displacement_breast",
+      "avg_displacement_breast",
+      "max_von_mises_breast",
+      "max_von_mises_glandular"
+    ]
+  }
+}

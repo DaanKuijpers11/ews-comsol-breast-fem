@@ -1,0 +1,35 @@
+{
+  "case_name": "full_freeze_probe_v1",
+  "case_dir": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite",
+  "settings_file": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\full_freeze_probe_v1.toml",
+  "model_name": "breast_model_comsol",
+  "prepare_artefacts": {
+    "source_settings_expanded_toml": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\prepare\\full_freeze_probe_v1_source_settings_expanded.toml",
+    "mesh_nodes_csv": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\prepare\\full_freeze_probe_v1_mesh_nodes.csv",
+    "mesh_data_npz": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\prepare\\full_freeze_probe_v1_mesh_data.npz",
+    "mesh_summary_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\prepare\\full_freeze_probe_v1_mesh_summary.json",
+    "lobules_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\prepare\\full_freeze_probe_v1_lobules.json",
+    "comsol_build_plan_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\prepare\\full_freeze_probe_v1_comsol_build_plan.json",
+    "source_case_toml": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\prepare\\full_freeze_probe_v1_inline_source_case.toml",
+    "prepare_status_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\prepare\\full_freeze_probe_v1_prepare_status.json",
+    "comsol_builder_java": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\build\\full_freeze_probe_v1_comsol_builder.java",
+    "comsol_builder_readme": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\build\\full_freeze_probe_v1_comsol_builder_README.txt",
+    "comsol_generated_mph_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\build\\full_freeze_probe_v1_generated.mph",
+    "comsol_selection_hints_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\build\\full_freeze_probe_v1_comsol_selection_hints.json",
+    "comsol_postprocess_java": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\build\\full_freeze_probe_v1_comsol_postprocess.java",
+    "comsol_metrics_json_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\solve\\full_freeze_probe_v1_metrics.json",
+    "comsol_build_verification_java": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\build\\full_freeze_probe_v1_comsol_verify_build.java",
+    "comsol_solve_verification_java": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\solve\\full_freeze_probe_v1_comsol_verify_solve.java",
+    "comsol_build_verification_json_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\build\\full_freeze_probe_v1_build_verification.json",
+    "comsol_solve_verification_json_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\solve\\full_freeze_probe_v1_solve_verification.json"
+  },
+  "resolved_case_toml": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\full_freeze_probe_v1_resolved_case.toml",
+  "single_file_case_toml": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\full_freeze_probe_v1_single_file_case.toml",
+  "output_layout": {
+    "root": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1",
+    "prepare": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\prepare",
+    "build": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\build",
+    "solve": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\solve",
+    "logs": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_freeze_probe_v1\\logs"
+  }
+}

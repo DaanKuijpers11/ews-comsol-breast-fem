@@ -18,6 +18,12 @@ java_compile_timeout_s = 300
 java_build_timeout_s = 0
 solve_timeout_s = 0
 postprocess_timeout_s = 900
+enable_skin_shell_physics = true
+enable_skin_solid_coupling_scaffold = true
+skin_shell_thickness_m = 0.0001
+chest_density_kg_m3 = 1050.0
+chest_youngs_modulus_pa = 10000.0
+chest_poissons_ratio = 0.49
 
 [source]
 base_case_toml = "./chen2024_droplet_auto_comsol_source.toml"

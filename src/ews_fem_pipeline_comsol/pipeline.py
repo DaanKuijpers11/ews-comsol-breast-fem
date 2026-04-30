@@ -1,16 +1,70 @@
 from __future__ import annotations
 
 import json
+import tomllib
 from pathlib import Path
 
+from ews_fem_pipeline_clean.prepare_simulation import load_settings_from_toml as load_febio_settings_from_toml
 from ews_fem_pipeline_comsol.paths import ensure_output_tree
-from ews_fem_pipeline_comsol.prepare_from_febio import prepare_case_from_febio
+from ews_fem_pipeline_comsol.prepare_from_febio import prepare_case_from_febio, resolve_source_case_toml
 from ews_fem_pipeline_comsol.script_builder import generate_comsol_java_builder
 from ews_fem_pipeline_comsol.settings import (
     Settings,
     load_settings_from_toml,
+    write_dict_to_toml,
     write_settings_to_toml,
 )
+
+
+def _load_raw_toml(filepath: Path) -> dict:
+    with open(filepath, "rb") as handle:
+        return tomllib.load(handle)
+
+
+def _export_resolved_case_snapshot(
+    *,
+    case_file: Path,
+    output_root: Path,
+    settings: Settings,
+) -> tuple[Path, Path]:
+    source_case_path, source_case_mode = resolve_source_case_toml(
+        case_name=case_file.stem,
+        comsol_case_toml=case_file,
+        output_dir=output_root / "prepare",
+        settings=settings,
+    )
+    expanded_source_case = load_febio_settings_from_toml(source_case_path).model_dump()
+    payload = {
+        "case_overview": {
+            "case_name": case_file.stem,
+            "comsol_case_file": str(case_file.resolve()),
+            "source_case_mode": source_case_mode,
+            "source_case_file": str(source_case_path.resolve()),
+            "output_root": str(output_root.resolve()),
+        },
+        "pipeline": settings.pipeline.__dict__,
+        "comsol": settings.comsol.__dict__,
+        "source": settings.source.__dict__,
+        "source_case": expanded_source_case,
+    }
+    snapshot_path = output_root / f"{case_file.stem}_resolved_case.toml"
+    write_dict_to_toml(snapshot_path, payload)
+    single_file_payload = {
+        "pipeline": settings.pipeline.__dict__,
+        "comsol": settings.comsol.__dict__,
+        "source": {
+            **settings.source.__dict__,
+            "base_case_toml": "",
+            "notes": (
+                f"{settings.source.notes} "
+                "This generated single-file case embeds the resolved source_case below and does not require a separate base_case_toml."
+            ).strip(),
+        },
+        "source_case": expanded_source_case,
+    }
+    single_file_path = output_root / f"{case_file.stem}_single_file_case.toml"
+    write_dict_to_toml(single_file_path, single_file_payload)
+    return snapshot_path, single_file_path
 
 
 def generate_cases(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
@@ -23,6 +77,11 @@ def generate_cases(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
         build_dir = output_paths["build"]
 
         write_settings_to_toml(output_root / f"{filepath.stem}_all_settings.toml", settings)
+        resolved_case_toml, single_file_case_toml = _export_resolved_case_snapshot(
+            case_file=filepath,
+            output_root=output_root,
+            settings=settings,
+        )
         prepare_artefacts = prepare_case_from_febio(
             case_name=filepath.stem,
             comsol_case_toml=filepath,
@@ -43,6 +102,8 @@ def generate_cases(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
             "settings_file": str(filepath.resolve()),
             "model_name": settings.pipeline.model_name,
             "prepare_artefacts": prepare_artefacts,
+            "resolved_case_toml": str(resolved_case_toml.resolve()),
+            "single_file_case_toml": str(single_file_case_toml.resolve()),
             "output_layout": {name: str(path.resolve()) for name, path in output_paths.items()},
         }
         json_file = build_dir / f"{filepath.stem}_comsol_input.json"

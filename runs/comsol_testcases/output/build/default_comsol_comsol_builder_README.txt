@@ -4,6 +4,10 @@ Build plan: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\prepare
 Selection hints: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_comsol_selection_hints.json
 Metrics postprocess Java: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_comsol_postprocess.java
 Metrics JSON target: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\solve\default_comsol_metrics.json
+Build verification Java: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_comsol_verify_build.java
+Solve verification Java: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\solve\default_comsol_comsol_verify_solve.java
+Build verification JSON target: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_build_verification.json
+Solve verification JSON target: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\solve\default_comsol_solve_verification.json
 Target MPH: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_generated.mph
 
 Typical next step:
