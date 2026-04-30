@@ -10,7 +10,7 @@
     "mesh_summary_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\prepare\\default_comsol_mesh_summary.json",
     "lobules_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\prepare\\default_comsol_lobules.json",
     "comsol_build_plan_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\prepare\\default_comsol_comsol_build_plan.json",
-    "source_case_toml": "C:\\Users\\20223231\\ews_fem_clean\\runs\\elipse_lobules_testcases\\chen2024_droplet_auto\\chen2024_droplet_auto.toml",
+    "source_case_toml": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\chen2024_droplet_auto_comsol_source.toml",
     "prepare_status_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\prepare\\default_comsol_prepare_status.json",
     "comsol_builder_java": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\build\\default_comsol_comsol_builder.java",
     "comsol_builder_readme": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_testcases\\output\\build\\default_comsol_comsol_builder_README.txt",

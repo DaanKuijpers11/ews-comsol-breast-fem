@@ -2602,3 +2602,237 @@
 2026-04-28 11:31:58,692 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
 2026-04-28 11:42:58,006 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Running COMSOL for default_comsol
 2026-04-28 11:53:00,596 [ERROR] ews_fem_pipeline_comsol.run_simulation.comsol_runner: COMSOL failed for default_comsol. Debug: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\logs\default_comsol_comsol_runner_debug.log
+2026-04-28 13:05:37,480 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 13:05:37,480 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 13:05:37,480 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 13:05:37,480 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 13:05:37,480 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 13:05:37,480 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 13:05:37,718 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 13:18:20,471 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 13:37:10,865 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 13:37:10,865 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 13:37:10,865 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 13:37:10,865 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 13:37:10,865 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 13:37:10,865 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 13:37:11,071 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 13:38:46,102 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 13:39:30,104 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 13:39:30,107 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 13:39:30,107 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 13:39:30,107 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 13:39:30,109 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 13:39:30,109 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 13:39:30,337 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 13:41:01,713 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 13:55:58,605 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 13:55:58,605 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 13:55:58,605 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 13:55:58,605 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 13:55:58,605 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 13:55:58,605 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 13:55:58,729 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 13:56:48,834 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 14:20:35,001 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 14:20:35,001 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 14:20:35,001 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 14:20:35,001 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 14:20:35,001 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 14:20:35,001 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 14:20:35,119 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 14:21:31,526 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 14:40:19,518 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 14:40:19,534 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 14:40:19,534 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 14:40:19,534 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 14:40:19,534 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 14:40:19,534 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 14:40:19,668 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 14:41:17,788 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 14:44:07,337 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 14:44:07,337 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 14:44:07,337 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 14:44:07,337 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 14:44:07,337 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 14:44:07,337 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 14:44:07,465 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 14:45:02,251 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 14:53:09,686 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 14:53:09,686 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 14:53:09,686 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 14:53:09,686 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 14:53:09,686 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 14:53:09,686 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 14:53:09,817 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 14:54:42,547 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 15:06:15,993 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 15:06:15,993 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 15:06:15,994 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 15:06:15,994 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 15:06:15,994 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 15:06:15,994 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 15:06:16,121 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 15:06:17,856 [WARNING] ews_fem_pipeline_comsol.run_simulation.comsol_runner: default_comsol: javac compile failed. See *_javac_compile_debug.log for details.
+2026-04-28 15:06:17,856 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Prepared build command for default_comsol (execute=false, MPH not built yet).
+2026-04-28 15:06:45,571 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 15:06:45,571 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 15:06:45,571 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 15:06:45,571 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 15:06:45,571 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 15:06:45,571 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 15:06:45,700 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 15:10:05,993 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 15:10:05,993 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 15:10:05,993 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 15:10:05,993 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 15:10:05,993 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 15:10:05,993 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 15:10:06,121 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 15:12:55,636 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 15:16:21,005 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 15:24:19,557 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 15:24:19,560 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 15:24:19,560 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 15:24:19,560 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 15:24:19,560 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 15:24:19,560 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 15:24:19,807 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 15:31:17,541 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 15:31:17,541 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 15:31:17,542 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 15:31:17,542 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 15:31:17,542 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 15:31:17,542 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 15:31:17,789 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 15:38:10,186 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 15:43:44,037 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 15:52:31,459 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 15:52:31,459 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 15:52:31,460 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 15:52:31,460 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 15:52:31,460 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 15:52:31,460 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 15:52:31,679 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 15:57:31,204 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 15:57:31,205 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 15:57:31,205 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 15:57:31,205 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 15:57:31,206 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 15:57:31,206 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 15:57:31,436 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 15:59:18,582 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 16:13:30,003 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 16:13:30,003 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 16:13:30,003 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 16:13:30,003 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 16:13:30,003 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 16:13:30,015 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 16:13:30,184 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 16:14:34,872 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 16:26:31,613 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 16:26:31,613 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 16:26:31,613 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 16:26:31,613 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 16:26:31,613 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 16:26:31,613 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 16:26:44,798 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 16:26:44,798 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 16:26:44,798 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 16:26:44,798 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 16:26:44,798 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 16:26:44,798 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 16:26:44,943 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 16:28:00,402 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-28 16:44:51,723 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 16:44:51,723 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 16:44:51,723 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 16:44:51,723 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 16:44:51,723 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 16:44:51,723 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 16:44:51,873 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 16:44:53,990 [WARNING] ews_fem_pipeline_comsol.run_simulation.comsol_runner: default_comsol: javac compile failed. See *_javac_compile_debug.log for details.
+2026-04-28 16:44:53,991 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Prepared build command for default_comsol (execute=false, MPH not built yet).
+2026-04-28 16:47:02,908 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-28 16:47:02,908 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-28 16:47:02,908 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-28 16:47:02,908 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-28 16:47:02,908 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-28 16:47:02,908 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-28 16:47:03,076 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-28 16:47:05,477 [WARNING] ews_fem_pipeline_comsol.run_simulation.comsol_runner: default_comsol: javac compile failed. See *_javac_compile_debug.log for details.
+2026-04-28 16:47:05,477 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Prepared build command for default_comsol (execute=false, MPH not built yet).
+2026-04-30 08:33:39,754 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-30 08:33:39,754 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-30 08:33:39,754 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-30 08:33:39,754 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-30 08:33:39,754 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-30 08:33:39,754 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-30 08:33:39,887 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-30 08:33:42,254 [WARNING] ews_fem_pipeline_comsol.run_simulation.comsol_runner: default_comsol: javac compile failed. See *_javac_compile_debug.log for details.
+2026-04-30 08:33:42,254 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Prepared build command for default_comsol (execute=false, MPH not built yet).
+2026-04-30 08:33:48,898 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-30 08:33:48,898 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-30 08:33:48,898 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-30 08:33:48,898 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-30 08:33:48,898 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-30 08:33:48,898 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-30 08:33:49,025 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-30 08:33:51,274 [WARNING] ews_fem_pipeline_comsol.run_simulation.comsol_runner: default_comsol: javac compile failed. See *_javac_compile_debug.log for details.
+2026-04-30 08:33:51,274 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Prepared build command for default_comsol (execute=false, MPH not built yet).
+2026-04-30 08:38:19,994 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-30 08:38:19,994 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-30 08:38:19,994 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-30 08:38:19,994 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-30 08:38:19,994 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-30 08:38:19,994 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-30 08:38:20,111 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-30 08:38:22,466 [WARNING] ews_fem_pipeline_comsol.run_simulation.comsol_runner: default_comsol: javac compile failed. See *_javac_compile_debug.log for details.
+2026-04-30 08:38:22,466 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Prepared build command for default_comsol (execute=false, MPH not built yet).
+2026-04-30 08:39:05,392 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-30 08:39:05,392 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-30 08:39:05,392 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-30 08:39:05,392 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-30 08:39:05,392 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-30 08:39:05,392 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-30 08:39:05,528 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-30 08:39:39,062 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-30 08:40:13,025 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-30 08:40:13,025 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-30 08:40:13,025 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-30 08:40:13,025 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-30 08:40:13,025 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-30 08:40:13,025 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-30 08:40:13,137 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-30 08:40:37,003 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-30 08:43:26,650 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-30 08:43:26,650 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-30 08:43:26,650 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-30 08:43:26,650 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-30 08:43:26,650 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-30 08:43:26,650 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-30 08:43:26,780 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for default_comsol
+2026-04-30 09:59:27,995 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for default_comsol without starting solve.
+2026-04-30 11:00:04,491 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-30 11:00:04,493 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-30 11:00:04,493 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-30 11:00:04,493 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-30 11:00:04,494 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-30 11:00:04,494 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-30 11:00:04,627 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for final_freeze_probe
+2026-04-30 11:22:53,919 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for final_freeze_probe without starting solve.
+2026-04-30 12:47:53,371 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-30 12:47:53,371 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-30 12:47:53,371 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-30 12:47:53,371 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-30 12:47:53,371 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-30 12:47:53,371 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-30 12:47:53,502 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for final_freeze_probe_v2
+2026-04-30 13:30:51,856 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Built COMSOL MPH for final_freeze_probe_v2 without starting solve.
+2026-04-30 13:46:43,049 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh: Mesh quality check:
+2026-04-30 13:46:43,049 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Elements checked: 8071
+2026-04-30 13:46:43,049 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Min quality: 0.1264
+2026-04-30 13:46:43,049 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Max quality: 1.0530
+2026-04-30 13:46:43,049 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Mean quality: 0.9861
+2026-04-30 13:46:43,049 [INFO] ews_fem_pipeline_clean.prepare_simulation.generate_mesh:   Poor quality elements (<0.1): 0
+2026-04-30 13:46:43,203 [INFO] ews_fem_pipeline_comsol.run_simulation.comsol_runner: Building MPH from Java scaffold for skin_chest_fast

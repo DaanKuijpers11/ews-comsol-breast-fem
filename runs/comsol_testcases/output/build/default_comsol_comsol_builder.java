@@ -90,393 +90,7 @@ public class default_comsol_comsol_builder {
     model.component("comp1").geom("geom1").run("gland_seed");
     String[] glandSeedObjs = model.component("comp1").geom("geom1").feature("gland_seed").objectNames();
 
-    
-    model.component("comp1").geom("geom1").create("lobule_01", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_01").set("semiaxes", "0.00357210 0.00454713 0.00642978");
-    model.component("comp1").geom("geom1").feature("lobule_01").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_01").set("pos", "0.00510238 0.05565057 0.00025215");
-    model.component("comp1").geom("geom1").feature("lobule_01").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_01").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_02", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_02").set("semiaxes", "0.00196466 0.00250092 0.00353638");
-    model.component("comp1").geom("geom1").feature("lobule_02").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_02").set("pos", "0.00242985 0.06211896 0.00012008");
-    model.component("comp1").geom("geom1").feature("lobule_02").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_02").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_03", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_03").set("semiaxes", "0.00357210 0.00479616 0.00642978");
-    model.component("comp1").geom("geom1").feature("lobule_03").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_03").set("pos", "0.00385156 0.05534445 0.00309800");
-    model.component("comp1").geom("geom1").feature("lobule_03").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_03").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_04", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_04").set("semiaxes", "0.00196466 0.00263789 0.00353638");
-    model.component("comp1").geom("geom1").feature("lobule_04").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_04").set("pos", "0.00186718 0.06186477 0.00150187");
-    model.component("comp1").geom("geom1").feature("lobule_04").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_04").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_05", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_05").set("semiaxes", "0.00357210 0.00497875 0.00642978");
-    model.component("comp1").geom("geom1").feature("lobule_05").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_05").set("pos", "0.00004295 0.05589374 0.00499435");
-    model.component("comp1").geom("geom1").feature("lobule_05").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_05").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_06", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_06").set("semiaxes", "0.00196466 0.00273831 0.00353638");
-    model.component("comp1").geom("geom1").feature("lobule_06").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_06").set("pos", "0.00001999 0.06236468 0.00232481");
-    model.component("comp1").geom("geom1").feature("lobule_06").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_06").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_07", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_07").set("semiaxes", "0.00357210 0.00487553 0.00642978");
-    model.component("comp1").geom("geom1").feature("lobule_07").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_07").set("pos", "-0.00382216 0.05629548 0.00379687");
-    model.component("comp1").geom("geom1").feature("lobule_07").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_07").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_08", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_08").set("semiaxes", "0.00196466 0.00268154 0.00353638");
-    model.component("comp1").geom("geom1").feature("lobule_08").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_08").set("pos", "-0.00174569 0.06265421 0.00173414");
-    model.component("comp1").geom("geom1").feature("lobule_08").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_08").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_09", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_09").set("semiaxes", "0.00357210 0.00453945 0.00642978");
-    model.component("comp1").geom("geom1").feature("lobule_09").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_09").set("pos", "-0.00497781 0.05637875 0.00015708");
-    model.component("comp1").geom("geom1").feature("lobule_09").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_09").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_10", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_10").set("semiaxes", "0.00196466 0.00249670 0.00353638");
-    model.component("comp1").geom("geom1").feature("lobule_10").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_10").set("pos", "-0.00222186 0.06281282 0.00007011");
-    model.component("comp1").geom("geom1").feature("lobule_10").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_10").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_11", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_11").set("semiaxes", "0.00357210 0.00487639 0.00642978");
-    model.component("comp1").geom("geom1").feature("lobule_11").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_11").set("pos", "-0.00382426 0.05612390 -0.00385772");
-    model.component("comp1").geom("geom1").feature("lobule_11").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_11").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_12", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_12").set("semiaxes", "0.00196466 0.00268201 0.00353638");
-    model.component("comp1").geom("geom1").feature("lobule_12").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_12").set("pos", "-0.00177441 0.06248962 -0.00178994");
-    model.component("comp1").geom("geom1").feature("lobule_12").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_12").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_13", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_13").set("semiaxes", "0.00357210 0.00498679 0.00642978");
-    model.component("comp1").geom("geom1").feature("lobule_13").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_13").set("pos", "0.00029516 0.05598322 -0.00506211");
-    model.component("comp1").geom("geom1").feature("lobule_13").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_13").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_14", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_14").set("semiaxes", "0.00196466 0.00274273 0.00353638");
-    model.component("comp1").geom("geom1").feature("lobule_14").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_14").set("pos", "0.00013675 0.06243256 -0.00234531");
-    model.component("comp1").geom("geom1").feature("lobule_14").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_14").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_15", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_15").set("semiaxes", "0.00357210 0.00486437 0.00642978");
-    model.component("comp1").geom("geom1").feature("lobule_15").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_15").set("pos", "0.00330674 0.05641077 -0.00358746");
-    model.component("comp1").geom("geom1").feature("lobule_15").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_15").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_16", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_16").set("semiaxes", "0.00196466 0.00267540 0.00353638");
-    model.component("comp1").geom("geom1").feature("lobule_16").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_16").set("pos", "0.00146592 0.06286236 -0.00159036");
-    model.component("comp1").geom("geom1").feature("lobule_16").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_16").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_17", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_17").set("semiaxes", "0.00323190 0.00423864 0.00581742");
-    model.component("comp1").geom("geom1").feature("lobule_17").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_17").set("pos", "0.00841559 0.04788168 0.00296001");
-    model.component("comp1").geom("geom1").feature("lobule_17").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_17").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_18", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_18").set("semiaxes", "0.00177754 0.00233125 0.00319958");
-    model.component("comp1").geom("geom1").feature("lobule_18").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_18").set("pos", "0.00573882 0.05428078 0.00201851");
-    model.component("comp1").geom("geom1").feature("lobule_18").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_18").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_19", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_19").set("semiaxes", "0.00323190 0.00445930 0.00581742");
-    model.component("comp1").geom("geom1").feature("lobule_19").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_19").set("pos", "0.00541286 0.04813868 0.00742591");
-    model.component("comp1").geom("geom1").feature("lobule_19").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_19").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_20", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_20").set("semiaxes", "0.00177754 0.00245261 0.00319958");
-    model.component("comp1").geom("geom1").feature("lobule_20").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_20").set("pos", "0.00368147 0.05449165 0.00505061");
-    model.component("comp1").geom("geom1").feature("lobule_20").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_20").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_21", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_21").set("semiaxes", "0.00323190 0.00452606 0.00581742");
-    model.component("comp1").geom("geom1").feature("lobule_21").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_21").set("pos", "0.00071959 0.04786344 0.00882789");
-    model.component("comp1").geom("geom1").feature("lobule_21").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_21").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_22", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_22").set("semiaxes", "0.00177754 0.00248933 0.00319958");
-    model.component("comp1").geom("geom1").feature("lobule_22").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_22").set("pos", "0.00049062 0.05427099 0.00601881");
-    model.component("comp1").geom("geom1").feature("lobule_22").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_22").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_23", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_23").set("semiaxes", "0.00323190 0.00446987 0.00581742");
-    model.component("comp1").geom("geom1").feature("lobule_23").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_23").set("pos", "-0.00556349 0.04820697 0.00766049");
-    model.component("comp1").geom("geom1").feature("lobule_23").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_23").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_24", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_24").set("semiaxes", "0.00177754 0.00245843 0.00319958");
-    model.component("comp1").geom("geom1").feature("lobule_24").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_24").set("pos", "-0.00378852 0.05452174 0.00521649");
-    model.component("comp1").geom("geom1").feature("lobule_24").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_24").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_25", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_25").set("semiaxes", "0.00323190 0.00421542 0.00581742");
-    model.component("comp1").geom("geom1").feature("lobule_25").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_25").set("pos", "-0.00859779 0.04771771 0.00250413");
-    model.component("comp1").geom("geom1").feature("lobule_25").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_25").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_26", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_26").set("semiaxes", "0.00177754 0.00231848 0.00319958");
-    model.component("comp1").geom("geom1").feature("lobule_26").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_26").set("pos", "-0.00588326 0.05412132 0.00171351");
-    model.component("comp1").geom("geom1").feature("lobule_26").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_26").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_27", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_27").set("semiaxes", "0.00323190 0.00422337 0.00581742");
-    model.component("comp1").geom("geom1").feature("lobule_27").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_27").set("pos", "-0.00834091 0.04824973 -0.00259865");
-    model.component("comp1").geom("geom1").feature("lobule_27").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_27").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_28", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_28").set("semiaxes", "0.00177754 0.00232285 0.00319958");
-    model.component("comp1").geom("geom1").feature("lobule_28").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_28").set("pos", "-0.00563736 0.05465140 -0.00175635");
-    model.component("comp1").geom("geom1").feature("lobule_28").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_28").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_29", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_29").set("semiaxes", "0.00323190 0.00444994 0.00581742");
-    model.component("comp1").geom("geom1").feature("lobule_29").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_29").set("pos", "-0.00551368 0.04807801 -0.00724195");
-    model.component("comp1").geom("geom1").feature("lobule_29").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_29").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_30", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_30").set("semiaxes", "0.00177754 0.00244747 0.00319958");
-    model.component("comp1").geom("geom1").feature("lobule_30").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_30").set("pos", "-0.00375154 0.05444496 -0.00492746");
-    model.component("comp1").geom("geom1").feature("lobule_30").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_30").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_31", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_31").set("semiaxes", "0.00323190 0.00453817 0.00581742");
-    model.component("comp1").geom("geom1").feature("lobule_31").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_31").set("pos", "0.00007348 0.04829280 -0.00892487");
-    model.component("comp1").geom("geom1").feature("lobule_31").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_31").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_32", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_32").set("semiaxes", "0.00177754 0.00249599 0.00319958");
-    model.component("comp1").geom("geom1").feature("lobule_32").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_32").set("pos", "0.00004970 0.05466934 -0.00603711");
-    model.component("comp1").geom("geom1").feature("lobule_32").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_32").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_33", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_33").set("semiaxes", "0.00323190 0.00444657 0.00581742");
-    model.component("comp1").geom("geom1").feature("lobule_33").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_33").set("pos", "0.00551818 0.04802271 -0.00718401");
-    model.component("comp1").geom("geom1").feature("lobule_33").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_33").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_34", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_34").set("semiaxes", "0.00177754 0.00244561 0.00319958");
-    model.component("comp1").geom("geom1").feature("lobule_34").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_34").set("pos", "0.00375721 0.05439790 -0.00489143");
-    model.component("comp1").geom("geom1").feature("lobule_34").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_34").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_35", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_35").set("semiaxes", "0.00323190 0.00423220 0.00581742");
-    model.component("comp1").geom("geom1").feature("lobule_35").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_35").set("pos", "0.00877162 0.04751040 -0.00288856");
-    model.component("comp1").geom("geom1").feature("lobule_35").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_35").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_36", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_36").set("semiaxes", "0.00177754 0.00232771 0.00319958");
-    model.component("comp1").geom("geom1").feature("lobule_36").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_36").set("pos", "0.00603959 0.05389213 -0.00198888");
-    model.component("comp1").geom("geom1").feature("lobule_36").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_36").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_01", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_01").set("semiaxes", "0.00304522 0.00387642 0.00582605");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_01").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_01").set("pos", "0.00376612 0.05888476 0.00018612");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_01").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_01").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_03", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_03").set("semiaxes", "0.00304522 0.00408873 0.00585720");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_03").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_03").set("pos", "0.00285937 0.05860461 0.00229993");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_03").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_03").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_05", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_05").set("semiaxes", "0.00304522 0.00424438 0.00582757");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_05").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_05").set("pos", "0.00003147 0.05912921 0.00365958");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_05").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_05").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_07", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_07").set("semiaxes", "0.00304522 0.00415639 0.00576025");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_07").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_07").set("pos", "-0.00278392 0.05947484 0.00276551");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_07").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_07").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_09", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_09").set("semiaxes", "0.00304522 0.00386988 0.00580545");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_09").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_09").set("pos", "-0.00359984 0.05959578 0.00011360");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_09").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_09").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_11", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_11").set("semiaxes", "0.00304522 0.00415712 0.00576444");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_11").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_11").set("pos", "-0.00279933 0.05930676 -0.00282383");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_11").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_11").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_13", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_13").set("semiaxes", "0.00304522 0.00425124 0.00581461");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_13").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_13").set("pos", "0.00021595 0.05920789 -0.00370371");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_13").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_13").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_15", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_15").set("semiaxes", "0.00304522 0.00414687 0.00581596");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_15").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_15").set("pos", "0.00238633 0.05963657 -0.00258891");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_15").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_15").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_17", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_17").set("semiaxes", "0.00275519 0.00361344 0.00559923");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_17").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_17").set("pos", "0.00707720 0.05108123 0.00248926");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_17").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_17").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_19", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_19").set("semiaxes", "0.00275519 0.00380155 0.00557155");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_19").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_19").set("pos", "0.00454716 0.05131516 0.00623826");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_19").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_19").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_21", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_21").set("semiaxes", "0.00275519 0.00385846 0.00560430");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_21").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_21").set("pos", "0.00060510 0.05106722 0.00742335");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_21").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_21").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_23", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_23").set("semiaxes", "0.00275519 0.00381057 0.00554863");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_23").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_23").set("pos", "-0.00467601 0.05136435 0.00643849");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_23").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_23").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_25", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_25").set("semiaxes", "0.00275519 0.00359364 0.00560194");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_25").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_25").set("pos", "-0.00724053 0.05091951 0.00210882");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_25").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_25").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_27", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_27").set("semiaxes", "0.00275519 0.00360042 0.00560077");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_27").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_27").set("pos", "-0.00698914 0.05145057 -0.00217750");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_27").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_27").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_29", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_29").set("semiaxes", "0.00275519 0.00379357 0.00557994");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_29").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_29").set("pos", "-0.00463261 0.05126148 -0.00608471");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_29").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_29").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_31", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_31").set("semiaxes", "0.00275519 0.00386879 0.00558569");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_31").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_31").set("pos", "0.00006159 0.05148107 -0.00748099");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_31").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_31").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_33", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_33").set("semiaxes", "0.00275519 0.00379070 0.00558488");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_33").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_33").set("pos", "0.00463770 0.05121030 -0.00603772");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_33").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_33").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("lobule_bridge_35", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_35").set("semiaxes", "0.00275519 0.00360795 0.00558881");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_35").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_35").set("pos", "0.00740561 0.05070127 -0.00243872");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_35").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("lobule_bridge_35").set("selresultshow", "all");
-
-    model.component("comp1").geom("geom1").create("gland_lobules", "Union");
-    model.component("comp1").geom("geom1").feature("gland_lobules").selection("input").set("lobule_01", "lobule_02", "lobule_03", "lobule_04", "lobule_05", "lobule_06", "lobule_07", "lobule_08", "lobule_09", "lobule_10", "lobule_11", "lobule_12", "lobule_13", "lobule_14", "lobule_15", "lobule_16", "lobule_17", "lobule_18", "lobule_19", "lobule_20", "lobule_21", "lobule_22", "lobule_23", "lobule_24", "lobule_25", "lobule_26", "lobule_27", "lobule_28", "lobule_29", "lobule_30", "lobule_31", "lobule_32", "lobule_33", "lobule_34", "lobule_35", "lobule_36", "lobule_bridge_01", "lobule_bridge_03", "lobule_bridge_05", "lobule_bridge_07", "lobule_bridge_09", "lobule_bridge_11", "lobule_bridge_13", "lobule_bridge_15", "lobule_bridge_17", "lobule_bridge_19", "lobule_bridge_21", "lobule_bridge_23", "lobule_bridge_25", "lobule_bridge_27", "lobule_bridge_29", "lobule_bridge_31", "lobule_bridge_33", "lobule_bridge_35");
-    model.component("comp1").geom("geom1").feature("gland_lobules").set("intbnd", "on");
-    model.component("comp1").geom("geom1").feature("gland_lobules").set("propagatesel", "on");
-    model.component("comp1").geom("geom1").feature("gland_lobules").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("gland_lobules").set("selresultshow", "all");
-    model.component("comp1").geom("geom1").run("gland_lobules");
-    String[] glandLobuleObjs = model.component("comp1").geom("geom1").feature("gland_lobules").objectNames();
+    String[] glandLobuleObjs = buildGlandLobules(model);
 
 
     model.component("comp1").geom("geom1").create("gland_clip", "Intersection");
@@ -511,7 +125,8 @@ public class default_comsol_comsol_builder {
     // Auto-generated pointers:
     // - Build plan JSON: C:/Users/20223231/ews_fem_clean/runs/comsol_testcases/output/prepare/default_comsol_comsol_build_plan.json
     // - Selection hints JSON: C:/Users/20223231/ews_fem_clean/runs/comsol_testcases/output/build/default_comsol_comsol_selection_hints.json
-    // - Lobules in plan: 36
+    // - Lobule primitives in plan: 18
+    // - Anatomical lobe groups interpreted in COMSOL: 18
     //
     // Source geometry summary:
     // - radius: 0.07
@@ -577,4 +192,3824 @@ public class default_comsol_comsol_builder {
     model.save("C:/Users/20223231/ews_fem_clean/runs/comsol_testcases/output/build/default_comsol_generated.mph");
     ModelUtil.disconnect();
   }
+
+  private static String[] buildGlandLobules(Model model) {
+    buildSharedDuctHub(model);
+    buildAnatomicalLobe01(model);
+    buildAnatomicalLobe02(model);
+    buildAnatomicalLobe03(model);
+    buildAnatomicalLobe04(model);
+    buildAnatomicalLobe05(model);
+    buildAnatomicalLobe06(model);
+    buildAnatomicalLobe07(model);
+    buildAnatomicalLobe08(model);
+    buildAnatomicalLobe09(model);
+    buildAnatomicalLobe10(model);
+    buildAnatomicalLobe11(model);
+    buildAnatomicalLobe12(model);
+    buildAnatomicalLobe13(model);
+    buildAnatomicalLobe14(model);
+    buildAnatomicalLobe15(model);
+    buildAnatomicalLobe16(model);
+    buildAnatomicalLobe17(model);
+    buildAnatomicalLobe18(model);
+
+    model.component("comp1").geom("geom1").create("gland_lobules", "Union");
+    model.component("comp1").geom("geom1").feature("gland_lobules").selection("input").set("anatomical_lobe_01", "anatomical_lobe_02", "anatomical_lobe_03", "anatomical_lobe_04", "anatomical_lobe_05", "anatomical_lobe_06", "anatomical_lobe_07", "anatomical_lobe_08", "anatomical_lobe_09", "anatomical_lobe_10", "anatomical_lobe_11", "anatomical_lobe_12", "anatomical_lobe_13", "anatomical_lobe_14", "anatomical_lobe_15", "anatomical_lobe_16", "anatomical_lobe_17", "anatomical_lobe_18", "duct_hub_core", "duct_hub_cap", "duct_trunk_main");
+    model.component("comp1").geom("geom1").feature("gland_lobules").set("intbnd", "on");
+    model.component("comp1").geom("geom1").feature("gland_lobules").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("gland_lobules").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("gland_lobules").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").run("gland_lobules");
+    return model.component("comp1").geom("geom1").feature("gland_lobules").objectNames();
+  }
+
+
+  private static void buildSharedDuctHub(Model model) {
+
+    model.component("comp1").geom("geom1").create("duct_hub_core", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("duct_hub_core").set("semiaxes", "0.00143500 0.00143500 0.00210000");
+    model.component("comp1").geom("geom1").feature("duct_hub_core").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("duct_hub_core").set("pos", "0 0.05610000 0");
+    model.component("comp1").geom("geom1").feature("duct_hub_core").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("duct_hub_core").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("duct_hub_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("duct_hub_cap").set("semiaxes", "0.00196000 0.00196000 0.00112000");
+    model.component("comp1").geom("geom1").feature("duct_hub_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("duct_hub_cap").set("pos", "0 0.05519000 0");
+    model.component("comp1").geom("geom1").feature("duct_hub_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("duct_hub_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("duct_trunk_main", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("duct_trunk_main").set("semiaxes", "0.00084000 0.00084000 0.00308000");
+    model.component("comp1").geom("geom1").feature("duct_trunk_main").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("duct_trunk_main").set("pos", "0 0.05400000 0");
+    model.component("comp1").geom("geom1").feature("duct_trunk_main").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("duct_trunk_main").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe01(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_01_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_01").set("semiaxes", "0.00712502 0.00696309 0.01243098");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_01").set("pos", "0.01109420 0.03653753 0.00004679");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_02").set("semiaxes", "0.00831944 0.00792102 0.01201313");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_02").set("pos", "0.01346107 0.03470945 0.00106527");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_03").set("semiaxes", "0.00927728 0.00868922 0.01159529");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_03").set("pos", "0.01582889 0.03288136 0.00186110");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_04").set("semiaxes", "0.00980885 0.00911554 0.01117744");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_04").set("pos", "0.01819840 0.03105327 0.00225573");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_05").set("semiaxes", "0.00980885 0.00911554 0.01075959");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_05").set("pos", "0.02057001 0.02922519 0.00215007");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_06").set("semiaxes", "0.00927728 0.00868922 0.01034174");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_06").set("pos", "0.02294374 0.02739710 0.00154411");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_07").set("semiaxes", "0.00831944 0.00792102 0.00992389");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_07").set("pos", "0.02531916 0.02556902 0.00053695");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_08").set("semiaxes", "0.00712502 0.00696309 0.00950605");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_08").set("pos", "0.02769552 0.02374093 -0.00069286");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_wing").set("semiaxes", "0.00850145 0.00866140 0.00877481");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_wing").set("pos", "0.02074818 0.03202571 0.00019441");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_01_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_posterior_cap").set("semiaxes", "0.00842048 0.00815191 0.01133413");
+    model.component("comp1").geom("geom1").feature("lobe_01_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_posterior_cap").set("pos", "0.00866523 0.02593463 0.00003555");
+    model.component("comp1").geom("geom1").feature("lobe_01_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_01").set("pos", "0.01040435 0.03954926 0.00011877");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_02").set("pos", "0.00972511 0.04070565 0.00018635");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_03").set("pos", "0.00905648 0.04183477 0.00024901");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_04").set("pos", "0.00839846 0.04293663 0.00030677");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_05").set("pos", "0.00775104 0.04401122 0.00035962");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_06").set("pos", "0.00711424 0.04505855 0.00040756");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_07").set("pos", "0.00648804 0.04607862 0.00045059");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_08").set("pos", "0.00587245 0.04707142 0.00048872");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_09").set("pos", "0.00526747 0.04803697 0.00052193");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_10").set("pos", "0.00467309 0.04897524 0.00055024");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_11").set("pos", "0.00408933 0.04988626 0.00057364");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_12").set("pos", "0.00351617 0.05077001 0.00059213");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_13").set("pos", "0.00295362 0.05162650 0.00060571");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_14").set("pos", "0.00240168 0.05245573 0.00061439");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_15").set("pos", "0.00186035 0.05325769 0.00061815");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_16").set("pos", "0.00132962 0.05403239 0.00061701");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_17").set("pos", "0.00080951 0.05477983 0.00061096");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_01_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_18").set("pos", "0.00030000 0.05550000 0.00060000");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_01_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_01", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_01").selection("input").set("lobe_01_petal_seg_01", "lobe_01_petal_seg_02", "lobe_01_petal_seg_03", "lobe_01_petal_seg_04", "lobe_01_petal_seg_05", "lobe_01_petal_seg_06", "lobe_01_petal_seg_07", "lobe_01_petal_seg_08", "lobe_01_petal_wing", "lobe_01_posterior_cap", "lobe_01_duct_bead_01", "lobe_01_duct_bead_02", "lobe_01_duct_bead_03", "lobe_01_duct_bead_04", "lobe_01_duct_bead_05", "lobe_01_duct_bead_06", "lobe_01_duct_bead_07", "lobe_01_duct_bead_08", "lobe_01_duct_bead_09", "lobe_01_duct_bead_10", "lobe_01_duct_bead_11", "lobe_01_duct_bead_12", "lobe_01_duct_bead_13", "lobe_01_duct_bead_14", "lobe_01_duct_bead_15", "lobe_01_duct_bead_16", "lobe_01_duct_bead_17", "lobe_01_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_01").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_01").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_01").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe02(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_02_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_01").set("semiaxes", "0.00712502 0.00696309 0.01243098");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_01").set("pos", "0.00558961 0.03653753 0.00949895");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_02").set("semiaxes", "0.00831944 0.00792102 0.01201313");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_02").set("pos", "0.00592298 0.03470945 0.01205399");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_03").set("semiaxes", "0.00927728 0.00868922 0.01159529");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_03").set("pos", "0.00644824 0.03288136 0.01449612");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_04").set("semiaxes", "0.00980885 0.00911554 0.01117744");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_04").set("pos", "0.00731929 0.03105327 0.01673478");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_05").set("semiaxes", "0.00980885 0.00911554 0.01075959");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_05").set("pos", "0.00862152 0.02922519 0.01871971");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_06").set("semiaxes", "0.00927728 0.00868922 0.01034174");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_06").set("pos", "0.01035493 0.02739710 0.02045091");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_07").set("semiaxes", "0.00831944 0.00792102 0.00992389");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_07").set("pos", "0.01243412 0.02556902 0.02197864");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_08").set("semiaxes", "0.00712502 0.00696309 0.00950605");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_08").set("pos", "0.01470521 0.02374093 0.02339344");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_wing").set("semiaxes", "0.00850145 0.00866140 0.00877481");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_wing").set("pos", "0.01036216 0.03202571 0.01792896");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_02_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_posterior_cap").set("semiaxes", "0.00842048 0.00815191 0.01133413");
+    model.component("comp1").geom("geom1").feature("lobe_02_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_posterior_cap").set("pos", "0.00435774 0.02593463 0.00720128");
+    model.component("comp1").geom("geom1").feature("lobe_02_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_01").set("pos", "0.00517624 0.03955162 0.00885375");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_02").set("pos", "0.00477256 0.04071008 0.00831682");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_03").set("pos", "0.00437855 0.04184100 0.00778601");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_04").set("pos", "0.00399423 0.04294438 0.00726133");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_05").set("pos", "0.00361959 0.04402022 0.00674279");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_06").set("pos", "0.00325464 0.04506852 0.00623038");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_07").set("pos", "0.00289936 0.04608928 0.00572411");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_08").set("pos", "0.00255377 0.04708250 0.00522396");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_09").set("pos", "0.00221786 0.04804818 0.00472995");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_10").set("pos", "0.00189163 0.04898632 0.00424207");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_11").set("pos", "0.00157509 0.04989692 0.00376032");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_12").set("pos", "0.00126823 0.05077998 0.00328471");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_13").set("pos", "0.00097105 0.05163550 0.00281523");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_14").set("pos", "0.00068355 0.05246348 0.00235188");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_15").set("pos", "0.00040574 0.05326392 0.00189466");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_16").set("pos", "0.00013760 0.05403682 0.00144358");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_17").set("pos", "-0.00012085 0.05478218 0.00099863");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_02_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_18").set("pos", "-0.00036962 0.05550000 0.00055981");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_02_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_02", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_02").selection("input").set("lobe_02_petal_seg_01", "lobe_02_petal_seg_02", "lobe_02_petal_seg_03", "lobe_02_petal_seg_04", "lobe_02_petal_seg_05", "lobe_02_petal_seg_06", "lobe_02_petal_seg_07", "lobe_02_petal_seg_08", "lobe_02_petal_wing", "lobe_02_posterior_cap", "lobe_02_duct_bead_01", "lobe_02_duct_bead_02", "lobe_02_duct_bead_03", "lobe_02_duct_bead_04", "lobe_02_duct_bead_05", "lobe_02_duct_bead_06", "lobe_02_duct_bead_07", "lobe_02_duct_bead_08", "lobe_02_duct_bead_09", "lobe_02_duct_bead_10", "lobe_02_duct_bead_11", "lobe_02_duct_bead_12", "lobe_02_duct_bead_13", "lobe_02_duct_bead_14", "lobe_02_duct_bead_15", "lobe_02_duct_bead_16", "lobe_02_duct_bead_17", "lobe_02_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_02").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_02").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_02").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe03(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_03_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_01").set("semiaxes", "0.00712502 0.00696309 0.01243098");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_01").set("pos", "-0.00552700 0.03653753 0.00958580");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_02").set("semiaxes", "0.00831944 0.00792102 0.01201313");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_02").set("pos", "-0.00758507 0.03470945 0.01113622");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_03").set("semiaxes", "0.00927728 0.00868922 0.01159529");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_03").set("pos", "-0.00945024 0.03288136 0.01279786");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_04").set("semiaxes", "0.00980885 0.00911554 0.01117744");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_04").set("pos", "-0.01096784 0.03105327 0.01465989");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_05").set("semiaxes", "0.00980885 0.00911554 0.01075959");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_05").set("pos", "-0.01205203 0.02922519 0.01677183");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_06").set("semiaxes", "0.00927728 0.00868922 0.01034174");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_06").set("pos", "-0.01270281 0.02739710 0.01913366");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_07").set("semiaxes", "0.00831944 0.00792102 0.00992389");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_07").set("pos", "-0.01300601 0.02556902 0.02169590");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_08").set("semiaxes", "0.00712502 0.00696309 0.00950605");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_08").set("pos", "-0.01311633 0.02374093 0.02436935");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_wing").set("semiaxes", "0.00850145 0.00866140 0.00877481");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_wing").set("pos", "-0.01043306 0.03202571 0.01788248");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_03_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_posterior_cap").set("semiaxes", "0.00842048 0.00815191 0.01133413");
+    model.component("comp1").geom("geom1").feature("lobe_03_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_posterior_cap").set("pos", "-0.00431372 0.02593463 0.00727625");
+    model.component("comp1").geom("geom1").feature("lobe_03_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_01").set("pos", "-0.00524829 0.03955021 0.00886010");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_02").set("pos", "-0.00497063 0.04070743 0.00824811");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_03").set("pos", "-0.00469400 0.04183727 0.00764716");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_04").set("pos", "-0.00441842 0.04293974 0.00705728");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_05").set("pos", "-0.00414387 0.04401483 0.00647845");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_06").set("pos", "-0.00387037 0.04506255 0.00591068");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_07").set("pos", "-0.00359791 0.04608290 0.00535396");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_08").set("pos", "-0.00332649 0.04707587 0.00480830");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_09").set("pos", "-0.00305612 0.04804147 0.00427370");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_10").set("pos", "-0.00278678 0.04897969 0.00375015");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_11").set("pos", "-0.00251849 0.04989054 0.00323766");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_12").set("pos", "-0.00225124 0.05077402 0.00273623");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_13").set("pos", "-0.00198503 0.05163012 0.00224585");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_14").set("pos", "-0.00171987 0.05245884 0.00176653");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_15").set("pos", "-0.00145574 0.05326019 0.00129826");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_16").set("pos", "-0.00119266 0.05403417 0.00084106");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_17").set("pos", "-0.00093062 0.05478077 0.00039490");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_03_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_18").set("pos", "-0.00066962 0.05550000 -0.00004019");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_03_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_03", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_03").selection("input").set("lobe_03_petal_seg_01", "lobe_03_petal_seg_02", "lobe_03_petal_seg_03", "lobe_03_petal_seg_04", "lobe_03_petal_seg_05", "lobe_03_petal_seg_06", "lobe_03_petal_seg_07", "lobe_03_petal_seg_08", "lobe_03_petal_wing", "lobe_03_posterior_cap", "lobe_03_duct_bead_01", "lobe_03_duct_bead_02", "lobe_03_duct_bead_03", "lobe_03_duct_bead_04", "lobe_03_duct_bead_05", "lobe_03_duct_bead_06", "lobe_03_duct_bead_07", "lobe_03_duct_bead_08", "lobe_03_duct_bead_09", "lobe_03_duct_bead_10", "lobe_03_duct_bead_11", "lobe_03_duct_bead_12", "lobe_03_duct_bead_13", "lobe_03_duct_bead_14", "lobe_03_duct_bead_15", "lobe_03_duct_bead_16", "lobe_03_duct_bead_17", "lobe_03_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_03").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_03").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_03").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe04(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_04_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_01").set("semiaxes", "0.00712502 0.00696309 0.01243098");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_01").set("pos", "-0.01113587 0.03653753 0.00004853");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_02").set("semiaxes", "0.00831944 0.00792102 0.01201313");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_02").set("pos", "-0.01351139 0.03470945 -0.00094962");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_03").set("semiaxes", "0.00927728 0.00868922 0.01159529");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_03").set("pos", "-0.01588595 0.03288136 -0.00172512");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_04").set("semiaxes", "0.00980885 0.00911554 0.01117744");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_04").set("pos", "-0.01825875 0.03105327 -0.00209941");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_05").set("semiaxes", "0.00980885 0.00911554 0.01075959");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_05").set("pos", "-0.02062938 0.02922519 -0.00197342");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_06").set("semiaxes", "0.00927728 0.00868922 0.01034174");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_06").set("pos", "-0.02299782 0.02739710 -0.00134713");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_07").set("semiaxes", "0.00831944 0.00792102 0.00992389");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_07").set("pos", "-0.02536452 0.02556902 -0.00031963");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_08").set("semiaxes", "0.00712502 0.00696309 0.00950605");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_08").set("pos", "-0.02773024 0.02374093 0.00093051");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_wing").set("semiaxes", "0.00850145 0.00866140 0.00877481");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_wing").set("pos", "-0.02079819 0.03202571 -0.00007827");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_04_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_posterior_cap").set("semiaxes", "0.00842048 0.00815191 0.01133413");
+    model.component("comp1").geom("geom1").feature("lobe_04_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_posterior_cap").set("pos", "-0.00870691 0.02593463 0.00003691");
+    model.component("comp1").geom("geom1").feature("lobe_04_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_01").set("pos", "-0.01044415 0.03954792 -0.00002652");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_02").set("pos", "-0.00976299 0.04070311 -0.00008868");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_03").set("pos", "-0.00909239 0.04183120 -0.00013846");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_04").set("pos", "-0.00843234 0.04293219 -0.00017586");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_05").set("pos", "-0.00778285 0.04400607 -0.00020089");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_06").set("pos", "-0.00714391 0.04505285 -0.00021354");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_07").set("pos", "-0.00651553 0.04607252 -0.00021382");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_08").set("pos", "-0.00589770 0.04706509 -0.00020171");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_09").set("pos", "-0.00529043 0.04803055 -0.00017724");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_10").set("pos", "-0.00469372 0.04896891 -0.00014038");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_11").set("pos", "-0.00410756 0.04988016 -0.00009115");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_12").set("pos", "-0.00353195 0.05076431 -0.00002954");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_13").set("pos", "-0.00296691 0.05162135 0.00004444");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_14").set("pos", "-0.00241241 0.05245129 0.00013080");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_15").set("pos", "-0.00186848 0.05325412 0.00022953");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_16").set("pos", "-0.00133510 0.05402985 0.00034065");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_17").set("pos", "-0.00081227 0.05477848 0.00046414");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_04_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_18").set("pos", "-0.00030000 0.05550000 0.00060000");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_04_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_04", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_04").selection("input").set("lobe_04_petal_seg_01", "lobe_04_petal_seg_02", "lobe_04_petal_seg_03", "lobe_04_petal_seg_04", "lobe_04_petal_seg_05", "lobe_04_petal_seg_06", "lobe_04_petal_seg_07", "lobe_04_petal_seg_08", "lobe_04_petal_wing", "lobe_04_posterior_cap", "lobe_04_duct_bead_01", "lobe_04_duct_bead_02", "lobe_04_duct_bead_03", "lobe_04_duct_bead_04", "lobe_04_duct_bead_05", "lobe_04_duct_bead_06", "lobe_04_duct_bead_07", "lobe_04_duct_bead_08", "lobe_04_duct_bead_09", "lobe_04_duct_bead_10", "lobe_04_duct_bead_11", "lobe_04_duct_bead_12", "lobe_04_duct_bead_13", "lobe_04_duct_bead_14", "lobe_04_duct_bead_15", "lobe_04_duct_bead_16", "lobe_04_duct_bead_17", "lobe_04_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_04").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_04").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_04").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe05(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_05_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_01").set("semiaxes", "0.00712502 0.00696309 0.01243098");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_01").set("pos", "-0.00552839 0.03653753 -0.00955346");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_02").set("semiaxes", "0.00831944 0.00792102 0.01201313");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_02").set("pos", "-0.00584314 0.03470945 -0.01211087");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_03").set("semiaxes", "0.00927728 0.00868922 0.01159529");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_03").set("pos", "-0.00635060 0.03288136 -0.01455676");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_04").set("semiaxes", "0.00980885 0.00911554 0.01117744");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_04").set("pos", "-0.00720531 0.03105327 -0.01680171");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_05").set("semiaxes", "0.00980885 0.00911554 0.01075959");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_05").set("pos", "-0.00849304 0.02922519 -0.01879607");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_06").set("semiaxes", "0.00927728 0.00868922 0.01034174");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_06").set("pos", "-0.01021380 0.02739710 -0.02053985");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_07").set("semiaxes", "0.00831944 0.00792102 0.00992389");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_07").set("pos", "-0.01228181 0.02556902 -0.02208268");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_08").set("semiaxes", "0.00712502 0.00696309 0.00950605");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_08").set("pos", "-0.01454253 0.02374093 -0.02351400");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_wing").set("semiaxes", "0.00850145 0.00866140 0.00877481");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_wing").set("pos", "-0.01028209 0.03202571 -0.01798599");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_05_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_posterior_cap").set("semiaxes", "0.00842048 0.00815191 0.01133413");
+    model.component("comp1").geom("geom1").feature("lobe_05_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_posterior_cap").set("pos", "-0.00431181 0.02593463 -0.00724600");
+    model.component("comp1").geom("geom1").feature("lobe_05_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_01").set("pos", "-0.00512214 0.03955109 -0.00890290");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_02").set("pos", "-0.00473193 0.04070909 -0.00835733");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_03").set("pos", "-0.00435775 0.04183961 -0.00781420");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_04").set("pos", "-0.00399961 0.04294265 -0.00727351");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_05").set("pos", "-0.00365751 0.04401821 -0.00673526");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_06").set("pos", "-0.00333144 0.04506630 -0.00619944");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_07").set("pos", "-0.00302142 0.04608690 -0.00566606");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_08").set("pos", "-0.00272743 0.04708003 -0.00513512");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_09").set("pos", "-0.00244948 0.04804568 -0.00460662");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_10").set("pos", "-0.00218757 0.04898385 -0.00408056");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_11").set("pos", "-0.00194169 0.04989454 -0.00355693");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_12").set("pos", "-0.00171185 0.05077776 -0.00303574");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_13").set("pos", "-0.00149805 0.05163349 -0.00251699");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_14").set("pos", "-0.00130029 0.05246175 -0.00200068");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_15").set("pos", "-0.00111856 0.05326253 -0.00148680");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_16").set("pos", "-0.00095288 0.05403583 -0.00097537");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_17").set("pos", "-0.00080323 0.05478165 -0.00046637");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_05_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_18").set("pos", "-0.00066962 0.05550000 0.00004019");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_05_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_05", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_05").selection("input").set("lobe_05_petal_seg_01", "lobe_05_petal_seg_02", "lobe_05_petal_seg_03", "lobe_05_petal_seg_04", "lobe_05_petal_seg_05", "lobe_05_petal_seg_06", "lobe_05_petal_seg_07", "lobe_05_petal_seg_08", "lobe_05_petal_wing", "lobe_05_posterior_cap", "lobe_05_duct_bead_01", "lobe_05_duct_bead_02", "lobe_05_duct_bead_03", "lobe_05_duct_bead_04", "lobe_05_duct_bead_05", "lobe_05_duct_bead_06", "lobe_05_duct_bead_07", "lobe_05_duct_bead_08", "lobe_05_duct_bead_09", "lobe_05_duct_bead_10", "lobe_05_duct_bead_11", "lobe_05_duct_bead_12", "lobe_05_duct_bead_13", "lobe_05_duct_bead_14", "lobe_05_duct_bead_15", "lobe_05_duct_bead_16", "lobe_05_duct_bead_17", "lobe_05_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_05").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_05").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_05").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe06(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_06_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_01").set("semiaxes", "0.00712502 0.00696309 0.01243098");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_01").set("pos", "0.00548469 0.03653753 -0.00965236");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_02").set("semiaxes", "0.00831944 0.00792102 0.01201313");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_02").set("pos", "0.00753295 0.03470945 -0.01121570");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_03").set("semiaxes", "0.00927728 0.00868922 0.01159529");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_03").set("pos", "0.00938762 0.03288136 -0.01288905");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_04").set("semiaxes", "0.00980885 0.00911554 0.01117744");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_04").set("pos", "0.01089347 0.03105327 -0.01476061");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_05").set("semiaxes", "0.00980885 0.00911554 0.01075959");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_05").set("pos", "0.01196434 0.02922519 -0.01687933");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_06").set("semiaxes", "0.00927728 0.00868922 0.01034174");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_06").set("pos", "0.01260023 0.02739710 -0.01924521");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_07").set("semiaxes", "0.00831944 0.00792102 0.00992389");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_07").set("pos", "0.01288729 0.02556902 -0.02180931");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_08").set("semiaxes", "0.00712502 0.00696309 0.00950605");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_08").set("pos", "0.01298078 0.02374093 -0.02448340");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_wing").set("semiaxes", "0.00850145 0.00866140 0.00877481");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_wing").set("pos", "0.01038051 0.03202571 -0.01796220");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_06_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_posterior_cap").set("semiaxes", "0.00842048 0.00815191 0.01133413");
+    model.component("comp1").geom("geom1").feature("lobe_06_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_posterior_cap").set("pos", "0.00428468 0.02593463 -0.00733446");
+    model.component("comp1").geom("geom1").feature("lobe_06_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_01").set("pos", "0.00520568 0.03954902 -0.00892461");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_02").set("pos", "0.00492123 0.04070519 -0.00831462");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_03").set("pos", "0.00463134 0.04183413 -0.00771938");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_04").set("pos", "0.00433602 0.04293583 -0.00713888");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_05").set("pos", "0.00403525 0.04401029 -0.00657312");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_06").set("pos", "0.00372905 0.04505752 -0.00602210");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_07").set("pos", "0.00341741 0.04607752 -0.00548583");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_08").set("pos", "0.00310033 0.04707028 -0.00496429");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_09").set("pos", "0.00277781 0.04803581 -0.00445750");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_10").set("pos", "0.00244985 0.04897410 -0.00396546");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_11").set("pos", "0.00211645 0.04988516 -0.00348815");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_12").set("pos", "0.00177762 0.05076899 -0.00302559");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_13").set("pos", "0.00143334 0.05162557 -0.00257777");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_14").set("pos", "0.00108363 0.05245493 -0.00214469");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_15").set("pos", "0.00072848 0.05325705 -0.00172636");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_16").set("pos", "0.00036788 0.05403193 -0.00132276");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_17").set("pos", "0.00000185 0.05477958 -0.00093392");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_06_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_18").set("pos", "-0.00036962 0.05550000 -0.00055981");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_06_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_06", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_06").selection("input").set("lobe_06_petal_seg_01", "lobe_06_petal_seg_02", "lobe_06_petal_seg_03", "lobe_06_petal_seg_04", "lobe_06_petal_seg_05", "lobe_06_petal_seg_06", "lobe_06_petal_seg_07", "lobe_06_petal_seg_08", "lobe_06_petal_wing", "lobe_06_posterior_cap", "lobe_06_duct_bead_01", "lobe_06_duct_bead_02", "lobe_06_duct_bead_03", "lobe_06_duct_bead_04", "lobe_06_duct_bead_05", "lobe_06_duct_bead_06", "lobe_06_duct_bead_07", "lobe_06_duct_bead_08", "lobe_06_duct_bead_09", "lobe_06_duct_bead_10", "lobe_06_duct_bead_11", "lobe_06_duct_bead_12", "lobe_06_duct_bead_13", "lobe_06_duct_bead_14", "lobe_06_duct_bead_15", "lobe_06_duct_bead_16", "lobe_06_duct_bead_17", "lobe_06_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_06").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_06").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_06").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe07(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_07_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_01").set("semiaxes", "0.00689431 0.00675369 0.01350150");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_01").set("pos", "0.02471643 0.02041159 -0.00001283");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_02").set("semiaxes", "0.00805005 0.00768282 0.01304767");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_02").set("pos", "0.02745914 0.01842607 0.00125674");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_03").set("semiaxes", "0.00897688 0.00842792 0.01259384");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_03").set("pos", "0.03020171 0.01644056 0.00224354");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_04").set("semiaxes", "0.00949124 0.00884142 0.01214001");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_04").set("pos", "0.03294402 0.01445504 0.00272080");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_05").set("semiaxes", "0.00949124 0.00884142 0.01168618");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_05").set("pos", "0.03568599 0.01246953 0.00256269");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_06").set("semiaxes", "0.00897688 0.00842792 0.01123234");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_06").set("pos", "0.03842763 0.01048401 0.00176920");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_07").set("semiaxes", "0.00805005 0.00768282 0.01077851");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_07").set("pos", "0.04116901 0.00849850 0.00046618");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_08").set("semiaxes", "0.00689431 0.00675369 0.01032468");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_08").set("pos", "0.04391025 0.00651298 -0.00111961");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_wing").set("semiaxes", "0.00908796 0.00922456 0.00953047");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_wing").set("pos", "0.03442101 0.01562052 0.00007750");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_07_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_posterior_cap").set("semiaxes", "0.00814782 0.00790676 0.01231019");
+    model.component("comp1").geom("geom1").feature("lobe_07_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_posterior_cap").set("pos", "0.02236610 0.00889560 -0.00001148");
+    model.component("comp1").geom("geom1").feature("lobe_07_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_01").set("pos", "0.02382773 0.02375054 0.00011669");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_02").set("pos", "0.02288530 0.02516111 0.00023754");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_03").set("pos", "0.02188915 0.02662881 0.00034978");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_04").set("pos", "0.02083928 0.02815364 0.00045340");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_05").set("pos", "0.01973568 0.02973560 0.00054842");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_06").set("pos", "0.01857836 0.03137469 0.00063482");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_07").set("pos", "0.01736732 0.03307092 0.00071262");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_08").set("pos", "0.01610254 0.03482427 0.00078180");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_09").set("pos", "0.01478405 0.03663475 0.00084237");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_10").set("pos", "0.01341183 0.03850237 0.00089433");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_11").set("pos", "0.01198589 0.04042712 0.00093767");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_12").set("pos", "0.01050622 0.04240899 0.00097241");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_13").set("pos", "0.00897283 0.04444800 0.00099854");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_14").set("pos", "0.00738571 0.04654414 0.00101605");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_15").set("pos", "0.00574487 0.04869741 0.00102496");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_16").set("pos", "0.00405030 0.05090781 0.00102525");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_17").set("pos", "0.00230201 0.05317534 0.00101693");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_07_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_18").set("pos", "0.00050000 0.05550000 0.00100000");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_07_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_07", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_07").selection("input").set("lobe_07_petal_seg_01", "lobe_07_petal_seg_02", "lobe_07_petal_seg_03", "lobe_07_petal_seg_04", "lobe_07_petal_seg_05", "lobe_07_petal_seg_06", "lobe_07_petal_seg_07", "lobe_07_petal_seg_08", "lobe_07_petal_wing", "lobe_07_posterior_cap", "lobe_07_duct_bead_01", "lobe_07_duct_bead_02", "lobe_07_duct_bead_03", "lobe_07_duct_bead_04", "lobe_07_duct_bead_05", "lobe_07_duct_bead_06", "lobe_07_duct_bead_07", "lobe_07_duct_bead_08", "lobe_07_duct_bead_09", "lobe_07_duct_bead_10", "lobe_07_duct_bead_11", "lobe_07_duct_bead_12", "lobe_07_duct_bead_13", "lobe_07_duct_bead_14", "lobe_07_duct_bead_15", "lobe_07_duct_bead_16", "lobe_07_duct_bead_17", "lobe_07_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_07").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_07").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_07").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe08(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_08_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_01").set("semiaxes", "0.00689431 0.00675369 0.01350150");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_01").set("pos", "0.02129617 0.02041159 0.01231190");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_02").set("semiaxes", "0.00805005 0.00768282 0.01304767");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_02").set("pos", "0.02303393 0.01842607 0.01478465");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_03").set("semiaxes", "0.00897688 0.00842792 0.01259384");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_03").set("pos", "0.02491321 0.01644056 0.01701260");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_04").set("semiaxes", "0.00949124 0.00884142 0.01214001");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_04").set("pos", "0.02704751 0.01445504 0.01879943");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_05").set("semiaxes", "0.00949124 0.00884142 0.01168618");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_05").set("pos", "0.02949983 0.01246953 0.02003619");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_06").set("semiaxes", "0.00897688 0.00842792 0.01123234");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_06").set("pos", "0.03227015 0.01048401 0.02072288");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_07").set("semiaxes", "0.00805005 0.00768282 0.01077851");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_07").set("pos", "0.03529550 0.00849850 0.02096846");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_08").set("semiaxes", "0.00689431 0.00675369 0.01032468");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_08").set("pos", "0.03846237 0.00651298 0.02096923");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_wing").set("semiaxes", "0.00908796 0.00922456 0.00953047");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_wing").set("pos", "0.02967734 0.01562052 0.01724413");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_08_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_posterior_cap").set("semiaxes", "0.00814782 0.00790676 0.01231019");
+    model.component("comp1").geom("geom1").feature("lobe_08_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_posterior_cap").set("pos", "0.01926141 0.00889560 0.01101490");
+    model.component("comp1").geom("geom1").feature("lobe_08_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_01").set("pos", "0.02046498 0.02375276 0.01192659");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_02").set("pos", "0.01959194 0.02516528 0.01156705");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_03").set("pos", "0.01867707 0.02663468 0.01117297");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_04").set("pos", "0.01772035 0.02816094 0.01074434");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_05").set("pos", "0.01672179 0.02974408 0.01028116");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_06").set("pos", "0.01568139 0.03138408 0.00978343");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_07").set("pos", "0.01459915 0.03308096 0.00925116");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_08").set("pos", "0.01347507 0.03483470 0.00868434");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_09").set("pos", "0.01230915 0.03664532 0.00808297");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_10").set("pos", "0.01110139 0.03851280 0.00744705");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_11").set("pos", "0.00985178 0.04043716 0.00677659");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_12").set("pos", "0.00856034 0.04241838 0.00607158");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_13").set("pos", "0.00722705 0.04445648 0.00533202");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_14").set("pos", "0.00585193 0.04655144 0.00455792");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_15").set("pos", "0.00443496 0.04870328 0.00374927");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_16").set("pos", "0.00297615 0.05091198 0.00290607");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_17").set("pos", "0.00147550 0.05317756 0.00202832");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_08_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_18").set("pos", "-0.00006699 0.05550000 0.00111603");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_08_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_08", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_08").selection("input").set("lobe_08_petal_seg_01", "lobe_08_petal_seg_02", "lobe_08_petal_seg_03", "lobe_08_petal_seg_04", "lobe_08_petal_seg_05", "lobe_08_petal_seg_06", "lobe_08_petal_seg_07", "lobe_08_petal_seg_08", "lobe_08_petal_wing", "lobe_08_posterior_cap", "lobe_08_duct_bead_01", "lobe_08_duct_bead_02", "lobe_08_duct_bead_03", "lobe_08_duct_bead_04", "lobe_08_duct_bead_05", "lobe_08_duct_bead_06", "lobe_08_duct_bead_07", "lobe_08_duct_bead_08", "lobe_08_duct_bead_09", "lobe_08_duct_bead_10", "lobe_08_duct_bead_11", "lobe_08_duct_bead_12", "lobe_08_duct_bead_13", "lobe_08_duct_bead_14", "lobe_08_duct_bead_15", "lobe_08_duct_bead_16", "lobe_08_duct_bead_17", "lobe_08_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_08").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_08").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_08").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe09(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_09_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_01").set("semiaxes", "0.00689431 0.00675369 0.01350150");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_01").set("pos", "0.01229593 0.02041159 0.02138559");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_02").set("semiaxes", "0.00805005 0.00768282 0.01304767");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_02").set("pos", "0.01256085 0.01842607 0.02439626");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_03").set("semiaxes", "0.00897688 0.00842792 0.01259384");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_03").set("pos", "0.01307091 0.01644056 0.02726597");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_04").set("semiaxes", "0.00949124 0.00884142 0.01214001");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_04").set("pos", "0.01402270 0.01445504 0.02988172");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_05").set("semiaxes", "0.00949124 0.00884142 0.01168618");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_05").set("pos", "0.01552531 0.01246953 0.03218076");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_06").set("semiaxes", "0.00897688 0.00842792 0.01123234");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_06").set("pos", "0.01757873 0.01048401 0.03416310");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_07").set("semiaxes", "0.00805005 0.00768282 0.01077851");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_07").set("pos", "0.02007389 0.00849850 0.03589146");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_08").set("semiaxes", "0.00689431 0.00675369 0.01032468");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_08").set("pos", "0.02281418 0.00651298 0.03747888");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_wing").set("semiaxes", "0.00908796 0.00922456 0.00953047");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_wing").set("pos", "0.01710596 0.01562052 0.02983592");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_09_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_posterior_cap").set("semiaxes", "0.00814782 0.00790676 0.01231019");
+    model.component("comp1").geom("geom1").feature("lobe_09_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_posterior_cap").set("pos", "0.01112441 0.00889560 0.01913906");
+    model.component("comp1").geom("geom1").feature("lobe_09_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_01").set("pos", "0.01174184 0.02375145 0.02058757");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_02").set("pos", "0.01116855 0.02516281 0.01984265");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_03").set("pos", "0.01057605 0.02663121 0.01904632");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_04").set("pos", "0.00996435 0.02815662 0.01819858");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_05").set("pos", "0.00933344 0.02973906 0.01729944");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_06").set("pos", "0.00868333 0.03137853 0.01634891");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_07").set("pos", "0.00801401 0.03307502 0.01534696");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_08").set("pos", "0.00732548 0.03482853 0.01429362");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_09").set("pos", "0.00661776 0.03663907 0.01318887");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_10").set("pos", "0.00589082 0.03850663 0.01203272");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_11").set("pos", "0.00514468 0.04043121 0.01082517");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_12").set("pos", "0.00437934 0.04241283 0.00956621");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_13").set("pos", "0.00359479 0.04445146 0.00825585");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_14").set("pos", "0.00279104 0.04654712 0.00689409");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_15").set("pos", "0.00196808 0.04869980 0.00548092");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_16").set("pos", "0.00112592 0.05090951 0.00401636");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_17").set("pos", "0.00026455 0.05317624 0.00250039");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_09_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_18").set("pos", "-0.00061603 0.05550000 0.00093301");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_09_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_09", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_09").selection("input").set("lobe_09_petal_seg_01", "lobe_09_petal_seg_02", "lobe_09_petal_seg_03", "lobe_09_petal_seg_04", "lobe_09_petal_seg_05", "lobe_09_petal_seg_06", "lobe_09_petal_seg_07", "lobe_09_petal_seg_08", "lobe_09_petal_wing", "lobe_09_posterior_cap", "lobe_09_duct_bead_01", "lobe_09_duct_bead_02", "lobe_09_duct_bead_03", "lobe_09_duct_bead_04", "lobe_09_duct_bead_05", "lobe_09_duct_bead_06", "lobe_09_duct_bead_07", "lobe_09_duct_bead_08", "lobe_09_duct_bead_09", "lobe_09_duct_bead_10", "lobe_09_duct_bead_11", "lobe_09_duct_bead_12", "lobe_09_duct_bead_13", "lobe_09_duct_bead_14", "lobe_09_duct_bead_15", "lobe_09_duct_bead_16", "lobe_09_duct_bead_17", "lobe_09_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_09").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_09").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_09").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe10(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_10_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_01").set("semiaxes", "0.00689431 0.00675369 0.01350150");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_01").set("pos", "0.00002536 0.02041159 0.02468241");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_02").set("semiaxes", "0.00805005 0.00768282 0.01304767");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_02").set("pos", "-0.00124281 0.01842607 0.02742577");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_03").set("semiaxes", "0.00897688 0.00842792 0.01259384");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_03").set("pos", "-0.00222822 0.01644056 0.03016884");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_04").set("semiaxes", "0.00949124 0.00884142 0.01214001");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_04").set("pos", "-0.00270409 0.01445504 0.03291139");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_05").set("semiaxes", "0.00949124 0.00884142 0.01168618");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_05").set("pos", "-0.00254458 0.01246953 0.03565328");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_06").set("semiaxes", "0.00897688 0.00842792 0.01123234");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_06").set("pos", "-0.00174970 0.01048401 0.03839452");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_07").set("semiaxes", "0.00805005 0.00768282 0.01077851");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_07").set("pos", "-0.00044528 0.00849850 0.04113524");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_08").set("semiaxes", "0.00689431 0.00675369 0.01032468");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_08").set("pos", "0.00114190 0.00651298 0.04387566");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_wing").set("semiaxes", "0.00908796 0.00922456 0.00953047");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_wing").set("pos", "-0.00001556 0.01562052 0.03438752");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_10_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_posterior_cap").set("semiaxes", "0.00814782 0.00790676 0.01231019");
+    model.component("comp1").geom("geom1").feature("lobe_10_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_posterior_cap").set("pos", "0.00002294 0.00889560 0.02209102");
+    model.component("comp1").geom("geom1").feature("lobe_10_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_01").set("pos", "-0.00010455 0.02375118 0.02368710");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_02").set("pos", "-0.00022588 0.02516232 0.02275797");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_03").set("pos", "-0.00033862 0.02663051 0.02177448");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_04").set("pos", "-0.00044279 0.02815575 0.02073665");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_05").set("pos", "-0.00053837 0.02973805 0.01964446");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_06").set("pos", "-0.00062537 0.03137741 0.01849792");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_07").set("pos", "-0.00070379 0.03307382 0.01729703");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_08").set("pos", "-0.00077363 0.03482729 0.01604179");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_09").set("pos", "-0.00083488 0.03663781 0.01473219");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_10").set("pos", "-0.00088756 0.03850539 0.01336824");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_11").set("pos", "-0.00093165 0.04043002 0.01194995");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_12").set("pos", "-0.00096716 0.04241171 0.01047729");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_13").set("pos", "-0.00099409 0.04445045 0.00895029");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_14").set("pos", "-0.00101243 0.04654625 0.00736894");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_15").set("pos", "-0.00102220 0.04869911 0.00573323");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_16").set("pos", "-0.00102338 0.05090902 0.00404317");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_17").set("pos", "-0.00101598 0.05317598 0.00229876");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_10_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_18").set("pos", "-0.00100000 0.05550000 0.00050000");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_10_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_10", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_10").selection("input").set("lobe_10_petal_seg_01", "lobe_10_petal_seg_02", "lobe_10_petal_seg_03", "lobe_10_petal_seg_04", "lobe_10_petal_seg_05", "lobe_10_petal_seg_06", "lobe_10_petal_seg_07", "lobe_10_petal_seg_08", "lobe_10_petal_wing", "lobe_10_posterior_cap", "lobe_10_duct_bead_01", "lobe_10_duct_bead_02", "lobe_10_duct_bead_03", "lobe_10_duct_bead_04", "lobe_10_duct_bead_05", "lobe_10_duct_bead_06", "lobe_10_duct_bead_07", "lobe_10_duct_bead_08", "lobe_10_duct_bead_09", "lobe_10_duct_bead_10", "lobe_10_duct_bead_11", "lobe_10_duct_bead_12", "lobe_10_duct_bead_13", "lobe_10_duct_bead_14", "lobe_10_duct_bead_15", "lobe_10_duct_bead_16", "lobe_10_duct_bead_17", "lobe_10_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_10").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_10").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_10").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe11(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_11_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_01").set("semiaxes", "0.00689431 0.00675369 0.01350150");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_01").set("pos", "-0.01217128 0.02041159 0.02130302");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_02").set("semiaxes", "0.00805005 0.00768282 0.01304767");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_02").set("pos", "-0.01463513 0.01842607 0.02305336");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_03").set("semiaxes", "0.00897688 0.00842792 0.01259384");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_03").set("pos", "-0.01685346 0.01644056 0.02494399");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_04").set("semiaxes", "0.00949124 0.00884142 0.01214001");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_04").set("pos", "-0.01862938 0.01445504 0.02708738");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_05").set("semiaxes", "0.00949124 0.00884142 0.01168618");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_05").set("pos", "-0.01985361 0.01246953 0.02954597");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_06").set("semiaxes", "0.00897688 0.00842792 0.01123234");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_06").set("pos", "-0.02052616 0.01048401 0.03231976");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_07").set("semiaxes", "0.00805005 0.00768282 0.01077851");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_07").set("pos", "-0.02075630 0.00849850 0.03534632");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_08").set("semiaxes", "0.00689431 0.00675369 0.01032468");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_08").set("pos", "-0.02074091 0.00651298 0.03851316");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_wing").set("semiaxes", "0.00908796 0.00922456 0.00953047");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_wing").set("pos", "-0.01705376 0.01562052 0.02967040");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_11_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_posterior_cap").set("semiaxes", "0.00814782 0.00790676 0.01231019");
+    model.component("comp1").geom("geom1").feature("lobe_11_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_posterior_cap").set("pos", "-0.01100532 0.00889560 0.01905297");
+    model.component("comp1").geom("geom1").feature("lobe_11_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_01").set("pos", "-0.01184447 0.02375397 0.02037774");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_02").set("pos", "-0.01148386 0.02516756 0.01951467");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_03").set("pos", "-0.01108943 0.02663788 0.01860916");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_04").set("pos", "-0.01066120 0.02816493 0.01766120");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_05").set("pos", "-0.01019916 0.02974871 0.01667080");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_06").set("pos", "-0.00970331 0.03138921 0.01563795");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_07").set("pos", "-0.00917365 0.03308644 0.01456265");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_08").set("pos", "-0.00861018 0.03484040 0.01344491");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_09").set("pos", "-0.00801291 0.03665109 0.01228472");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_10").set("pos", "-0.00738182 0.03851850 0.01108209");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_11").set("pos", "-0.00671693 0.04044264 0.00983702");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_12").set("pos", "-0.00601822 0.04242351 0.00854950");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_13").set("pos", "-0.00528571 0.04446111 0.00721953");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_14").set("pos", "-0.00451939 0.04655543 0.00584712");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_15").set("pos", "-0.00371926 0.04870648 0.00443226");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_16").set("pos", "-0.00288533 0.05091426 0.00297496");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_17").set("pos", "-0.00201758 0.05317877 0.00147521");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_11_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_18").set("pos", "-0.00111603 0.05550000 -0.00006699");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_11_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_11", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_11").selection("input").set("lobe_11_petal_seg_01", "lobe_11_petal_seg_02", "lobe_11_petal_seg_03", "lobe_11_petal_seg_04", "lobe_11_petal_seg_05", "lobe_11_petal_seg_06", "lobe_11_petal_seg_07", "lobe_11_petal_seg_08", "lobe_11_petal_wing", "lobe_11_posterior_cap", "lobe_11_duct_bead_01", "lobe_11_duct_bead_02", "lobe_11_duct_bead_03", "lobe_11_duct_bead_04", "lobe_11_duct_bead_05", "lobe_11_duct_bead_06", "lobe_11_duct_bead_07", "lobe_11_duct_bead_08", "lobe_11_duct_bead_09", "lobe_11_duct_bead_10", "lobe_11_duct_bead_11", "lobe_11_duct_bead_12", "lobe_11_duct_bead_13", "lobe_11_duct_bead_14", "lobe_11_duct_bead_15", "lobe_11_duct_bead_16", "lobe_11_duct_bead_17", "lobe_11_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_11").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_11").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_11").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe12(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_12_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_01").set("semiaxes", "0.00689431 0.00675369 0.01350150");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_01").set("pos", "-0.02141097 0.02041159 0.01240738");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_02").set("semiaxes", "0.00805005 0.00768282 0.01304767");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_02").set("pos", "-0.02442072 0.01842607 0.01268251");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_03").set("semiaxes", "0.00897688 0.00842792 0.01259384");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_03").set("pos", "-0.02728869 0.01644056 0.01320231");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_04").set("semiaxes", "0.00949124 0.00884142 0.01214001");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_04").set("pos", "-0.02990119 0.01445504 0.01416296");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_05").set("semiaxes", "0.00949124 0.00884142 0.01168618");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_05").set("pos", "-0.03219512 0.01246953 0.01567336");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_06").set("semiaxes", "0.00897688 0.00842792 0.01123234");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_06").set("pos", "-0.03417048 0.01048401 0.01773351");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_07").set("semiaxes", "0.00805005 0.00768282 0.01077851");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_07").set("pos", "-0.03589037 0.00849850 0.02023451");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_08").set("semiaxes", "0.00689431 0.00675369 0.01032468");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_08").set("pos", "-0.03746848 0.00651298 0.02298017");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_wing").set("semiaxes", "0.00908796 0.00922456 0.00953047");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_wing").set("pos", "-0.02983605 0.01562052 0.01718419");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_12_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_posterior_cap").set("semiaxes", "0.00814782 0.00790676 0.01231019");
+    model.component("comp1").geom("geom1").feature("lobe_12_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_posterior_cap").set("pos", "-0.01937740 0.00889560 0.01110809");
+    model.component("comp1").geom("geom1").feature("lobe_12_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_01").set("pos", "-0.02070586 0.02374998 0.01179579");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_02").set("pos", "-0.01994986 0.02516005 0.01122475");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_03").set("pos", "-0.01914297 0.02662732 0.01063383");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_04").set("pos", "-0.01828520 0.02815179 0.01002302");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_05").set("pos", "-0.01737653 0.02973346 0.00939233");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_06").set("pos", "-0.01641698 0.03137232 0.00874176");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_07").set("pos", "-0.01540654 0.03306838 0.00807130");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_08").set("pos", "-0.01434520 0.03482163 0.00738096");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_09").set("pos", "-0.01323298 0.03663208 0.00667074");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_10").set("pos", "-0.01206988 0.03849973 0.00594063");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_11").set("pos", "-0.01085588 0.04042458 0.00519064");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_12").set("pos", "-0.00959099 0.04240662 0.00442077");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_13").set("pos", "-0.00827522 0.04444586 0.00363101");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_14").set("pos", "-0.00690855 0.04654229 0.00282137");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_15").set("pos", "-0.00549100 0.04869592 0.00199185");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_16").set("pos", "-0.00402256 0.05090675 0.00114244");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_17").set("pos", "-0.00250323 0.05317478 0.00027315");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_12_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_18").set("pos", "-0.00093301 0.05550000 -0.00061603");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_12_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_12", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_12").selection("input").set("lobe_12_petal_seg_01", "lobe_12_petal_seg_02", "lobe_12_petal_seg_03", "lobe_12_petal_seg_04", "lobe_12_petal_seg_05", "lobe_12_petal_seg_06", "lobe_12_petal_seg_07", "lobe_12_petal_seg_08", "lobe_12_petal_wing", "lobe_12_posterior_cap", "lobe_12_duct_bead_01", "lobe_12_duct_bead_02", "lobe_12_duct_bead_03", "lobe_12_duct_bead_04", "lobe_12_duct_bead_05", "lobe_12_duct_bead_06", "lobe_12_duct_bead_07", "lobe_12_duct_bead_08", "lobe_12_duct_bead_09", "lobe_12_duct_bead_10", "lobe_12_duct_bead_11", "lobe_12_duct_bead_12", "lobe_12_duct_bead_13", "lobe_12_duct_bead_14", "lobe_12_duct_bead_15", "lobe_12_duct_bead_16", "lobe_12_duct_bead_17", "lobe_12_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_12").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_12").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_12").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe13(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_13_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_01").set("semiaxes", "0.00689431 0.00675369 0.01350150");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_01").set("pos", "-0.02465833 0.02041159 -0.00005721");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_02").set("semiaxes", "0.00805005 0.00768282 0.01304767");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_02").set("pos", "-0.02739743 0.01842607 -0.00133456");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_03").set("semiaxes", "0.00897688 0.00842792 0.01259384");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_03").set("pos", "-0.03013719 0.01644056 -0.00232914");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_04").set("semiaxes", "0.00949124 0.00884142 0.01214001");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_04").set("pos", "-0.03287813 0.01445504 -0.00281419");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_05").set("semiaxes", "0.00949124 0.00884142 0.01168618");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_05").set("pos", "-0.03562054 0.01246953 -0.00266386");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_06").set("semiaxes", "0.00897688 0.00842792 0.01123234");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_06").set("pos", "-0.03836442 0.01048401 -0.00187816");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_07").set("semiaxes", "0.00805005 0.00768282 0.01077851");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_07").set("pos", "-0.04110949 0.00849850 -0.00058292");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_08").set("semiaxes", "0.00689431 0.00675369 0.01032468");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_08").set("pos", "-0.04385522 0.00651298 0.00099508");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_wing").set("semiaxes", "0.00908796 0.00922456 0.00953047");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_wing").set("pos", "-0.03436024 0.01562052 -0.00015420");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_13_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_posterior_cap").set("semiaxes", "0.00814782 0.00790676 0.01231019");
+    model.component("comp1").geom("geom1").feature("lobe_13_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_posterior_cap").set("pos", "-0.02230801 0.00889560 -0.00005120");
+    model.component("comp1").geom("geom1").feature("lobe_13_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_01").set("pos", "-0.02377117 0.02375164 -0.00017777");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_02").set("pos", "-0.02283048 0.02516317 -0.00027749");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_03").set("pos", "-0.02183627 0.02663171 -0.00035609");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_04").set("pos", "-0.02078853 0.02815725 -0.00041356");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_05").set("pos", "-0.01968727 0.02973979 -0.00044990");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_06").set("pos", "-0.01853248 0.03137933 -0.00046512");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_07").set("pos", "-0.01732416 0.03307588 -0.00045922");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_08").set("pos", "-0.01606232 0.03482942 -0.00043219");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_09").set("pos", "-0.01474695 0.03663997 -0.00038403");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_10").set("pos", "-0.01337806 0.03850752 -0.00031475");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_11").set("pos", "-0.01195564 0.04043208 -0.00022434");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_12").set("pos", "-0.01047970 0.04241363 -0.00011281");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_13").set("pos", "-0.00895023 0.04445219 0.00001984");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_14").set("pos", "-0.00736723 0.04654775 0.00017362");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_15").set("pos", "-0.00573071 0.04870031 0.00034853");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_16").set("pos", "-0.00404067 0.05090987 0.00054456");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_17").set("pos", "-0.00229710 0.05317643 0.00076172");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_13_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_18").set("pos", "-0.00050000 0.05550000 0.00100000");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_13_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_13", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_13").selection("input").set("lobe_13_petal_seg_01", "lobe_13_petal_seg_02", "lobe_13_petal_seg_03", "lobe_13_petal_seg_04", "lobe_13_petal_seg_05", "lobe_13_petal_seg_06", "lobe_13_petal_seg_07", "lobe_13_petal_seg_08", "lobe_13_petal_wing", "lobe_13_posterior_cap", "lobe_13_duct_bead_01", "lobe_13_duct_bead_02", "lobe_13_duct_bead_03", "lobe_13_duct_bead_04", "lobe_13_duct_bead_05", "lobe_13_duct_bead_06", "lobe_13_duct_bead_07", "lobe_13_duct_bead_08", "lobe_13_duct_bead_09", "lobe_13_duct_bead_10", "lobe_13_duct_bead_11", "lobe_13_duct_bead_12", "lobe_13_duct_bead_13", "lobe_13_duct_bead_14", "lobe_13_duct_bead_15", "lobe_13_duct_bead_16", "lobe_13_duct_bead_17", "lobe_13_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_13").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_13").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_13").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe14(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_14_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_01").set("semiaxes", "0.00689431 0.00675369 0.01350150");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_01").set("pos", "-0.02129731 0.02041159 -0.01228439");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_02").set("semiaxes", "0.00805005 0.00768282 0.01304767");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_02").set("pos", "-0.02303752 0.01842607 -0.01475541");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_03").set("semiaxes", "0.00897688 0.00842792 0.01259384");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_03").set("pos", "-0.02491901 0.01644056 -0.01698150");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_04").set("semiaxes", "0.00949124 0.00884142 0.01214001");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_04").set("pos", "-0.02705508 0.01445504 -0.01876621");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_05").set("semiaxes", "0.00949124 0.00884142 0.01168618");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_05").set("pos", "-0.02950862 0.01246953 -0.02000053");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_06").set("semiaxes", "0.00897688 0.00842792 0.01123234");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_06").set("pos", "-0.03227963 0.01048401 -0.02068448");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_07").set("semiaxes", "0.00805005 0.00768282 0.01077851");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_07").set("pos", "-0.03530522 0.00849850 -0.02092705");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_08").set("semiaxes", "0.00689431 0.00675369 0.01032468");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_08").set("pos", "-0.03847209 0.00651298 -0.02092468");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_wing").set("semiaxes", "0.00908796 0.00922456 0.00953047");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_wing").set("pos", "-0.02968045 0.01562052 -0.01721508");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_14_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_posterior_cap").set("semiaxes", "0.00814782 0.00790676 0.01231019");
+    model.component("comp1").geom("geom1").feature("lobe_14_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_posterior_cap").set("pos", "-0.01926138 0.00889560 -0.01098961");
+    model.component("comp1").geom("geom1").feature("lobe_14_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_01").set("pos", "-0.02046907 0.02375300 -0.01189474");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_02").set("pos", "-0.01960516 0.02516574 -0.01152014");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_03").set("pos", "-0.01870560 0.02663532 -0.01110038");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_04").set("pos", "-0.01777037 0.02816174 -0.01063545");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_05").set("pos", "-0.01679949 0.02974500 -0.01012536");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_06").set("pos", "-0.01579295 0.03138510 -0.00957010");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_07").set("pos", "-0.01475074 0.03308205 -0.00896967");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_08").set("pos", "-0.01367288 0.03483584 -0.00832408");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_09").set("pos", "-0.01255936 0.03664647 -0.00763332");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_10").set("pos", "-0.01141018 0.03851394 -0.00689739");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_11").set("pos", "-0.01022534 0.04043825 -0.00611629");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_12").set("pos", "-0.00900485 0.04241940 -0.00529003");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_13").set("pos", "-0.00774869 0.04445740 -0.00441861");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_14").set("pos", "-0.00645687 0.04655224 -0.00350201");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_15").set("pos", "-0.00512940 0.04870391 -0.00254025");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_16").set("pos", "-0.00376626 0.05091243 -0.00153333");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_17").set("pos", "-0.00236747 0.05317780 -0.00048123");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_14_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_18").set("pos", "-0.00093301 0.05550000 0.00061603");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_14_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_14", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_14").selection("input").set("lobe_14_petal_seg_01", "lobe_14_petal_seg_02", "lobe_14_petal_seg_03", "lobe_14_petal_seg_04", "lobe_14_petal_seg_05", "lobe_14_petal_seg_06", "lobe_14_petal_seg_07", "lobe_14_petal_seg_08", "lobe_14_petal_wing", "lobe_14_posterior_cap", "lobe_14_duct_bead_01", "lobe_14_duct_bead_02", "lobe_14_duct_bead_03", "lobe_14_duct_bead_04", "lobe_14_duct_bead_05", "lobe_14_duct_bead_06", "lobe_14_duct_bead_07", "lobe_14_duct_bead_08", "lobe_14_duct_bead_09", "lobe_14_duct_bead_10", "lobe_14_duct_bead_11", "lobe_14_duct_bead_12", "lobe_14_duct_bead_13", "lobe_14_duct_bead_14", "lobe_14_duct_bead_15", "lobe_14_duct_bead_16", "lobe_14_duct_bead_17", "lobe_14_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_14").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_14").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_14").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe15(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_15_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_01").set("semiaxes", "0.00689431 0.00675369 0.01350150");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_01").set("pos", "-0.01237178 0.02041159 -0.02134047");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_02").set("semiaxes", "0.00805005 0.00768282 0.01304767");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_02").set("pos", "-0.01264747 0.01842607 -0.02435017");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_03").set("semiaxes", "0.00897688 0.00842792 0.01259384");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_03").set("pos", "-0.01316779 0.01644056 -0.02721804");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_04").set("semiaxes", "0.00949124 0.00884142 0.01214001");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_04").set("pos", "-0.01412893 0.01445504 -0.02983037");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_05").set("semiaxes", "0.00949124 0.00884142 0.01168618");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_05").set("pos", "-0.01563975 0.01246953 -0.03212402");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_06").set("semiaxes", "0.00897688 0.00842792 0.01123234");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_06").set("pos", "-0.01770026 0.01048401 -0.03409900");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_07").set("semiaxes", "0.00805005 0.00768282 0.01077851");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_07").set("pos", "-0.02020158 0.00849850 -0.03581843");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_08").set("semiaxes", "0.00689431 0.00675369 0.01032468");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_08").set("pos", "-0.02294753 0.00651298 -0.03739603");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_wing").set("semiaxes", "0.00908796 0.00922456 0.00953047");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_wing").set("pos", "-0.01719077 0.01562052 -0.02978966");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_15_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_posterior_cap").set("semiaxes", "0.00814782 0.00790676 0.01231019");
+    model.component("comp1").geom("geom1").feature("lobe_15_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_posterior_cap").set("pos", "-0.01119298 0.00889560 -0.01909858");
+    model.component("comp1").geom("geom1").feature("lobe_15_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_01").set("pos", "-0.01182035 0.02375147 -0.02054115");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_02").set("pos", "-0.01126022 0.02516285 -0.01978864");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_03").set("pos", "-0.01069141 0.02663126 -0.01897866");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_04").set("pos", "-0.01011390 0.02815669 -0.01811121");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_05").set("pos", "-0.00952769 0.02973914 -0.01718630");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_06").set("pos", "-0.00893280 0.03137862 -0.01620392");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_07").set("pos", "-0.00832921 0.03307511 -0.01516407");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_08").set("pos", "-0.00771693 0.03482863 -0.01406676");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_09").set("pos", "-0.00709596 0.03663917 -0.01291199");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_10").set("pos", "-0.00646629 0.03850673 -0.01169974");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_11").set("pos", "-0.00582793 0.04043131 -0.01043003");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_12").set("pos", "-0.00518088 0.04241292 -0.00910286");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_13").set("pos", "-0.00452514 0.04445154 -0.00771822");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_14").set("pos", "-0.00386070 0.04654719 -0.00627611");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_15").set("pos", "-0.00318757 0.04869986 -0.00477653");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_16").set("pos", "-0.00250575 0.05090955 -0.00321949");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_17").set("pos", "-0.00181523 0.05317627 -0.00160499");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_15_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_18").set("pos", "-0.00111603 0.05550000 0.00006699");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_15_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_15", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_15").selection("input").set("lobe_15_petal_seg_01", "lobe_15_petal_seg_02", "lobe_15_petal_seg_03", "lobe_15_petal_seg_04", "lobe_15_petal_seg_05", "lobe_15_petal_seg_06", "lobe_15_petal_seg_07", "lobe_15_petal_seg_08", "lobe_15_petal_wing", "lobe_15_posterior_cap", "lobe_15_duct_bead_01", "lobe_15_duct_bead_02", "lobe_15_duct_bead_03", "lobe_15_duct_bead_04", "lobe_15_duct_bead_05", "lobe_15_duct_bead_06", "lobe_15_duct_bead_07", "lobe_15_duct_bead_08", "lobe_15_duct_bead_09", "lobe_15_duct_bead_10", "lobe_15_duct_bead_11", "lobe_15_duct_bead_12", "lobe_15_duct_bead_13", "lobe_15_duct_bead_14", "lobe_15_duct_bead_15", "lobe_15_duct_bead_16", "lobe_15_duct_bead_17", "lobe_15_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_15").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_15").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_15").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe16(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_16_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_01").set("semiaxes", "0.00689431 0.00675369 0.01350150");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_01").set("pos", "0.00001517 0.02041159 -0.02463267");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_02").set("semiaxes", "0.00805005 0.00768282 0.01304767");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_02").set("pos", "0.00128785 0.01842607 -0.02737395");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_03").set("semiaxes", "0.00897688 0.00842792 0.01259384");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_03").set("pos", "0.00227776 0.01644056 -0.03011539");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_04").set("semiaxes", "0.00949124 0.00884142 0.01214001");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_04").set("pos", "0.00275814 0.01445504 -0.03285715");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_05").set("semiaxes", "0.00949124 0.00884142 0.01168618");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_05").set("pos", "0.00260314 0.01246953 -0.03559930");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_06").set("semiaxes", "0.00897688 0.00842792 0.01123234");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_06").set("pos", "0.00181276 0.01048401 -0.03834185");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_07").set("semiaxes", "0.00805005 0.00768282 0.01077851");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_07").set("pos", "0.00051285 0.00849850 -0.04108470");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_08").set("semiaxes", "0.00689431 0.00675369 0.01032468");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_08").set("pos", "-0.00106983 0.00651298 -0.04382774");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_wing").set("semiaxes", "0.00908796 0.00922456 0.00953047");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_wing").set("pos", "0.00005995 0.01562052 -0.03433616");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_16_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_posterior_cap").set("semiaxes", "0.00814782 0.00790676 0.01231019");
+    model.component("comp1").geom("geom1").feature("lobe_16_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_posterior_cap").set("pos", "0.00001372 0.00889560 -0.02204128");
+    model.component("comp1").geom("geom1").feature("lobe_16_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_01").set("pos", "0.00013747 0.02375212 -0.02363868");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_02").set("pos", "0.00023875 0.02516409 -0.02271104");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_03").set("pos", "0.00031901 0.02663299 -0.02172921");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_04").set("pos", "0.00037824 0.02815885 -0.02069320");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_05").set("pos", "0.00041645 0.02974164 -0.01960301");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_06").set("pos", "0.00043363 0.03138139 -0.01845864");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_07").set("pos", "0.00042979 0.03307808 -0.01726009");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_08").set("pos", "0.00040493 0.03483171 -0.01600735");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_09").set("pos", "0.00035904 0.03664229 -0.01470044");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_10").set("pos", "0.00029213 0.03850981 -0.01333934");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_11").set("pos", "0.00020420 0.04043427 -0.01192406");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_12").set("pos", "0.00009524 0.04241569 -0.01045459");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_13").set("pos", "-0.00003474 0.04445404 -0.00893095");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_14").set("pos", "-0.00018574 0.04654935 -0.00735312");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_15").set("pos", "-0.00035777 0.04870159 -0.00572112");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_16").set("pos", "-0.00055083 0.05091078 -0.00403493");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_17").set("pos", "-0.00076490 0.05317692 -0.00229455");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_16_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_18").set("pos", "-0.00100000 0.05550000 -0.00050000");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_16_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_16", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_16").selection("input").set("lobe_16_petal_seg_01", "lobe_16_petal_seg_02", "lobe_16_petal_seg_03", "lobe_16_petal_seg_04", "lobe_16_petal_seg_05", "lobe_16_petal_seg_06", "lobe_16_petal_seg_07", "lobe_16_petal_seg_08", "lobe_16_petal_wing", "lobe_16_posterior_cap", "lobe_16_duct_bead_01", "lobe_16_duct_bead_02", "lobe_16_duct_bead_03", "lobe_16_duct_bead_04", "lobe_16_duct_bead_05", "lobe_16_duct_bead_06", "lobe_16_duct_bead_07", "lobe_16_duct_bead_08", "lobe_16_duct_bead_09", "lobe_16_duct_bead_10", "lobe_16_duct_bead_11", "lobe_16_duct_bead_12", "lobe_16_duct_bead_13", "lobe_16_duct_bead_14", "lobe_16_duct_bead_15", "lobe_16_duct_bead_16", "lobe_16_duct_bead_17", "lobe_16_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_16").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_16").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_16").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe17(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_17_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_01").set("semiaxes", "0.00689431 0.00675369 0.01350150");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_01").set("pos", "0.01237224 0.02041159 -0.02132769");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_02").set("semiaxes", "0.00805005 0.00768282 0.01304767");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_02").set("pos", "0.01484756 0.01842607 -0.02306179");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_03").set("semiaxes", "0.00897688 0.00842792 0.01259384");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_03").set("pos", "0.01707828 0.01644056 -0.02493777");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_04").set("semiaxes", "0.00949124 0.00884142 0.01214001");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_04").set("pos", "0.01886826 0.01445504 -0.02706943");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_05").set("semiaxes", "0.00949124 0.00884142 0.01168618");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_05").set("pos", "0.02010865 0.01246953 -0.02951991");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_06").set("semiaxes", "0.00897688 0.00842792 0.01123234");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_06").set("pos", "0.02079944 0.01048401 -0.03228922");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_07").set("semiaxes", "0.00805005 0.00768282 0.01077851");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_07").set("pos", "0.02104948 0.00849850 -0.03531420");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_08").set("semiaxes", "0.00689431 0.00675369 0.01032468");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_08").set("pos", "0.02105493 0.00651298 -0.03848107");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_wing").set("semiaxes", "0.00908796 0.00922456 0.00953047");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_wing").set("pos", "0.01726503 0.01562052 -0.02968172");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_17_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_posterior_cap").set("semiaxes", "0.00814782 0.00790676 0.01231019");
+    model.component("comp1").geom("geom1").feature("lobe_17_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_posterior_cap").set("pos", "0.01119288 0.00889560 -0.01908615");
+    model.component("comp1").geom("geom1").feature("lobe_17_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_01").set("pos", "0.01203351 0.02375167 -0.02040591");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_02").set("pos", "0.01164973 0.02516324 -0.01955196");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_03").set("pos", "0.01122092 0.02663180 -0.01866156");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_04").set("pos", "0.01074707 0.02815737 -0.01773473");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_05").set("pos", "0.01022818 0.02973993 -0.01677145");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_06").set("pos", "0.00966425 0.03137948 -0.01577174");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_07").set("pos", "0.00905528 0.03307604 -0.01473559");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_08").set("pos", "0.00840127 0.03482959 -0.01366300");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_09").set("pos", "0.00770222 0.03664014 -0.01255398");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_10").set("pos", "0.00695813 0.03850769 -0.01140851");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_11").set("pos", "0.00616900 0.04043224 -0.01022661");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_12").set("pos", "0.00533483 0.04241378 -0.00900827");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_13").set("pos", "0.00445562 0.04445232 -0.00775349");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_14").set("pos", "0.00353137 0.04654786 -0.00646227");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_15").set("pos", "0.00256208 0.04870040 -0.00513461");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_16").set("pos", "0.00154775 0.05090994 -0.00377052");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_17").set("pos", "0.00048838 0.05317647 -0.00236998");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_17_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_18").set("pos", "-0.00061603 0.05550000 -0.00093301");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_17_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_17", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_17").selection("input").set("lobe_17_petal_seg_01", "lobe_17_petal_seg_02", "lobe_17_petal_seg_03", "lobe_17_petal_seg_04", "lobe_17_petal_seg_05", "lobe_17_petal_seg_06", "lobe_17_petal_seg_07", "lobe_17_petal_seg_08", "lobe_17_petal_wing", "lobe_17_posterior_cap", "lobe_17_duct_bead_01", "lobe_17_duct_bead_02", "lobe_17_duct_bead_03", "lobe_17_duct_bead_04", "lobe_17_duct_bead_05", "lobe_17_duct_bead_06", "lobe_17_duct_bead_07", "lobe_17_duct_bead_08", "lobe_17_duct_bead_09", "lobe_17_duct_bead_10", "lobe_17_duct_bead_11", "lobe_17_duct_bead_12", "lobe_17_duct_bead_13", "lobe_17_duct_bead_14", "lobe_17_duct_bead_15", "lobe_17_duct_bead_16", "lobe_17_duct_bead_17", "lobe_17_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_17").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_17").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_17").set("selresultshow", "all");
+
+  }
+
+  private static void buildAnatomicalLobe18(Model model) {
+
+
+    model.component("comp1").geom("geom1").create("lobe_18_petal_seg_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_01").set("semiaxes", "0.00689431 0.00675369 0.01350150");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_01").set("pos", "0.02139509 0.02041159 -0.01234935");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_petal_seg_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_02").set("semiaxes", "0.00805005 0.00768282 0.01304767");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_02").set("pos", "0.02440530 0.01842607 -0.01261934");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_petal_seg_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_03").set("semiaxes", "0.00897688 0.00842792 0.01259384");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_03").set("pos", "0.02727416 0.01644056 -0.01313423");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_petal_seg_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_04").set("semiaxes", "0.00949124 0.00884142 0.01214001");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_04").set("pos", "0.02988830 0.01445504 -0.01409042");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_petal_seg_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_05").set("semiaxes", "0.00949124 0.00884142 0.01168618");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_05").set("pos", "0.03218481 0.01246953 -0.01559689");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_petal_seg_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_06").set("semiaxes", "0.00897688 0.00842792 0.01123234");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_06").set("pos", "0.03416369 0.01048401 -0.01765365");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_petal_seg_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_07").set("semiaxes", "0.00805005 0.00768282 0.01077851");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_07").set("pos", "0.03588785 0.00849850 -0.02015171");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_petal_seg_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_08").set("semiaxes", "0.00689431 0.00675369 0.01032468");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_08").set("pos", "0.03747065 0.00651298 -0.02289467");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_seg_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_petal_wing", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_wing").set("semiaxes", "0.00908796 0.00922456 0.00953047");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_wing").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_wing").set("pos", "0.02982078 0.01562052 -0.01712184");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_wing").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_petal_wing").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("lobe_18_posterior_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_posterior_cap").set("semiaxes", "0.00814782 0.00790676 0.01231019");
+    model.component("comp1").geom("geom1").feature("lobe_18_posterior_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_posterior_cap").set("pos", "0.01935951 0.00889560 -0.01105390");
+    model.component("comp1").geom("geom1").feature("lobe_18_posterior_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_posterior_cap").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_01", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_01").set("semiaxes", "0.00109861 0.00109861 0.00137472");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_01").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_01").set("pos", "0.02068712 0.02375079 -0.01174513");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_01").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_01").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_02", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_02").set("semiaxes", "0.00107722 0.00107722 0.00134944");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_02").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_02").set("pos", "0.01992217 0.02516157 -0.01119213");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_02").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_02").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_03", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_03").set("semiaxes", "0.00105583 0.00105583 0.00132417");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_03").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_03").set("pos", "0.01910023 0.02662946 -0.01063010");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_03").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_03").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_04", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_04").set("semiaxes", "0.00103444 0.00103444 0.00129889");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_04").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_04").set("pos", "0.01822131 0.02815445 -0.01005904");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_04").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_04").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_05", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_05").set("semiaxes", "0.00101306 0.00101306 0.00127361");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_05").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_05").set("pos", "0.01728541 0.02973654 -0.00947895");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_05").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_05").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_06", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_06").set("semiaxes", "0.00099167 0.00099167 0.00124833");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_06").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_06").set("pos", "0.01629252 0.03137574 -0.00888983");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_06").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_06").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_07", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_07").set("semiaxes", "0.00097028 0.00097028 0.00122306");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_07").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_07").set("pos", "0.01524264 0.03307203 -0.00829168");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_07").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_07").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_08", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_08").set("semiaxes", "0.00094889 0.00094889 0.00119778");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_08").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_08").set("pos", "0.01413578 0.03482543 -0.00768450");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_08").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_08").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_09", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_09").set("semiaxes", "0.00092750 0.00092750 0.00117250");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_09").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_09").set("pos", "0.01297194 0.03663593 -0.00706829");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_09").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_09").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_10", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_10").set("semiaxes", "0.00090611 0.00090611 0.00114722");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_10").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_10").set("pos", "0.01175111 0.03850353 -0.00644305");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_10").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_10").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_11", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_11").set("semiaxes", "0.00088472 0.00088472 0.00112194");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_11").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_11").set("pos", "0.01047329 0.04042823 -0.00580878");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_11").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_11").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_12", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_12").set("semiaxes", "0.00086333 0.00086333 0.00109667");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_12").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_12").set("pos", "0.00913849 0.04241004 -0.00516547");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_12").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_12").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_13", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_13").set("semiaxes", "0.00084194 0.00084194 0.00107139");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_13").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_13").set("pos", "0.00774671 0.04444894 -0.00451314");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_13").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_13").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_14", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_14").set("semiaxes", "0.00082056 0.00082056 0.00104611");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_14").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_14").set("pos", "0.00629794 0.04654495 -0.00385178");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_14").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_14").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_15", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_15").set("semiaxes", "0.00079917 0.00079917 0.00102083");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_15").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_15").set("pos", "0.00479219 0.04869806 -0.00318139");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_15").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_15").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_16", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_16").set("semiaxes", "0.00077778 0.00077778 0.00099556");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_16").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_16").set("pos", "0.00322945 0.05090827 -0.00250196");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_16").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_16").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_17", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_17").set("semiaxes", "0.00075639 0.00075639 0.00097028");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_17").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_17").set("pos", "0.00160972 0.05317558 -0.00181351");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_17").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_17").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("lobe_18_duct_bead_18", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_18").set("semiaxes", "0.00073500 0.00073500 0.00094500");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_18").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_18").set("pos", "-0.00006699 0.05550000 -0.00111603");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("lobe_18_duct_bead_18").set("selresultshow", "all");
+
+
+
+    model.component("comp1").geom("geom1").create("anatomical_lobe_18", "Union");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_18").selection("input").set("lobe_18_petal_seg_01", "lobe_18_petal_seg_02", "lobe_18_petal_seg_03", "lobe_18_petal_seg_04", "lobe_18_petal_seg_05", "lobe_18_petal_seg_06", "lobe_18_petal_seg_07", "lobe_18_petal_seg_08", "lobe_18_petal_wing", "lobe_18_posterior_cap", "lobe_18_duct_bead_01", "lobe_18_duct_bead_02", "lobe_18_duct_bead_03", "lobe_18_duct_bead_04", "lobe_18_duct_bead_05", "lobe_18_duct_bead_06", "lobe_18_duct_bead_07", "lobe_18_duct_bead_08", "lobe_18_duct_bead_09", "lobe_18_duct_bead_10", "lobe_18_duct_bead_11", "lobe_18_duct_bead_12", "lobe_18_duct_bead_13", "lobe_18_duct_bead_14", "lobe_18_duct_bead_15", "lobe_18_duct_bead_16", "lobe_18_duct_bead_17", "lobe_18_duct_bead_18");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_18").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_18").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_18").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("anatomical_lobe_18").set("selresultshow", "all");
+
+  }
+
 }

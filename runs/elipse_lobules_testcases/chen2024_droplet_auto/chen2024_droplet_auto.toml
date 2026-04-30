@@ -17,7 +17,9 @@ generator_mode = "chen_2024_double_ring"
 nipple = [ 0.0, 0.068, 0.0,]
 
 # Base lobe property envelope
-width = 0.0042
+# Slightly reduced width plus larger ring radii gives less overlap once the
+# COMSOL geometry is built as explicit bulb+duct lobes.
+width = 0.0038
 amp_c1 = 70.0
 amp_c2 = 55.0
 amp_rho = 35.0
@@ -26,13 +28,13 @@ seed = 42
 # Chen-like double ring setup (total lobes = 18)
 inner_ring_count = 8
 outer_ring_count = 10
-inner_ring_radius = 0.005
-outer_ring_radius = 0.009
-inner_depth = 0.012
-outer_depth = 0.020
+inner_ring_radius = 0.007
+outer_ring_radius = 0.013
+inner_depth = 0.020
+outer_depth = 0.030
 
 # Teardrop chain (each lobe split in 2 linked Gaussian components)
-droplet_length = 0.007
+droplet_length = 0.012
 droplet_components = 2
 
 [material.adipose.hetero]

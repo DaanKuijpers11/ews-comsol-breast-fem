@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import json
 import re
+from collections import defaultdict
 from pathlib import Path
+import numpy as np
 
 
 def _comsol_safe_name(text: str) -> str:
@@ -16,6 +18,10 @@ def _safe_java_identifier(text: str) -> str:
     if identifier[0].isdigit():
         identifier = f"case_{identifier}"
     return identifier
+
+
+def _chunk_list(items: list[str], size: int) -> list[list[str]]:
+    return [items[idx:idx + size] for idx in range(0, len(items), size)]
 
 
 def _linearize_mooney_rivlin(material: dict[str, object]) -> tuple[float, float]:
@@ -84,6 +90,9 @@ def generate_comsol_java_builder(
     asym_enabled = bool(asymmetry.get("enabled", False))
     gland_hetero = build_plan_summary["material"].get("glandular", {}).get("hetero", {}) or {}
     droplet_components = max(1, int(gland_hetero.get("droplet_components", 1)))
+    comsol_detail_mode = str(gland_hetero.get("comsol_geometry_detail_mode", "full")).lower()
+    comsol_petal_segments_override = max(0, int(gland_hetero.get("comsol_petal_segments", 0) or 0))
+    comsol_duct_beads_override = max(0, int(gland_hetero.get("comsol_duct_beads", 0) or 0))
 
     left_pos = left_rel * radius
     nipple_pos = nipple_rel * radius
@@ -118,6 +127,7 @@ def generate_comsol_java_builder(
         },
         "component_boundary_selections": {
             "geom1_breast_union_bnd": "Exterior boundaries of the full assembled breast/chest geometry",
+            "geom1_breast_outer_bnd": "Outer breast envelope boundary; used as the current skin-shell carrier boundary",
             "geom1_adipose_diff_bnd": "Boundaries of the adipose domain",
             "geom1_gland_clip_bnd": "Boundaries of the glandular domain",
             "geom1_chest_cyl_bnd": "Boundaries of the chest-wall support domain",
@@ -133,6 +143,7 @@ def generate_comsol_java_builder(
         },
         "recommended_physics_targets": {
             "full_breast_domain_selection": "geom1_breast_union_dom",
+            "skin_shell_boundary_selection": "geom1_breast_outer_bnd",
             "adipose_domain_selection": "geom1_adipose_diff_dom",
             "glandular_domain_selection": "geom1_gland_clip_dom",
             "chest_domain_selection": "geom1_chest_cyl_dom",
@@ -160,59 +171,59 @@ def generate_comsol_java_builder(
     selection_hints_path.write_text(json.dumps(selection_hints, indent=2), encoding="utf-8")
     selection_hints_java = selection_hints_path.as_posix()
 
+    nipple = gland_hetero.get("nipple", [0.0, 0.068, 0.0])
+    nipple_x = float(nipple[0]) if isinstance(nipple, list) and len(nipple) >= 1 else 0.0
+    nipple_y = float(nipple[1]) if isinstance(nipple, list) and len(nipple) >= 2 else radius
+    nipple_z = float(nipple[2]) if isinstance(nipple, list) and len(nipple) >= 3 else 0.0
+    use_template_lobes = any(str(lob.get("template_kind", "")) == "duct_lobe" for lob in lobules)
+
     lobule_feature_tags: list[str] = []
-    lobule_specs: list[dict[str, float | str]] = []
+    lobule_specs: list[dict[str, float | str | int]] = []
     lobule_java_blocks: list[str] = []
     for idx, lobule in enumerate(lobules, start=1):
         center = lobule.get("center", [0.0, 0.0, 0.0])
         if not isinstance(center, list) or len(center) != 3:
             continue
         cx, cy, cz = (float(center[0]), float(center[1]), float(center[2]))
-        sx = max(float(lobule.get("width_x", lobule.get("width", 0.002))) * 1.08, radius * 0.01)
-        sy = max(float(lobule.get("width_y", lobule.get("width", 0.002))) * 1.08, radius * 0.01)
-        sz = max(float(lobule.get("width_z", lobule.get("width", 0.002))) * 1.08, radius * 0.01)
+        component_role = str(lobule.get("component_role", "bulb"))
+        component_index = int(lobule.get("component_index", 0))
+        component_count = int(lobule.get("component_count", 1))
+        lobe_id = int(lobule.get("lobe_id", idx))
+
+        base_sx = float(lobule.get("width_x", lobule.get("width", 0.002)))
+        base_sy = float(lobule.get("width_y", lobule.get("width", 0.002)))
+        base_sz = float(lobule.get("width_z", lobule.get("width", 0.002)))
+
+        if component_role == "duct":
+            sx = max(base_sx * 0.78, radius * 0.007)
+            sy = max(base_sy * 1.45, radius * 0.014)
+            sz = max(base_sz * 0.78, radius * 0.007)
+        else:
+            sx = max(base_sx * 1.12, radius * 0.010)
+            sy = max(base_sy * 1.08, radius * 0.012)
+            sz = max(base_sz * 1.12, radius * 0.010)
+
         tag = f"lobule_{idx:02d}"
-        lobule_feature_tags.append(tag)
-        lobule_specs.append({"tag": tag, "cx": cx, "cy": cy, "cz": cz, "sx": sx, "sy": sy, "sz": sz})
-        lobule_java_blocks.append(
-            f"""
-    model.component("comp1").geom("geom1").create("{tag}", "Ellipsoid");
-    model.component("comp1").geom("geom1").feature("{tag}").set("semiaxes", "{sx:.8f} {sz:.8f} {sy:.8f}");
-    model.component("comp1").geom("geom1").feature("{tag}").set("axistype", "y");
-    model.component("comp1").geom("geom1").feature("{tag}").set("pos", "{cx:.8f} {cy:.8f} {cz:.8f}");
-    model.component("comp1").geom("geom1").feature("{tag}").set("selresult", "on");
-    model.component("comp1").geom("geom1").feature("{tag}").set("selresultshow", "all");
-"""
+        lobule_specs.append(
+            {
+                "tag": tag,
+                "cx": cx,
+                "cy": cy,
+                "cz": cz,
+                "sx": sx,
+                "sy": sy,
+                "sz": sz,
+                "lobe_id": lobe_id,
+                "component_index": component_index,
+                "component_count": component_count,
+                "component_role": component_role,
+                "ring_name": str(lobule.get("ring_name", "inner")),
+            }
         )
-    bridge_feature_tags: list[str] = []
-    bridge_java_blocks: list[str] = []
-    if droplet_components > 1:
-        for start in range(0, len(lobule_specs), droplet_components):
-            group = lobule_specs[start : start + droplet_components]
-            if len(group) < 2:
-                continue
-            for left_idx in range(len(group) - 1):
-                left = group[left_idx]
-                right = group[left_idx + 1]
-                cx = (float(left["cx"]) + float(right["cx"])) / 2.0
-                cy = (float(left["cy"]) + float(right["cy"])) / 2.0
-                cz = (float(left["cz"]) + float(right["cz"])) / 2.0
-                sx = max(
-                    (float(left["sx"]) + float(right["sx"])) * 0.55,
-                    abs(float(right["cx"]) - float(left["cx"])) * 0.60 + min(float(left["sx"]), float(right["sx"])) * 0.55,
-                )
-                sy = max(
-                    (float(left["sy"]) + float(right["sy"])) * 0.55,
-                    abs(float(right["cy"]) - float(left["cy"])) * 0.60 + min(float(left["sy"]), float(right["sy"])) * 0.55,
-                )
-                sz = max(
-                    (float(left["sz"]) + float(right["sz"])) * 0.55,
-                    abs(float(right["cz"]) - float(left["cz"])) * 0.60 + min(float(left["sz"]), float(right["sz"])) * 0.55,
-                )
-                tag = f"lobule_bridge_{start + left_idx + 1:02d}"
-                bridge_feature_tags.append(tag)
-                bridge_java_blocks.append(
-                    f"""
+        if not use_template_lobes:
+            lobule_feature_tags.append(tag)
+            lobule_java_blocks.append(
+                f"""
     model.component("comp1").geom("geom1").create("{tag}", "Ellipsoid");
     model.component("comp1").geom("geom1").feature("{tag}").set("semiaxes", "{sx:.8f} {sz:.8f} {sy:.8f}");
     model.component("comp1").geom("geom1").feature("{tag}").set("axistype", "y");
@@ -220,15 +231,351 @@ def generate_comsol_java_builder(
     model.component("comp1").geom("geom1").feature("{tag}").set("selresult", "on");
     model.component("comp1").geom("geom1").feature("{tag}").set("selresultshow", "all");
 """
+            )
+    lobe_groups: dict[int, list[dict[str, float | str | int]]] = defaultdict(list)
+    for spec in lobule_specs:
+        lobe_groups[int(spec["lobe_id"])].append(spec)
+
+    anatomical_lobe_tags: list[str] = []
+    anatomical_lobe_java_blocks: list[str] = []
+    lobe_refinement_java_blocks: list[str] = []
+    shared_duct_tags: list[str] = []
+    shared_duct_java_blocks: list[str] = []
+    if lobe_groups and use_template_lobes:
+        fast_detail_mode = comsol_detail_mode == "fast"
+        hub_y = nipple_y - radius * 0.17
+        hub_tag = "duct_hub_core"
+        hub_cap_tag = "duct_hub_cap"
+        trunk_tag = "duct_trunk_main"
+        shared_duct_tags.extend([hub_tag, hub_cap_tag, trunk_tag])
+        shared_duct_java_blocks.extend(
+            [
+                f"""
+    model.component("comp1").geom("geom1").create("{hub_tag}", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("{hub_tag}").set("semiaxes", "{radius * 0.0205:.8f} {radius * 0.0205:.8f} {radius * 0.0300:.8f}");
+    model.component("comp1").geom("geom1").feature("{hub_tag}").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("{hub_tag}").set("pos", "0 {hub_y:.8f} 0");
+    model.component("comp1").geom("geom1").feature("{hub_tag}").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("{hub_tag}").set("selresultshow", "all");
+""",
+                f"""
+    model.component("comp1").geom("geom1").create("{hub_cap_tag}", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("{hub_cap_tag}").set("semiaxes", "{radius * 0.0280:.8f} {radius * 0.0280:.8f} {radius * 0.0160:.8f}");
+    model.component("comp1").geom("geom1").feature("{hub_cap_tag}").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("{hub_cap_tag}").set("pos", "0 {hub_y - radius * 0.0130:.8f} 0");
+    model.component("comp1").geom("geom1").feature("{hub_cap_tag}").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("{hub_cap_tag}").set("selresultshow", "all");
+""",
+                f"""
+    model.component("comp1").geom("geom1").create("{trunk_tag}", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("{trunk_tag}").set("semiaxes", "{radius * 0.0120:.8f} {radius * 0.0120:.8f} {radius * 0.0440:.8f}");
+    model.component("comp1").geom("geom1").feature("{trunk_tag}").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("{trunk_tag}").set("pos", "0 {hub_y - radius * 0.0300:.8f} 0");
+    model.component("comp1").geom("geom1").feature("{trunk_tag}").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("{trunk_tag}").set("selresultshow", "all");
+""",
+            ]
+        )
+        for lobe_id in sorted(lobe_groups):
+            bulb = lobe_groups[lobe_id][0]
+            bx = float(bulb["cx"])
+            by = float(bulb["cy"])
+            bz = float(bulb["cz"])
+            bsx = float(bulb["sx"])
+            bsy = float(bulb["sy"])
+            bsz = float(bulb["sz"])
+            ring_name = str(bulb.get("ring_name", "inner"))
+
+            original = next((lob for lob in lobules if int(lob.get("lobe_id", -1)) == lobe_id), None)
+            if original is None:
+                continue
+            bulb_sidecar = original.get("bulb_sidecar", [bx, by, bz])
+            duct_mid = original.get("duct_mid", [bx, by, bz])
+            duct_tip = original.get("duct_tip", [bx, by, bz])
+            if not isinstance(bulb_sidecar, list) or len(bulb_sidecar) != 3:
+                bulb_sidecar = [bx, by, bz]
+            if not isinstance(duct_mid, list) or len(duct_mid) != 3:
+                duct_mid = [bx, by, bz]
+            if not isinstance(duct_tip, list) or len(duct_tip) != 3:
+                duct_tip = [bx, by, bz]
+
+            radial_x = bx
+            radial_z = bz
+            radial_norm = max((radial_x ** 2 + radial_z ** 2) ** 0.5, 1e-9)
+            radial_x /= radial_norm
+            radial_z /= radial_norm
+            tangent_x = -radial_z
+            tangent_z = radial_x
+
+            petal_segment_tags: list[str] = []
+            petal_segment_java_blocks: list[str] = []
+            segment_count = (
+                comsol_petal_segments_override
+                if comsol_petal_segments_override > 0
+                else (4 if fast_detail_mode else 8)
+            )
+            petal_span = 2.45 if ring_name == "outer" else 2.05
+            petal_curve = 0.42 if ring_name == "outer" else 0.32
+            petal_twist = 0.14 if ring_name == "outer" else 0.10
+            for seg_idx in range(segment_count):
+                t = seg_idx / max(segment_count - 1, 1)
+                seg_tag = f"lobe_{lobe_id:02d}_petal_seg_{seg_idx + 1:02d}"
+                petal_segment_tags.append(seg_tag)
+                radial_shift = (-0.30 + petal_span * t) * bsx
+                tangent_shift = (petal_curve * np.sin(np.pi * t) - petal_twist * t) * bsx
+                seg_cx = bx + radial_x * radial_shift + tangent_x * tangent_shift
+                seg_cy = by - (0.08 + 0.70 * t) * bsy
+                seg_cz = bz + radial_z * radial_shift + tangent_z * tangent_shift
+                seg_sx = max(bsx * (0.88 + 0.34 * np.sin(np.pi * t)), radius * 0.0068)
+                seg_sy = max(bsy * (0.68 - 0.16 * t), radius * 0.0050)
+                seg_sz = max(bsz * (0.82 + 0.26 * np.sin(np.pi * t)), radius * 0.0062)
+                petal_segment_java_blocks.append(
+                    f"""
+    model.component("comp1").geom("geom1").create("{seg_tag}", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("{seg_tag}").set("semiaxes", "{seg_sx:.8f} {seg_sz:.8f} {seg_sy:.8f}");
+    model.component("comp1").geom("geom1").feature("{seg_tag}").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("{seg_tag}").set("pos", "{seg_cx:.8f} {seg_cy:.8f} {seg_cz:.8f}");
+    model.component("comp1").geom("geom1").feature("{seg_tag}").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("{seg_tag}").set("selresultshow", "all");
+"""
                 )
-    lobule_union_inputs = ", ".join(f'"{tag}"' for tag in [*lobule_feature_tags, *bridge_feature_tags])
-    use_lobules = bool(lobule_feature_tags)
-    lobule_java = "".join([*lobule_java_blocks, *bridge_java_blocks])
-    gland_source_tag = "gland_lobules" if use_lobules else "gland_seed"
-    gland_source_objects_var = "glandLobuleObjs" if use_lobules else "glandSeedObjs"
-    lobule_union_java = (
+
+            petal_wing_tag = f"lobe_{lobe_id:02d}_petal_wing"
+            wing_cx = float(bulb_sidecar[0]) + tangent_x * (0.12 * bsx)
+            wing_cy = float(bulb_sidecar[1]) - 0.24 * bsy
+            wing_cz = float(bulb_sidecar[2]) + tangent_z * (0.12 * bsz)
+            wing_sx = max(bsx * (1.16 if ring_name == "outer" else 1.05), radius * 0.0060)
+            wing_sy = max(bsy * 0.48, radius * 0.0044)
+            wing_sz = max(bsz * (1.12 if ring_name == "outer" else 1.02), radius * 0.0062)
+
+            posterior_cap_tag = f"lobe_{lobe_id:02d}_posterior_cap"
+            cap_cx = bx - radial_x * (0.60 * bsx)
+            cap_cy = by - 0.66 * bsy
+            cap_cz = bz - radial_z * (0.60 * bsz)
+            cap_sx = max(bsx * 1.04, radius * 0.0070)
+            cap_sy = max(bsy * 0.62, radius * 0.0050)
+            cap_sz = max(bsz * 0.96, radius * 0.0062)
+
+            duct_bead_tags: list[str] = []
+            duct_bead_java_blocks: list[str] = []
+            duct_start_x = bx - radial_x * (0.30 * bsx)
+            duct_start_y = by + 0.02 * bsy
+            duct_start_z = bz - radial_z * (0.30 * bsz)
+            control_x = float(duct_mid[0])
+            control_y = float(duct_mid[1])
+            control_z = float(duct_mid[2])
+            end_x = float(duct_tip[0])
+            end_y = float(duct_tip[1])
+            end_z = float(duct_tip[2])
+            bead_count = (
+                comsol_duct_beads_override
+                if comsol_duct_beads_override > 0
+                else (6 if fast_detail_mode else 18)
+            )
+            for bead_idx in range(1, bead_count + 1):
+                t = bead_idx / bead_count
+                omt = 1.0 - t
+                px = omt * omt * duct_start_x + 2.0 * omt * t * control_x + t * t * end_x
+                py = omt * omt * duct_start_y + 2.0 * omt * t * control_y + t * t * end_y
+                pz = omt * omt * duct_start_z + 2.0 * omt * t * control_z + t * t * end_z
+                bead_tag = f"lobe_{lobe_id:02d}_duct_bead_{bead_idx:02d}"
+                duct_bead_tags.append(bead_tag)
+                bead_rxy = max(radius * (0.0105 + 0.0055 * omt), radius * 0.0068)
+                bead_ry = max(radius * (0.0135 + 0.0065 * omt), radius * 0.0084)
+                duct_bead_java_blocks.append(
+                    f"""
+    model.component("comp1").geom("geom1").create("{bead_tag}", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("{bead_tag}").set("semiaxes", "{bead_rxy:.8f} {bead_rxy:.8f} {bead_ry:.8f}");
+    model.component("comp1").geom("geom1").feature("{bead_tag}").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("{bead_tag}").set("pos", "{px:.8f} {py:.8f} {pz:.8f}");
+    model.component("comp1").geom("geom1").feature("{bead_tag}").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("{bead_tag}").set("selresultshow", "all");
+"""
+                )
+
+            lobe_refinement_java_blocks.append(
+                f"""
+{"".join(petal_segment_java_blocks)}
+    model.component("comp1").geom("geom1").create("{petal_wing_tag}", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("{petal_wing_tag}").set("semiaxes", "{wing_sx:.8f} {wing_sz:.8f} {wing_sy:.8f}");
+    model.component("comp1").geom("geom1").feature("{petal_wing_tag}").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("{petal_wing_tag}").set("pos", "{wing_cx:.8f} {wing_cy:.8f} {wing_cz:.8f}");
+    model.component("comp1").geom("geom1").feature("{petal_wing_tag}").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("{petal_wing_tag}").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").create("{posterior_cap_tag}", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("{posterior_cap_tag}").set("semiaxes", "{cap_sx:.8f} {cap_sz:.8f} {cap_sy:.8f}");
+    model.component("comp1").geom("geom1").feature("{posterior_cap_tag}").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("{posterior_cap_tag}").set("pos", "{cap_cx:.8f} {cap_cy:.8f} {cap_cz:.8f}");
+    model.component("comp1").geom("geom1").feature("{posterior_cap_tag}").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("{posterior_cap_tag}").set("selresultshow", "all");
+{"".join(duct_bead_java_blocks)}
+"""
+            )
+
+            lobe_tag = f"anatomical_lobe_{lobe_id:02d}"
+            anatomical_lobe_tags.append(lobe_tag)
+            lobe_input_tags = [*petal_segment_tags, petal_wing_tag, posterior_cap_tag, *duct_bead_tags]
+            lobe_input_args = ", ".join(f'"{tag}"' for tag in lobe_input_tags)
+            anatomical_lobe_java_blocks.append(
+                f"""
+    model.component("comp1").geom("geom1").create("{lobe_tag}", "Union");
+    model.component("comp1").geom("geom1").feature("{lobe_tag}").selection("input").set({lobe_input_args});
+    model.component("comp1").geom("geom1").feature("{lobe_tag}").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("{lobe_tag}").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("{lobe_tag}").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("{lobe_tag}").set("selresultshow", "all");
+"""
+            )
+    elif lobe_groups:
+        for lobe_id in sorted(lobe_groups):
+            ordered_group = sorted(lobe_groups[lobe_id], key=lambda item: int(item["component_index"]))
+            comp_tags = [str(spec["tag"]) for spec in ordered_group]
+            bulb = next((spec for spec in ordered_group if str(spec["component_role"]) == "bulb"), ordered_group[0])
+            duct = next((spec for spec in ordered_group if str(spec["component_role"]) == "duct"), ordered_group[-1])
+            ring_name = str(bulb.get("ring_name", "inner"))
+
+            bx = float(bulb["cx"])
+            by = float(bulb["cy"])
+            bz = float(bulb["cz"])
+            bsx = float(bulb["sx"])
+            bsy = float(bulb["sy"])
+            bsz = float(bulb["sz"])
+            dx = float(duct["cx"])
+            dy = float(duct["cy"])
+            dz = float(duct["cz"])
+            dsx = float(duct["sx"])
+            dsy = float(duct["sy"])
+            dsz = float(duct["sz"])
+
+            toward_x = nipple_x - bx
+            toward_y = nipple_y - by
+            toward_z = nipple_z - bz
+            toward_norm = max((toward_x ** 2 + toward_y ** 2 + toward_z ** 2) ** 0.5, 1e-9)
+            toward_x /= toward_norm
+            toward_y /= toward_norm
+            toward_z /= toward_norm
+
+            tangent_x = -bz
+            tangent_z = bx
+            tangent_norm = max((tangent_x ** 2 + tangent_z ** 2) ** 0.5, 1e-9)
+            tangent_x /= tangent_norm
+            tangent_z /= tangent_norm
+
+            radial_x = bx
+            radial_z = bz
+            radial_norm = max((radial_x ** 2 + radial_z ** 2) ** 0.5, 1e-9)
+            radial_x /= radial_norm
+            radial_z /= radial_norm
+
+            bulb_sidecar_tag = f"lobe_{lobe_id:02d}_bulb_sidecar"
+            bulb_sidecar_cx = bx + radial_x * (0.36 * bsx) - tangent_x * (0.18 * bsx)
+            bulb_sidecar_cy = by - 0.16 * bsy
+            bulb_sidecar_cz = bz + radial_z * (0.36 * bsz) + tangent_z * (0.18 * bsz)
+            bulb_sidecar_sx = max(bsx * 0.62, radius * 0.006)
+            bulb_sidecar_sy = max(bsy * 0.72, radius * 0.008)
+            bulb_sidecar_sz = max(bsz * 0.58, radius * 0.006)
+
+            duct_tip_tag = f"lobe_{lobe_id:02d}_duct_tip"
+            curvature_scale = 0.45 if ring_name == "outer" else 0.20
+            duct_tip_cx = dx + toward_x * (0.42 * dsy) + tangent_x * (curvature_scale * dsx)
+            duct_tip_cy = dy + toward_y * (0.48 * dsy)
+            duct_tip_cz = dz + toward_z * (0.42 * dsy) + tangent_z * (curvature_scale * dsz)
+            duct_tip_sx = max(dsx * 0.82, radius * 0.005)
+            duct_tip_sy = max(dsy * 0.96, radius * 0.010)
+            duct_tip_sz = max(dsz * 0.82, radius * 0.005)
+
+            lobe_refinement_java_blocks.append(
+                f"""
+    model.component("comp1").geom("geom1").create("{bulb_sidecar_tag}", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("{bulb_sidecar_tag}").set("semiaxes", "{bulb_sidecar_sx:.8f} {bulb_sidecar_sz:.8f} {bulb_sidecar_sy:.8f}");
+    model.component("comp1").geom("geom1").feature("{bulb_sidecar_tag}").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("{bulb_sidecar_tag}").set("pos", "{bulb_sidecar_cx:.8f} {bulb_sidecar_cy:.8f} {bulb_sidecar_cz:.8f}");
+    model.component("comp1").geom("geom1").feature("{bulb_sidecar_tag}").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("{bulb_sidecar_tag}").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("{duct_tip_tag}", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("{duct_tip_tag}").set("semiaxes", "{duct_tip_sx:.8f} {duct_tip_sz:.8f} {duct_tip_sy:.8f}");
+    model.component("comp1").geom("geom1").feature("{duct_tip_tag}").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("{duct_tip_tag}").set("pos", "{duct_tip_cx:.8f} {duct_tip_cy:.8f} {duct_tip_cz:.8f}");
+    model.component("comp1").geom("geom1").feature("{duct_tip_tag}").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("{duct_tip_tag}").set("selresultshow", "all");
+"""
+            )
+
+            lobe_union_inputs = ", ".join(f'"{tag}"' for tag in [*comp_tags, bulb_sidecar_tag, duct_tip_tag])
+            lobe_tag = f"anatomical_lobe_{lobe_id:02d}"
+            anatomical_lobe_tags.append(lobe_tag)
+            anatomical_lobe_java_blocks.append(
+                f"""
+    model.component("comp1").geom("geom1").create("{lobe_tag}", "Union");
+    model.component("comp1").geom("geom1").feature("{lobe_tag}").selection("input").set({lobe_union_inputs});
+    model.component("comp1").geom("geom1").feature("{lobe_tag}").set("intbnd", "off");
+    model.component("comp1").geom("geom1").feature("{lobe_tag}").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("{lobe_tag}").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("{lobe_tag}").set("selresultshow", "all");
+"""
+            )
+
+    union_source_tags = [*(anatomical_lobe_tags or lobule_feature_tags), *shared_duct_tags]
+    lobule_union_inputs = ", ".join(f'"{tag}"' for tag in union_source_tags)
+    use_lobules = bool(union_source_tags)
+    lobule_helper_methods: list[str] = []
+    lobule_helper_invocations: list[str] = []
+
+    if use_template_lobes and anatomical_lobe_java_blocks:
+        if shared_duct_java_blocks:
+            shared_method_name = "buildSharedDuctHub"
+            lobule_helper_invocations.append(f"    {shared_method_name}(model);\n")
+            lobule_helper_methods.append(
+                f"""
+  private static void {shared_method_name}(Model model) {{
+{"".join(shared_duct_java_blocks)}
+  }}
+"""
+            )
+        for method_index, (refinement_block, lobe_union_block) in enumerate(
+            zip(lobe_refinement_java_blocks, anatomical_lobe_java_blocks),
+            start=1,
+        ):
+            method_name = f"buildAnatomicalLobe{method_index:02d}"
+            lobule_helper_invocations.append(f"    {method_name}(model);\n")
+            lobule_helper_methods.append(
+                f"""
+  private static void {method_name}(Model model) {{
+{refinement_block}
+{lobe_union_block}
+  }}
+"""
+            )
+    else:
+        primitive_blocks = [*lobule_java_blocks, *shared_duct_java_blocks]
+        for chunk_index, chunk in enumerate(_chunk_list(primitive_blocks, 40), start=1):
+            method_name = f"buildLobulePrimitiveChunk{chunk_index:02d}"
+            lobule_helper_invocations.append(f"    {method_name}(model);\n")
+            lobule_helper_methods.append(
+                f"""
+  private static void {method_name}(Model model) {{
+{"".join(chunk)}
+  }}
+"""
+            )
+        for chunk_index, chunk in enumerate(_chunk_list(anatomical_lobe_java_blocks, 20), start=1):
+            method_name = f"buildLobuleUnionChunk{chunk_index:02d}"
+            lobule_helper_invocations.append(f"    {method_name}(model);\n")
+            lobule_helper_methods.append(
+                f"""
+  private static void {method_name}(Model model) {{
+{"".join(chunk)}
+  }}
+"""
+            )
+
+    lobule_helper_methods_java = "".join(lobule_helper_methods)
+    lobule_helper_invocations_java = "".join(lobule_helper_invocations)
+    lobule_builder_method_java = (
         f"""
-    {lobule_java}
+  private static String[] buildGlandLobules(Model model) {{
+{lobule_helper_invocations_java}
     model.component("comp1").geom("geom1").create("gland_lobules", "Union");
     model.component("comp1").geom("geom1").feature("gland_lobules").selection("input").set({lobule_union_inputs});
     model.component("comp1").geom("geom1").feature("gland_lobules").set("intbnd", "on");
@@ -236,7 +583,17 @@ def generate_comsol_java_builder(
     model.component("comp1").geom("geom1").feature("gland_lobules").set("selresult", "on");
     model.component("comp1").geom("geom1").feature("gland_lobules").set("selresultshow", "all");
     model.component("comp1").geom("geom1").run("gland_lobules");
-    String[] glandLobuleObjs = model.component("comp1").geom("geom1").feature("gland_lobules").objectNames();
+    return model.component("comp1").geom("geom1").feature("gland_lobules").objectNames();
+  }}
+"""
+        if use_lobules
+        else ""
+    )
+    gland_source_tag = "gland_lobules" if use_lobules else "gland_seed"
+    gland_source_objects_var = "glandLobuleObjs" if use_lobules else "glandSeedObjs"
+    lobule_union_java = (
+        f"""
+    String[] glandLobuleObjs = buildGlandLobules(model);
 """
         if use_lobules
         else ""
@@ -254,6 +611,7 @@ public class {class_name} {{
 
     model.param().set("breast_radius", "{build_plan_summary["geometry"].get("radius", 0.07)}[m]");
     model.param().set("chest_thickness", "{build_plan_summary["geometry"].get("thickness_chest_wall", 0.002)}[m]");
+    model.param().set("skin_shell_thickness", "0.0001[m]");
     model.param().set("mesh_density_hint", "{build_plan_summary["mesh"].get("density", 140.0)}");
     model.param().set("skin_density", "{build_plan_summary["material"].get("skin", {}).get("density", 1100.0)}[kg/m^3]");
     model.param().set("adipose_density", "{build_plan_summary["material"].get("adipose", {}).get("density", 911.0)}[kg/m^3]");
@@ -367,7 +725,8 @@ public class {class_name} {{
     // Auto-generated pointers:
     // - Build plan JSON: {build_plan_java}
     // - Selection hints JSON: {selection_hints_java}
-    // - Lobules in plan: {build_plan_summary["lobule_count"]}
+    // - Lobule primitives in plan: {build_plan_summary["lobule_count"]}
+    // - Anatomical lobe groups interpreted in COMSOL: {len(anatomical_lobe_tags) if anatomical_lobe_tags else build_plan_summary["lobule_count"]}
     //
     // Source geometry summary:
     // - radius: {build_plan_summary["geometry"].get("radius", "n/a")}
@@ -390,6 +749,13 @@ public class {class_name} {{
     model.component("comp1").material("mat_chest").propertyGroup("def").set("density", new String[] {{ "skin_density" }});
     model.component("comp1").material("mat_chest").propertyGroup("def").set("youngsmodulus", new String[] {{ "skin_E" }});
     model.component("comp1").material("mat_chest").propertyGroup("def").set("poissonsratio", new String[] {{ "skin_nu" }});
+
+    model.component("comp1").material().create("mat_skin_shell", "Common");
+    model.component("comp1").material("mat_skin_shell").label("SkinShellScaffold");
+    model.component("comp1").material("mat_skin_shell").selection().named("geom1_breast_outer_bnd");
+    model.component("comp1").material("mat_skin_shell").propertyGroup("def").set("density", new String[] {{ "skin_density" }});
+    model.component("comp1").material("mat_skin_shell").propertyGroup("def").set("youngsmodulus", new String[] {{ "skin_E" }});
+    model.component("comp1").material("mat_skin_shell").propertyGroup("def").set("poissonsratio", new String[] {{ "skin_nu" }});
 
     model.component("comp1").material().create("mat_adipose", "Common");
     model.component("comp1").material("mat_adipose").label("Adipose");
@@ -415,7 +781,7 @@ public class {class_name} {{
     // Current builder scope:
     // 1) build a COMSOL-native outer breast, glandular core, and chest-wall support
     // 2) expose stable finalized geometry selections for the main regions
-    // 3) attach initial linearized materials and solid mechanics
+    // 3) attach initial linearized materials and a skin-shell scaffold boundary selection
     // 4) run and save MPH
     //
     // Note:
@@ -433,6 +799,8 @@ public class {class_name} {{
     model.save("{result_mph_java}");
     ModelUtil.disconnect();
   }}
+{lobule_builder_method_java}
+{lobule_helper_methods_java}
 }}
 """
     script_path.write_text(java_source, encoding="utf-8")

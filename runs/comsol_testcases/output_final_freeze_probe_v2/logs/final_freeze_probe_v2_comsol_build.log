@@ -1,0 +1,717 @@
+*******************************************
+***COMSOL 6.4.0.378 progress output file***
+*******************************************
+Thu Apr 30 12:48:00 CEST 2026
+COMSOL Multiphysics 6.4 (Build: 378) starting in batch mode
+Running: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output_final_freeze_probe_v2\build\final_freeze_probe_v2_comsol_builder.class
+---------- Current Progress: 100 % - Updating selections
+Memory: 527/532 584/623
+           Current Progress:   0 % - Sphere
+Memory: 546/546 599/623
+           Current Progress:   8 % - Block
+Memory: 554/554 602/623
+-          Current Progress:  17 % - Intersection
+-          Current Progress:  17 % - Performing Boolean operation
+Memory: 556/556 602/623
+           Current Progress:   0 % - Union
+Memory: 557/557 603/623
+           Current Progress:   0 % - Performing Boolean operation
+           Current Progress:   0 % - Cylinder
+Memory: 558/558 604/623
+           Current Progress:   0 % - Block 2
+Memory: 560/560 604/623
+           Current Progress:   0 % - Ellipsoid
+Memory: 560/560 605/623
+           Current Progress:   0 % - Ellipsoid 2
+Memory: 574/596 601/625
+           Current Progress:   0 % - Ellipsoid 3
+           Current Progress:   0 % - Ellipsoid 4
+           Current Progress:   0 % - Ellipsoid 1
+           Current Progress:   1 % - Ellipsoid 2a
+Memory: 578/596 605/625
+           Current Progress:   1 % - Ellipsoid 3a
+Memory: 579/596 606/625
+           Current Progress:   1 % - Ellipsoid 4a
+           Current Progress:   1 % - Ellipsoid 5
+Memory: 582/596 609/625
+           Current Progress:   1 % - Ellipsoid 6
+Memory: 580/596 607/625
+           Current Progress:   1 % - Ellipsoid 7
+           Current Progress:   1 % - Ellipsoid 8
+Memory: 584/596 611/625
+           Current Progress:   2 % - Ellipsoid 9
+Memory: 585/596 612/625
+           Current Progress:   2 % - Ellipsoid 10
+Memory: 589/596 616/625
+           Current Progress:   2 % - Ellipsoid 1a
+Memory: 593/596 620/625
+           Current Progress:   2 % - Ellipsoid 2b
+Memory: 591/596 618/625
+           Current Progress:   2 % - Ellipsoid 3b
+Memory: 573/596 601/625
+           Current Progress:   2 % - Ellipsoid 4b
+           Current Progress:   2 % - Ellipsoid 5a
+           Current Progress:   3 % - Ellipsoid 6a
+           Current Progress:   3 % - Ellipsoid 7a
+           Current Progress:   3 % - Ellipsoid 8a
+           Current Progress:   3 % - Ellipsoid 9a
+           Current Progress:   3 % - Ellipsoid 10a
+Memory: 573/596 602/625
+           Current Progress:   3 % - Ellipsoid 11
+           Current Progress:   3 % - Ellipsoid 12
+           Current Progress:   4 % - Ellipsoid 13
+Memory: 574/596 602/625
+           Current Progress:   4 % - Ellipsoid 14
+           Current Progress:   4 % - Ellipsoid 15
+Memory: 574/596 603/625
+           Current Progress:   4 % - Ellipsoid 16
+           Current Progress:   4 % - Ellipsoid 17
+           Current Progress:   4 % - Ellipsoid 18
+           Current Progress:   4 % - Union 1
+           Current Progress:   4 % - Performing Boolean operation
+Memory: 581/596 606/625
+           Current Progress:   6 % - Ellipsoid 1b
+Memory: 554/596 590/625
+           Current Progress:   6 % - Ellipsoid 2c
+Memory: 555/596 591/625
+           Current Progress:   6 % - Ellipsoid 3c
+Memory: 556/596 591/625
+           Current Progress:   6 % - Ellipsoid 4c
+           Current Progress:   6 % - Ellipsoid 5b
+           Current Progress:   7 % - Ellipsoid 6b
+           Current Progress:   7 % - Ellipsoid 7b
+           Current Progress:   7 % - Ellipsoid 8b
+           Current Progress:   7 % - Ellipsoid 19
+           Current Progress:   7 % - Ellipsoid 20
+           Current Progress:   7 % - Ellipsoid 1c
+           Current Progress:   7 % - Ellipsoid 2d
+           Current Progress:   8 % - Ellipsoid 3d
+           Current Progress:   8 % - Ellipsoid 4d
+           Current Progress:   8 % - Ellipsoid 5c
+Memory: 556/596 592/625
+           Current Progress:   8 % - Ellipsoid 6c
+           Current Progress:   8 % - Ellipsoid 7c
+           Current Progress:   8 % - Ellipsoid 8c
+Memory: 556/596 591/625
+           Current Progress:   8 % - Ellipsoid 9b
+           Current Progress:   9 % - Ellipsoid 10b
+           Current Progress:   9 % - Ellipsoid 11a
+Memory: 557/596 592/625
+           Current Progress:   9 % - Ellipsoid 12a
+           Current Progress:   9 % - Ellipsoid 13a
+           Current Progress:   9 % - Ellipsoid 14a
+           Current Progress:   9 % - Ellipsoid 15a
+           Current Progress:   9 % - Ellipsoid 16a
+-          Current Progress:  10 % - Ellipsoid 17a
+-          Current Progress:  10 % - Ellipsoid 18a
+-          Current Progress:  10 % - Union 2
+-          Current Progress:  10 % - Performing Boolean operation
+Memory: 561/596 596/625
+-          Current Progress:  11 % - Ellipsoid 1d
+Memory: 567/596 600/625
+-          Current Progress:  11 % - Ellipsoid 2e
+-          Current Progress:  12 % - Ellipsoid 3e
+-          Current Progress:  12 % - Ellipsoid 4e
+-          Current Progress:  12 % - Ellipsoid 5d
+Memory: 568/596 600/625
+-          Current Progress:  12 % - Ellipsoid 6d
+-          Current Progress:  12 % - Ellipsoid 7d
+Memory: 574/596 606/625
+-          Current Progress:  12 % - Ellipsoid 8d
+Memory: 577/596 608/625
+-          Current Progress:  12 % - Ellipsoid 21
+-          Current Progress:  13 % - Ellipsoid 22
+-          Current Progress:  13 % - Ellipsoid 1e
+-          Current Progress:  13 % - Ellipsoid 2f
+-          Current Progress:  13 % - Ellipsoid 3f
+-          Current Progress:  13 % - Ellipsoid 4f
+-          Current Progress:  13 % - Ellipsoid 5e
+Memory: 578/596 609/625
+-          Current Progress:  13 % - Ellipsoid 6e
+-          Current Progress:  14 % - Ellipsoid 7e
+-          Current Progress:  14 % - Ellipsoid 8e
+-          Current Progress:  14 % - Ellipsoid 9c
+-          Current Progress:  14 % - Ellipsoid 10c
+-          Current Progress:  14 % - Ellipsoid 11b
+-          Current Progress:  14 % - Ellipsoid 12b
+-          Current Progress:  14 % - Ellipsoid 13b
+-          Current Progress:  15 % - Ellipsoid 14b
+-          Current Progress:  15 % - Ellipsoid 15b
+-          Current Progress:  15 % - Ellipsoid 16b
+-          Current Progress:  15 % - Ellipsoid 17b
+-          Current Progress:  15 % - Ellipsoid 18b
+-          Current Progress:  15 % - Union 3
+-          Current Progress:  15 % - Performing Boolean operation
+Memory: 581/596 609/625
+-          Current Progress:  17 % - Ellipsoid 1f
+Memory: 587/596 616/625
+-          Current Progress:  17 % - Ellipsoid 2g
+-          Current Progress:  17 % - Ellipsoid 3g
+-          Current Progress:  17 % - Ellipsoid 4g
+-          Current Progress:  17 % - Ellipsoid 5f
+-          Current Progress:  18 % - Ellipsoid 6f
+-          Current Progress:  18 % - Ellipsoid 7f
+-          Current Progress:  18 % - Ellipsoid 8f
+-          Current Progress:  18 % - Ellipsoid 23
+-          Current Progress:  18 % - Ellipsoid 24
+Memory: 588/596 616/625
+-          Current Progress:  18 % - Ellipsoid 1g
+Memory: 596/596 624/625
+-          Current Progress:  18 % - Ellipsoid 2h
+-          Current Progress:  19 % - Ellipsoid 3h
+Memory: 600/600 627/627
+-          Current Progress:  19 % - Ellipsoid 4h
+-          Current Progress:  19 % - Ellipsoid 5g
+-          Current Progress:  19 % - Ellipsoid 6g
+-          Current Progress:  19 % - Ellipsoid 7g
+-          Current Progress:  19 % - Ellipsoid 8g
+-          Current Progress:  19 % - Ellipsoid 9d
+--         Current Progress:  20 % - Ellipsoid 10d
+--         Current Progress:  20 % - Ellipsoid 11c
+--         Current Progress:  20 % - Ellipsoid 12c
+--         Current Progress:  20 % - Ellipsoid 13c
+--         Current Progress:  20 % - Ellipsoid 14c
+--         Current Progress:  20 % - Ellipsoid 15c
+--         Current Progress:  20 % - Ellipsoid 16c
+Memory: 601/601 628/628
+--         Current Progress:  21 % - Ellipsoid 17c
+--         Current Progress:  21 % - Ellipsoid 18c
+--         Current Progress:  21 % - Union 4
+--         Current Progress:  21 % - Performing Boolean operation
+Memory: 603/603 630/630
+--         Current Progress:  22 % - Ellipsoid 1h
+Memory: 598/610 623/637
+--         Current Progress:  22 % - Ellipsoid 2i
+--         Current Progress:  23 % - Ellipsoid 3i
+--         Current Progress:  23 % - Ellipsoid 4i
+--         Current Progress:  23 % - Ellipsoid 5h
+Memory: 599/610 623/637
+--         Current Progress:  23 % - Ellipsoid 6h
+--         Current Progress:  23 % - Ellipsoid 7h
+Memory: 599/610 624/637
+--         Current Progress:  23 % - Ellipsoid 8h
+Memory: 601/610 626/637
+--         Current Progress:  23 % - Ellipsoid 25
+--         Current Progress:  24 % - Ellipsoid 26
+--         Current Progress:  24 % - Ellipsoid 1i
+--         Current Progress:  24 % - Ellipsoid 2j
+--         Current Progress:  24 % - Ellipsoid 3j
+--         Current Progress:  24 % - Ellipsoid 4j
+--         Current Progress:  24 % - Ellipsoid 5i
+--         Current Progress:  24 % - Ellipsoid 6i
+--         Current Progress:  25 % - Ellipsoid 7i
+--         Current Progress:  25 % - Ellipsoid 8i
+--         Current Progress:  25 % - Ellipsoid 9e
+--         Current Progress:  25 % - Ellipsoid 10e
+--         Current Progress:  25 % - Ellipsoid 11d
+--         Current Progress:  25 % - Ellipsoid 12d
+--         Current Progress:  25 % - Ellipsoid 13d
+Memory: 603/610 628/637
+--         Current Progress:  26 % - Ellipsoid 14d
+Memory: 603/610 627/637
+--         Current Progress:  26 % - Ellipsoid 15d
+--         Current Progress:  26 % - Ellipsoid 16d
+--         Current Progress:  26 % - Ellipsoid 17d
+--         Current Progress:  26 % - Ellipsoid 18d
+--         Current Progress:  26 % - Union 5
+--         Current Progress:  26 % - Performing Boolean operation
+Memory: 606/610 631/637
+--         Current Progress:  28 % - Ellipsoid 1j
+Memory: 614/614 639/639
+--         Current Progress:  28 % - Ellipsoid 2k
+Memory: 615/615 639/639
+--         Current Progress:  28 % - Ellipsoid 3k
+--         Current Progress:  28 % - Ellipsoid 4k
+--         Current Progress:  28 % - Ellipsoid 5j
+--         Current Progress:  28 % - Ellipsoid 6j
+--         Current Progress:  29 % - Ellipsoid 7j
+--         Current Progress:  29 % - Ellipsoid 8j
+--         Current Progress:  29 % - Ellipsoid 27
+Memory: 616/616 641/641
+--         Current Progress:  29 % - Ellipsoid 28
+--         Current Progress:  29 % - Ellipsoid 1k
+--         Current Progress:  29 % - Ellipsoid 2l
+--         Current Progress:  29 % - Ellipsoid 3l
+---        Current Progress:  30 % - Ellipsoid 4l
+---        Current Progress:  30 % - Ellipsoid 5k
+---        Current Progress:  30 % - Ellipsoid 6k
+---        Current Progress:  30 % - Ellipsoid 7k
+Memory: 617/617 641/641
+---        Current Progress:  30 % - Ellipsoid 8k
+---        Current Progress:  30 % - Ellipsoid 9f
+---        Current Progress:  30 % - Ellipsoid 10f
+---        Current Progress:  31 % - Ellipsoid 11e
+---        Current Progress:  31 % - Ellipsoid 12e
+---        Current Progress:  31 % - Ellipsoid 13e
+---        Current Progress:  31 % - Ellipsoid 14e
+---        Current Progress:  31 % - Ellipsoid 15e
+---        Current Progress:  31 % - Ellipsoid 16e
+---        Current Progress:  31 % - Ellipsoid 17e
+---        Current Progress:  32 % - Ellipsoid 18e
+---        Current Progress:  32 % - Union 6
+---        Current Progress:  32 % - Performing Boolean operation
+Memory: 622/622 646/646
+---        Current Progress:  33 % - Ellipsoid 1l
+Memory: 628/628 652/652
+---        Current Progress:  33 % - Ellipsoid 2m
+---        Current Progress:  33 % - Ellipsoid 3m
+---        Current Progress:  34 % - Ellipsoid 4m
+---        Current Progress:  34 % - Ellipsoid 5l
+Memory: 629/629 652/652
+---        Current Progress:  34 % - Ellipsoid 6l
+---        Current Progress:  34 % - Ellipsoid 7l
+---        Current Progress:  34 % - Ellipsoid 8l
+---        Current Progress:  34 % - Ellipsoid 29
+---        Current Progress:  34 % - Ellipsoid 30
+---        Current Progress:  35 % - Ellipsoid 1m
+---        Current Progress:  35 % - Ellipsoid 2n
+---        Current Progress:  35 % - Ellipsoid 3n
+Memory: 629/629 653/653
+---        Current Progress:  35 % - Ellipsoid 4n
+---        Current Progress:  35 % - Ellipsoid 5m
+---        Current Progress:  35 % - Ellipsoid 6m
+---        Current Progress:  35 % - Ellipsoid 7m
+---        Current Progress:  36 % - Ellipsoid 8m
+---        Current Progress:  36 % - Ellipsoid 9g
+---        Current Progress:  36 % - Ellipsoid 10g
+Memory: 630/630 653/653
+---        Current Progress:  36 % - Ellipsoid 11f
+---        Current Progress:  36 % - Ellipsoid 12f
+---        Current Progress:  36 % - Ellipsoid 13f
+---        Current Progress:  36 % - Ellipsoid 14f
+---        Current Progress:  37 % - Ellipsoid 15f
+Memory: 630/630 654/654
+---        Current Progress:  37 % - Ellipsoid 16f
+---        Current Progress:  37 % - Ellipsoid 17f
+---        Current Progress:  37 % - Ellipsoid 18f
+---        Current Progress:  37 % - Union 7
+Memory: 631/631 654/654
+---        Current Progress:  37 % - Performing Boolean operation
+Memory: 633/633 657/657
+---        Current Progress:  39 % - Ellipsoid 1n
+Memory: 639/639 662/662
+---        Current Progress:  39 % - Ellipsoid 2o
+---        Current Progress:  39 % - Ellipsoid 3o
+---        Current Progress:  39 % - Ellipsoid 4o
+---        Current Progress:  39 % - Ellipsoid 5n
+---        Current Progress:  39 % - Ellipsoid 6n
+---        Current Progress:  39 % - Ellipsoid 7n
+----       Current Progress:  40 % - Ellipsoid 8n
+----       Current Progress:  40 % - Ellipsoid 31
+----       Current Progress:  40 % - Ellipsoid 32
+Memory: 640/640 663/663
+----       Current Progress:  40 % - Ellipsoid 1o
+Memory: 641/641 663/663
+----       Current Progress:  40 % - Ellipsoid 2p
+----       Current Progress:  40 % - Ellipsoid 3p
+----       Current Progress:  40 % - Ellipsoid 4p
+----       Current Progress:  41 % - Ellipsoid 5o
+Memory: 641/641 663/664
+----       Current Progress:  41 % - Ellipsoid 6o
+----       Current Progress:  41 % - Ellipsoid 7o
+----       Current Progress:  41 % - Ellipsoid 8o
+----       Current Progress:  41 % - Ellipsoid 9h
+----       Current Progress:  41 % - Ellipsoid 10h
+----       Current Progress:  41 % - Ellipsoid 11g
+----       Current Progress:  42 % - Ellipsoid 12g
+----       Current Progress:  42 % - Ellipsoid 13g
+----       Current Progress:  42 % - Ellipsoid 14g
+----       Current Progress:  42 % - Ellipsoid 15g
+----       Current Progress:  42 % - Ellipsoid 16g
+Memory: 641/641 664/664
+----       Current Progress:  42 % - Ellipsoid 17g
+----       Current Progress:  42 % - Ellipsoid 18g
+----       Current Progress:  43 % - Union 8
+----       Current Progress:  43 % - Performing Boolean operation
+Memory: 644/644 667/667
+----       Current Progress:  44 % - Ellipsoid 1p
+Memory: 649/649 675/675
+----       Current Progress:  44 % - Ellipsoid 2q
+----       Current Progress:  44 % - Ellipsoid 3q
+----       Current Progress:  44 % - Ellipsoid 4q
+Memory: 650/650 677/677
+----       Current Progress:  45 % - Ellipsoid 5p
+Memory: 650/651 676/678
+----       Current Progress:  45 % - Ellipsoid 6p
+----       Current Progress:  45 % - Ellipsoid 7p
+----       Current Progress:  45 % - Ellipsoid 8p
+----       Current Progress:  45 % - Ellipsoid 33
+----       Current Progress:  45 % - Ellipsoid 34
+Memory: 650/651 677/678
+----       Current Progress:  45 % - Ellipsoid 1q
+----       Current Progress:  46 % - Ellipsoid 2r
+----       Current Progress:  46 % - Ellipsoid 3r
+----       Current Progress:  46 % - Ellipsoid 4r
+----       Current Progress:  46 % - Ellipsoid 5q
+Memory: 651/651 677/678
+----       Current Progress:  46 % - Ellipsoid 6q
+----       Current Progress:  46 % - Ellipsoid 7q
+----       Current Progress:  46 % - Ellipsoid 8q
+----       Current Progress:  47 % - Ellipsoid 9i
+----       Current Progress:  47 % - Ellipsoid 10i
+----       Current Progress:  47 % - Ellipsoid 11h
+----       Current Progress:  47 % - Ellipsoid 12h
+----       Current Progress:  47 % - Ellipsoid 13h
+----       Current Progress:  47 % - Ellipsoid 14h
+----       Current Progress:  47 % - Ellipsoid 15h
+----       Current Progress:  48 % - Ellipsoid 16h
+----       Current Progress:  48 % - Ellipsoid 17h
+----       Current Progress:  48 % - Ellipsoid 18h
+----       Current Progress:  48 % - Union 9
+----       Current Progress:  48 % - Performing Boolean operation
+Memory: 655/655 682/682
+----       Current Progress:  49 % - Ellipsoid 1r
+Memory: 659/659 684/685
+-----      Current Progress:  50 % - Ellipsoid 2s
+-----      Current Progress:  50 % - Ellipsoid 3s
+-----      Current Progress:  50 % - Ellipsoid 4s
+Memory: 660/660 685/685
+-----      Current Progress:  50 % - Ellipsoid 5r
+Memory: 660/660 686/686
+-----      Current Progress:  50 % - Ellipsoid 6r
+-----      Current Progress:  50 % - Ellipsoid 7r
+-----      Current Progress:  51 % - Ellipsoid 8r
+-----      Current Progress:  51 % - Ellipsoid 35
+-----      Current Progress:  51 % - Ellipsoid 36
+-----      Current Progress:  51 % - Ellipsoid 1s
+-----      Current Progress:  51 % - Ellipsoid 2t
+-----      Current Progress:  51 % - Ellipsoid 3t
+-----      Current Progress:  51 % - Ellipsoid 4t
+Memory: 660/661 686/686
+-----      Current Progress:  52 % - Ellipsoid 5s
+Memory: 661/661 686/686
+-----      Current Progress:  52 % - Ellipsoid 6s
+-----      Current Progress:  52 % - Ellipsoid 7s
+-----      Current Progress:  52 % - Ellipsoid 8s
+-----      Current Progress:  52 % - Ellipsoid 9j
+-----      Current Progress:  52 % - Ellipsoid 10j
+Memory: 660/661 685/686
+-----      Current Progress:  52 % - Ellipsoid 11i
+-----      Current Progress:  53 % - Ellipsoid 12i
+-----      Current Progress:  53 % - Ellipsoid 13i
+Memory: 660/661 686/686
+-----      Current Progress:  53 % - Ellipsoid 14i
+-----      Current Progress:  53 % - Ellipsoid 15i
+Memory: 661/661 686/686
+-----      Current Progress:  53 % - Ellipsoid 16i
+-----      Current Progress:  53 % - Ellipsoid 17i
+-----      Current Progress:  53 % - Ellipsoid 18i
+Memory: 661/661 687/687
+-----      Current Progress:  54 % - Union 10
+-----      Current Progress:  54 % - Performing Boolean operation
+Memory: 665/665 691/691
+-----      Current Progress:  55 % - Ellipsoid 1t
+Memory: 669/669 695/695
+-----      Current Progress:  55 % - Ellipsoid 2u
+Memory: 670/670 695/695
+-----      Current Progress:  55 % - Ellipsoid 3u
+-----      Current Progress:  55 % - Ellipsoid 4u
+-----      Current Progress:  56 % - Ellipsoid 5t
+-----      Current Progress:  56 % - Ellipsoid 6t
+-----      Current Progress:  56 % - Ellipsoid 7t
+-----      Current Progress:  56 % - Ellipsoid 8t
+-----      Current Progress:  56 % - Ellipsoid 37
+-----      Current Progress:  56 % - Ellipsoid 38
+-----      Current Progress:  56 % - Ellipsoid 1u
+-----      Current Progress:  57 % - Ellipsoid 2v
+-----      Current Progress:  57 % - Ellipsoid 3v
+-----      Current Progress:  57 % - Ellipsoid 4v
+-----      Current Progress:  57 % - Ellipsoid 5u
+-----      Current Progress:  57 % - Ellipsoid 6u
+-----      Current Progress:  57 % - Ellipsoid 7u
+-----      Current Progress:  57 % - Ellipsoid 8u
+-----      Current Progress:  58 % - Ellipsoid 9k
+-----      Current Progress:  58 % - Ellipsoid 10k
+-----      Current Progress:  58 % - Ellipsoid 11j
+-----      Current Progress:  58 % - Ellipsoid 12j
+-----      Current Progress:  58 % - Ellipsoid 13j
+-----      Current Progress:  58 % - Ellipsoid 14j
+-----      Current Progress:  58 % - Ellipsoid 15j
+-----      Current Progress:  59 % - Ellipsoid 16j
+-----      Current Progress:  59 % - Ellipsoid 17j
+-----      Current Progress:  59 % - Ellipsoid 18j
+-----      Current Progress:  59 % - Union 11
+-----      Current Progress:  59 % - Performing Boolean operation
+Memory: 675/675 700/700
+------     Current Progress:  60 % - Ellipsoid 1v
+Memory: 680/680 705/705
+------     Current Progress:  61 % - Ellipsoid 2w
+------     Current Progress:  61 % - Ellipsoid 3w
+------     Current Progress:  61 % - Ellipsoid 4w
+------     Current Progress:  61 % - Ellipsoid 5v
+------     Current Progress:  61 % - Ellipsoid 6v
+------     Current Progress:  61 % - Ellipsoid 7v
+------     Current Progress:  61 % - Ellipsoid 8v
+------     Current Progress:  62 % - Ellipsoid 39
+------     Current Progress:  62 % - Ellipsoid 40
+------     Current Progress:  62 % - Ellipsoid 1w
+------     Current Progress:  62 % - Ellipsoid 2x
+------     Current Progress:  62 % - Ellipsoid 3x
+Memory: 681/681 705/705
+------     Current Progress:  62 % - Ellipsoid 4x
+------     Current Progress:  62 % - Ellipsoid 5w
+------     Current Progress:  63 % - Ellipsoid 6w
+------     Current Progress:  63 % - Ellipsoid 7w
+------     Current Progress:  63 % - Ellipsoid 8w
+------     Current Progress:  63 % - Ellipsoid 9l
+Memory: 681/681 706/706
+------     Current Progress:  63 % - Ellipsoid 10l
+------     Current Progress:  63 % - Ellipsoid 11k
+------     Current Progress:  63 % - Ellipsoid 12k
+------     Current Progress:  64 % - Ellipsoid 13k
+------     Current Progress:  64 % - Ellipsoid 14k
+------     Current Progress:  64 % - Ellipsoid 15k
+Memory: 685/685 710/710
+------     Current Progress:  64 % - Ellipsoid 16k
+Memory: 690/690 715/715
+------     Current Progress:  64 % - Ellipsoid 17k
+Memory: 693/693 718/718
+------     Current Progress:  64 % - Ellipsoid 18k
+Memory: 695/695 720/720
+------     Current Progress:  64 % - Union 12
+Memory: 700/700 725/725
+------     Current Progress:  64 % - Performing Boolean operation
+Memory: 697/701 721/725
+------     Current Progress:  66 % - Ellipsoid 1x
+Memory: 698/701 722/725
+------     Current Progress:  66 % - Ellipsoid 2.24
+------     Current Progress:  66 % - Ellipsoid 3.24
+------     Current Progress:  66 % - Ellipsoid 4.24
+------     Current Progress:  66 % - Ellipsoid 5x
+------     Current Progress:  67 % - Ellipsoid 6x
+------     Current Progress:  67 % - Ellipsoid 7x
+------     Current Progress:  67 % - Ellipsoid 8x
+------     Current Progress:  67 % - Ellipsoid 41
+------     Current Progress:  67 % - Ellipsoid 42
+------     Current Progress:  67 % - Ellipsoid 1.24
+------     Current Progress:  67 % - Ellipsoid 2.25
+------     Current Progress:  68 % - Ellipsoid 3.25
+------     Current Progress:  68 % - Ellipsoid 4.25
+------     Current Progress:  68 % - Ellipsoid 5.24
+------     Current Progress:  68 % - Ellipsoid 6.24
+------     Current Progress:  68 % - Ellipsoid 7.24
+------     Current Progress:  68 % - Ellipsoid 8.24
+------     Current Progress:  68 % - Ellipsoid 9m
+------     Current Progress:  69 % - Ellipsoid 10m
+------     Current Progress:  69 % - Ellipsoid 11l
+------     Current Progress:  69 % - Ellipsoid 12l
+------     Current Progress:  69 % - Ellipsoid 13l
+------     Current Progress:  69 % - Ellipsoid 14l
+Memory: 698/701 721/725
+------     Current Progress:  69 % - Ellipsoid 15l
+Memory: 699/701 722/725
+------     Current Progress:  69 % - Ellipsoid 16l
+-------    Current Progress:  70 % - Ellipsoid 17l
+-------    Current Progress:  70 % - Ellipsoid 18l
+-------    Current Progress:  70 % - Union 13
+-------    Current Progress:  70 % - Performing Boolean operation
+Memory: 702/702 726/726
+-------    Current Progress:  71 % - Ellipsoid 1.25
+Memory: 707/707 734/734
+-------    Current Progress:  71 % - Ellipsoid 2.26
+-------    Current Progress:  72 % - Ellipsoid 3.26
+-------    Current Progress:  72 % - Ellipsoid 4.26
+-------    Current Progress:  72 % - Ellipsoid 5.25
+-------    Current Progress:  72 % - Ellipsoid 6.25
+-------    Current Progress:  72 % - Ellipsoid 7.25
+-------    Current Progress:  72 % - Ellipsoid 8.25
+-------    Current Progress:  72 % - Ellipsoid 43
+-------    Current Progress:  73 % - Ellipsoid 44
+-------    Current Progress:  73 % - Ellipsoid 1.26
+-------    Current Progress:  73 % - Ellipsoid 2.27
+-------    Current Progress:  73 % - Ellipsoid 3.27
+-------    Current Progress:  73 % - Ellipsoid 4.27
+-------    Current Progress:  73 % - Ellipsoid 5.26
+-------    Current Progress:  73 % - Ellipsoid 6.26
+-------    Current Progress:  74 % - Ellipsoid 7.26
+-------    Current Progress:  74 % - Ellipsoid 8.26
+Memory: 708/708 734/734
+-------    Current Progress:  74 % - Ellipsoid 9n
+-------    Current Progress:  74 % - Ellipsoid 10n
+-------    Current Progress:  74 % - Ellipsoid 11m
+-------    Current Progress:  74 % - Ellipsoid 12m
+-------    Current Progress:  74 % - Ellipsoid 13m
+-------    Current Progress:  75 % - Ellipsoid 14m
+-------    Current Progress:  75 % - Ellipsoid 15m
+Memory: 708/708 735/735
+-------    Current Progress:  75 % - Ellipsoid 16m
+-------    Current Progress:  75 % - Ellipsoid 17m
+-------    Current Progress:  75 % - Ellipsoid 18m
+-------    Current Progress:  75 % - Union 14
+-------    Current Progress:  75 % - Performing Boolean operation
+Memory: 713/713 740/740
+-------    Current Progress:  77 % - Ellipsoid 1.27
+Memory: 717/717 743/743
+-------    Current Progress:  77 % - Ellipsoid 2.28
+-------    Current Progress:  77 % - Ellipsoid 3.28
+-------    Current Progress:  77 % - Ellipsoid 4.28
+-------    Current Progress:  77 % - Ellipsoid 5.27
+-------    Current Progress:  77 % - Ellipsoid 6.27
+-------    Current Progress:  78 % - Ellipsoid 7.27
+-------    Current Progress:  78 % - Ellipsoid 8.27
+-------    Current Progress:  78 % - Ellipsoid 45
+-------    Current Progress:  78 % - Ellipsoid 46
+-------    Current Progress:  78 % - Ellipsoid 1.28
+-------    Current Progress:  78 % - Ellipsoid 2.29
+-------    Current Progress:  78 % - Ellipsoid 3.29
+-------    Current Progress:  79 % - Ellipsoid 4.29
+-------    Current Progress:  79 % - Ellipsoid 5.28
+-------    Current Progress:  79 % - Ellipsoid 6.28
+-------    Current Progress:  79 % - Ellipsoid 7.28
+-------    Current Progress:  79 % - Ellipsoid 8.28
+-------    Current Progress:  79 % - Ellipsoid 9o
+-------    Current Progress:  79 % - Ellipsoid 10o
+--------   Current Progress:  80 % - Ellipsoid 11n
+--------   Current Progress:  80 % - Ellipsoid 12n
+--------   Current Progress:  80 % - Ellipsoid 13n
+--------   Current Progress:  80 % - Ellipsoid 14n
+--------   Current Progress:  80 % - Ellipsoid 15n
+--------   Current Progress:  80 % - Ellipsoid 16n
+--------   Current Progress:  80 % - Ellipsoid 17n
+--------   Current Progress:  81 % - Ellipsoid 18n
+Memory: 718/718 743/743
+--------   Current Progress:  81 % - Union 15
+--------   Current Progress:  81 % - Performing Boolean operation
+Memory: 722/722 748/748
+--------   Current Progress:  82 % - Ellipsoid 1.29
+Memory: 726/726 756/756
+--------   Current Progress:  82 % - Ellipsoid 2.30
+Memory: 727/727 756/756
+--------   Current Progress:  82 % - Ellipsoid 3.30
+Memory: 728/728 758/758
+--------   Current Progress:  83 % - Ellipsoid 4.30
+--------   Current Progress:  83 % - Ellipsoid 5.29
+--------   Current Progress:  83 % - Ellipsoid 6.29
+--------   Current Progress:  83 % - Ellipsoid 7.29
+--------   Current Progress:  83 % - Ellipsoid 8.29
+--------   Current Progress:  83 % - Ellipsoid 47
+--------   Current Progress:  84 % - Ellipsoid 48
+--------   Current Progress:  84 % - Ellipsoid 1.30
+--------   Current Progress:  84 % - Ellipsoid 2.31
+--------   Current Progress:  84 % - Ellipsoid 3.31
+--------   Current Progress:  84 % - Ellipsoid 4.31
+--------   Current Progress:  84 % - Ellipsoid 5.30
+--------   Current Progress:  84 % - Ellipsoid 6.30
+--------   Current Progress:  85 % - Ellipsoid 7.30
+--------   Current Progress:  85 % - Ellipsoid 8.30
+--------   Current Progress:  85 % - Ellipsoid 9p
+--------   Current Progress:  85 % - Ellipsoid 10p
+--------   Current Progress:  85 % - Ellipsoid 11o
+Memory: 729/729 758/758
+--------   Current Progress:  85 % - Ellipsoid 12o
+--------   Current Progress:  85 % - Ellipsoid 13o
+--------   Current Progress:  86 % - Ellipsoid 14o
+--------   Current Progress:  86 % - Ellipsoid 15o
+--------   Current Progress:  86 % - Ellipsoid 16o
+--------   Current Progress:  86 % - Ellipsoid 17o
+--------   Current Progress:  86 % - Ellipsoid 18o
+--------   Current Progress:  86 % - Union 16
+--------   Current Progress:  86 % - Performing Boolean operation
+Memory: 713/729 743/758
+--------   Current Progress:  88 % - Ellipsoid 1.31
+Memory: 719/729 749/758
+--------   Current Progress:  88 % - Ellipsoid 2.32
+--------   Current Progress:  88 % - Ellipsoid 3.32
+--------   Current Progress:  88 % - Ellipsoid 4.32
+Memory: 724/729 754/758
+--------   Current Progress:  88 % - Ellipsoid 5.31
+Memory: 726/729 756/758
+--------   Current Progress:  88 % - Ellipsoid 6.31
+--------   Current Progress:  89 % - Ellipsoid 7.31
+--------   Current Progress:  89 % - Ellipsoid 8.31
+--------   Current Progress:  89 % - Ellipsoid 49
+--------   Current Progress:  89 % - Ellipsoid 50
+--------   Current Progress:  89 % - Ellipsoid 1.32
+--------   Current Progress:  89 % - Ellipsoid 2.33
+--------   Current Progress:  89 % - Ellipsoid 3.33
+---------  Current Progress:  90 % - Ellipsoid 4.33
+---------  Current Progress:  90 % - Ellipsoid 5.32
+---------  Current Progress:  90 % - Ellipsoid 6.32
+---------  Current Progress:  90 % - Ellipsoid 7.32
+---------  Current Progress:  90 % - Ellipsoid 8.32
+---------  Current Progress:  90 % - Ellipsoid 9q
+---------  Current Progress:  90 % - Ellipsoid 10q
+---------  Current Progress:  91 % - Ellipsoid 11p
+---------  Current Progress:  91 % - Ellipsoid 12p
+---------  Current Progress:  91 % - Ellipsoid 13p
+---------  Current Progress:  91 % - Ellipsoid 14p
+---------  Current Progress:  91 % - Ellipsoid 15p
+---------  Current Progress:  91 % - Ellipsoid 16p
+Memory: 727/729 756/758
+---------  Current Progress:  91 % - Ellipsoid 17p
+---------  Current Progress:  92 % - Ellipsoid 18p
+---------  Current Progress:  92 % - Union 17
+---------  Current Progress:  92 % - Performing Boolean operation
+Memory: 730/730 760/760
+---------  Current Progress:  93 % - Ellipsoid 1.33
+Memory: 735/735 764/764
+---------  Current Progress:  93 % - Ellipsoid 2.34
+---------  Current Progress:  93 % - Ellipsoid 3.34
+---------  Current Progress:  94 % - Ellipsoid 4.34
+---------  Current Progress:  94 % - Ellipsoid 5.33
+---------  Current Progress:  94 % - Ellipsoid 6.33
+---------  Current Progress:  94 % - Ellipsoid 7.33
+Memory: 736/736 765/765
+---------  Current Progress:  94 % - Ellipsoid 8.33
+---------  Current Progress:  94 % - Ellipsoid 51
+---------  Current Progress:  94 % - Ellipsoid 52
+---------  Current Progress:  95 % - Ellipsoid 1.34
+---------  Current Progress:  95 % - Ellipsoid 2.35
+---------  Current Progress:  95 % - Ellipsoid 3.35
+---------  Current Progress:  95 % - Ellipsoid 4.35
+---------  Current Progress:  95 % - Ellipsoid 5.34
+Memory: 739/739 768/768
+---------  Current Progress:  95 % - Ellipsoid 6.34
+Memory: 743/744 772/773
+---------  Current Progress:  95 % - Ellipsoid 7.34
+Memory: 744/744 775/775
+---------  Current Progress:  96 % - Ellipsoid 8.34
+Memory: 749/752 778/781
+---------  Current Progress:  96 % - Ellipsoid 9r
+Memory: 752/752 781/781
+---------  Current Progress:  96 % - Ellipsoid 10r
+---------  Current Progress:  96 % - Ellipsoid 11q
+Memory: 750/752 779/781
+---------  Current Progress:  96 % - Ellipsoid 12q
+---------  Current Progress:  96 % - Ellipsoid 13q
+---------  Current Progress:  96 % - Ellipsoid 14q
+---------  Current Progress:  97 % - Ellipsoid 15q
+---------  Current Progress:  97 % - Ellipsoid 16q
+---------  Current Progress:  97 % - Ellipsoid 17q
+---------  Current Progress:  97 % - Ellipsoid 18q
+---------  Current Progress:  97 % - Union 18
+---------  Current Progress:  97 % - Performing Boolean operation
+Memory: 751/752 779/781
+---------  Current Progress:  99 % - Union 19
+Memory: 755/755 782/782
+---------  Current Progress:  99 % - Performing Boolean operation
+Memory: 791/791 819/819
+           Current Progress:   0 % - Intersection 2
+Memory: 955/998 993/1026
+           Current Progress:   0 % - Performing Boolean operation
+Memory: 1012/1012 1057/1057
+           Current Progress:   0 % - Difference
+Memory: 1050/1050 1094/1094
+           Current Progress:   0 % - Performing Boolean operation
+Memory: 1117/1117 1160/1160
+           Current Progress:   0 % - Union 20
+Memory: 1467/1472 1550/1558
+           Current Progress:   0 % - Performing Boolean operation
+Memory: 1537/1537 1620/1620
+           Current Progress:   0 % - Geometry 1
+Memory: 1878/2721 1966/2814
+           Current Progress:   0 % - Form Union
+           Current Progress:   0 % - Performing Boolean operation
+Memory: 1811/2721 1898/2814
+
+/******************/
+/*****Error********/
+/******************/
+Error running java class.
+Error while building 'Form Union' in 'Geometry 1':
+Boolean geometry operation failed.
+Boolean geometry operation failed.
+ - Class: final_freeze_probe_v2_comsol_builder
+Saving model: C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output_final_freeze_probe_v2\build\final_freeze_probe_v2_generated_Model.mph
+Save time: 8 s.
+Total time: 2568 s.

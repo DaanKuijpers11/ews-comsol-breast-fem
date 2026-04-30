@@ -8,6 +8,26 @@ def _unit_vector(vec):
     return vec / norm
 
 
+def _clamp_point_before_nipple(point, nipple, clearance):
+    """
+    Keep a template point posterior to the nipple by enforcing a minimum
+    Euclidean clearance from the nipple center.
+    """
+    point = np.array(point, dtype=float)
+    nipple = np.array(nipple, dtype=float)
+    vec = point - nipple
+    dist = np.linalg.norm(vec)
+    if dist < 1e-12:
+        point = nipple + np.array([0.0, -abs(clearance), 0.0], dtype=float)
+    elif dist < clearance:
+        point = nipple + vec / dist * clearance
+
+    # Also enforce an anterior stop plane so no duct point can poke through
+    # the nipple/areola region in the y-direction even if xz offset is large.
+    point[1] = min(point[1], nipple[1] - abs(clearance))
+    return point
+
+
 def _append_droplet_chain(
     lobules,
     base_center,
@@ -18,6 +38,8 @@ def _append_droplet_chain(
     amp_rho,
     droplet_length,
     droplet_components,
+    lobe_id=None,
+    ring_name=None,
 ):
     """
     Approximate a teardrop lobule by chaining Gaussian components from bulb to duct.
@@ -43,6 +65,11 @@ def _append_droplet_chain(
                 "amp_c1": amp_c1 * amp_scale,
                 "amp_c2": amp_c2 * amp_scale,
                 "amp_rho": amp_rho * amp_scale,
+                "lobe_id": lobe_id,
+                "ring_name": ring_name,
+                "component_index": idx,
+                "component_count": n_comp,
+                "component_role": "bulb" if idx == 0 else "duct",
             }
         )
 
@@ -121,11 +148,15 @@ def _generate_chen_double_ring_lobules(
     nipple = np.array(nipple, dtype=float)
     lobules = []
 
-    def add_ring(count, ring_radius, depth, width_scale, phase):
+    lobe_counter = 0
+
+    def add_ring(count, ring_radius, depth, width_scale, phase, ring_name):
+        nonlocal lobe_counter
         if count <= 0:
             return
         angles = np.linspace(0.0, 2.0 * np.pi, count, endpoint=False) + phase
         for phi in angles:
+            lobe_counter += 1
             base_center = np.array(
                 [
                     ring_radius * np.cos(phi),
@@ -145,6 +176,8 @@ def _generate_chen_double_ring_lobules(
                 amp_rho=amp_rho,
                 droplet_length=droplet_length,
                 droplet_components=droplet_components,
+                lobe_id=lobe_counter,
+                ring_name=ring_name,
             )
 
     add_ring(
@@ -153,6 +186,7 @@ def _generate_chen_double_ring_lobules(
         depth=inner_depth,
         width_scale=1.05,
         phase=0.0,
+        ring_name="inner",
     )
     add_ring(
         count=outer_ring_count,
@@ -160,8 +194,230 @@ def _generate_chen_double_ring_lobules(
         depth=outer_depth,
         width_scale=0.95,
         phase=np.pi / max(1, outer_ring_count),
+        ring_name="outer",
     )
 
+    return lobules
+
+
+def _generate_chen_duct_lobes(
+    nipple,
+    width,
+    amp_c1,
+    amp_c2,
+    amp_rho,
+    seed,
+    inner_ring_count,
+    outer_ring_count,
+    inner_ring_radius,
+    outer_ring_radius,
+    inner_depth,
+    outer_depth,
+    droplet_length,
+):
+    """
+    COMSOL-oriented Chen-like lobe layout:
+    - 18 anatomical lobes (8 inner + 10 outer)
+    - each lobe represented by two primitives:
+      1) a posterior bulb/sac
+      2) an anterior duct directed toward the nipple
+    """
+    rng = np.random.default_rng(seed)
+    nipple = np.array(nipple, dtype=float)
+    lobules = []
+    lobe_counter = 0
+
+    def add_ring(count, ring_radius, depth, width_scale, phase, ring_name):
+        nonlocal lobe_counter
+        if count <= 0:
+            return
+        angles = np.linspace(0.0, 2.0 * np.pi, count, endpoint=False) + phase
+        for phi in angles:
+            lobe_counter += 1
+            bulb_center = np.array(
+                [
+                    ring_radius * np.cos(phi),
+                    nipple[1] - depth,
+                    ring_radius * np.sin(phi),
+                ],
+                dtype=float,
+            )
+            bulb_center += rng.normal(0.0, width * 0.04, size=3)
+
+            toward_nipple = _unit_vector(nipple - bulb_center)
+            duct_center = bulb_center + toward_nipple * (0.58 * droplet_length)
+
+            bulb_width = width * width_scale
+            duct_width = bulb_width * 0.48
+
+            lobules.append(
+                {
+                    "center": bulb_center.tolist(),
+                    "width": bulb_width,
+                    "width_x": bulb_width * 0.95,
+                    "width_y": bulb_width * 1.22,
+                    "width_z": bulb_width * 0.95,
+                    "amp_c1": amp_c1,
+                    "amp_c2": amp_c2,
+                    "amp_rho": amp_rho,
+                    "lobe_id": lobe_counter,
+                    "ring_name": ring_name,
+                    "component_index": 0,
+                    "component_count": 2,
+                    "component_role": "bulb",
+                }
+            )
+            lobules.append(
+                {
+                    "center": duct_center.tolist(),
+                    "width": duct_width,
+                    "width_x": duct_width * 0.70,
+                    "width_y": max(droplet_length * 0.72, duct_width * 1.8),
+                    "width_z": duct_width * 0.70,
+                    "amp_c1": amp_c1 * 0.92,
+                    "amp_c2": amp_c2 * 0.92,
+                    "amp_rho": amp_rho * 0.92,
+                    "lobe_id": lobe_counter,
+                    "ring_name": ring_name,
+                    "component_index": 1,
+                    "component_count": 2,
+                    "component_role": "duct",
+                }
+            )
+
+    add_ring(
+        count=inner_ring_count,
+        ring_radius=inner_ring_radius,
+        depth=inner_depth,
+        width_scale=1.02,
+        phase=0.0,
+        ring_name="inner",
+    )
+    add_ring(
+        count=outer_ring_count,
+        ring_radius=outer_ring_radius,
+        depth=outer_depth,
+        width_scale=0.92,
+        phase=np.pi / max(1, outer_ring_count),
+        ring_name="outer",
+    )
+
+    return lobules
+
+
+def _generate_chen_template_lobes(
+    nipple,
+    width,
+    amp_c1,
+    amp_c2,
+    amp_rho,
+    seed,
+    inner_ring_count,
+    outer_ring_count,
+    inner_ring_radius,
+    outer_ring_radius,
+    inner_depth,
+    outer_depth,
+    droplet_length,
+    hub_offset_y,
+    nipple_clearance_mid,
+    nipple_clearance_tip,
+):
+    """
+    Generate 18 anatomical lobe templates for COMSOL placement.
+
+    Each template describes one lobe with:
+    - a posterior bulb center and radii
+    - a sidecar offset to avoid perfect ellipsoid bulbs
+    - a curved duct represented by a mid point and a distal tip that stops
+      short of the nipple/areola region
+    """
+    rng = np.random.default_rng(seed)
+    nipple = np.array(nipple, dtype=float)
+    lobules = []
+    lobe_counter = 0
+    hub_center = nipple - np.array([0.0, hub_offset_y, 0.0], dtype=float)
+
+    def add_ring(count, ring_radius, depth, width_scale, phase, ring_name):
+        nonlocal lobe_counter
+        if count <= 0:
+            return
+        angles = np.linspace(0.0, 2.0 * np.pi, count, endpoint=False) + phase
+        for phi in angles:
+            lobe_counter += 1
+            bulb_center = np.array(
+                [
+                    ring_radius * np.cos(phi),
+                    nipple[1] - depth,
+                    ring_radius * np.sin(phi),
+                ],
+                dtype=float,
+            )
+            jitter = rng.normal(0.0, width * 0.010, size=3)
+            jitter[1] = 0.0
+            bulb_center += jitter
+
+            toward_hub = _unit_vector(hub_center - bulb_center)
+            tangent = np.array([-np.sin(phi), 0.0, np.cos(phi)], dtype=float)
+            tangent = _unit_vector(tangent)
+            radial = np.array([np.cos(phi), 0.0, np.sin(phi)], dtype=float)
+            radial = _unit_vector(radial)
+
+            is_outer = ring_name == "outer"
+            curvature = 0.0012 if is_outer else 0.0007
+            posterior_bias = 0.72 if is_outer else 0.64
+            duct_mid = bulb_center + toward_hub * (posterior_bias * droplet_length)
+            duct_mid += tangent * curvature
+            duct_mid -= radial * ((0.02 if is_outer else 0.01) * width)
+            duct_mid = _clamp_point_before_nipple(duct_mid, nipple, nipple_clearance_mid)
+
+            target_tip = hub_center.copy()
+            target_tip += tangent * ((0.0010 if is_outer else 0.0006) * np.sign(np.sin(phi + 1e-9)))
+            target_tip += radial * (0.0005 if is_outer else 0.0003)
+            duct_tip = _clamp_point_before_nipple(target_tip, nipple, nipple_clearance_tip)
+
+            bulb_width = width * width_scale * (1.18 if is_outer else 1.16)
+            bulb_sidecar = bulb_center + radial * (0.82 * bulb_width) - tangent * (0.10 * bulb_width)
+            bulb_sidecar[1] -= 0.18 * bulb_width
+
+            lobules.append(
+                {
+                    "center": bulb_center.tolist(),
+                    "width": bulb_width,
+                    "width_x": bulb_width * (0.78 if is_outer else 0.82),
+                    "width_y": bulb_width * (2.05 if is_outer else 1.92),
+                    "width_z": bulb_width * (0.82 if is_outer else 0.86),
+                    "amp_c1": amp_c1,
+                    "amp_c2": amp_c2,
+                    "amp_rho": amp_rho,
+                    "lobe_id": lobe_counter,
+                    "ring_name": ring_name,
+                    "component_index": 0,
+                    "component_count": 1,
+                    "component_role": "bulb",
+                    "template_kind": "duct_lobe",
+                    "duct_mid": duct_mid.tolist(),
+                    "duct_tip": duct_tip.tolist(),
+                    "bulb_sidecar": bulb_sidecar.tolist(),
+                }
+            )
+
+    add_ring(
+        count=inner_ring_count,
+        ring_radius=inner_ring_radius,
+        depth=inner_depth,
+        width_scale=1.00,
+        phase=0.0,
+        ring_name="inner",
+    )
+    add_ring(
+        count=outer_ring_count,
+        ring_radius=outer_ring_radius,
+        depth=outer_depth,
+        width_scale=1.00,
+        phase=0.0,
+        ring_name="outer",
+    )
     return lobules
 
 
@@ -184,6 +440,9 @@ def generate_lobules(
     outer_depth=0.020,
     droplet_length=0.007,
     droplet_components=2,
+    hub_offset_y=0.0125,
+    nipple_clearance_mid=0.015,
+    nipple_clearance_tip=0.011,
     seed=42,
 ):
     """
@@ -205,6 +464,46 @@ def generate_lobules(
             outer_depth=outer_depth,
             droplet_length=droplet_length,
             droplet_components=droplet_components,
+        )
+
+    if generator_mode == "chen_2024_duct_lobes":
+        return _generate_chen_duct_lobes(
+            nipple=nipple,
+            width=width,
+            amp_c1=amp_c1,
+            amp_c2=amp_c2,
+            amp_rho=amp_rho,
+            seed=seed,
+            inner_ring_count=inner_ring_count,
+            outer_ring_count=outer_ring_count,
+            inner_ring_radius=inner_ring_radius,
+            outer_ring_radius=outer_ring_radius,
+            inner_depth=inner_depth,
+            outer_depth=outer_depth,
+            droplet_length=droplet_length,
+            hub_offset_y=hub_offset_y,
+            nipple_clearance_mid=nipple_clearance_mid,
+            nipple_clearance_tip=nipple_clearance_tip,
+        )
+
+    if generator_mode == "chen_2024_template_lobes":
+        return _generate_chen_template_lobes(
+            nipple=nipple,
+            width=width,
+            amp_c1=amp_c1,
+            amp_c2=amp_c2,
+            amp_rho=amp_rho,
+            seed=seed,
+            inner_ring_count=inner_ring_count,
+            outer_ring_count=outer_ring_count,
+            inner_ring_radius=inner_ring_radius,
+            outer_ring_radius=outer_ring_radius,
+            inner_depth=inner_depth,
+            outer_depth=outer_depth,
+            droplet_length=droplet_length,
+            hub_offset_y=hub_offset_y,
+            nipple_clearance_mid=nipple_clearance_mid,
+            nipple_clearance_tip=nipple_clearance_tip,
         )
 
     return _generate_fan_lobules(

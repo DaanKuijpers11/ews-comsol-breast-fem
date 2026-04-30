@@ -14,11 +14,15 @@ auto_build_from_java = true
 java_compile_first = true
 jdk_root = "C:/Program Files/Eclipse Adoptium/jdk-21.0.10.7-hotspot"
 extra_args = [  ]
+java_compile_timeout_s = 300
+java_build_timeout_s = 0
+solve_timeout_s = 0
+postprocess_timeout_s = 900
 
 [source]
-base_case_toml = "../elipse_lobules_testcases/chen2024_droplet_auto/chen2024_droplet_auto.toml"
+base_case_toml = "./chen2024_droplet_auto_comsol_source.toml"
 reuse_febio_prepare = true
 export_mesh_npz = true
 export_mesh_csv = true
 export_lobules_json = true
-notes = "Prepare step reuses FEBio geometry/lobule generation and exports COMSOL-ready artefacts."
+notes = "Prepare step reuses a COMSOL-specific Chen-2024 source case and exports COMSOL-ready artefacts."

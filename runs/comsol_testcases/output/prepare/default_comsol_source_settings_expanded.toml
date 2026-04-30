@@ -53,6 +53,9 @@ inner_depth = 0.012
 outer_depth = 0.02
 droplet_length = 0.007
 droplet_components = 2
+hub_offset_y = 0.0125
+nipple_clearance_mid = 0.015
+nipple_clearance_tip = 0.011
 
 
 [material.adipose]
@@ -89,6 +92,9 @@ inner_depth = 0.012
 outer_depth = 0.02
 droplet_length = 0.007
 droplet_components = 2
+hub_offset_y = 0.0125
+nipple_clearance_mid = 0.015
+nipple_clearance_tip = 0.011
 
 
 [material.glandular]
@@ -110,20 +116,23 @@ n_per_lobe = 5
 nipple = [ 0.0, 0.068, 0.0,]
 lobe_length = 0.03
 spread_angle = 2.0
-width = 0.0042
+width = 0.0076
 amp_c1 = 70.0
 amp_c2 = 55.0
 amp_rho = 35.0
 seed = 42
-generator_mode = "chen_2024_double_ring"
-inner_ring_count = 8
-outer_ring_count = 10
-inner_ring_radius = 0.005
-outer_ring_radius = 0.009
-inner_depth = 0.012
-outer_depth = 0.02
-droplet_length = 0.007
+generator_mode = "chen_2024_template_lobes"
+inner_ring_count = 6
+outer_ring_count = 12
+inner_ring_radius = 0.0135
+outer_ring_radius = 0.027
+inner_depth = 0.03
+outer_depth = 0.046
+droplet_length = 0.022
 droplet_components = 2
+hub_offset_y = 0.0125
+nipple_clearance_mid = 0.015
+nipple_clearance_tip = 0.011
 
 
 [material.tumor]

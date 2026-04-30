@@ -214,6 +214,15 @@ class Lobule(BaseModel):
     amp_c1: float = 0.0
     amp_c2: float = 0.0
     amp_rho: float = 0.0
+    lobe_id: int | None = None
+    ring_name: str | None = None
+    component_index: int | None = None
+    component_count: int | None = None
+    component_role: Literal["bulb", "duct"] | None = None
+    template_kind: str | None = None
+    duct_mid: tuple[float, float, float] | None = None
+    duct_tip: tuple[float, float, float] | None = None
+    bulb_sidecar: tuple[float, float, float] | None = None
 
 
 class Heterogeneity(BaseModel):
@@ -263,7 +272,7 @@ class Heterogeneity(BaseModel):
     seed: int = 42
 
     # Auto-generator selection
-    generator_mode: Literal["fan", "chen_2024_double_ring"] = "fan"
+    generator_mode: Literal["fan", "chen_2024_double_ring", "chen_2024_duct_lobes", "chen_2024_template_lobes"] = "fan"
 
     # Chen-inspired double-ring lobe layout
     inner_ring_count: int = 8
@@ -274,6 +283,12 @@ class Heterogeneity(BaseModel):
     outer_depth: float = 0.020
     droplet_length: float = 0.007
     droplet_components: int = 2
+    hub_offset_y: float = 0.0125
+    nipple_clearance_mid: float = 0.015
+    nipple_clearance_tip: float = 0.011
+    comsol_geometry_detail_mode: Literal["full", "fast"] = "full"
+    comsol_petal_segments: int = 0
+    comsol_duct_beads: int = 0
 
     def build_lobules(self) -> list[Lobule]:
         """
@@ -312,6 +327,9 @@ class Heterogeneity(BaseModel):
                 outer_depth=self.outer_depth,
                 droplet_length=self.droplet_length,
                 droplet_components=self.droplet_components,
+                hub_offset_y=self.hub_offset_y,
+                nipple_clearance_mid=self.nipple_clearance_mid,
+                nipple_clearance_tip=self.nipple_clearance_tip,
                 seed=self.seed,
             )
 
