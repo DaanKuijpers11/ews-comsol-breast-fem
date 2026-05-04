@@ -1,0 +1,35 @@
+{
+  "case_name": "full_baseline_reference_simple_gland_static_baseline",
+  "case_dir": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite",
+  "settings_file": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\full_baseline_reference_simple_gland_static_baseline.toml",
+  "model_name": "breast_model_comsol",
+  "prepare_artefacts": {
+    "source_settings_expanded_toml": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\prepare\\full_baseline_reference_simple_gland_static_baseline_source_settings_expanded.toml",
+    "mesh_nodes_csv": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\prepare\\full_baseline_reference_simple_gland_static_baseline_mesh_nodes.csv",
+    "mesh_data_npz": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\prepare\\full_baseline_reference_simple_gland_static_baseline_mesh_data.npz",
+    "mesh_summary_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\prepare\\full_baseline_reference_simple_gland_static_baseline_mesh_summary.json",
+    "lobules_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\prepare\\full_baseline_reference_simple_gland_static_baseline_lobules.json",
+    "comsol_build_plan_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\prepare\\full_baseline_reference_simple_gland_static_baseline_comsol_build_plan.json",
+    "source_case_toml": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\prepare\\full_baseline_reference_simple_gland_static_baseline_inline_source_case.toml",
+    "prepare_status_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\prepare\\full_baseline_reference_simple_gland_static_baseline_prepare_status.json",
+    "comsol_builder_java": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\build\\full_baseline_reference_simple_gland_static_baseline_comsol_builder.java",
+    "comsol_builder_readme": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\build\\full_baseline_reference_simple_gland_static_baseline_comsol_builder_README.txt",
+    "comsol_generated_mph_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\build\\full_baseline_reference_simple_gland_static_baseline_generated.mph",
+    "comsol_selection_hints_json": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\build\\full_baseline_reference_simple_gland_static_baseline_comsol_selection_hints.json",
+    "comsol_postprocess_java": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\build\\full_baseline_reference_simple_gland_static_baseline_comsol_postprocess.java",
+    "comsol_metrics_json_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\solve\\full_baseline_reference_simple_gland_static_baseline_metrics.json",
+    "comsol_build_verification_java": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\build\\full_baseline_reference_simple_gland_static_baseline_comsol_verify_build.java",
+    "comsol_solve_verification_java": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\solve\\full_baseline_reference_simple_gland_static_baseline_comsol_verify_solve.java",
+    "comsol_build_verification_json_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\build\\full_baseline_reference_simple_gland_static_baseline_build_verification.json",
+    "comsol_solve_verification_json_target": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\solve\\full_baseline_reference_simple_gland_static_baseline_solve_verification.json"
+  },
+  "resolved_case_toml": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\full_baseline_reference_simple_gland_static_baseline_resolved_case.toml",
+  "single_file_case_toml": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\full_baseline_reference_simple_gland_static_baseline_single_file_case.toml",
+  "output_layout": {
+    "root": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline",
+    "prepare": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\prepare",
+    "build": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\build",
+    "solve": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\solve",
+    "logs": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_simple_gland_static_baseline\\logs"
+  }
+}

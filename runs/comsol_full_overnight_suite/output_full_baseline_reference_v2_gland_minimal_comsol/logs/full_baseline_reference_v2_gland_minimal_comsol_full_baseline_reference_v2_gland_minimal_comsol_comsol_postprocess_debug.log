@@ -1,0 +1,22 @@
+Command: C:/Program Files/COMSOL/COMSOL64/Multiphysics/bin/win64/comsolbatch.exe -configuration C:\Users\20223231\ews_fem_clean\runs\comsol_full_overnight_suite\output_full_baseline_reference_v2_gland_minimal_comsol\build\comsol_configuration -inputfile C:\Users\20223231\ews_fem_clean\runs\comsol_full_overnight_suite\output_full_baseline_reference_v2_gland_minimal_comsol\build\full_baseline_reference_v2_gland_minimal_comsol_comsol_postprocess.class -outputfile C:\Users\20223231\ews_fem_clean\runs\comsol_full_overnight_suite\output_full_baseline_reference_v2_gland_minimal_comsol\build\full_baseline_reference_v2_gland_minimal_comsol_comsol_postprocess_output.mph -batchlog C:\Users\20223231\ews_fem_clean\runs\comsol_full_overnight_suite\output_full_baseline_reference_v2_gland_minimal_comsol\logs\full_baseline_reference_v2_gland_minimal_comsol_full_baseline_reference_v2_gland_minimal_comsol_comsol_postprocess.log
+Timeout seconds: 900
+Return code: 0
+
+=== STDOUT ===
+COMSOL_METRICS_JSON_BEGIN
+{
+  "case_name": "full_baseline_reference_v2_gland_minimal_comsol",
+  "source": "COMSOL",
+  "breast_volume": NaN,
+  "glandular_volume": NaN,
+  "adipose_volume": NaN,
+  "max_displacement_breast": NaN,
+  "avg_displacement_breast": NaN,
+  "max_von_mises_breast": NaN,
+  "max_von_mises_glandular": NaN
+}
+COMSOL_METRICS_JSON_END
+
+
+=== STDERR ===
+<empty>

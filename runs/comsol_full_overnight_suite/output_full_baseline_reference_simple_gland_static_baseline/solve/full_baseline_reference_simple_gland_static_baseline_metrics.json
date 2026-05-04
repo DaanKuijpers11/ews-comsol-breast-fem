@@ -1,0 +1,11 @@
+{
+  "case_name": "full_baseline_reference_simple_gland_static_baseline",
+  "source": "COMSOL",
+  "breast_volume": 7.501519992674088E-4,
+  "glandular_volume": 8.630109536683467E-5,
+  "adipose_volume": 6.330632965306399E-4,
+  "max_displacement_breast": 0.011846734462220345,
+  "avg_displacement_breast": 0.00662984072400828,
+  "max_von_mises_breast": 1334.7398430390997,
+  "max_von_mises_glandular": 1334.7398430390997
+}

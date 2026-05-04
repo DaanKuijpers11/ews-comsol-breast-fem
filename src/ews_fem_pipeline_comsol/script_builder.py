@@ -94,6 +94,9 @@ def generate_comsol_java_builder(
     glandular_bulk_modulus = float(glandular_material.get("bulk_modulus", 1.0))
     glandular_coef1 = float(glandular_material.get("coef1", 0.0))
     glandular_coef2 = float(glandular_material.get("coef2", 0.0))
+    skin_E, skin_nu = _linearize_mooney_rivlin(skin_material)
+    adipose_E, adipose_nu = _linearize_mooney_rivlin(adipose_material)
+    glandular_E, glandular_nu = _linearize_mooney_rivlin(glandular_material)
 
     geometry = build_plan_summary["geometry"]
     radius = float(geometry.get("radius", 0.07))
@@ -108,12 +111,21 @@ def generate_comsol_java_builder(
     gland_hetero = build_plan_summary["material"].get("glandular", {}).get("hetero", {}) or {}
     droplet_components = max(1, int(gland_hetero.get("droplet_components", 1)))
     comsol_detail_mode = str(gland_hetero.get("comsol_geometry_detail_mode", "full")).lower()
+    duct_only_detail_mode = comsol_detail_mode == "duct_only"
     comsol_petal_segments_override = max(0, int(gland_hetero.get("comsol_petal_segments", 0) or 0))
     comsol_duct_beads_override = max(0, int(gland_hetero.get("comsol_duct_beads", 0) or 0))
 
     left_pos = left_rel * radius
     nipple_pos = nipple_rel * radius
     center_pos = center_rel * radius
+    nipple_cap_radius_y = max(nipple_pos * 1.00, radius * 0.022)
+    nipple_cap_radius_x = max(center_pos * 0.42, radius * 0.020)
+    nipple_cap_radius_z = max(center_pos * 0.42, radius * 0.020)
+    nipple_cap_center_y = radius + nipple_cap_radius_y * 0.52
+    gland_nipple_radius_y = max(nipple_cap_radius_y * 0.96, radius * 0.020)
+    gland_nipple_radius_x = max(nipple_cap_radius_x * 0.90, radius * 0.017)
+    gland_nipple_radius_z = max(nipple_cap_radius_z * 0.90, radius * 0.017)
+    gland_nipple_center_y = radius + gland_nipple_radius_y * 0.46
     chest_curve_depth = min(max(chestwall_curve_depth_m, chest_thickness * 0.05), radius * 0.2)
     chest_curve_radius = ((radius * radius) + (chest_curve_depth * chest_curve_depth)) / max(2.0 * chest_curve_depth, 1e-9)
     chest_curve_center_y = chest_curve_radius - chest_curve_depth
@@ -154,7 +166,7 @@ def generate_comsol_java_builder(
         },
         "geometry_feature_tags": {
             "breast_outer": "Outer breast envelope with FEBio-style baseline and optional light thorax curvature",
-            "gland_keep_anterior": "Anterior keep region used to clip the glandular ellipsoid at the chest wall",
+            "gland_keep_anterior": "Legacy helper region from earlier gland clipping logic; no longer part of the main gland_clip intersection path.",
             "gland_clip": "Glandular source volume clipped to the breast outer volume",
             "gland_lobules": "Union of COMSOL-native lobule ellipsoids derived from the exported FEBio lobule layout",
             "adipose_diff": "Adipose outer volume minus glandular volume",
@@ -242,10 +254,14 @@ def generate_comsol_java_builder(
     nipple_z = float(nipple[2]) if isinstance(nipple, list) and len(nipple) >= 3 else 0.0
     use_template_lobes = any(str(lob.get("template_kind", "")) == "duct_lobe" for lob in lobules)
 
+    visible_lobules = list(lobules)
+    if duct_only_detail_mode:
+        visible_lobules = [lob for lob in lobules if str(lob.get("component_role", "")) == "duct"]
+
     lobule_feature_tags: list[str] = []
     lobule_specs: list[dict[str, float | str | int]] = []
     lobule_java_blocks: list[str] = []
-    for idx, lobule in enumerate(lobules, start=1):
+    for idx, lobule in enumerate(visible_lobules, start=1):
         center = lobule.get("center", [0.0, 0.0, 0.0])
         if not isinstance(center, list) or len(center) != 3:
             continue
@@ -654,8 +670,8 @@ def generate_comsol_java_builder(
         if use_lobules
         else ""
     )
-    gland_source_tag = "gland_lobules" if use_lobules else "gland_seed"
-    gland_source_objects_var = "glandLobuleObjs" if use_lobules else "glandSeedObjs"
+    gland_source_tag = "gland_lobules" if use_lobules else "gland_seed_with_nipple"
+    gland_source_objects_var = "glandLobuleObjs" if use_lobules else "glandSeedWithNippleObjs"
     lobule_union_java = (
         f"""
     String[] glandLobuleObjs = buildGlandLobules(model);
@@ -734,8 +750,7 @@ def generate_comsol_java_builder(
         shellScaffoldNotes
       );
     }}
-    model.param().set("skin_shell_scaffold_notes", shellScaffoldNotes.toString());
-    model.param().set("hyperelastic_scaffold_notes", hyperelasticNotes.toString());
+    // Do not store free-form debug notes in COMSOL parameters; they are parsed as expressions.
 """
     else:
         shell_physics_java = """
@@ -770,7 +785,7 @@ def generate_comsol_java_builder(
     } else {
       hyperelasticNotes.append("Solid Mooney-Rivlin scaffold incomplete; keeping default linear elastic fallback on solid.\\n");
     }
-    model.param().set("hyperelastic_scaffold_notes", hyperelasticNotes.toString());
+    // Do not store free-form debug notes in COMSOL parameters; they are parsed as expressions.
 """
 
     java_source = f"""import com.comsol.model.*;
@@ -804,6 +819,12 @@ public class {class_name} {{
     model.param().set("glandular_bulk_modulus", "{glandular_bulk_modulus:.12f}[Pa]");
     model.param().set("glandular_c10", "{glandular_coef1:.12f}[Pa]");
     model.param().set("glandular_c01", "{glandular_coef2:.12f}[Pa]");
+    model.param().set("skin_E", "{skin_E:.12f}[Pa]");
+    model.param().set("skin_nu", "{skin_nu:.12f}");
+    model.param().set("adipose_E", "{adipose_E:.12f}[Pa]");
+    model.param().set("adipose_nu", "{adipose_nu:.12f}");
+    model.param().set("glandular_E", "{glandular_E:.12f}[Pa]");
+    model.param().set("glandular_nu", "{glandular_nu:.12f}");
     model.param().set("chest_E", "{chest_E:.12f}[Pa]");
     model.param().set("chest_nu", "{chest_nu:.12f}");
 
@@ -823,6 +844,13 @@ public class {class_name} {{
     model.component("comp1").geom("geom1").feature("sph_outer").set("pos", "0 0 0");
     model.component("comp1").geom("geom1").feature("sph_outer").set("selresult", "on");
     model.component("comp1").geom("geom1").feature("sph_outer").set("selresultshow", "all");
+
+    model.component("comp1").geom("geom1").create("nipple_cap", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("nipple_cap").set("semiaxes", "{nipple_cap_radius_x:.8f} {nipple_cap_radius_z:.8f} {nipple_cap_radius_y:.8f}");
+    model.component("comp1").geom("geom1").feature("nipple_cap").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("nipple_cap").set("pos", "0 {nipple_cap_center_y:.8f} 0");
+    model.component("comp1").geom("geom1").feature("nipple_cap").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("nipple_cap").set("selresultshow", "all");
 
     String[] breastBaseObjs;
     if ({str(curved_chestwall_enabled).lower()}) {{
@@ -875,7 +903,7 @@ public class {class_name} {{
     }}
 
     model.component("comp1").geom("geom1").create("breast_outer", "Union");
-    model.component("comp1").geom("geom1").feature("breast_outer").selection("input").set(breastBaseObjs);
+    model.component("comp1").geom("geom1").feature("breast_outer").selection("input").set(breastBaseObjs[0], "nipple_cap");
     model.component("comp1").geom("geom1").feature("breast_outer").set("intbnd", "on");
     model.component("comp1").geom("geom1").feature("breast_outer").set("propagatesel", "on");
     model.component("comp1").geom("geom1").feature("breast_outer").set("selresult", "on");
@@ -960,10 +988,27 @@ public class {class_name} {{
     model.component("comp1").geom("geom1").feature("gland_seed").set("selresultshow", "all");
     model.component("comp1").geom("geom1").run("gland_seed");
     String[] glandSeedObjs = model.component("comp1").geom("geom1").feature("gland_seed").objectNames();
+
+    model.component("comp1").geom("geom1").create("gland_nipple_core", "Ellipsoid");
+    model.component("comp1").geom("geom1").feature("gland_nipple_core").set("semiaxes", "{gland_nipple_radius_x:.8f} {gland_nipple_radius_z:.8f} {gland_nipple_radius_y:.8f}");
+    model.component("comp1").geom("geom1").feature("gland_nipple_core").set("axistype", "y");
+    model.component("comp1").geom("geom1").feature("gland_nipple_core").set("pos", "0 {gland_nipple_center_y:.8f} 0");
+    model.component("comp1").geom("geom1").feature("gland_nipple_core").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("gland_nipple_core").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").run("gland_nipple_core");
+
+    model.component("comp1").geom("geom1").create("gland_seed_with_nipple", "Union");
+    model.component("comp1").geom("geom1").feature("gland_seed_with_nipple").selection("input").set("gland_seed", "gland_nipple_core");
+    model.component("comp1").geom("geom1").feature("gland_seed_with_nipple").set("intbnd", "on");
+    model.component("comp1").geom("geom1").feature("gland_seed_with_nipple").set("propagatesel", "on");
+    model.component("comp1").geom("geom1").feature("gland_seed_with_nipple").set("selresult", "on");
+    model.component("comp1").geom("geom1").feature("gland_seed_with_nipple").set("selresultshow", "all");
+    model.component("comp1").geom("geom1").run("gland_seed_with_nipple");
+    String[] glandSeedWithNippleObjs = model.component("comp1").geom("geom1").feature("gland_seed_with_nipple").objectNames();
 {lobule_union_java}
 
     model.component("comp1").geom("geom1").create("gland_clip", "Intersection");
-    model.component("comp1").geom("geom1").feature("gland_clip").selection("input").set({gland_source_objects_var}[0], breastOuterObjs[0], glandKeepAnteriorObjs[0]);
+    model.component("comp1").geom("geom1").feature("gland_clip").selection("input").set({gland_source_objects_var}[0], breastOuterObjs[0]);
     model.component("comp1").geom("geom1").feature("gland_clip").set("keep", "on");
     model.component("comp1").geom("geom1").feature("gland_clip").set("intbnd", "on");
     model.component("comp1").geom("geom1").feature("gland_clip").set("propagatesel", "on");
@@ -1026,16 +1071,22 @@ public class {class_name} {{
     model.component("comp1").material("mat_skin_shell").label("SkinShellScaffold");
     model.component("comp1").material("mat_skin_shell").selection().named("geom1_breast_outer_bnd");
     model.component("comp1").material("mat_skin_shell").propertyGroup("def").set("density", new String[] {{ "skin_density" }});
+    model.component("comp1").material("mat_skin_shell").propertyGroup("def").set("youngsmodulus", new String[] {{ "skin_E" }});
+    model.component("comp1").material("mat_skin_shell").propertyGroup("def").set("poissonsratio", new String[] {{ "skin_nu" }});
 
     model.component("comp1").material().create("mat_adipose", "Common");
     model.component("comp1").material("mat_adipose").label("Adipose");
     model.component("comp1").material("mat_adipose").selection().named("geom1_adipose_diff_dom");
     model.component("comp1").material("mat_adipose").propertyGroup("def").set("density", new String[] {{ "adipose_density" }});
+    model.component("comp1").material("mat_adipose").propertyGroup("def").set("youngsmodulus", new String[] {{ "adipose_E" }});
+    model.component("comp1").material("mat_adipose").propertyGroup("def").set("poissonsratio", new String[] {{ "adipose_nu" }});
 
     model.component("comp1").material().create("mat_glandular", "Common");
     model.component("comp1").material("mat_glandular").label("Glandular");
     model.component("comp1").material("mat_glandular").selection().named("geom1_gland_clip_dom");
     model.component("comp1").material("mat_glandular").propertyGroup("def").set("density", new String[] {{ "glandular_density" }});
+    model.component("comp1").material("mat_glandular").propertyGroup("def").set("youngsmodulus", new String[] {{ "glandular_E" }});
+    model.component("comp1").material("mat_glandular").propertyGroup("def").set("poissonsratio", new String[] {{ "glandular_nu" }});
 
     model.component("comp1").physics().create("solid", "SolidMechanics", "geom1");
     model.component("comp1").physics("solid").selection().named("geom1_breast_union_dom");

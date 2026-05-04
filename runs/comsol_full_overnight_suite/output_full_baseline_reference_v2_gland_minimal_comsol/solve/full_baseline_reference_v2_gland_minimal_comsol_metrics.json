@@ -1,0 +1,11 @@
+{
+  "case_name": "full_baseline_reference_v2_gland_minimal_comsol",
+  "source": "COMSOL",
+  "breast_volume": NaN,
+  "glandular_volume": NaN,
+  "adipose_volume": NaN,
+  "max_displacement_breast": NaN,
+  "avg_displacement_breast": NaN,
+  "max_von_mises_breast": NaN,
+  "max_von_mises_glandular": NaN
+}

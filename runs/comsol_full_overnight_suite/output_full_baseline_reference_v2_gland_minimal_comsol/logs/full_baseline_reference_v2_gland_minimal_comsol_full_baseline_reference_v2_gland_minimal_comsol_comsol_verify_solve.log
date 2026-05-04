@@ -1,0 +1,14 @@
+*******************************************
+***COMSOL 6.4.0.378 progress output file***
+*******************************************
+Fri May 01 16:22:40 CEST 2026
+COMSOL Multiphysics 6.4 (Build: 378) starting in batch mode
+Running: C:\Users\20223231\ews_fem_clean\runs\comsol_full_overnight_suite\output_full_baseline_reference_v2_gland_minimal_comsol\solve\full_baseline_reference_v2_gland_minimal_comsol_comsol_verify_solve.class
+
+/******************/
+/*****Error********/
+/******************/
+Error running java class.
+Security preference 'File system access' does not allow 'read' access to 'C:\Users\20223231\ews fem clean\runs\comsol full overnight suite\output full baseline reference v2 gland minimal comsol\solve\full baseline reference v2 gland minimal comsol result.mph'.
+ - Class: full_baseline_reference_v2_gland_minimal_comsol_comsol_verify_solve
+Total time: 0 s.

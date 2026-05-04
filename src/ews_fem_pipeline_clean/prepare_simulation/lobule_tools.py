@@ -214,6 +214,9 @@ def _generate_chen_duct_lobes(
     inner_depth,
     outer_depth,
     droplet_length,
+    hub_offset_y,
+    nipple_clearance_mid,
+    nipple_clearance_tip,
 ):
     """
     COMSOL-oriented Chen-like lobe layout:
@@ -226,6 +229,7 @@ def _generate_chen_duct_lobes(
     nipple = np.array(nipple, dtype=float)
     lobules = []
     lobe_counter = 0
+    hub_center = nipple - np.array([0.0, hub_offset_y, 0.0], dtype=float)
 
     def add_ring(count, ring_radius, depth, width_scale, phase, ring_name):
         nonlocal lobe_counter
@@ -244,11 +248,12 @@ def _generate_chen_duct_lobes(
             )
             bulb_center += rng.normal(0.0, width * 0.04, size=3)
 
-            toward_nipple = _unit_vector(nipple - bulb_center)
-            duct_center = bulb_center + toward_nipple * (0.58 * droplet_length)
+            toward_hub = _unit_vector(hub_center - bulb_center)
+            duct_center = bulb_center + toward_hub * (0.74 * droplet_length)
+            duct_center = _clamp_point_before_nipple(duct_center, nipple, nipple_clearance_mid)
 
             bulb_width = width * width_scale
-            duct_width = bulb_width * 0.48
+            duct_width = bulb_width * 0.38
 
             lobules.append(
                 {

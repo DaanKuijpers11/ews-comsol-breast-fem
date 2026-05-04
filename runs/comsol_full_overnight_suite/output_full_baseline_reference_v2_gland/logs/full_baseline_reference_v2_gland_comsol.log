@@ -1,0 +1,26 @@
+*******************************************
+***COMSOL 6.4.0.378 progress output file***
+*******************************************
+Fri May 01 14:24:22 CEST 2026
+COMSOL Multiphysics 6.4 (Build: 378) starting in batch mode
+Opening file: C:\Users\20223231\ews_fem_clean\runs\comsol_full_overnight_suite\output_full_baseline_reference_v2_gland\build\full_baseline_reference_v2_gland_generated_Model.mph
+Open time: 10 s.
+Running: Study 1
+           Current Progress:   0 % - Union 20
+Memory: 977/978 1015/1021
+           Current Progress:   0 % - Performing Boolean operation
+Memory: 1140/1140 1189/1189
+           Current Progress:   0 % - Form Union
+Memory: 1631/2490 1684/2536
+           Current Progress:   0 % - Performing Boolean operation
+Memory: 1675/2490 1740/2536
+
+/******************/
+/*****Error********/
+/******************/
+Error in multiphysics compilation.
+Error while building 'Form Union' in 'Geometry 1':
+Boolean geometry operation failed.
+Saving model: C:\Users\20223231\ews_fem_clean\runs\comsol_full_overnight_suite\output_full_baseline_reference_v2_gland\solve\full_baseline_reference_v2_gland_result.mph
+Save time: 2 s.
+Total time: 993 s.

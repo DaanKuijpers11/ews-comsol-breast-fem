@@ -1,9 +1,0 @@
-Command: C:\Program Files\Eclipse Adoptium\jdk-21.0.10.7-hotspot\bin\javac.exe -proc:none -cp C:\Program Files\COMSOL\COMSOL64\Multiphysics\plugins\* -d C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build C:\Users\20223231\ews_fem_clean\runs\comsol_testcases\output\build\default_comsol_comsol_builder.java
-Timeout seconds: 300
-Return code: 0
-
-=== STDOUT ===
-<empty>
-
-=== STDERR ===
-<empty>

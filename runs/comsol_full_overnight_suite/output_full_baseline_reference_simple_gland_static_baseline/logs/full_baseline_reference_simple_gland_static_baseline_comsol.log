@@ -1,0 +1,95 @@
+*******************************************
+***COMSOL 6.4.0.378 progress output file***
+*******************************************
+Mon May 04 10:33:54 CEST 2026
+COMSOL Multiphysics 6.4 (Build: 378) starting in batch mode
+Opening file: C:\Users\20223231\ews_fem_clean\runs\comsol_full_overnight_suite\output_full_baseline_reference_simple_gland_static_baseline\build\full_baseline_reference_simple_gland_static_baseline_generated.mph
+Open time: 10 s.
+Running: Study 1
+           Current Progress:   1 % - Generating equations
+Memory: 872/894 907/928
+           Current Progress:   2 % - Generating equations
+Memory: 879/894 912/928
+           Current Progress:   3 % - Generating equations
+Memory: 886/904 920/936
+<---- Compile Equations: Stationary in Study 1/Solution 1 (sol1) ---------------
+Started at May 4, 2026, 10:34:08 AM.
+Geometry shape function: Quadratic serendipity
+Running on Intel64 Family 6 Model 141 Stepping 1, GenuineIntel.
+Using 1 socket with 8 cores in total on S20223231.
+Available memory: 16.05 GB.
+           Current Progress:   4 % - Compile Equations: Stationary
+Memory: 1085/1087 1132/1135
+           Current Progress:   6 % - Compile Equations: Stationary
+Memory: 1001/1087 1076/1135
+Moved 1 higher-order node points away from 'Geometry 1' to avoid badly shaped elements.
+Maximum distance from a point to the geometry is 0.000001 m.
+           Current Progress:   7 % - Compile Equations: Stationary
+Memory: 1023/1087 1084/1135
+Time: 3 s.
+Physical memory: 1.09 GB
+Virtual memory: 1.13 GB
+Ended at May 4, 2026, 10:34:11 AM.
+----- Compile Equations: Stationary in Study 1/Solution 1 (sol1) -------------->
+<---- Dependent Variables 1 in Study 1/Solution 1 (sol1) -----------------------
+Started at May 4, 2026, 10:34:11 AM.
+           Current Progress:   7 % - Dependent Variables 1
+Memory: 1105/1105 1178/1178
+Solution time: 0 s.
+Physical memory: 1.11 GB
+Virtual memory: 1.18 GB
+Ended at May 4, 2026, 10:34:11 AM.
+----- Dependent Variables 1 in Study 1/Solution 1 (sol1) ---------------------->
+<---- Stationary Solver 1 in Study 1/Solution 1 (sol1) -------------------------
+Started at May 4, 2026, 10:34:11 AM.
+-          Current Progress:  12 % - Stationary Solver 1
+Memory: 1150/1150 1207/1207
+Linear solver
+Number of degrees of freedom solved for: 193812 (plus 2 internal DOFs).
+--         Current Progress:  21 % - Assembling residual
+Memory: 1121/1167 1174/1224
+--         Current Progress:  21 % - 
+Memory: 1255/1255 1301/1301
+--         Current Progress:  24 % - Assembling sparsity pattern
+Memory: 1436/1489 1483/1536
+--         Current Progress:  25 % - Assembling matrices
+Memory: 1550/1590 1596/1637
+---        Current Progress:  31 % - Assembling matrices
+Memory: 1663/1663 1711/1711
+---        Current Progress:  36 % - Assembling matrices
+Memory: 1688/1688 1748/1748
+Symmetric matrices found.
+Scales for dependent variables:
+Displacement of Shell Normals (comp1.ar): 0.01
+Displacement Field (comp1.u): 1.4e-05
+Displacement Field (comp1.u2): 2.7e-05
+---        Current Progress:  38 % - 
+Memory: 1749/1808 1805/1870
+Hybrid null-space function used.
+---        Current Progress:  38 % - Matrix factorization
+Memory: 1771/1808 1885/3371
+----       Current Progress:  42 % - Matrix factorization
+Memory: 1962/1962 2602/3371
+----       Current Progress:  49 % - Matrix factorization
+Memory: 2248/2248 2618/3371
+------     Current Progress:  65 % - Matrix factorization
+Memory: 2228/2381 2486/3371
+--------   Current Progress:  80 % - Matrix factorization
+Memory: 2338/2381 2664/3371
+Iter      SolEst     Damping    Stepsize #Res #Jac #Sol   LinErr   LinRes
+---------- Current Progress: 100 % - Solving linear system
+Memory: 2283/2381 2559/3371
+   1        0.58   1.0000000        0.58    1    1    1  3.6e-13  1.2e-11
+---------- Current Progress: 100 % - 
+Memory: 1464/2381 1673/3371
+Solution time: 7 s.
+Physical memory: 2.38 GB
+Virtual memory: 3.37 GB
+Ended at May 4, 2026, 10:34:18 AM.
+----- Stationary Solver 1 in Study 1/Solution 1 (sol1) ------------------------>
+Run time: 14 s.
+Saving model: C:\Users\20223231\ews_fem_clean\runs\comsol_full_overnight_suite\output_full_baseline_reference_simple_gland_static_baseline\solve\full_baseline_reference_simple_gland_static_baseline_result.mph
+Save time: 1 s.
+Total time: 24 s.
+---------- Current Progress: 100 % - Done
+Memory: 1521/2381 1720/3371

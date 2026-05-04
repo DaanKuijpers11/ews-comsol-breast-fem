@@ -286,7 +286,7 @@ class Heterogeneity(BaseModel):
     hub_offset_y: float = 0.0125
     nipple_clearance_mid: float = 0.015
     nipple_clearance_tip: float = 0.011
-    comsol_geometry_detail_mode: Literal["full", "fast"] = "full"
+    comsol_geometry_detail_mode: Literal["full", "fast", "duct_only"] = "full"
     comsol_petal_segments: int = 0
     comsol_duct_beads: int = 0
 

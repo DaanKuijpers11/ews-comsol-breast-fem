@@ -1,0 +1,18 @@
+{
+  "case_name": "full_baseline_reference_v2_gland",
+  "verification_mode": "fallback_builder_artifacts",
+  "phase": "build_only",
+  "reason": "Verification Java ran but did not emit JSON markers.",
+  "loaded_model_path": "C:\\Users\\20223231\\ews_fem_clean\\runs\\comsol_full_overnight_suite\\output_full_baseline_reference_v2_gland\\build\\full_baseline_reference_v2_gland_generated_Model.mph",
+  "loaded_model_exists": true,
+  "builder_java_exists": true,
+  "selection_hints_exists": true,
+  "builder_signals": {
+    "solid_hmat_adipose": true,
+    "solid_hmat_glandular": true,
+    "shell_hmat_skin": true,
+    "solid_thin_connection": true,
+    "mat_chest": true,
+    "mooney_rivlin_parameters": true
+  }
+}
