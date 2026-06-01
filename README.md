@@ -1,276 +1,187 @@
-# ews_fem_clean
+# EWS COMSOL Breast FEM Pipeline
 
-Finite element breast modelling workspace for the EWS internship project.
+Parametric COMSOL finite-element breast modelling pipeline for the Early Warning Scan (EWS) internship project.
 
-This repository contains:
+The project builds and evaluates a reproducible breast FEM workflow for testing how anatomy, tissue layout, support structures, dynamic excitation, and tumor/lesion assumptions affect the mechanical response of the breast. The current focus is not a patient-specific final model, but a defensible COMSOL pipeline that can generate controlled model variants and compare their displacement and stress response.
 
-- the original FEBio-oriented modelling workflow
-- a cleaned Python pipeline for case generation and post-processing
-- an extended COMSOL pipeline for automated geometry construction and first-order mechanical analysis
+## Current Scope
 
-The current project focus is the improvement of anatomical realism of the internal glandular structure while keeping the pipeline automated and reproducible.
+The active model pipeline supports:
 
-## Project Status
+- stage-based COMSOL case definitions using TOML files
+- parametrized chest-wall geometry and breast volume controls
+- realistic glandular reference layouts using lobe-based distributions
+- nipple and asymmetry sensitivity cases
+- Cooper-ligament support sensitivity cases
+- tumor/lesion sensitivity cases using stiffness-overlay regions
+- fixed-support acceleration pulse studies for dynamic response screening
+- automated export of summary metrics, time-series tables, and report figures
 
-The current model state can be summarized as follows:
+The current dynamic reference input is a mild fixed-support acceleration pulse:
 
-- the Python pipeline is functional for case generation, meshing, and export
-- the COMSOL pipeline can generate, build, and solve automated cases
-- the internal glandular structure has progressed from a simple ellipsoidal region toward a Chen-inspired multicomponent lobe-based structure
-- the current glandular layout uses a `6 + 12` ring organization with `18` anatomical lobes
-- the COMSOL route is currently strongest for geometry iteration and static benchmarking
-- material fidelity in COMSOL is still an intermediate step: the source model is Mooney-Rivlin based, while the current COMSOL branch still uses a linearized approximation for initial solves
+- acceleration amplitude: `0.25g`
+- duration: `0.60 s`
+- mass damping: `alpha = 60 1/s`
 
-Main current development priorities:
-
-1. freeze a final glandular geometry
-2. introduce a faster geometry mode for iteration
-3. clean up legacy output and duplicated artefacts
-4. make glandular coverage/fraction easier to control
-5. improve the COMSOL material implementation toward direct Mooney-Rivlin consistency
+Higher acceleration amplitudes such as `0.50g`, `1.00g`, and `1.25g` are used as diagnostic excitation scouts, not as direct claims of a real jump.
 
 ## Repository Layout
 
-- `src/ews_fem_pipeline_clean`
-  - cleaned FEBio-oriented preparation and simulation pipeline
-- `src/ews_fem_pipeline_comsol`
-  - COMSOL case generation, Java builder generation, batch build, and post-processing
-- `runs/febio_runs/elipse_lobules_testcases`
-  - FEBio-style source and benchmark/test cases
-- `runs/febio_runs/geometry_stage1`
-  - FEBio geometry-only and geometry-plus-gland stage-1.5 validation cases
-- `runs/comsol_testcases`
-  - COMSOL pipeline test cases and glandular geometry tuning cases
-- `Model_current`
-  - screenshots of the latest model state used for visual comparison
-- `Lobules model pictures`
-  - reference screenshots/images used during glandular geometry development
+- `src/ews_fem_pipeline_comsol/`
+  - active COMSOL pipeline package
+  - TOML loading, source-case preparation, Java builder generation, COMSOL batch execution, and post-processing
 
-## Main Pipelines
+- `runs/comsol_runs/`
+  - active COMSOL run definitions
+  - TOML files are kept for provenance
+  - generated build/solve artefacts are intentionally ignored by Git
 
-### 1. FEBio-Oriented Pipeline
+- `analysis_output/comsol_pipeline/`
+  - lightweight report-oriented evaluation output
+  - summary CSV/Markdown tables, comparison plots, sources, and figure indexes
 
-Run a full FEBio-style case:
+- `docs/report_notes/comsol_pipeline/`
+  - report notes, stage interpretation, and model-justification documents
 
-```powershell
-python -m ews_fem_pipeline_clean run runs/febio_runs/elipse_lobules_testcases/base_ellipsoid/base_ellipsoid.toml -j 1
-```
+- `docs/Literature/`
+  - literature PDFs used for model assumptions and report justification
 
-Run a sweep with evaluation:
+- `tools/`
+  - evaluation and plotting utilities, including COMSOL comparison plots
 
-```powershell
-python -m ews_fem_pipeline_clean sweep runs/febio_runs/elipse_lobules_testcases/large_ellipsoid/large_ellipsoid.toml runs/febio_runs/elipse_lobules_testcases/base_ellipsoid/base_ellipsoid.toml runs/febio_runs/elipse_lobules_testcases/medium_ellipsoid/medium_ellipsoid.toml runs/febio_runs/elipse_lobules_testcases/wide_strong_ellipsoid/wide_strong_ellipsoid.toml runs/febio_runs/elipse_lobules_testcases/xlarge_ellipsoid/xlarge_ellipsoid.toml --evaluate
-```
+- `model_pictures/`
+  - local model screenshots and animations used while preparing report figures
 
-Stage-1.5 outer-geometry validation cases now live in:
+- `src/ews_fem_pipeline_clean/`
+  - legacy/source-reference code from the earlier FEM pipeline
+  - normal COMSOL development should use `src/ews_fem_pipeline_comsol`
 
-- `runs/febio_runs/geometry_stage1`
+## Active Stage Structure
 
-This route remains the source reference for:
+The main COMSOL stage definitions are kept in:
 
-- Mooney-Rivlin material definitions
-- dynamic loading setup
-- VTK-based export
-- baseline biomechanical comparison
+- `runs/comsol_runs/geometry_stage1`
+  - motion sanity baseline
+  - simple baseline geometry for validating the 0.25g dynamic input
 
-### 2. COMSOL Pipeline
+- `runs/comsol_runs/geometry_stage2_chestwall`
+  - chest-wall geometry sensitivity
+  - current report route uses transverse `xoffset055` curvature with volume preservation and auto-alignment
 
-The repository includes a separate COMSOL package:
+- `runs/comsol_runs/geometry_stage3`
+  - realistic glandular reference spread
+  - used to move from simple glandular fraction tests toward lobe-based tissue distributions
 
-- `src/ews_fem_pipeline_comsol`
+- `runs/comsol_runs/geometry_stage4`
+  - asymmetry and nipple-position sensitivity cases
+  - reference case is intentionally close to the Stage 3 realistic reference
 
-This pipeline reuses the cleaned FEBio-style preprocessing and then exports COMSOL-ready artefacts, including:
+- `runs/comsol_runs/geometry_stage5`
+  - no-Cooper control and Cooper-ligament sensitivity cases
+  - current no-Cooper control is the most stable mechanical reference for dynamic amplitude scouting
 
-- mesh node CSV
-- mesh NPZ
-- lobule JSON
-- expanded source settings TOML
-- COMSOL Java builder scaffold
-- COMSOL build plan JSON
-- COMSOL post-processing Java scaffold
+- `runs/comsol_runs/geometry_stage6`
+  - tumor/lesion sensitivity cases
+  - current route uses no-Cooper reference anatomy with tumor material overlay variants
 
-### Typical COMSOL Workflow
+## Typical Commands
 
-Write a default COMSOL settings file:
+Run these commands from the repository root in the configured `ews-fem` Anaconda environment.
 
-```powershell
-python -m ews_fem_pipeline_comsol write-default-settings runs/comsol_testcases/default_comsol.toml
-```
-
-Generate COMSOL case input JSON and artefacts:
+Build one or more COMSOL cases without solving:
 
 ```powershell
-python -m ews_fem_pipeline_comsol generate runs/comsol_testcases/default_comsol.toml
+python -m ews_fem_pipeline_comsol build-only runs\comsol_runs\geometry_stage6\stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_solve_only_preview.toml
 ```
 
-Run a build-only COMSOL case:
+Run one or more full COMSOL cases:
 
 ```powershell
-python -m ews_fem_pipeline_comsol build-only runs/comsol_testcases/default_comsol.toml
+python -m ews_fem_pipeline_comsol run runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_solve_only_preview.toml
 ```
 
-Run a full COMSOL case:
+Run post-processing only on existing solved results:
 
 ```powershell
-python -m ews_fem_pipeline_comsol run runs/comsol_testcases/default_comsol.toml
+python -m ews_fem_pipeline_comsol postprocess-only --mode global runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_solve_only_preview.toml
 ```
 
-Check COMSOL license connectivity:
+Regenerate lightweight evaluation plots and tables:
 
 ```powershell
-python -m ews_fem_pipeline_comsol license-check runs/comsol_testcases/default_comsol.toml
+python tools\make_comsol_evaluation_plots.py
 ```
 
-## Active COMSOL Cases
-
-The most relevant current COMSOL case files are:
-
-- [runs/comsol_testcases/default_comsol.toml](runs/comsol_testcases/default_comsol.toml)
-  - main default COMSOL pipeline case
-- [runs/comsol_testcases/chen2024_droplet_auto_comsol_source.toml](runs/comsol_testcases/chen2024_droplet_auto_comsol_source.toml)
-  - active COMSOL-specific source geometry/material settings
-- [runs/comsol_testcases/final_freeze_probe.toml](runs/comsol_testcases/final_freeze_probe.toml)
-  - first anterior-shift freeze probe for glandular structure
-- [runs/comsol_testcases/final_freeze_probe_v2.toml](runs/comsol_testcases/final_freeze_probe_v2.toml)
-  - second freeze probe with stronger anterior shift and longer duct reach
-
-To run the current freeze probe:
+Check CLI options:
 
 ```powershell
-python -m ews_fem_pipeline_comsol build-only runs/comsol_testcases/final_freeze_probe_v2.toml
+python -m ews_fem_pipeline_comsol --help
 ```
 
-## Current Glandular Geometry Concept
+## Output Policy
 
-The outer breast envelope is still based on a simplified analytical shape. The internal glandular region is no longer intended to be represented by a simple ellipsoidal inclusion.
+This repository is set up so Git tracks source code, TOML provenance, documentation, report notes, small summary tables, and selected lightweight figures.
 
-The current glandular structure is instead built as:
+The following generated artefacts are intentionally not tracked:
 
-- `18` glandular lobes
-- arranged in a `6 + 12` concentric organization
-- with petal-like lobe bodies
-- posterior lobe volume extending toward the chest wall
-- duct-like convergence toward a shared nipple-adjacent hub region
+- COMSOL `.mph` files
+- COMSOL recovery/status files
+- generated build folders
+- generated solve folders
+- COMSOL configuration caches
+- FEBio/mesh exports such as `.vtk`, `.vtu`, `.feb`, `.xplt`, `.npy`, `.npz`, `.obj`, `.stl`
+- large local run outputs
 
-In COMSOL, the main glandular geometry is constructed in:
+This keeps the GitHub repository usable while still preserving the case definitions needed to reproduce important runs.
 
-- `gland_lobules`
-  - union of all generated lobe, duct, and hub primitives
-- `gland_clip`
-  - final glandular domain after clipping the glandular source to the outer breast volume
+## Current Evaluation Outputs
 
-The remaining interior volume is constructed as:
+The most important lightweight evaluation folders are:
 
-- `adipose_diff`
-  - outer breast minus glandular region
+- `analysis_output/comsol_pipeline/tier1_comparison`
+  - Stage 1 through Stage 5 comparison including the motion sanity baseline
 
-The final geometry union used for physics is:
+- `analysis_output/comsol_pipeline/tier1_comparison_without_stage1`
+  - anatomical comparison without the Stage 1 simple-geometry baseline
 
-- `breast_union`
-  - adipose + glandular + chest-wall support
+- `analysis_output/comsol_pipeline/stage5_dynamic_amplitude_scout`
+  - comparison of stable no-Cooper dynamic amplitude scouts
 
-### Important Current Limitation
+- `analysis_output/comsol_pipeline/stage6_fast_tumor_screening`
+  - early tumor-screening output; treat partial or zero-series cases carefully
 
-The current COMSOL geometry does **not yet include a separate anatomical skin layer** as its own domain.
+## Interpretation Notes
 
-Current COMSOL domains are effectively:
+Stage 1 is a motion sanity baseline and should not be interpreted as the final anatomical reference. It uses a simpler and larger baseline geometry, so its displacement and stress response are not directly comparable to the later anatomical stages.
 
-- glandular
-- adipose
-- chest wall support
+Stage 2 is the first fair anatomical geometry baseline. Stage 3 adds the realistic glandular reference spread. Stage 4 and Stage 5 references are intentionally close to Stage 3 because they serve as controls for asymmetry and Cooper-ligament sensitivity.
 
-Skin properties still exist in the source settings, but the COMSOL branch has not yet turned them into a distinct outer shell geometry. This is a planned future refinement.
+Stage 6 tumor cases are currently designed as controlled sensitivity experiments. The initial tumor implementation is useful for studying whether a local stiffness perturbation changes surface displacement, landmark displacement, stress evolution, or local tumor-region response. It should not yet be over-interpreted as a patient-specific tumor reconstruction.
 
-## COMSOL Build Behaviour
+## Useful Report Notes
 
-The COMSOL build stage can be slow for the high-fidelity glandular geometry because it performs many boolean and union operations on overlapping solids.
+Start with:
 
-Typical observations:
+- `docs/report_notes/comsol_pipeline/report_status_overview_2026-05-26.md`
+- `docs/report_notes/comsol_pipeline/tier1_case_definition_summary_2026-05-26.md`
+- `docs/report_notes/comsol_pipeline/report_figures_metrics_index.md`
+- `docs/report_notes/comsol_pipeline/model_justification/stage6_tumor_lesion_plan_2026-05-26.md`
+- `docs/report_notes/comsol_pipeline/model_justification/breast_volume_literature_context_2026-05-26.md`
 
-- `build-only` can take many minutes
-- final `Form Union` and boolean steps are often the slowest part
-- the detailed lobe/duct geometry is much slower than older ellipsoidal glandular models
+## Main Limitations
 
-This is expected for the current high-detail geometry and is one reason why a future `fast geometry mode` is planned.
+- The current COMSOL model is a controlled parametric model, not a patient-specific reconstruction.
+- Stage 1 is useful for motion validation but is not the final anatomical reference.
+- Cooper-ligament implementation is still a mechanical support sensitivity route, not a validated anatomical reconstruction.
+- Tumor/lesion modelling currently uses simplified size, location, and stiffness assumptions.
+- Long COMSOL runs can generate large local artefacts; use TOMLs and lightweight summaries as the primary tracked provenance.
 
-## Material Model Notes
+## Recommended Working Pattern
 
-The source model uses Mooney-Rivlin-style parameters for:
+1. Create or edit a TOML case in the relevant `runs/comsol_runs/geometry_stage*` folder.
+2. Run `build-only` first and inspect geometry, selections, and material settings in COMSOL.
+3. Only run full dynamics after geometry placement and assumptions are acceptable.
+4. Use `postprocess-only --mode global` first for quick solved-case checks.
+5. Run heavier surface/tumor post-processing only for cases that are worth keeping.
+6. Regenerate `analysis_output/comsol_pipeline` summaries for report-ready comparisons.
 
-- skin
-- adipose tissue
-- glandular tissue
-- optional tumour inclusion
-
-However, the current COMSOL builder still converts these source properties into a small-strain linear elastic approximation for the initial COMSOL implementation.
-
-This means:
-
-- FEBio source settings remain the constitutive reference
-- COMSOL geometry/region handling is currently ahead of COMSOL constitutive fidelity
-- one of the next project steps is to improve the COMSOL materials so they better reflect the source Mooney-Rivlin formulation
-
-## Output Folders
-
-Each COMSOL testcase writes to its own output folder, for example:
-
-- `runs/comsol_testcases/output`
-- `runs/comsol_testcases/output_final_freeze_probe`
-- `runs/comsol_testcases/output_final_freeze_probe_v2`
-
-These folders may contain:
-
-- `prepare`
-- `build`
-- `solve`
-- `logs`
-
-Important artefacts typically include:
-
-- `*_lobules.json`
-- `*_comsol_build_plan.json`
-- `*_comsol_builder.java`
-- `*_generated.mph`
-- `*_metrics.json`
-
-The `runs/comsol_testcases/output` tree can accumulate duplicate or stale artefacts over time. Cleanup is planned, but avoid deleting files while a COMSOL run is still active.
-
-## Recommended Workflow
-
-For geometry development:
-
-1. edit or create a dedicated source TOML in `runs/comsol_testcases`
-2. run `build-only`
-3. inspect the resulting geometry in COMSOL
-4. compare with `Model_current` screenshots and literature reference images
-5. only after geometry is acceptable, proceed to solve and metric comparison
-
-For final comparison work:
-
-1. freeze glandular geometry
-2. compute glandular fraction / internal coverage
-3. improve COMSOL material fidelity
-4. compare COMSOL and FEBio responses on shared benchmark cases
-
-## Known Limitations
-
-- COMSOL build-only can be slow for the detailed glandular geometry
-- the current COMSOL branch does not yet include a separate skin shell domain
-- the COMSOL material representation is not yet a direct Mooney-Rivlin implementation
-- geometry realism has been prioritized over dynamic fidelity in the current phase
-- multiple older output files and legacy artefacts still exist in the workspace and should be cleaned later
-
-## Practical Notes
-
-- If COMSOL reports `License error: -15`, the license server is not currently reachable.
-- If `build-only` reports success but the generated `.mph` file timestamp did not change, inspect the build logs before assuming the geometry updated.
-- For the current detailed geometry, use dedicated probe cases rather than constantly overwriting the default case.
-
-## Short-Term Next Steps
-
-Planned next steps in this repository:
-
-1. add a fast geometry mode for quicker COMSOL iteration
-2. clean up duplicated and stale output artefacts
-3. make glandular fraction more explicitly controllable
-4. improve the COMSOL material implementation toward the source Mooney-Rivlin model
