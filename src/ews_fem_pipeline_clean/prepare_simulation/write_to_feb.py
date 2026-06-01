@@ -47,9 +47,12 @@ def add_density_map_math(root, settings, mesh):
     for tissue_name, material in [
         ("skin", settings.material.skin),
         ("glandular", settings.material.glandular),
-        ("adipose", settings.material.adipose)
+        ("adipose", settings.material.adipose),
+        ("pectoralis", settings.material.pectoralis),
     ]:
         tissue = getattr(tissues, tissue_name)
+        if tissue.nodes is None or len(tissue.nodes) == 0:
+            continue
 
         # Get all unique node IDs belonging to this tissue
         tissue_nodes_flat = tissue.nodes.flatten()  # Elements have multiple nodes
@@ -114,6 +117,16 @@ def write_to_feb(filepath: Path, mesh: MeshParts, settings: Settings):
     This file writes the mesh and simulation settings to the .xml/.feb file using the settings from simulation_settings.py
     """
 
+    tissues = mesh.tissue_parts
+    for tissue_name in ["skin", "glandular", "adipose", "chest"]:
+        tissue = getattr(tissues, tissue_name)
+        n_elem = len(tissue.elements) if tissue.elements is not None else 0
+        if n_elem == 0:
+            raise RuntimeError(
+                f"Cannot write FEBio input for {filepath.name}: tissue part '{tissue_name}' has no extracted elements."
+            )
+    has_pectoralis = tissues.pectoralis.elements is not None and len(tissues.pectoralis.elements) > 0
+
 
     FEB_element = FEBElement()
     ###############################################################################################################
@@ -148,6 +161,10 @@ def write_to_feb(filepath: Path, mesh: MeshParts, settings: Settings):
     glandualar_elem = FEB_element.glandular.to_xml(parent=material_elem)
     settings.material.glandular.to_xml(parent=glandualar_elem, tumor=settings.material.tumor.glandular)
 
+    if has_pectoralis:
+        pectoralis_elem = FEB_element.pectoralis.to_xml(parent=material_elem)
+        settings.material.pectoralis.to_xml(parent=pectoralis_elem, tumor=None)
+
     #################################################################################################################
     # Mesh #
     ########
@@ -160,6 +177,9 @@ def write_to_feb(filepath: Path, mesh: MeshParts, settings: Settings):
     write_elements_to_xml(parent=mesh_elem, mesh=mesh)
 
     # Mass damping and gravity
+    if not has_pectoralis:
+        FEB_element.mass_damping.val = "skin_part,glandular_part,adipose_part"
+        FEB_element.gravitational_acceleration.val = "skin_part,glandular_part,adipose_part"
     FEB_element.mass_damping.to_xml(parent=mesh_elem)
     FEB_element.gravitational_acceleration.to_xml(parent=mesh_elem)
 
@@ -175,6 +195,8 @@ def write_to_feb(filepath: Path, mesh: MeshParts, settings: Settings):
     # Solid domain
     FEB_element.solid_domain_glandular.to_xml(parent=mesh_domains_elem)
     FEB_element.solid_domain_adipose.to_xml(parent=mesh_domains_elem)
+    if has_pectoralis:
+        FEB_element.solid_domain_pectoralis.to_xml(parent=mesh_domains_elem)
 
     # Add density map only when enabled (can be disabled for FEBio compatibility debugging).
     if os.environ.get("EWS_DISABLE_DENSITY_MAP", "0") not in {"1", "true", "TRUE", "yes", "YES"}:

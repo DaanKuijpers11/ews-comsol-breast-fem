@@ -1,9 +1,0 @@
-Command: C:/Program Files/COMSOL/COMSOL64/Multiphysics/bin/win64/comsolbatch.exe -configuration C:\Users\20223231\ews_fem_clean\runs\comsol_full_overnight_suite\output_full_baseline_reference_v2_gland_minimal_comsol\build\comsol_configuration -inputfile C:\Users\20223231\ews_fem_clean\runs\comsol_full_overnight_suite\output_full_baseline_reference_v2_gland_minimal_comsol\solve\full_baseline_reference_v2_gland_minimal_comsol_comsol_verify_solve.class -outputfile C:\Users\20223231\ews_fem_clean\runs\comsol_full_overnight_suite\output_full_baseline_reference_v2_gland_minimal_comsol\solve\full_baseline_reference_v2_gland_minimal_comsol_comsol_verify_solve_output.mph -batchlog C:\Users\20223231\ews_fem_clean\runs\comsol_full_overnight_suite\output_full_baseline_reference_v2_gland_minimal_comsol\logs\full_baseline_reference_v2_gland_minimal_comsol_full_baseline_reference_v2_gland_minimal_comsol_comsol_verify_solve.log
-Timeout seconds: 900
-Return code: 0
-
-=== STDOUT ===
-<empty>
-
-=== STDERR ===
-<empty>

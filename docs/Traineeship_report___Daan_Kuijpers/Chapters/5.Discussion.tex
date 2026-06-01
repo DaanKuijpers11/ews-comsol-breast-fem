@@ -1,0 +1,45 @@
+\section{Discussion}
+
+The updated COMSOL pipeline shows that a staged modelling workflow is useful for separating motion input, chestwall geometry, glandular distribution, asymmetry, support assumptions, and lesion sensitivity. This separation is important because breast-model response depends strongly on geometry, tissue composition, material assumptions, boundary conditions, and solver robustness \cite{Samani2001,Hsu2011,Ramiao2016,Chen2024,Chen2025}.
+
+\subsection{Pipeline organization and reproducibility}
+
+A major outcome of the project is the reproducible COMSOL pipeline itself. The current workflow can generate complete source-case snapshots, COMSOL Java builders, selection hints, build plans, metrics, time-series files, and evaluation plots from TOML files. The recent reorganization also made the COMSOL package self-contained for normal use: it no longer needs to import the old FEBio-oriented package to load source-case settings or generate lobules. This makes the pipeline easier to maintain, easier to upload to GitHub, and easier to describe as a standalone COMSOL workflow.
+
+The remaining legacy folders and old FEBio scripts are still useful as historical context, but they should not be part of the normal COMSOL runtime path. They should either be clearly marked as legacy or excluded from the main repository once the current TOMLs, report notes, and evaluation outputs are safely preserved.
+
+\subsection{Stage interpretation}
+
+The most important interpretive point is that Stage 1 and Stages 2--5 should not be compared as if they were matched anatomical variants. Stage 1 is a motion sanity baseline with a larger and simpler geometry. Its higher displacement and stress are therefore expected and should not be used to claim that the selected anatomical route has universally lower motion.
+
+Stage 2 is the first fair anatomical baseline. It introduces the xoffset055 transverse chestwall while preserving volume and aligning the nipple and glandular structures. The selected chestwall should still be described as a patient-dependent sensitivity, not as a universal anatomical truth. Its value is that it provides a defensible posterior support geometry for later controlled comparisons.
+
+Stage 3 is currently the main anatomical glandular reference. It increases the glandular fraction to approximately 24.3\% and uses a more realistic chestwall-aware lobule spread. The fact that the Stage 3 response is close to Stage 4 and Stage 5 in Tier 1 is not a failure; those later cases are intentionally controls. More specific glandular distribution sensitivities still require compact/reference/wide variants with comparable total glandular volume.
+
+\subsection{Cooper ligament and asymmetry limitations}
+
+The current model should not claim a proven Cooper ligament effect. The no-Cooper control is valid, but the default Cooper run failed very early. A future Cooper study should start from a milder support variant, use build-only checks, and only then run selected overnight cases. Until then, Cooper ligaments should be described as a mechanical support sensitivity rather than as an exact anatomical reconstruction.
+
+Similarly, asymmetry should be treated as a sensitivity framework. Nipple shift and glandular-follow alignment are promising, but earlier additive ellipsoid strategies could create misleading geometry. A final patient-specific asymmetry model would require a surface deformation or scan-derived geometry method, with nipple and glandular structures mapped consistently to that surface.
+
+\subsection{Tumor/lesion modelling}
+
+Stage 6 is a natural extension of the EWS goal because lesion stiffness and location may affect displacement, signed surface motion, landmark displacement, and local stress. The current implementation is deliberately simple: a spherical tumor mask modifies material properties locally and provides mask-based tumor-region metrics. This is a defensible first sensitivity test because it avoids difficult Boolean operations and keeps the tumor placement easy to validate.
+
+However, it should not be overclaimed. There is no separate tumor domain, no separate \texttt{mat\_tumor}, and no segmented lesion boundary in the current physics geometry. The correct report language is therefore ``analytic lesion stiffness/location sensitivity''. The upper-outer and surface-proximal cases are literature-motivated location probes, but they do not imply that the current model represents true skin invasion or a patient-specific tumor boundary. A visible surface bulge would require a separate geometry perturbation of the breast surface.
+
+The spherical route is also intentionally conservative. Clinical imaging descriptors include round, oval, irregular, and spiculated masses, but a sphere is the cleanest first mechanical test because it is easy to place, easy to visualize, and less likely to introduce mesh artefacts. Later extensions could add ellipsoidal masks, smooth lobulated masks, or segmented patient-specific lesions after the spherical route is stable and measurable. Solver robustness remains part of Stage 6 validation, because even ``fast'' tumor cases can become expensive when mesh density, second-order elements, and out-of-core linear solves are active.
+
+\subsection{Material and dynamic-model limitations}
+
+The 0.25g fixed-support acceleration pulse is useful as a mild controlled excitation, but it is not a calibrated measurement of a real jump or a complete EWS acquisition protocol. It should be presented as a gentle dynamic test input that makes model variants comparable. The material parameters should also be treated as controlled modelling assumptions rather than patient-specific tissue values, because reported breast tissue stiffness varies strongly across experimental methods and tissue states \cite{Samani2007,Ramiao2016,Teixeira2023}.
+
+The COMSOL material implementation remains an intermediate step. It uses source-case Mooney--Rivlin-style parameters and current COMSOL material scaffolding to support automated comparisons. A later model should improve the nonlinear material implementation and include a targeted material sensitivity study once geometry and solver stability are more mature.
+
+\subsection{Repository and data-management implications}
+
+The workspace contains a mixture of source code, active TOMLs, report notes, small evaluation outputs, generated Java files, MPH files, COMSOL caches, solver logs, and old legacy outputs. For GitHub, the important material is the reproducible part: source code, active TOMLs, documentation, report notes, evaluation scripts, and small summary CSV/MD/PNG outputs that support conclusions. Large generated build and solve artefacts should remain local and be ignored by Git. This makes it possible to keep using the same \texttt{ews\_fem\_clean} workspace while keeping the repository lightweight.
+
+\subsection{Recommended next steps}
+
+The next technical step is to keep the current COMSOL source-case organization stable and then clean the repository by folder. In \texttt{runs/comsol\_runs}, the active Stage 1--6 TOMLs should be preserved, while large generated outputs and old legacy suites should be excluded from GitHub. Scientifically, the most useful next solve work is a small set of carefully chosen Stage 6 tumor cases: no-tumor control, small central, small upper-outer, small subareolar, and small posterior. These should only be interpreted after tumor-mask volume and local tumor metrics are confirmed.

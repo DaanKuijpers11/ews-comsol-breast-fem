@@ -1,0 +1,9 @@
+\section{Conclusion}
+
+This traineeship produced a structured COMSOL FEM breast-model pipeline for controlled Early Warning Scan model development. The main result is not a final patient-specific detector, but a reproducible workflow in which chestwall geometry, glandular distribution, dynamic excitation, asymmetry controls, Cooper support assumptions, and tumor/lesion sensitivities can be generated and compared from TOML configuration files.
+
+The current report-ready baseline is the Stage 2 xoffset055 volume-preserving chestwall route combined with the Stage 3 realistic glandular reference. Stage 1 remains useful as a 0.25g motion sanity baseline, but it should not be used as the final anatomical reference because its geometry and volume differ from Stages 2--5. Stage 4 and Stage 5 currently provide matched control cases: no-asymmetry and no-Cooper. A reliable Cooper-support effect has not yet been demonstrated because the default Cooper run failed early.
+
+Stage 6 adds a controlled tumor/lesion screening route. The current tumor is an analytic spherical material overlay rather than a separate segmented domain. This is appropriate for first-order stiffness, size, and location sensitivity, but not yet for patient-specific tumor reconstruction or diagnostic claims. The next useful tumor work is a small set of validated full-solve cases comparing no tumor, central, upper-outer, subareolar, posterior, and surface-proximal placements, followed only later by shape or surface-bulge extensions.
+
+The final software state is also cleaner than before: normal COMSOL pipeline use no longer depends on the older FEBio-oriented package. This makes the project more suitable for GitHub, provided that source code, active TOMLs, documentation, report notes, and small evaluation summaries are tracked, while large MPH/build/solve artefacts and COMSOL caches remain outside version control.

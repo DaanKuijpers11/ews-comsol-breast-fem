@@ -20,6 +20,11 @@ def analysis_script() -> Path:
     return scripts_dir() / "data_analysis_main.py"
 
 
+def fallback_site_packages() -> list[Path]:
+    vendor_dir = scripts_dir() / "_vendor"
+    return [vendor_dir] if vendor_dir.exists() else []
+
+
 def resolve_run_name(path_like: str | Path) -> str:
     path = Path(path_like)
 
@@ -92,10 +97,11 @@ def evaluate_runs(case_inputs: tuple[str | Path, ...]) -> tuple[str, ...]:
         env["RUN_FEB_PATH"] = str(feb_path)
         existing_pythonpath = env.get("PYTHONPATH", "")
         extra_pythonpath = str(root / "scripts")
-        env["PYTHONPATH"] = (
-            extra_pythonpath if not existing_pythonpath
-            else os.pathsep.join([extra_pythonpath, existing_pythonpath])
-        )
+        pythonpath_parts = [extra_pythonpath]
+        pythonpath_parts.extend(str(path) for path in fallback_site_packages())
+        if existing_pythonpath:
+            pythonpath_parts.append(existing_pythonpath)
+        env["PYTHONPATH"] = os.pathsep.join(pythonpath_parts)
         try:
             subprocess.run([sys.executable, str(script_path)], cwd=root, env=env, check=True)
             completed.append(run_name)

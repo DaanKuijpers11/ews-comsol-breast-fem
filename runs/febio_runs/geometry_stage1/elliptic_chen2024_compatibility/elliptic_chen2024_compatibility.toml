@@ -1,0 +1,41 @@
+# Compatibility probe:
+# stage-1 outer-envelope refactor + advanced Chen-inspired glandular generator
+[model.mesh]
+density = 120
+debug_view = false
+order = 1
+
+[model.geometry]
+outer_profile_mode = "elliptic"
+anterior_projection_scale = 1.1
+superior_pole_scale = 0.97
+
+[material.tumor]
+tumorous = false
+
+[material.glandular.hetero]
+enabled = true
+auto_generate = true
+generator_mode = "chen_2024_double_ring"
+nipple = [ 0.0, 0.068, 0.0,]
+width = 0.0038
+amp_c1 = 70.0
+amp_c2 = 55.0
+amp_rho = 35.0
+seed = 42
+inner_ring_count = 8
+outer_ring_count = 10
+inner_ring_radius = 0.007
+outer_ring_radius = 0.013
+inner_depth = 0.020
+outer_depth = 0.030
+droplet_length = 0.012
+droplet_components = 2
+
+[material.adipose.hetero]
+enabled = true
+radial_center = [ 0.0, 0.0, 0.0,]
+radial_L = 0.05
+radial_alpha_c1 = 20.0
+radial_alpha_c2 = 15.0
+radial_alpha_rho = 25.0

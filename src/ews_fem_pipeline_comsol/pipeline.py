@@ -4,10 +4,10 @@ import json
 import tomllib
 from pathlib import Path
 
-from ews_fem_pipeline_clean.prepare_simulation import load_settings_from_toml as load_febio_settings_from_toml
 from ews_fem_pipeline_comsol.paths import ensure_output_tree
-from ews_fem_pipeline_comsol.prepare_from_febio import prepare_case_from_febio, resolve_source_case_toml
+from ews_fem_pipeline_comsol.prepare_source_case import prepare_source_case, resolve_source_case_toml
 from ews_fem_pipeline_comsol.script_builder import generate_comsol_java_builder
+from ews_fem_pipeline_comsol.source_case import load_settings_from_toml as load_source_case_from_toml
 from ews_fem_pipeline_comsol.settings import (
     Settings,
     load_settings_from_toml,
@@ -33,7 +33,7 @@ def _export_resolved_case_snapshot(
         output_dir=output_root / "prepare",
         settings=settings,
     )
-    expanded_source_case = load_febio_settings_from_toml(source_case_path).model_dump()
+    expanded_source_case = load_source_case_from_toml(source_case_path).model_dump()
     payload = {
         "case_overview": {
             "case_name": case_file.stem,
@@ -67,10 +67,14 @@ def _export_resolved_case_snapshot(
     return snapshot_path, single_file_path
 
 
-def generate_cases(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
+def generate_cases(input_files: tuple[Path, ...], *, postprocess_mode_override: str | None = None) -> tuple[Path, ...]:
     generated: list[Path] = []
-    for filepath in input_files:
+    total = len(input_files)
+    for index, filepath in enumerate(input_files, start=1):
+        print(f"[COMSOL pipeline] ({index}/{total}) generate: {filepath}", flush=True)
         settings = load_settings_from_toml(filepath)
+        if postprocess_mode_override is not None:
+            settings.comsol.postprocess_mode = postprocess_mode_override
         output_paths = ensure_output_tree(filepath.parent, settings)
         output_root = output_paths["root"]
         prepare_dir = output_paths["prepare"]
@@ -82,7 +86,7 @@ def generate_cases(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
             output_root=output_root,
             settings=settings,
         )
-        prepare_artefacts = prepare_case_from_febio(
+        prepare_artefacts = prepare_source_case(
             case_name=filepath.stem,
             comsol_case_toml=filepath,
             output_dir=prepare_dir,
@@ -110,6 +114,7 @@ def generate_cases(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
         json_file.write_text(json.dumps(payload, indent=2), encoding="utf-8")
         manifest_file = output_root / f"{filepath.stem}_output_manifest.json"
         manifest_file.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        print(f"[COMSOL pipeline] ({index}/{total}) generated input: {json_file}", flush=True)
         generated.append(json_file)
 
     return tuple(generated)
@@ -147,6 +152,22 @@ def build_cases(input_files: tuple[Path, ...], settings_map: dict[Path, Settings
     return COMSOLRunner().run(input_files, settings_map=settings_map, build_only=True)
 
 
+def postprocess_cases(input_files: tuple[Path, ...], settings_map: dict[Path, Settings] | None = None) -> tuple[Path, ...]:
+    from ews_fem_pipeline_comsol.run_simulation import COMSOLRunner
+
+    for filepath in input_files:
+        assert filepath.suffix == ".json", "Input file must be a generated COMSOL JSON input."
+
+    if settings_map is None:
+        settings_map = {}
+        for filepath in input_files:
+            payload = json.loads(filepath.read_text(encoding="utf-8"))
+            source_toml = Path(payload["settings_file"])
+            settings_map[filepath] = load_settings_from_toml(source_toml)
+
+    return COMSOLRunner().postprocess(input_files, settings_map=settings_map)
+
+
 def run_full_pipeline(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
     generated = generate_cases(input_files)
     settings_map: dict[Path, Settings] = {}
@@ -163,6 +184,14 @@ def build_only_pipeline(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
     return build_cases(generated, settings_map=settings_map)
 
 
+def postprocess_only_pipeline(input_files: tuple[Path, ...], *, postprocess_mode: str | None = None) -> tuple[Path, ...]:
+    generated = generate_cases(input_files, postprocess_mode_override=postprocess_mode)
+    settings_map: dict[Path, Settings] = {}
+    for source_toml, generated_json in zip(input_files, generated):
+        settings_map[generated_json] = load_settings_from_toml(source_toml)
+    return postprocess_cases(generated, settings_map=settings_map)
+
+
 def sweep_cases(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
     return run_full_pipeline(input_files)
 
@@ -171,6 +200,21 @@ def compare_metrics_cases(input_files: tuple[Path, ...], baseline: str | None = 
     from ews_fem_pipeline_comsol.metrics_compare import compare_metrics
 
     return compare_metrics(input_files, baseline=baseline)
+
+
+def extract_source_case(input_file: Path, output_file: Path | None = None) -> Path:
+    settings = load_settings_from_toml(input_file)
+    output_root = ensure_output_tree(input_file.parent, settings)["root"]
+    source_case_path, _source_case_mode = resolve_source_case_toml(
+        case_name=input_file.stem,
+        comsol_case_toml=input_file,
+        output_dir=output_root / "prepare",
+        settings=settings,
+    )
+    expanded_source_case = load_source_case_from_toml(source_case_path).model_dump()
+    target = output_file or (input_file.parent / f"{input_file.stem}_source_case.toml")
+    write_dict_to_toml(target, expanded_source_case)
+    return target
 
 
 def check_license(settings_file: Path) -> bool:

@@ -52,15 +52,17 @@ class FEBElement(BaseModel):
     skin: FEBField = FEBField(tag="material", id="1", name="skin", type="Mooney-Rivlin")
     adipose: FEBField = FEBField(tag="material", id="2", name="adipose", type="Mooney-Rivlin")
     glandular: FEBField = FEBField(tag="material", id="3", name="glandular", type="Mooney-Rivlin")
+    pectoralis: FEBField = FEBField(tag="material", id="4", name="pectoralis", type="Mooney-Rivlin")
     mesh: FEBField = FEBField(tag="Mesh")
-    mass_damping: FEBField = FEBField(tag="PartList", val="skin_part,glandular_part,adipose_part", name="Mass_damping")
-    gravitational_acceleration: FEBField = FEBField(tag="PartList", val="skin_part,glandular_part,adipose_part",
+    mass_damping: FEBField = FEBField(tag="PartList", val="skin_part,glandular_part,adipose_part,pectoralis_part", name="Mass_damping")
+    gravitational_acceleration: FEBField = FEBField(tag="PartList", val="skin_part,glandular_part,adipose_part,pectoralis_part",
                                                     name="gravitational_acceleration")
     mesh_domains: FEBField = FEBField(tag="MeshDomains")
     shell_domain: FEBField = FEBField(tag="ShellDomain", name="skin_part", mat="skin")
     shell_thickness: FEBField = FEBField(tag="shell_thickness", val="0.0001")
     solid_domain_glandular: FEBField = FEBField(tag="SolidDomain", name="glandular_part", mat="glandular")
     solid_domain_adipose: FEBField = FEBField(tag="SolidDomain", name="adipose_part", mat="adipose")
+    solid_domain_pectoralis: FEBField = FEBField(tag="SolidDomain", name="pectoralis_part", mat="pectoralis")
     loads: FEBField = FEBField(tag="Loads")
     body_load1: FEBField = FEBField(tag="body_load", elem_set="@part_list:gravitational_acceleration",
                                     type="body force")
@@ -223,6 +225,9 @@ class Lobule(BaseModel):
     duct_mid: tuple[float, float, float] | None = None
     duct_tip: tuple[float, float, float] | None = None
     bulb_sidecar: tuple[float, float, float] | None = None
+    chestwall_y: float | None = None
+    chestwall_clearance: float | None = None
+    chestwall_adjustment_y: float | None = None
 
 
 class Heterogeneity(BaseModel):
@@ -289,6 +294,17 @@ class Heterogeneity(BaseModel):
     comsol_geometry_detail_mode: Literal["full", "fast", "duct_only"] = "full"
     comsol_petal_segments: int = 0
     comsol_duct_beads: int = 0
+    comsol_duct_style: Literal["beads", "ellipsoid_segments"] = "beads"
+    comsol_duct_segments: int = 0
+    comsol_duct_radius_scale: float = 1.0
+
+    # COMSOL Stage 2 transverse/width-curved chest-wall aware placement.
+    chestwall_aware_lobules: bool = False
+    chestwall_reference_radius_m: float = 0.07
+    chestwall_curve_depth_m: float = 0.0045
+    chestwall_curve_center_x_offset_m: float = 0.0
+    chestwall_clearance_m: float = 0.003
+    chestwall_posterior_margin_scale: float = 2.85
 
     def build_lobules(self) -> list[Lobule]:
         """
@@ -330,6 +346,12 @@ class Heterogeneity(BaseModel):
                 hub_offset_y=self.hub_offset_y,
                 nipple_clearance_mid=self.nipple_clearance_mid,
                 nipple_clearance_tip=self.nipple_clearance_tip,
+                chestwall_aware_lobules=self.chestwall_aware_lobules,
+                chestwall_reference_radius_m=self.chestwall_reference_radius_m,
+                chestwall_curve_depth_m=self.chestwall_curve_depth_m,
+                chestwall_curve_center_x_offset_m=self.chestwall_curve_center_x_offset_m,
+                chestwall_clearance_m=self.chestwall_clearance_m,
+                chestwall_posterior_margin_scale=self.chestwall_posterior_margin_scale,
                 seed=self.seed,
             )
 
@@ -510,26 +532,34 @@ class MaterialSettings(ExtendedBaseModel):
     """
     skin: MaterialProperties = MaterialProperties(
         density=1100,
-        bulk_modulus=480000,
+        bulk_modulus=8333333,
         pressure_model="default",
-        coef1=1200,
-        coef2=1200,
+        coef1=41667,
+        coef2=41667,
         hetero=Heterogeneity(enabled=False),
     )
     adipose: MaterialProperties = MaterialProperties(
-        density=911,
+        density=950,
         bulk_modulus=425000,
         pressure_model="default",
-        coef1=109,
-        coef2=106,
+        coef1=310,
+        coef2=300,
         hetero=Heterogeneity(enabled=False),
     )
     glandular: MaterialProperties = MaterialProperties(
-        density=911,
+        density=1070,
         bulk_modulus=425000,
         pressure_model="default",
-        coef1=230,
-        coef2=195,
+        coef1=833,
+        coef2=834,
+        hetero=Heterogeneity(enabled=False),
+    )
+    pectoralis: MaterialProperties = MaterialProperties(
+        density=1050,
+        bulk_modulus=425000,
+        pressure_model="default",
+        coef1=950,
+        coef2=717,
         hetero=Heterogeneity(enabled=False),
     )
     tumor: TumorProperties = TumorProperties()
@@ -587,8 +617,11 @@ def write_elements_to_xml(parent, mesh):
     """
     tissues = mesh.tissue_parts
     # This order must remain fixed
-    for name in ["skin", "glandular", "adipose", "chest"]:
+    for name in ["skin", "glandular", "adipose", "pectoralis", "chest"]:
         tissue = getattr(tissues, name)
+
+        if name != "chest" and (tissue.elements is None or len(tissue.elements) == 0):
+            continue
 
         if name == "chest":
             elem_elem = ET.SubElement(parent, 'Surface', name=tissue.name)
@@ -881,7 +914,7 @@ class Output(BaseModel):
     extra_vars: list[str] = []
 
     def to_xml(self, parent, filepath: Path):
-        output_path = filepath.parent / "output" / filepath.stem
+        output_path = Path("output") / filepath.stem
 
         if self.output_to_vtk:
             output_vtk = str(output_path.with_suffix(".vtk"))

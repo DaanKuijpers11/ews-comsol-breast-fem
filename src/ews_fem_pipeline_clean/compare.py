@@ -95,7 +95,11 @@ def _write_plot(path: Path, rows: list[dict[str, object]], baseline_name: str) -
     plt.close(fig)
 
 
-def compare_cases(case_inputs: tuple[str | Path, ...], baseline: str | None = None) -> Path:
+def compare_cases(
+    case_inputs: tuple[str | Path, ...],
+    baseline: str | None = None,
+    output_dir: str | Path | None = None,
+) -> Path:
     root = workspace_root()
     metrics = []
 
@@ -144,10 +148,17 @@ def compare_cases(case_inputs: tuple[str | Path, ...], baseline: str | None = No
             }
         )
 
-    output_dir = root / "analysis_output" / "figures" / "comparison_all_models"
-    csv_path = output_dir / "compare_summary.csv"
-    md_path = output_dir / "compare_summary.md"
-    plot_path = output_dir / "compare_summary.png"
+    resolved_output_dir = (
+        Path(output_dir)
+        if output_dir is not None
+        else root / "analysis_output" / "figures" / "comparison_all_models"
+    )
+    if not resolved_output_dir.is_absolute():
+        resolved_output_dir = root / resolved_output_dir
+
+    csv_path = resolved_output_dir / "compare_summary.csv"
+    md_path = resolved_output_dir / "compare_summary.md"
+    plot_path = resolved_output_dir / "compare_summary.png"
 
     fieldnames = [
         "case",

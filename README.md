@@ -35,8 +35,10 @@ Main current development priorities:
   - cleaned FEBio-oriented preparation and simulation pipeline
 - `src/ews_fem_pipeline_comsol`
   - COMSOL case generation, Java builder generation, batch build, and post-processing
-- `runs/elipse_lobules_testcases`
+- `runs/febio_runs/elipse_lobules_testcases`
   - FEBio-style source and benchmark/test cases
+- `runs/febio_runs/geometry_stage1`
+  - FEBio geometry-only and geometry-plus-gland stage-1.5 validation cases
 - `runs/comsol_testcases`
   - COMSOL pipeline test cases and glandular geometry tuning cases
 - `Model_current`
@@ -51,14 +53,18 @@ Main current development priorities:
 Run a full FEBio-style case:
 
 ```powershell
-python -m ews_fem_pipeline_clean run runs/elipse_lobules_testcases/base_ellipsoid/base_ellipsoid.toml -j 1
+python -m ews_fem_pipeline_clean run runs/febio_runs/elipse_lobules_testcases/base_ellipsoid/base_ellipsoid.toml -j 1
 ```
 
 Run a sweep with evaluation:
 
 ```powershell
-python -m ews_fem_pipeline_clean sweep runs/elipse_lobules_testcases/large_ellipsoid/large_ellipsoid.toml runs/elipse_lobules_testcases/base_ellipsoid/base_ellipsoid.toml runs/elipse_lobules_testcases/medium_ellipsoid/medium_ellipsoid.toml runs/elipse_lobules_testcases/wide_strong_ellipsoid/wide_strong_ellipsoid.toml runs/elipse_lobules_testcases/xlarge_ellipsoid/xlarge_ellipsoid.toml --evaluate
+python -m ews_fem_pipeline_clean sweep runs/febio_runs/elipse_lobules_testcases/large_ellipsoid/large_ellipsoid.toml runs/febio_runs/elipse_lobules_testcases/base_ellipsoid/base_ellipsoid.toml runs/febio_runs/elipse_lobules_testcases/medium_ellipsoid/medium_ellipsoid.toml runs/febio_runs/elipse_lobules_testcases/wide_strong_ellipsoid/wide_strong_ellipsoid.toml runs/febio_runs/elipse_lobules_testcases/xlarge_ellipsoid/xlarge_ellipsoid.toml --evaluate
 ```
+
+Stage-1.5 outer-geometry validation cases now live in:
+
+- `runs/febio_runs/geometry_stage1`
 
 This route remains the source reference for:
 
@@ -268,4 +274,3 @@ Planned next steps in this repository:
 2. clean up duplicated and stale output artefacts
 3. make glandular fraction more explicitly controllable
 4. improve the COMSOL material implementation toward the source Mooney-Rivlin model
-

@@ -28,11 +28,86 @@ class ComsolSettings:
     enable_skin_solid_coupling_scaffold: bool = False
     skin_shell_thickness_m: float = 0.0001
     enable_curved_chestwall: bool = False
+    support_geometry_mode: str = "auto"
     chestwall_curve_depth_m: float = 0.0007
+    chestwall_curve_max_depth_ratio: float = 0.2
+    chestwall_curve_center_x_offset_m: float = 0.0
+    chestwall_curve_max_offset_ratio: float = 0.75
+    chestwall_curve_si_depth_m: float = 0.0
+    chestwall_alignment_mode: str = "manual"
+    chestwall_si_alignment_mode: str = "global_x"
+    chestwall_support_mode: str = "cylinder_band"
+    chestwall_curve_nipple_follow_factor: float = 0.0
+    chestwall_curve_gland_follow_factor: float = 0.0
+    transverse_volume_preserve_y_scale: float = 1.0
+    transverse_volume_preserve_gland_y_scale: float = 1.0
+    outer_shape_scale_x: float = 1.0
+    outer_shape_scale_y: float = 1.0
+    outer_shape_scale_z: float = 1.0
+    outer_inferior_fullness_enabled: bool = False
+    outer_inferior_fullness_ratio: float = 0.0
+    outer_lateral_fullness_enabled: bool = False
+    outer_lateral_fullness_ratio: float = 0.0
+    outer_lateral_fullness_side: float = 1.0
+    nipple_surface_offset_factor: float = 0.18
+    gland_nipple_surface_offset_factor: float = 0.16
+    nipple_surface_anchor_y_m: float = -1.0
+    nipple_surface_protrusion_m: float = -1.0
+    nipple_surface_overlap_m: float = -1.0
+    nipple_surface_center_overlap_m: float = -1.0
+    nipple_surface_center_overlap_fraction: float = -1.0
+    nipple_geometry_x_offset_m: float = 0.0
+    nipple_geometry_z_offset_m: float = 0.0
+    nipple_surface_normal_alignment_enabled: bool = False
+    gland_nipple_surface_depth_factor: float = -1.0
+    gland_nipple_surface_clearance_fraction: float = -99.0
+    gland_subareolar_surface_clearance_m: float = -1.0
+    glandular_seed_surface_clearance_fraction: float = -99.0
+    debug_show_subareolar_helpers: bool = False
+    glandular_shape_scale_x: float = 1.0
+    glandular_shape_scale_y: float = 1.0
+    glandular_shape_scale_z: float = 1.0
+    glandular_seed_center_x_offset_m: float = 0.0
+    glandular_seed_center_y_offset_m: float = 0.0
+    glandular_seed_center_z_offset_m: float = 0.0
+    glandular_lobule_include_subareolar_core: bool = False
+    glandular_lobule_include_subareolar_bridge: bool = False
+    glandular_lobule_include_reference_ellipsoid: bool = False
+    glandular_subareolar_core_scale: float = 1.0
+    glandular_subareolar_bridge_scale: float = 1.0
     compact_output: bool = False
     chest_density_kg_m3: float = 1050.0
     chest_youngs_modulus_pa: float = 10000.0
     chest_poissons_ratio: float = 0.49
+    enable_split_support_regions: bool = False
+    upper_support_fraction: float = 2.0 / 3.0
+    pectoralis_density_kg_m3: float = 1050.0
+    pectoralis_bulk_modulus_pa: float = 425000.0
+    pectoralis_coef1_pa: float = 950.0
+    pectoralis_coef2_pa: float = 717.0
+    enable_cooper_ligament_scaffold: bool = False
+    cooper_ligament_variant: str = "none"
+    cooper_ligament_effective_modulus_pa: float = 5.8e6
+    cooper_ligament_reference_length_m: float = 0.07
+    cooper_ligament_area_fraction: float = 0.15
+    cooper_ligament_tangential_scale: float = 0.35
+    cooper_ligament_damping_pa_s_per_m: float = 0.0
+    enable_default_result_plots: bool = True
+    postprocess_export_plot_images: bool = True
+    postprocess_save_postprocessed_mph: bool = False
+    postprocess_mode: str = "full"
+    postprocess_quick_mode: bool = False
+    postprocess_write_auxiliary_mph: bool = False
+    dynamic_motion_mode: str = "prescribed_support_displacement"
+    dynamic_motion_profile: str = "cosine_down_pulse"
+    dynamic_motion_hold_s: float = 0.25
+    dynamic_acceleration_amplitude_g: float = 0.75
+    dynamic_acceleration_duration_s: float = 0.45
+    dynamic_mass_damping_alpha_s_inv: float = 20.0
+    dynamic_output_step_s: float = 0.0
+    dynamic_pulse_output_step_s: float = 0.002
+    gravity_ramp_duration_s: float = 0.0
+    dynamic_settle_duration_s: float = 0.0
 
 
 @dataclass
@@ -44,7 +119,7 @@ class PipelineSettings:
 @dataclass
 class SourceSettings:
     base_case_toml: str = ""
-    reuse_febio_prepare: bool = True
+    reuse_source_prepare: bool = True
     export_mesh_npz: bool = True
     export_mesh_csv: bool = True
     export_lobules_json: bool = True
@@ -87,6 +162,12 @@ def load_settings_from_toml(filepath: Path) -> Settings:
     assert filepath.suffix == ".toml", "Input file must have .toml extension."
     with open(filepath, "rb") as handle:
         user_data = tomllib.load(handle)
+
+    source_data = user_data.get("source")
+    if isinstance(source_data, dict):
+        legacy_prepare = source_data.pop("reuse_febio_prepare", None)
+        if legacy_prepare is not None and "reuse_source_prepare" not in source_data:
+            source_data["reuse_source_prepare"] = legacy_prepare
 
     merged = _deep_merge(_to_dict(default_settings()), user_data)
     return _from_dict(merged)

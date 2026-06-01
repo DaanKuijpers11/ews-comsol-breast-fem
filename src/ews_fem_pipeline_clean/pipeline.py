@@ -28,6 +28,8 @@ def generate_cases(input_files: tuple[Path, ...]) -> tuple[Path, ...]:
         )
 
         mesh = generate_mesh(settings=settings)
+        if settings.model.mesh.debug_stop_after_mesh:
+            continue
         write_to_feb(filepath=filepath, mesh=mesh, settings=settings)
         feb_files.append(filepath.with_suffix(".feb"))
 
@@ -75,7 +77,11 @@ def sweep_cases(input_files: tuple[Path, ...], jobs: int = 0, evaluate: bool = F
     return output_files
 
 
-def compare_case_summaries(input_files: tuple[Path, ...], baseline: str | None = None) -> Path:
+def compare_case_summaries(
+    input_files: tuple[Path, ...],
+    baseline: str | None = None,
+    output_dir: str | Path | None = None,
+) -> Path:
     from ews_fem_pipeline_clean.compare import compare_cases
 
-    return compare_cases(input_files, baseline=baseline)
+    return compare_cases(input_files, baseline=baseline, output_dir=output_dir)

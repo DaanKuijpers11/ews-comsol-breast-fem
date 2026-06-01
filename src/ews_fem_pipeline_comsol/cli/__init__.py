@@ -1,4 +1,5 @@
 import argparse
+import logging
 from pathlib import Path
 
 from ews_fem_pipeline_comsol.__about__ import __version__
@@ -22,15 +23,34 @@ def _build_parser() -> argparse.ArgumentParser:
     build_parser = subparsers.add_parser("build-only", help="Generate and build the COMSOL MPH without starting the solve.")
     build_parser.add_argument("input_files", nargs="+", type=Path)
 
+    postprocess_parser = subparsers.add_parser(
+        "postprocess-only",
+        help="Generate postprocess Java and rerun COMSOL metrics/plot export on an existing result MPH without solving.",
+    )
+    postprocess_parser.add_argument("input_files", nargs="+", type=Path)
+    postprocess_parser.add_argument(
+        "--mode",
+        choices=["full", "global", "ews_surface", "internal_tumor", "none", "skip"],
+        default=None,
+        help="Override [comsol].postprocess_mode for this postprocess-only call.",
+    )
+
     run_parser = subparsers.add_parser("run", help="Run generate and solve in sequence.")
     run_parser.add_argument("input_files", nargs="+", type=Path)
 
     sweep_parser = subparsers.add_parser("sweep", help="Batch run multiple TOML cases through COMSOL pipeline.")
     sweep_parser.add_argument("input_files", nargs="+", type=Path)
 
-    compare_parser = subparsers.add_parser("compare-metrics", help="Compare COMSOL/FEBio metrics across runs.")
+    compare_parser = subparsers.add_parser("compare-metrics", help="Compare COMSOL and optional legacy metrics across runs.")
     compare_parser.add_argument("input_files", nargs="+", type=Path)
     compare_parser.add_argument("--baseline", type=str, default=None, help="Case name to use as baseline.")
+
+    extract_parser = subparsers.add_parser(
+        "extract-source-case",
+        help="Write the resolved inline/source case from a COMSOL TOML to a standalone source-case TOML.",
+    )
+    extract_parser.add_argument("input_file", type=Path)
+    extract_parser.add_argument("--output", type=Path, default=None)
 
     defaults_parser = subparsers.add_parser("write-default-settings", help="Write a default COMSOL TOML settings file.")
     defaults_parser.add_argument("filepath", type=Path)
@@ -42,6 +62,7 @@ def _build_parser() -> argparse.ArgumentParser:
 
 
 def cli_main(argv: list[str] | None = None) -> int:
+    logging.basicConfig(level=logging.WARNING, format="[%(levelname)s] %(message)s")
     parser = _build_parser()
     args = parser.parse_args(argv)
 
@@ -63,6 +84,12 @@ def cli_main(argv: list[str] | None = None) -> int:
         build_only_pipeline(tuple(args.input_files))
         return 0
 
+    if args.command == "postprocess-only":
+        from ews_fem_pipeline_comsol.pipeline import postprocess_only_pipeline
+
+        postprocess_only_pipeline(tuple(args.input_files), postprocess_mode=args.mode)
+        return 0
+
     if args.command == "run":
         from ews_fem_pipeline_comsol.pipeline import run_full_pipeline
 
@@ -79,6 +106,13 @@ def cli_main(argv: list[str] | None = None) -> int:
         from ews_fem_pipeline_comsol.pipeline import compare_metrics_cases
 
         compare_metrics_cases(tuple(args.input_files), baseline=args.baseline)
+        return 0
+
+    if args.command == "extract-source-case":
+        from ews_fem_pipeline_comsol.pipeline import extract_source_case
+
+        target = extract_source_case(args.input_file, output_file=args.output)
+        print(target)
         return 0
 
     if args.command == "write-default-settings":

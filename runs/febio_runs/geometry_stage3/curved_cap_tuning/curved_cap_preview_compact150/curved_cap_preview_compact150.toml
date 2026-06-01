@@ -1,0 +1,51 @@
+[model.mesh]
+density = 150
+debug_view = true
+debug_stop_after_mesh = true
+order = 1
+
+[model.geometry]
+outer_profile_mode = "elliptic"
+anterior_projection_scale = 1.08
+superior_pole_scale = 0.98
+upper_pole_projection_ratio = 0.0
+posterior_support_height_scale = 1.0
+pectoralis_support_projection_scale = 0.28
+pectoralis_support_shape = "curved_cap"
+pectoralis_support_center_ratio = 0.60
+pectoralis_support_span_ratio = 0.16
+
+[material.skin]
+density = 1100
+bulk_modulus = 8333333
+pressure_model = "default"
+coef1 = 20833
+coef2 = 20833
+
+[material.adipose]
+density = 950
+bulk_modulus = 425000
+pressure_model = "default"
+coef1 = 250
+coef2 = 240
+
+[material.glandular]
+density = 1070
+bulk_modulus = 425000
+pressure_model = "default"
+coef1 = 600
+coef2 = 500
+
+[material.pectoralis]
+density = 1050
+bulk_modulus = 425000
+pressure_model = "default"
+coef1 = 700
+coef2 = 500
+
+[material.tumor]
+tumorous = false
+
+[material.glandular.hetero]
+enabled = false
+auto_generate = false

@@ -1,0 +1,39 @@
+[model.mesh]
+density = 125
+debug_view = false
+order = 1
+
+[model.geometry]
+outer_profile_mode = "elliptic"
+anterior_projection_scale = 1.08
+superior_pole_scale = 0.98
+upper_pole_projection_ratio = 0.0
+posterior_support_height_scale = 1.0
+
+[material.skin]
+density = 1100
+bulk_modulus = 8333333
+pressure_model = "default"
+coef1 = 41667
+coef2 = 41667
+
+[material.adipose]
+density = 950
+bulk_modulus = 425000
+pressure_model = "default"
+coef1 = 310
+coef2 = 300
+
+[material.glandular]
+density = 1070
+bulk_modulus = 425000
+pressure_model = "default"
+coef1 = 833
+coef2 = 834
+
+[material.tumor]
+tumorous = false
+
+[material.glandular.hetero]
+enabled = false
+auto_generate = false

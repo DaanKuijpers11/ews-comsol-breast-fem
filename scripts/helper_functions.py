@@ -210,7 +210,10 @@ def extract_peak_stress_by_tissue(df: pd.DataFrame) -> Dict:
 # ============================================================
 
 def get_surface_nodes(feb_path: Path) -> set:
-    start_marker = '<Elements type="tri6" name="skin_part">'
+    start_markers = {
+        '<Elements type="tri6" name="skin_part">',
+        '<Elements type="tri3" name="skin_part">',
+    }
     end_marker = "</Elements>"
     num_re = re.compile(r"\d+")
 
@@ -219,7 +222,7 @@ def get_surface_nodes(feb_path: Path) -> set:
 
     with feb_path.open() as f:
         for line in f:
-            if start_marker in line:
+            if any(marker in line for marker in start_markers):
                 active = True
             elif end_marker in line:
                 active = False
@@ -332,7 +335,9 @@ def extract_displacement_metrics(vtk_dir: Path, feb_path: Path, step_min: int, s
         if U is None:
             continue
 
-        idx = np.array([n - 1 for n in surface if n - 1 < len(U)])
+        idx = np.array([n - 1 for n in surface if 0 <= (n - 1) < len(U)], dtype=int)
+        if idx.size == 0:
+            continue
         U_mag = np.linalg.norm(U[idx], axis=1)
 
         all_vals.extend(U_mag)

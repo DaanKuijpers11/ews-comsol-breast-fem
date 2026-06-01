@@ -3,11 +3,14 @@ from __future__ import annotations
 import json
 import logging
 import os
+import re
 import shutil
 import subprocess
+import time
 from pathlib import Path
 
 from ews_fem_pipeline_comsol.paths import ensure_output_tree
+from ews_fem_pipeline_comsol.reporting import generate_case_report
 from ews_fem_pipeline_comsol.settings import Settings
 
 logger = logging.getLogger(__name__)
@@ -22,6 +25,95 @@ def _normalize_timeout_seconds(value: int | None, minimum_if_enabled: int) -> in
 
 
 class COMSOLRunner:
+    @staticmethod
+    def _console(message: str) -> None:
+        print(f"[COMSOL pipeline] {message}", flush=True)
+
+    @staticmethod
+    def _finish_progress_line() -> None:
+        return
+
+    @staticmethod
+    def _console_progress(message: str) -> None:
+        print(f"[COMSOL pipeline] {message}", flush=True)
+
+    @staticmethod
+    def _progress_message_from_line(line: str) -> tuple[str, bool, int | None] | None:
+        stripped = line.strip()
+        if not stripped:
+            return None
+        if "Current Progress:" in stripped:
+            match = re.search(r"Current Progress:\s*(\d+)\s*%\s*-\s*(.*)", stripped)
+            if match:
+                pct = max(0, min(100, int(match.group(1))))
+                description = match.group(2).strip()
+                if len(description) > 48:
+                    description = description[:45].rstrip() + "..."
+                width = 20
+                filled = round(width * pct / 100)
+                bar = "#" * filled + "." * (width - filled)
+                return f"[{bar}] {pct:3d}% - {description}".rstrip(), True, pct
+            return stripped, True, None
+        if stripped.startswith("COMSOL_POSTPROCESS_STATUS"):
+            return stripped.replace("COMSOL_POSTPROCESS_STATUS", "postprocess"), False, None
+        if stripped.startswith("COMSOL_IMAGE_EXPORT"):
+            return stripped, False, None
+        if stripped.startswith("TUMOR_PREVIEW_COMPONENT_READY"):
+            return stripped, False, None
+        if stripped.startswith("Minimum element quality:"):
+            return stripped, False, None
+        if stripped.startswith("Number of degrees of freedom solved for:"):
+            return stripped, False, None
+        if stripped.startswith("Solution time:") or stripped.startswith("Run time:"):
+            return stripped, False, None
+        if stripped.startswith("Error ") or "Error running java class" in stripped:
+            return stripped, False, None
+        if "Failed to generate mesh" in stripped or "Intersecting face elements" in stripped:
+            return stripped, False, None
+        return None
+
+    @classmethod
+    def _tail_progress_log(
+        cls,
+        *,
+        log_path: Path | None,
+        position: int,
+        last_message: str | None,
+        last_progress_pct: int | None,
+        label: str,
+    ) -> tuple[int, str | None, int | None]:
+        if log_path is None or not log_path.exists():
+            return position, last_message, last_progress_pct
+        try:
+            with log_path.open("r", encoding="utf-8", errors="replace") as handle:
+                handle.seek(position)
+                chunk = handle.read()
+                position = handle.tell()
+        except OSError:
+            return position, last_message, last_progress_pct
+        for line in chunk.splitlines():
+            parsed = cls._progress_message_from_line(line)
+            if parsed is None:
+                continue
+            message, inline, pct = parsed
+            if message and message != last_message:
+                if inline:
+                    if pct is not None:
+                        if last_progress_pct is not None and pct < last_progress_pct:
+                            continue
+                        if (
+                            last_progress_pct is not None
+                            and pct < 100
+                            and pct - last_progress_pct < 10
+                        ):
+                            continue
+                        last_progress_pct = pct
+                    cls._console_progress(f"{label}: {message}")
+                else:
+                    cls._console(f"{label}: {message}")
+                last_message = message
+        return position, last_message, last_progress_pct
+
     @staticmethod
     def _safe_unlink(path: Path) -> None:
         try:
@@ -65,9 +157,6 @@ class COMSOLRunner:
             "prepare_status_json",
             "comsol_builder_java",
             "comsol_builder_readme",
-            "comsol_postprocess_java",
-            "comsol_build_verification_java",
-            "comsol_solve_verification_java",
         )
         for key in removable_prepare_keys:
             value = prepare_artefacts.get(key)
@@ -88,6 +177,8 @@ class COMSOLRunner:
             "*compile*.log",
         ):
             for path in logs_dir.glob(pattern):
+                if "javac" in path.name.lower():
+                    continue
                 self._safe_unlink(path)
 
         for pattern in (
@@ -108,6 +199,21 @@ class COMSOLRunner:
         lower = text.lower()
         return "license error" in lower or "cannot connect to license server" in lower
 
+    @staticmethod
+    def _write_metrics_from_aux_stdout(aux_stdout: str, metrics_target: Path | None) -> bool:
+        if not metrics_target:
+            return False
+        begin_marker = "COMSOL_METRICS_JSON_BEGIN"
+        end_marker = "COMSOL_METRICS_JSON_END"
+        start_idx = aux_stdout.find(begin_marker)
+        end_idx = aux_stdout.find(end_marker)
+        if start_idx == -1 or end_idx == -1 or end_idx <= start_idx:
+            return False
+        metrics_json = aux_stdout[start_idx + len(begin_marker):end_idx].strip()
+        metrics_target.parent.mkdir(parents=True, exist_ok=True)
+        metrics_target.write_text(metrics_json + "\n", encoding="utf-8")
+        return True
+
     def _resolve_configuration_dir(self, settings: Settings, output_dir: Path) -> Path:
         if settings.comsol.configuration_dir:
             candidate = Path(settings.comsol.configuration_dir)
@@ -124,12 +230,77 @@ class COMSOLRunner:
 
     @staticmethod
     def _resolve_generated_mph_candidate(generated_mph: Path) -> Path | None:
-        if generated_mph.exists():
-            return generated_mph.resolve()
         fallback = generated_mph.with_name(f"{generated_mph.stem}_Model{generated_mph.suffix}")
-        if fallback.exists():
-            return fallback.resolve()
-        return None
+        candidates = [candidate for candidate in (generated_mph, fallback) if candidate.exists()]
+        if not candidates:
+            return None
+        try:
+            return max(candidates, key=lambda candidate: candidate.stat().st_mtime).resolve()
+        except OSError:
+            return candidates[-1].resolve()
+
+    @classmethod
+    def _resolve_fresh_generated_mph_candidate(cls, generated_mph: Path, started_at: float) -> Path | None:
+        fallback = generated_mph.with_name(f"{generated_mph.stem}_Model{generated_mph.suffix}")
+        candidates = [candidate for candidate in (generated_mph, fallback) if candidate.exists()]
+        fresh_candidates: list[Path] = []
+        if not candidates:
+            return None
+        # COMSOL may leave stale generated MPH files behind after a failed
+        # rebuild. Only accept files written during this build attempt.
+        for candidate in candidates:
+            try:
+                if candidate.stat().st_mtime >= started_at - 1.0:
+                    fresh_candidates.append(candidate)
+            except OSError:
+                continue
+        if not fresh_candidates:
+            return None
+        try:
+            return max(fresh_candidates, key=lambda candidate: candidate.stat().st_mtime).resolve()
+        except OSError:
+            return None
+
+    def _cleanup_duplicate_mph_outputs(
+        self,
+        *,
+        build_dir: Path,
+        generated_mph_target: Path | None,
+        preferred_generated_mph: Path | None,
+        settings: Settings,
+    ) -> None:
+        """
+        Remove large COMSOL duplicate MPH artefacts after build/solve/postprocess.
+
+        This runs only after COMSOL has completed the relevant step. It never
+        touches solve/*_result.mph, metrics, plots, reports, TOMLs, or logs.
+        """
+        if generated_mph_target is not None:
+            fallback = generated_mph_target.with_name(
+                f"{generated_mph_target.stem}_Model{generated_mph_target.suffix}"
+            )
+            preferred = preferred_generated_mph.resolve() if preferred_generated_mph else None
+            for candidate in (generated_mph_target, fallback):
+                try:
+                    candidate_resolved = candidate.resolve()
+                except OSError:
+                    candidate_resolved = candidate
+                if not candidate.exists():
+                    continue
+                if preferred is not None and candidate_resolved == preferred:
+                    continue
+                # Keep one openable generated MPH for geometry screenshots, but
+                # remove the duplicate created by COMSOL's Java/class fallback.
+                if generated_mph_target.exists() and fallback.exists():
+                    self._safe_unlink(candidate)
+
+        if not settings.comsol.postprocess_write_auxiliary_mph:
+            for pattern in (
+                "*postprocess*PostModel.mph",
+                "*postprocess*_output.mph",
+            ):
+                for path in build_dir.glob(pattern):
+                    self._safe_unlink(path)
 
     def check_license(self, settings: Settings, workdir: Path) -> tuple[bool, str]:
         """
@@ -222,15 +393,27 @@ class COMSOLRunner:
             return str(candidate)
         return None
 
-    @staticmethod
+    @classmethod
     def _run_logged_command(
+        cls,
         proc_args: list[str],
         cwd: Path,
         debug_path: Path,
         timeout_s: int | None = 120,
+        *,
+        progress_log: Path | None = None,
+        progress_label: str | None = None,
+        announce: bool = True,
     ) -> tuple[int, str, str]:
+        started = time.time()
+        label = progress_label or Path(proc_args[0]).name
+        if announce:
+            cls._console(f"{label}: start")
+        log_position = 0
+        last_progress: str | None = None
+        last_progress_pct: int | None = None
         try:
-            result = subprocess.run(
+            process = subprocess.Popen(
                 proc_args,
                 cwd=str(cwd),
                 stdout=subprocess.PIPE,
@@ -238,16 +421,51 @@ class COMSOLRunner:
                 text=True,
                 encoding="utf-8",
                 errors="replace",
-                timeout=(timeout_s if timeout_s and timeout_s > 0 else None),
             )
-            code = result.returncode
-            stdout = result.stdout or ""
-            stderr = result.stderr or ""
+            deadline = time.time() + timeout_s if timeout_s and timeout_s > 0 else None
+            while process.poll() is None:
+                log_position, last_progress, last_progress_pct = cls._tail_progress_log(
+                    log_path=progress_log,
+                    position=log_position,
+                    last_message=last_progress,
+                    last_progress_pct=last_progress_pct,
+                    label=label,
+                )
+                if deadline is not None and time.time() > deadline:
+                    process.kill()
+                    stdout, stderr = process.communicate()
+                    code = 124
+                    stderr = ((stderr or "") + "\nCommand timed out.").strip()
+                    break
+                time.sleep(5.0)
+            else:
+                stdout, stderr = process.communicate()
+                code = process.returncode
+            log_position, last_progress, last_progress_pct = cls._tail_progress_log(
+                log_path=progress_log,
+                position=log_position,
+                last_message=last_progress,
+                last_progress_pct=last_progress_pct,
+                label=label,
+            )
+            stdout = stdout or ""
+            stderr = stderr or ""
         except subprocess.TimeoutExpired as exc:
             code = 124
-            stdout = (exc.stdout or "") if isinstance(exc.stdout, str) else ""
-            stderr = (exc.stderr or "") if isinstance(exc.stderr, str) else ""
+            if isinstance(exc.stdout, bytes):
+                stdout = exc.stdout.decode("utf-8", errors="replace")
+            else:
+                stdout = exc.stdout or ""
+            if isinstance(exc.stderr, bytes):
+                stderr = exc.stderr.decode("utf-8", errors="replace")
+            else:
+                stderr = exc.stderr or ""
             stderr = (stderr + "\nCommand timed out.").strip()
+        elapsed_s = time.time() - started
+        cls._finish_progress_line()
+        if announce or code != 0:
+            status = "klaar" if code == 0 else f"failed code {code}"
+            cls._console(f"{label}: {status} after {elapsed_s/60:.1f} min")
 
         debug_path.write_text(
             "\n".join(
@@ -306,6 +524,7 @@ class COMSOLRunner:
                 case_dir,
                 javac_debug,
                 timeout_s=_normalize_timeout_seconds(settings.comsol.java_compile_timeout_s, 30),
+                announce=False,
             )
             if javac_code == 0 and class_file.exists():
                 class_args = [
@@ -321,15 +540,18 @@ class COMSOLRunner:
                     *settings.comsol.extra_args,
                 ]
                 class_debug = output_dir / f"{case_name}_comsol_build_class_debug.log"
+                class_started_at = time.time()
                 class_code, class_out, class_err = self._run_logged_command(
                     class_args,
                     case_dir,
                     class_debug,
                     timeout_s=_normalize_timeout_seconds(settings.comsol.java_build_timeout_s, 60),
+                    progress_log=build_log,
+                    progress_label=f"{case_name} build",
                 )
                 class_log_text = build_log.read_text(encoding="utf-8", errors="replace") if build_log.exists() else ""
                 class_text = "\n".join([class_out, class_err, class_log_text])
-                generated_candidate = self._resolve_generated_mph_candidate(generated_mph)
+                generated_candidate = self._resolve_fresh_generated_mph_candidate(generated_mph, class_started_at)
                 if class_code == 0 and generated_candidate is not None:
                     return True, ""
                 if class_code == 124:
@@ -356,6 +578,7 @@ class COMSOLRunner:
                 case_dir,
                 compile_debug,
                 timeout_s=_normalize_timeout_seconds(settings.comsol.java_compile_timeout_s, 30),
+                announce=False,
             )
             compile_text = "\n".join([compile_out, compile_err])
             if self._detect_license_error(compile_text):
@@ -376,15 +599,18 @@ class COMSOLRunner:
                     *settings.comsol.extra_args,
                 ]
                 class_debug = output_dir / f"{case_name}_comsol_build_class_debug.log"
+                class_started_at = time.time()
                 class_code, class_out, class_err = self._run_logged_command(
                     class_args,
                     case_dir,
                     class_debug,
                     timeout_s=_normalize_timeout_seconds(settings.comsol.java_build_timeout_s, 60),
+                    progress_log=build_log,
+                    progress_label=f"{case_name} build",
                 )
                 class_log_text = build_log.read_text(encoding="utf-8", errors="replace") if build_log.exists() else ""
                 class_text = "\n".join([class_out, class_err, class_log_text])
-                generated_candidate = self._resolve_generated_mph_candidate(generated_mph)
+                generated_candidate = self._resolve_fresh_generated_mph_candidate(generated_mph, class_started_at)
                 if class_code == 0 and generated_candidate is not None:
                     return True, ""
                 if class_code == 124:
@@ -414,15 +640,18 @@ class COMSOLRunner:
             *settings.comsol.extra_args,
         ]
         direct_debug = output_dir / f"{case_name}_comsol_build_direct_debug.log"
+        direct_started_at = time.time()
         code, stdout, stderr = self._run_logged_command(
             direct_args,
             case_dir,
             direct_debug,
             timeout_s=_normalize_timeout_seconds(settings.comsol.java_build_timeout_s, 60),
+            progress_log=build_log,
+            progress_label=f"{case_name} build",
         )
         build_log_text = build_log.read_text(encoding="utf-8", errors="replace") if build_log.exists() else ""
         direct_text = "\n".join([stdout, stderr, build_log_text])
-        generated_candidate = self._resolve_generated_mph_candidate(generated_mph)
+        generated_candidate = self._resolve_fresh_generated_mph_candidate(generated_mph, direct_started_at)
         if code == 0 and generated_candidate is not None:
             return True, ""
         if self._detect_license_error(direct_text):
@@ -467,29 +696,36 @@ class COMSOLRunner:
             case_dir,
             javac_debug,
             timeout_s=_normalize_timeout_seconds(settings.comsol.java_compile_timeout_s, 30),
+            announce=False,
         )
         if javac_code != 0 or not class_file.exists():
             return False, f"Failed to compile auxiliary COMSOL Java class {java_file.name}.", ""
 
         run_log = logs_dir / f"{case_name}_{java_file.stem}.log"
+        self._safe_unlink(run_log)
         class_args = [
             str(batch_executable),
             "-configuration",
             str(configuration_dir),
             "-inputfile",
             str(class_file.resolve()),
-            "-outputfile",
-            str(class_file.with_name(f"{java_file.stem}_output.mph").resolve()),
             "-batchlog",
             str(run_log.resolve()),
             *settings.comsol.extra_args,
         ]
+        if settings.comsol.postprocess_write_auxiliary_mph:
+            class_args[5:5] = [
+                "-outputfile",
+                str(class_file.with_name(f"{java_file.stem}_output.mph").resolve()),
+            ]
         class_debug = logs_dir / f"{case_name}_{java_file.stem}_debug.log"
         class_code, class_out, class_err = self._run_logged_command(
             class_args,
             case_dir,
             class_debug,
             timeout_s=_normalize_timeout_seconds(settings.comsol.postprocess_timeout_s, 60),
+            progress_log=run_log,
+            progress_label=f"{case_name} {java_file.stem}",
         )
         run_log_text = run_log.read_text(encoding="utf-8", errors="replace") if run_log.exists() else ""
         run_text = "\n".join([class_out, class_err, run_log_text])
@@ -501,9 +737,22 @@ class COMSOLRunner:
 
     def run(self, input_files: tuple[Path, ...], settings_map: dict[Path, Settings], *, build_only: bool = False) -> tuple[Path, ...]:
         completed: list[Path] = []
-        for input_file in input_files:
+        total = len(input_files)
+        mode = "build-only" if build_only else "run"
+        for index, input_file in enumerate(input_files, start=1):
+            self._console(f"({index}/{total}) {mode}: {input_file}")
             settings = settings_map[input_file]
             if self.run_case(input_file, settings, build_only=build_only):
+                completed.append(input_file)
+        return tuple(completed)
+
+    def postprocess(self, input_files: tuple[Path, ...], settings_map: dict[Path, Settings]) -> tuple[Path, ...]:
+        completed: list[Path] = []
+        total = len(input_files)
+        for index, input_file in enumerate(input_files, start=1):
+            self._console(f"({index}/{total}) postprocess-only: {input_file}")
+            settings = settings_map[input_file]
+            if self.postprocess_case(input_file, settings):
                 completed.append(input_file)
         return tuple(completed)
 
@@ -538,7 +787,6 @@ class COMSOLRunner:
         start_idx = aux_stdout.find(begin_marker)
         end_idx = aux_stdout.find(end_marker)
         if start_idx == -1 or end_idx == -1 or end_idx <= start_idx:
-            logger.warning("%s: verification export ran but did not emit JSON markers.", case_name)
             return False, "Verification Java ran but did not emit JSON markers."
         verification_json = aux_stdout[start_idx + len(begin_marker):end_idx].strip()
         verification_target.parent.mkdir(parents=True, exist_ok=True)
@@ -597,6 +845,7 @@ class COMSOLRunner:
         build_dir = output_paths["build"]
         solve_dir = output_paths["solve"]
         logs_dir = output_paths["logs"]
+        self._console(f"{case_name}: output root = {output_paths['root']}")
         command_preview_file = logs_dir / f"{case_name}.comsol_command.txt"
         prepare_artefacts = payload.get("prepare_artefacts", {})
         configuration_dir = self._resolve_configuration_dir(settings, build_dir)
@@ -662,7 +911,8 @@ class COMSOLRunner:
                 planned_commands.append(f"{comsol_executable} compile {builder_java.resolve()}")
 
             if True:
-                logger.info("Building MPH from Java scaffold for %s", case_name)
+                logger.debug("Building MPH from Java scaffold for %s", case_name)
+                self._console(f"{case_name}: build Java -> MPH")
                 built, reason = self._try_build_mph_from_java(
                     case_name=case_name,
                     case_dir=case_dir,
@@ -706,6 +956,7 @@ class COMSOLRunner:
 
         output_mph = solve_dir / f"{case_name}_result.mph"
         log_file = logs_dir / f"{case_name}_comsol.log"
+        self._safe_unlink(output_mph.with_suffix(output_mph.suffix + ".lock"))
 
         proc_args = [
             str(batch_executable),
@@ -725,6 +976,7 @@ class COMSOLRunner:
         command_preview_file.write_text("\n".join(planned_commands) + "\n", encoding="utf-8")
 
         if build_only:
+            self._console(f"{case_name}: build-only verification")
             verify_ok, verify_reason = self._capture_verification_json(
                 case_name=case_name,
                 case_dir=case_dir,
@@ -745,11 +997,18 @@ class COMSOLRunner:
                     reason=verify_reason,
                 )
             logger.info("Built COMSOL MPH for %s without starting solve.", case_name)
+            self._console(f"{case_name}: build-only complete")
             self._prune_output_artefacts(
                 case_name=case_name,
                 output_paths=output_paths,
                 prepare_artefacts=prepare_artefacts,
                 input_file=input_file,
+                settings=settings,
+            )
+            self._cleanup_duplicate_mph_outputs(
+                build_dir=build_dir,
+                generated_mph_target=generated_mph_target,
+                preferred_generated_mph=source_mph,
                 settings=settings,
             )
             return True
@@ -759,23 +1018,38 @@ class COMSOLRunner:
             return True
 
         logger.info("Running COMSOL for %s", case_name)
+        self._console(f"{case_name}: solve start")
         debug_path = logs_dir / f"{case_name}_comsol_runner_debug.log"
         code, _, _ = self._run_logged_command(
             proc_args,
             case_dir,
             debug_path,
             timeout_s=_normalize_timeout_seconds(settings.comsol.solve_timeout_s, 120),
+            progress_log=log_file,
+            progress_label=f"{case_name} solve",
         )
         if code != 0:
-            logger.error("COMSOL failed for %s. Debug: %s", case_name, debug_path)
-            return False
+            if output_mph.exists():
+                logger.warning(
+                    "%s: COMSOL returned a nonzero status, but a result MPH was saved; continuing with postprocess. Debug: %s",
+                    case_name,
+                    debug_path,
+                )
+            else:
+                logger.error("COMSOL failed for %s. Debug: %s", case_name, debug_path)
+                return False
 
         postprocess_java = (
             Path(prepare_artefacts.get("comsol_postprocess_java", ""))
             if prepare_artefacts.get("comsol_postprocess_java")
             else None
         )
-        if postprocess_java and postprocess_java.exists():
+        postprocess_mode = str(getattr(settings.comsol, "postprocess_mode", "full") or "full").strip().lower().replace("-", "_")
+        skip_postprocess = postprocess_mode in {"none", "skip", "off", "disabled", "false"}
+        if skip_postprocess:
+            self._console(f"{case_name}: postprocess skipped by postprocess_mode={postprocess_mode}")
+        elif postprocess_java and postprocess_java.exists():
+            self._console(f"{case_name}: postprocess metrics/export")
             ok, reason, aux_stdout = self._run_aux_java_class(
                 case_name=case_name,
                 case_dir=case_dir,
@@ -785,25 +1059,16 @@ class COMSOLRunner:
                 java_file=postprocess_java,
                 settings=settings,
             )
+            metrics_target = (
+                Path(prepare_artefacts.get("comsol_metrics_json_target", ""))
+                if prepare_artefacts.get("comsol_metrics_json_target")
+                else None
+            )
+            metrics_written = self._write_metrics_from_aux_stdout(aux_stdout, metrics_target)
             if not ok:
                 logger.warning("%s: %s", case_name, reason)
-            else:
-                metrics_target = (
-                    Path(prepare_artefacts.get("comsol_metrics_json_target", ""))
-                    if prepare_artefacts.get("comsol_metrics_json_target")
-                    else None
-                )
-                if metrics_target:
-                    begin_marker = "COMSOL_METRICS_JSON_BEGIN"
-                    end_marker = "COMSOL_METRICS_JSON_END"
-                    start_idx = aux_stdout.find(begin_marker)
-                    end_idx = aux_stdout.find(end_marker)
-                    if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
-                        metrics_json = aux_stdout[start_idx + len(begin_marker):end_idx].strip()
-                        metrics_target.parent.mkdir(parents=True, exist_ok=True)
-                        metrics_target.write_text(metrics_json + "\n", encoding="utf-8")
-                    else:
-                        logger.warning("%s: postprocess ran but did not emit metrics JSON markers.", case_name)
+            elif not metrics_written:
+                logger.info("%s: postprocess did not emit metrics markers; keeping existing/fallback reporting flow.", case_name)
 
         verify_ok, verify_reason = self._capture_verification_json(
             case_name=case_name,
@@ -825,11 +1090,125 @@ class COMSOLRunner:
                 reason=verify_reason,
             )
 
+        metrics_target = (
+            Path(prepare_artefacts.get("comsol_metrics_json_target", ""))
+            if prepare_artefacts.get("comsol_metrics_json_target")
+            else None
+        )
+        if metrics_target and metrics_target.exists():
+            try:
+                generate_case_report(
+                    case_name=case_name,
+                    metrics_path=metrics_target,
+                    verification_path=solve_verification_target if solve_verification_target and solve_verification_target.exists() else None,
+                    log_path=log_file if log_file.exists() else None,
+                    output_dir=solve_dir,
+                    settings=settings,
+                )
+            except Exception:
+                logger.exception("%s: failed to generate COMSOL summary report.", case_name)
+
         self._prune_output_artefacts(
             case_name=case_name,
             output_paths=output_paths,
             prepare_artefacts=prepare_artefacts,
             input_file=input_file,
+            settings=settings,
+        )
+        self._cleanup_duplicate_mph_outputs(
+            build_dir=build_dir,
+            generated_mph_target=generated_mph_target,
+            preferred_generated_mph=source_mph,
+            settings=settings,
+        )
+        self._console(f"{case_name}: run complete")
+        return True
+
+    def postprocess_case(self, input_file: Path, settings: Settings) -> bool:
+        assert input_file.suffix == ".json", "COMSOL runner expects JSON case input files."
+        payload = json.loads(input_file.read_text(encoding="utf-8"))
+        case_name = payload["case_name"]
+        case_dir = Path(payload["case_dir"])
+        output_paths = ensure_output_tree(case_dir, settings)
+        solve_dir = output_paths["solve"]
+        logs_dir = output_paths["logs"]
+        prepare_artefacts = payload.get("prepare_artefacts", {})
+        configuration_dir = self._resolve_configuration_dir(settings, output_paths["build"])
+        batch_executable = self._resolve_batch_executable(settings)
+        if not batch_executable:
+            logger.warning("Skipping postprocess for %s: COMSOL batch executable not found.", case_name)
+            return False
+
+        postprocess_java = (
+            Path(prepare_artefacts.get("comsol_postprocess_java", ""))
+            if prepare_artefacts.get("comsol_postprocess_java")
+            else None
+        )
+        result_mph = solve_dir / f"{case_name}_result.mph"
+        if not postprocess_java or not postprocess_java.exists():
+            logger.warning("Skipping postprocess for %s: generated postprocess Java is missing.", case_name)
+            return False
+        if not result_mph.exists():
+            logger.warning("Skipping postprocess for %s: result MPH does not exist at %s.", case_name, result_mph)
+            return False
+
+        ok, reason, aux_stdout = self._run_aux_java_class(
+            case_name=case_name,
+            case_dir=case_dir,
+            logs_dir=logs_dir,
+            configuration_dir=configuration_dir,
+            batch_executable=batch_executable,
+            java_file=postprocess_java,
+            settings=settings,
+        )
+        metrics_target = (
+            Path(prepare_artefacts.get("comsol_metrics_json_target", ""))
+            if prepare_artefacts.get("comsol_metrics_json_target")
+            else None
+        )
+        if metrics_target:
+            metrics_written = self._write_metrics_from_aux_stdout(aux_stdout, metrics_target)
+            if not metrics_written:
+                if not ok:
+                    logger.warning("%s: %s", case_name, reason)
+                    return False
+                logger.warning("%s: postprocess did not emit metrics markers.", case_name)
+                return False
+            if not ok:
+                logger.warning(
+                    "%s: postprocess emitted metrics, but auxiliary Java ended with: %s",
+                    case_name,
+                    reason,
+                )
+
+        solve_verification_target = (
+            Path(prepare_artefacts.get("comsol_solve_verification_json_target", ""))
+            if prepare_artefacts.get("comsol_solve_verification_json_target")
+            else None
+        )
+        log_file = logs_dir / f"{case_name}_comsol.log"
+        if metrics_target and metrics_target.exists():
+            try:
+                generate_case_report(
+                    case_name=case_name,
+                    metrics_path=metrics_target,
+                    verification_path=solve_verification_target if solve_verification_target and solve_verification_target.exists() else None,
+                    log_path=log_file if log_file.exists() else None,
+                    output_dir=solve_dir,
+                    settings=settings,
+                )
+            except Exception:
+                logger.exception("%s: failed to generate COMSOL summary report after postprocess-only.", case_name)
+                return False
+        generated_mph_target = (
+            Path(prepare_artefacts.get("comsol_generated_mph_target", ""))
+            if prepare_artefacts.get("comsol_generated_mph_target")
+            else None
+        )
+        self._cleanup_duplicate_mph_outputs(
+            build_dir=output_paths["build"],
+            generated_mph_target=generated_mph_target,
+            preferred_generated_mph=self._resolve_generated_mph_candidate(generated_mph_target) if generated_mph_target else None,
             settings=settings,
         )
         return True

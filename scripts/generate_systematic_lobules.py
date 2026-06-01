@@ -172,12 +172,12 @@ def visualize_lobules(lobules, nipple=(0.0, 0.035, 0.0), radius=0.07):
     plt.show()
 
 
-def save_to_toml_file(lobules, output_path="runs/overnight_suite/manual_lobules_systematic.toml"):
+def save_to_toml_file(lobules, output_path="runs/febio_runs/overnight_suite/manual_lobules_systematic.toml"):
     """
     Save the generated lobules to a complete TOML config file.
     """
     # Read the baseline config as template
-    base_toml = Path("runs/overnight_suite/manual_lobules_balanced.toml")
+    base_toml = Path("runs/febio_runs/overnight_suite/manual_lobules_balanced.toml")
     
     if not base_toml.exists():
         print(f"\nWARNING: Base config not found at {base_toml}")
@@ -256,7 +256,7 @@ if __name__ == "__main__":
     # Save to file
     save_to_toml_file(
         lobules,
-        output_path="runs/overnight_suite/manual_lobules_systematic.toml"
+        output_path="runs/febio_runs/overnight_suite/manual_lobules_systematic.toml"
     )
     
     print("\n" + "="*70)
@@ -265,7 +265,7 @@ if __name__ == "__main__":
     print("1. Review the TOML output above")
     print("2. Review the 2D visualizations (frontal + lateral)")
     print("3. Test the new config:")
-    print("   python -m ews_fem_pipeline_clean run runs/overnight_suite/manual_lobules_systematic.toml")
+    print("   python -m ews_fem_pipeline_clean run runs/febio_runs/overnight_suite/manual_lobules_systematic.toml")
     print("4. Analyze results:")
     print("   $env:RUN_NAME='manual_lobules_systematic'")
     print("   python scripts/data_analysis_main.py")

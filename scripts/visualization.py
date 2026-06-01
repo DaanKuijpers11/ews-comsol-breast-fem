@@ -110,7 +110,9 @@ def plot_surface_displacement_evolution(vtk_dir: Path, surface_nodes: set,
 
         U_mag = np.linalg.norm(U, axis=1)
 
-        idx = np.array([n - 1 for n in surface_nodes if n - 1 < len(U)])
+        idx = np.array([n - 1 for n in surface_nodes if 0 <= (n - 1) < len(U)], dtype=int)
+        if idx.size == 0:
+            continue
 
         surf = U_mag[idx] * 1000
 
@@ -171,7 +173,9 @@ def plot_landmark_spatial(vtk_dir: Path, landmarks: dict,
     if U is None:
         return
 
-    idx = np.array([n - 1 for n in surface_nodes if n - 1 < len(U)])
+    idx = np.array([n - 1 for n in surface_nodes if 0 <= (n - 1) < len(U)], dtype=int)
+    if idx.size == 0:
+        return
 
     coords = mesh.points[idx]
     disp = np.linalg.norm(U[idx], axis=1) * 1000
@@ -200,6 +204,10 @@ def plot_landmark_spatial(vtk_dir: Path, landmarks: dict,
 
 def plot_landmark_comparison(df: pd.DataFrame, output_dir: Path,
                              model_labels: Dict, model_colors: Dict):
+
+    if df is None or df.empty or "landmark" not in df.columns or "model" not in df.columns:
+        print("No landmark comparison data found; skipping landmark comparison plot.")
+        return
 
     fig, ax = plt.subplots(figsize=(12, 6))
 
@@ -261,7 +269,9 @@ def plot_spatial_displacement_comparison(model_dirs: dict,
         mesh = meshio.read(vtk_path)
         U = mesh.point_data["displacement"]
 
-        idx = np.array([n - 1 for n in surface_nodes if n - 1 < len(U)])
+        idx = np.array([n - 1 for n in surface_nodes if 0 <= (n - 1) < len(U)], dtype=int)
+        if idx.size == 0:
+            continue
 
         coords = mesh.points[idx]
         disp = np.linalg.norm(U[idx], axis=1) * 1000

@@ -1,0 +1,58 @@
+# Python cache and local tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local logs and temporary files
+*.log
+*.tmp
+
+# COMSOL/FEM heavy generated artefacts
+*.mph
+*.mph.*
+*.recovery
+*.status
+*.class
+*.comsol_command.txt
+**/comsol_configuration/
+**/org.eclipse.core.runtime/
+**/org.eclipse.osgi/
+**/org.eclipse.update/
+
+# Generated run/build/solve folders
+# Keep lightweight run provenance, but never track generated FEM artefacts.
+runs/**
+!runs/**/
+!runs/**/*.toml
+!runs/**/README.md
+runs/**/output/
+runs/**/outputs/
+runs/**/output_*/
+runs/**/build/
+runs/**/solve/
+runs/**/prepare/
+runs/comsol_full_overnight_suite/
+output/
+
+# FEBio/mesh/generated numerical artefacts
+*.vtk
+*.vtu
+*.xplt
+*.feb
+*.npy
+*.npz
+*.obj
+*.mtl
+*.stl
+
+# Keep active lightweight analysis, ignore older duplicate analysis outputs
+analysis_output/figures/
+analysis_output/figures_Febio_pipeline/
+analysis_output/metrics_compare/
+analysis_output/legacy_benchmark/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db

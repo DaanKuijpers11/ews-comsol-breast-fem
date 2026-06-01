@@ -1,6 +1,7 @@
 import numpy as np
 from pathlib import Path
 import logging
+import re
 
 import pyvista as pv
 from tqdm import tqdm
@@ -30,7 +31,21 @@ def feb_to_blender(filepath: Path):  # Input should be path to .vtk files
         filepaths_vtk.append(filepath_vtk)
         idx += 1
         filepath_vtk = filepath_name.with_suffix(f".{idx}.vtk")
-    logger.info(f"Found {idx + 1} .vtk files")
+
+    if not filepaths_vtk:
+        pattern = re.compile(rf"^{re.escape(filename)}\.\d+\.vtk$")
+        filepaths_vtk = sorted(
+            candidate
+            for candidate in filepath_output.glob("*.vtk")
+            if pattern.match(candidate.name)
+        )
+
+    logger.info(f"Found {len(filepaths_vtk)} .vtk files")
+
+    if not filepaths_vtk:
+        raise FileNotFoundError(
+            f"No VTK time-step files found for {filename} in {filepath_output}."
+        )
 
     # Define paths output .obj file for surface mesh and output .npy file for displacements
     filepath_obj = (filepath_output / filename).with_suffix(".obj")

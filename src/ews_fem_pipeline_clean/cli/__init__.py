@@ -41,6 +41,12 @@ def _build_parser() -> argparse.ArgumentParser:
     compare_parser = subparsers.add_parser("compare", help="Build a compact comparison summary for multiple cases.")
     compare_parser.add_argument("input_files", nargs="+", type=Path)
     compare_parser.add_argument("--baseline", type=str, default=None, help="Case name to use as baseline.")
+    compare_parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=None,
+        help="Optional directory for compare outputs, relative to the workspace root or absolute.",
+    )
 
     return parser
 
@@ -94,7 +100,7 @@ def cli_main(argv: list[str] | None = None) -> int:
     if args.command == "compare":
         from ews_fem_pipeline_clean.pipeline import compare_case_summaries
 
-        compare_case_summaries(tuple(args.input_files), baseline=args.baseline)
+        compare_case_summaries(tuple(args.input_files), baseline=args.baseline, output_dir=args.output_dir)
         return 0
 
     parser.error(f"Unknown command: {args.command}")
