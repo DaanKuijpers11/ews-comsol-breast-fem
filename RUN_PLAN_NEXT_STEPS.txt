@@ -1,0 +1,110 @@
+COMSOL EWS - kort run-plan
+==========================
+
+Werkmap:
+C:\Users\20223231\ews_fem_clean
+
+Belangrijk:
+- Run niet alles tegelijk. Eerst control, dan postprocess, dan pas tumor.
+- Als een solve faalt of duidelijk partial is: eerst stoppen/evalueren, niet automatisch door naar de volgende case.
+- Bewaar vooral TOMLs, summary CSV/JSON/MD, time_series CSV, plots en screenshots.
+- Grote result/build MPH files mogen later weg zodra de evaluatie en screenshots goed zijn.
+
+
+1) Eerst: Stage 5 no-tumor control met skin scaffold aan
+--------------------------------------------------------
+Doel:
+- Checken of de 1.25g no-Cooper reference stabiel blijft met skin shell + skin-solid coupling.
+- Dit is de nieuwe eerlijkere control voordat Stage 6 tumor-runs met skin worden gedaan.
+
+Run:
+python -m ews_fem_pipeline_comsol run runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_skin_on_solve_only_preview.toml
+
+Na afloop eerst globaal postprocessen:
+python -m ews_fem_pipeline_comsol postprocess-only --mode global runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_skin_on_solve_only_preview.toml
+
+Daarna evaluatieplots/samenvattingen opnieuw maken:
+python tools\make_comsol_evaluation_plots.py
+
+Check daarna:
+- Heeft de solve t = 2.2 s gehaald?
+- Is displacement logisch t.o.v. de 1.25g no-skin control?
+- Is stress niet extreem/onrealistisch hoog?
+- Is de skin-on result visueel stabiel in COMSOL?
+
+
+2) Daarna: beslissen of skin-on de nieuwe basis wordt
+-----------------------------------------------------
+Als Stage 5 skin-on stabiel en verdedigbaar is:
+- Maak daarna pas een Stage 6 skin-on tumor TOML op basis van de medium upper-outer surface-proximal tumor.
+- Belangrijk: tumor-case moet dezelfde settings hebben als de skin-on control, behalve tumorous=true.
+- Gewenste toekomstige naam:
+  runs\comsol_runs\geometry_stage6\stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_skin_on_solve_only_preview.toml
+
+Als Stage 5 skin-on faalt of veel te traag/instabiel is:
+- Gebruik voorlopig no-skin als diagnostic route.
+- Beschrijf skin shell dan als noodzakelijke vervolgverbetering, niet als afgeronde baseline.
+
+
+3) Eerste tumorvergelijking: medium upper-outer surface-proximal
+----------------------------------------------------------------
+Reden:
+- Upper-outer quadrant is klinisch een logische eerste locatie.
+- Medium tumor is waarschijnlijk zichtbaarder dan een kleine 6 mm tumor.
+- Surface-proximal ligging sluit beter aan bij het EWS-doel: surface motion/shape detectie.
+
+Huidige bestaande no-skin diagnostic TOML:
+runs\comsol_runs\geometry_stage6\stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_solve_only_preview.toml
+
+Alleen gebruiken als skin-on nog niet de basis is:
+python -m ews_fem_pipeline_comsol run runs\comsol_runs\geometry_stage6\stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_solve_only_preview.toml
+
+Postprocess eerst compact/global:
+python -m ews_fem_pipeline_comsol postprocess-only --mode global runs\comsol_runs\geometry_stage6\stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_solve_only_preview.toml
+
+Daarna, als global nuttig is en je surface-effect wil zien:
+python -m ews_fem_pipeline_comsol postprocess-only --mode ews-surface runs\comsol_runs\geometry_stage6\stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_solve_only_preview.toml
+
+Daarna:
+python tools\make_comsol_evaluation_plots.py
+
+
+4) Tweede tumor-case alleen als de medium upper-outer vergelijking nuttig is
+----------------------------------------------------------------------------
+Optie: large central diagnostic tumor.
+Doel:
+- Niet direct report-ready als klinische claim.
+- Wel nuttig als upper-bound test: kan het model uberhaupt een duidelijk tumor-effect laten zien?
+
+Run:
+python -m ews_fem_pipeline_comsol run runs\comsol_runs\geometry_stage6\stage6_tumor_large_central_xoffset055_125g_solve_only_preview.toml
+
+Postprocess global:
+python -m ews_fem_pipeline_comsol postprocess-only --mode global runs\comsol_runs\geometry_stage6\stage6_tumor_large_central_xoffset055_125g_solve_only_preview.toml
+
+Optioneel surface:
+python -m ews_fem_pipeline_comsol postprocess-only --mode ews-surface runs\comsol_runs\geometry_stage6\stage6_tumor_large_central_xoffset055_125g_solve_only_preview.toml
+
+Daarna:
+python tools\make_comsol_evaluation_plots.py
+
+
+5) Wat voorlopig NIET tegelijk draaien
+--------------------------------------
+- Niet meteen alle kleine tumorlocaties opnieuw draaien.
+- Niet meteen Cooper + tumor combineren.
+- Niet meteen 0.25g, 0.50g, 1.00g, 1.25g allemaal postprocessen met full mode.
+- Niet full postprocess doen voordat global/evaluation laat zien dat de case echt bruikbaar is.
+
+
+6) Overzicht prioriteit
+-----------------------
+Hoogste prioriteit:
+1. Stage 5 1.25g skin-on no-tumor control solve.
+2. Global postprocess van die skin-on control.
+3. Plot/evaluation update.
+4. Daarna pas Stage 6 medium upper-outer tumor met dezelfde skin/no-skin basis als de control.
+
+Voor report:
+- Control vs tumor moet dezelfde geometry, acceleration, material settings, skin setting en Cooper setting hebben.
+- Alleen tumorous=true/false en tumor-locatie/grootte mogen veranderen.
