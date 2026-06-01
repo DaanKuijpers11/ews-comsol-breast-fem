@@ -1,3 +1,10 @@
+"""Source-case anatomy, material, load, and legacy XML settings.
+
+These pydantic models are the COMSOL package's local copy of the source FEM case
+schema. COMSOL TOMLs can embed or reference these settings, after which
+``prepare_source_case`` converts them into build-plan JSON for the Java builder.
+"""
+
 import numpy as np
 from pathlib import Path
 from typing import Annotated, Literal

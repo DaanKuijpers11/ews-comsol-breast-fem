@@ -1,3 +1,9 @@
+"""Source-case geometry and mesh settings used before COMSOL Java generation.
+
+These pydantic models describe the analytical breast profile, mesh generation
+parameters, and named tissue parts exported by the source-case prepare step.
+"""
+
 from typing import Literal
 
 from pydantic import BaseModel, Field

@@ -1,3 +1,9 @@
+"""Gmsh-based source-case mesh generation.
+
+The COMSOL builder mainly uses analytical geometry, but this module still
+exports mesh/lobule artefacts that document the resolved source-case anatomy.
+"""
+
 import math
 import numpy as np
 import logging

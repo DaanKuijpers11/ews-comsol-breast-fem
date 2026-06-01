@@ -1,3 +1,5 @@
+"""Centralized output-folder resolution for COMSOL cases."""
+
 from __future__ import annotations
 
 from pathlib import Path

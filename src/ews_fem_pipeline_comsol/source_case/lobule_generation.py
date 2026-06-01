@@ -1,3 +1,9 @@
+"""Deterministic glandular lobule layout generators.
+
+The COMSOL pipeline uses these functions to create fan-shaped or Chen-inspired
+lobule templates before converting them into COMSOL ellipsoid/duct primitives.
+"""
+
 import numpy as np
 
 

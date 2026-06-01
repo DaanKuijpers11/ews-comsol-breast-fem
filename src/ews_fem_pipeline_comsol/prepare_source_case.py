@@ -1,3 +1,10 @@
+"""Prepare COMSOL build inputs from source-case anatomy/material settings.
+
+This module resolves the source case behind a COMSOL TOML, exports lightweight
+mesh/lobule/build-plan artefacts, and writes the JSON/TOML files consumed by
+``script_builder``. It does not run COMSOL.
+"""
+
 from __future__ import annotations
 
 import json
@@ -44,6 +51,7 @@ def resolve_source_case_toml(
     output_dir: Path,
     settings: Settings,
 ) -> tuple[Path, str]:
+    """Return the source-case TOML path, creating an inline snapshot if needed."""
     inline_source_case = _extract_inline_source_case(comsol_case_toml)
     if inline_source_case:
         inline_path = output_dir / f"{case_name}_inline_source_case.toml"
@@ -123,9 +131,7 @@ def prepare_source_case(
     output_dir: Path,
     settings: Settings,
 ) -> dict[str, str]:
-    """
-    Generate COMSOL-ready input artefacts from the source-case settings.
-    """
+    """Generate COMSOL-ready input artefacts from the source-case settings."""
     if not settings.source.reuse_source_prepare:
         return {}
 
@@ -147,16 +153,15 @@ def prepare_source_case(
         "mesh_export": "not_requested",
         "message": "",
         "builder_scope": (
-            "Current COMSOL builder is a scaffold: it exports geometry/material/lobule inputs "
-            "from the source-case settings, but does not yet recreate the full COMSOL physics "
-            "model automatically."
+            "Current COMSOL builder creates analytical breast geometry, selections, "
+            "material scaffolds, dynamics, and postprocess Java from source-case settings. "
+            "Some advanced anatomical features remain sensitivity/scaffold routes."
         ),
         "recommended_next_steps": [
-            "Import or reconstruct the breast mesh/geometry inside COMSOL.",
-            "Create explicit COMSOL selections for skin, adipose, glandular, and chest-wall regions.",
-            "Map source-case material parameters to COMSOL material models.",
-            "Define gravity and motion studies equivalent to the source-case baseline.",
-            "Validate the COMSOL model first with a static gravity load before dynamic motion.",
+            "Run build-only first and inspect geometry, selections, and tumor preview placement.",
+            "Use solved result MPH files only after geometry has been visually checked.",
+            "Start postprocess with global mode before heavier surface or tumor exports.",
+            "Treat Cooper ligaments, asymmetry, and tumor routes as sensitivity models unless fully validated.",
         ],
         "source_case_mode": source_case_mode,
         "source_case_toml": str(base_case_toml.resolve()),

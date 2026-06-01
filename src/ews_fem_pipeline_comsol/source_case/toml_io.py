@@ -1,4 +1,6 @@
-﻿import math
+"""TOML I/O helpers for source-case pydantic settings."""
+
+import math
 import tomllib
 from pathlib import Path
 
@@ -70,9 +72,7 @@ def _write_table(lines: list[str], prefix: str, table: dict, array_item: bool = 
 
 
 def write_settings_to_toml(filepath: Path, settings):
-    """
-    Writes all settings to a .toml file.
-    """
+    """Write all source-case settings to a TOML file."""
     assert filepath.suffix == ".toml", "The input file does not have the correct file extension. Must be .toml"
 
     parent_path = filepath.parent
@@ -87,12 +87,7 @@ def write_settings_to_toml(filepath: Path, settings):
 
 
 def load_settings_from_toml(filepath: Path):
-    """
-    Loads settings from a pre-written .toml file.
-    Only non-default settings need to be provided.
-    The remaining settings are set to their default value.
-    """
-
+    """Load source-case settings from TOML and fill omitted values with defaults."""
     assert filepath.suffix == ".toml", "The input file does not have the correct file extension. Must be .toml"
 
     with open(filepath, "rb") as f:
@@ -100,4 +95,3 @@ def load_settings_from_toml(filepath: Path):
     settings = Settings.model_validate(settings)
 
     return settings
-

@@ -1,3 +1,10 @@
+"""Create lightweight report artefacts from COMSOL metrics JSON.
+
+The COMSOL postprocess Java emits metrics JSON. This module turns it into
+Git-friendly summary JSON/CSV/Markdown and optional time-series CSVs for
+surface displacement, landmark displacement, and tissue stress.
+"""
+
 from __future__ import annotations
 
 import csv
@@ -290,6 +297,7 @@ def generate_case_report(
     output_dir: Path,
     settings: Settings,
 ) -> dict[str, Path]:
+    """Write summary and time-series files for one postprocessed COMSOL case."""
     metrics = _safe_read_json(metrics_path)
     verification = _safe_read_json(verification_path) if verification_path else {}
 

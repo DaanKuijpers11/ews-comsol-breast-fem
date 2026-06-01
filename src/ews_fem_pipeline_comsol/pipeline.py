@@ -1,3 +1,11 @@
+"""High-level orchestration for the COMSOL case pipeline.
+
+This module connects the CLI verbs to the three main phases:
+1. generate Python/JSON/Java artefacts from TOML case files;
+2. build and optionally solve the COMSOL model through COMSOL batch;
+3. rerun post-processing or metric comparison on existing solved cases.
+"""
+
 from __future__ import annotations
 
 import json
@@ -27,6 +35,7 @@ def _export_resolved_case_snapshot(
     output_root: Path,
     settings: Settings,
 ) -> tuple[Path, Path]:
+    """Write provenance TOMLs that capture the fully resolved COMSOL/source case."""
     source_case_path, source_case_mode = resolve_source_case_toml(
         case_name=case_file.stem,
         comsol_case_toml=case_file,
@@ -68,6 +77,7 @@ def _export_resolved_case_snapshot(
 
 
 def generate_cases(input_files: tuple[Path, ...], *, postprocess_mode_override: str | None = None) -> tuple[Path, ...]:
+    """Generate COMSOL input JSON and Java/build artefacts for TOML cases."""
     generated: list[Path] = []
     total = len(input_files)
     for index, filepath in enumerate(input_files, start=1):
@@ -121,6 +131,7 @@ def generate_cases(input_files: tuple[Path, ...], *, postprocess_mode_override: 
 
 
 def solve_cases(input_files: tuple[Path, ...], settings_map: dict[Path, Settings] | None = None) -> tuple[Path, ...]:
+    """Run COMSOL build/solve for already generated JSON case inputs."""
     from ews_fem_pipeline_comsol.run_simulation import COMSOLRunner
 
     for filepath in input_files:
@@ -137,6 +148,7 @@ def solve_cases(input_files: tuple[Path, ...], settings_map: dict[Path, Settings
 
 
 def build_cases(input_files: tuple[Path, ...], settings_map: dict[Path, Settings] | None = None) -> tuple[Path, ...]:
+    """Build generated COMSOL models without starting the transient solve."""
     from ews_fem_pipeline_comsol.run_simulation import COMSOLRunner
 
     for filepath in input_files:
@@ -153,6 +165,7 @@ def build_cases(input_files: tuple[Path, ...], settings_map: dict[Path, Settings
 
 
 def postprocess_cases(input_files: tuple[Path, ...], settings_map: dict[Path, Settings] | None = None) -> tuple[Path, ...]:
+    """Rerun generated COMSOL post-processing Java on existing result MPH files."""
     from ews_fem_pipeline_comsol.run_simulation import COMSOLRunner
 
     for filepath in input_files:

@@ -1,3 +1,5 @@
+"""Compare lightweight COMSOL metrics with optional legacy FEBio summaries."""
+
 from __future__ import annotations
 
 import csv

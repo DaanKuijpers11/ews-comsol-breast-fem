@@ -1,3 +1,11 @@
+"""Generate COMSOL Java API source files from prepared case artefacts.
+
+This is the main translation layer from Python/TOML settings to COMSOL Java. It
+emits the model builder, postprocess class, verification helpers, and selection
+hints. The generated Java owns the COMSOL-side geometry, selections, material
+variables, dynamic loading, Cooper/tumor scaffolds, plots, and metrics export.
+"""
+
 from __future__ import annotations
 
 import json
@@ -52,9 +60,7 @@ def generate_comsol_java_builder(
     prepare_artefacts: dict[str, str],
     comsol_settings: ComsolSettings | None = None,
 ) -> dict[str, str]:
-    """
-    Generate COMSOL Java API scaffolding from exported prepare artefacts.
-    """
+    """Generate builder/postprocess/verification Java and selection hints."""
     output_dir.mkdir(parents=True, exist_ok=True)
     class_name = _safe_java_identifier(f"{case_name}_comsol_builder")
 
@@ -1102,6 +1108,8 @@ def generate_comsol_java_builder(
     postprocess_output_stem = case_name if postprocess_mode == "full" else f"{case_name}_{postprocess_mode}"
     metrics_json_path = solve_dir / f"{postprocess_output_stem}_metrics.json"
     selection_hints_path = output_dir / f"{case_name}_comsol_selection_hints.json"
+    # Selection hints give humans a stable map from model concepts to generated
+    # COMSOL tags, which is especially useful for build-only inspection.
     nipple_placement_debug = {
         "nipple_surface_mode": nipple_surface_mode,
         "nipple_surface_aware_enabled": use_surface_aware_nipple,
@@ -1465,6 +1473,9 @@ def generate_comsol_java_builder(
     if duct_only_detail_mode:
         visible_lobules = [lob for lob in lobules if str(lob.get("component_role", "")) == "duct"]
 
+    # Convert source-case lobule descriptors into COMSOL geometry primitives.
+    # Template-lobe mode builds bulb/duct families; older modes remain simple
+    # ellipsoid chains.
     lobule_feature_tags: list[str] = []
     lobule_specs: list[dict[str, float | str | int]] = []
     lobule_java_blocks: list[str] = []

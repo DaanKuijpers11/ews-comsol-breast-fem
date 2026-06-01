@@ -1,3 +1,5 @@
+"""Command-line interface for the EWS COMSOL FEM pipeline."""
+
 import argparse
 import logging
 from pathlib import Path

@@ -1,3 +1,10 @@
+"""Dataclass settings for COMSOL pipeline TOML files.
+
+The top-level TOML is split into ``[pipeline]``, ``[source]``, and ``[comsol]``.
+User TOMLs are deep-merged with defaults so stage cases only need to specify the
+settings that differ from the baseline.
+"""
+
 from __future__ import annotations
 
 import copy
@@ -9,6 +16,8 @@ from typing import Any
 
 @dataclass
 class ComsolSettings:
+    """COMSOL build, geometry, dynamics, support, and postprocess options."""
+
     enabled: bool = True
     batch_executable: str | None = None
     comsol_executable: str | None = None
@@ -112,12 +121,16 @@ class ComsolSettings:
 
 @dataclass
 class PipelineSettings:
+    """Small pipeline-level settings independent of COMSOL physics."""
+
     model_name: str = "breast_model_comsol"
     output_subdir: str = "output"
 
 
 @dataclass
 class SourceSettings:
+    """Controls how a COMSOL TOML obtains source-case anatomy/material data."""
+
     base_case_toml: str = ""
     reuse_source_prepare: bool = True
     export_mesh_npz: bool = True
@@ -159,6 +172,7 @@ def _from_dict(data: dict[str, Any]) -> Settings:
 
 
 def load_settings_from_toml(filepath: Path) -> Settings:
+    """Load a COMSOL case TOML and merge it with default settings."""
     assert filepath.suffix == ".toml", "Input file must have .toml extension."
     with open(filepath, "rb") as handle:
         user_data = tomllib.load(handle)

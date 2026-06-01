@@ -1,3 +1,10 @@
+"""COMSOL batch execution, progress reporting, and postprocess orchestration.
+
+The runner receives generated JSON case inputs from ``pipeline.py``. It can
+build a Java-generated MPH, solve the configured study, run auxiliary Java
+verification/postprocess classes, and prune duplicate heavyweight artefacts.
+"""
+
 from __future__ import annotations
 
 import json
@@ -25,6 +32,8 @@ def _normalize_timeout_seconds(value: int | None, minimum_if_enabled: int) -> in
 
 
 class COMSOLRunner:
+    """Run COMSOL build, solve, verification, and postprocess steps for cases."""
+
     @staticmethod
     def _console(message: str) -> None:
         print(f"[COMSOL pipeline] {message}", flush=True)
@@ -405,6 +414,7 @@ class COMSOLRunner:
         progress_label: str | None = None,
         announce: bool = True,
     ) -> tuple[int, str, str]:
+        """Run a subprocess, write a debug log, and stream selected COMSOL progress."""
         started = time.time()
         label = progress_label or Path(proc_args[0]).name
         if announce:
@@ -499,6 +509,7 @@ class COMSOLRunner:
         generated_mph: Path,
         settings: Settings,
     ) -> tuple[bool, str]:
+        """Compile/run the generated COMSOL Java builder and report build status."""
         build_log = output_dir / f"{case_name}_comsol_build.log"
         class_file = builder_java.with_suffix(".class")
         jdk_root = settings.comsol.jdk_root or os.environ.get("JAVA_HOME")
@@ -672,6 +683,7 @@ class COMSOLRunner:
         java_file: Path,
         settings: Settings,
     ) -> tuple[bool, str, str]:
+        """Compile and run a generated verification or postprocess Java class."""
         class_file = java_file.with_suffix(".class")
         jdk_root = settings.comsol.jdk_root or os.environ.get("JAVA_HOME")
         javac_executable = self._resolve_javac_executable(jdk_root)
@@ -837,6 +849,7 @@ class COMSOLRunner:
         verification_target.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
     def run_case(self, input_file: Path, settings: Settings, *, build_only: bool = False) -> bool:
+        """Build and optionally solve a single generated COMSOL case input."""
         assert input_file.suffix == ".json", "COMSOL runner expects JSON case input files."
         payload = json.loads(input_file.read_text(encoding="utf-8"))
         case_name = payload["case_name"]
@@ -1125,6 +1138,7 @@ class COMSOLRunner:
         return True
 
     def postprocess_case(self, input_file: Path, settings: Settings) -> bool:
+        """Run postprocess-only on a solved result MPH for one generated case."""
         assert input_file.suffix == ".json", "COMSOL runner expects JSON case input files."
         payload = json.loads(input_file.read_text(encoding="utf-8"))
         case_name = payload["case_name"]

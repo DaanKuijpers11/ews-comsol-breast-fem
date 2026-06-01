@@ -1,3 +1,5 @@
+"""Small public settings API used by the CLI and external scripts."""
+
 from pathlib import Path
 
 from .settings import (
@@ -18,4 +20,3 @@ def load_settings(filepath: Path) -> Settings:
 
 def write_settings(filepath: Path, settings: Settings) -> None:
     write_settings_to_toml(filepath, settings)
-
