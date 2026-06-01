@@ -9,48 +9,17 @@ variables, dynamic loading, Cooper/tumor scaffolds, plots, and metrics export.
 from __future__ import annotations
 
 import json
-import re
 from collections import defaultdict
 from pathlib import Path
 import numpy as np
 
+from ews_fem_pipeline_comsol.java_utils import (
+    chunk_list as _chunk_list,
+    comsol_safe_name as _comsol_safe_name,
+    safe_java_identifier as _safe_java_identifier,
+)
+from ews_fem_pipeline_comsol.material_mapping import linearize_mooney_rivlin as _linearize_mooney_rivlin
 from ews_fem_pipeline_comsol.settings import ComsolSettings
-
-
-def _comsol_safe_name(text: str) -> str:
-    return text.replace("\\", "/")
-
-
-def _safe_java_identifier(text: str) -> str:
-    identifier = re.sub(r"[^0-9a-zA-Z_]", "_", text)
-    if not identifier:
-        identifier = "comsol_case"
-    if identifier[0].isdigit():
-        identifier = f"case_{identifier}"
-    return identifier
-
-
-def _chunk_list(items: list[str], size: int) -> list[list[str]]:
-    return [items[idx:idx + size] for idx in range(0, len(items), size)]
-
-
-def _linearize_mooney_rivlin(material: dict[str, object]) -> tuple[float, float]:
-    """
-    Infer a small-strain isotropic linear elastic approximation from source-case inputs.
-
-    Inference:
-    - Shear modulus G ~= 2 * (c1 + c2)
-    - Bulk modulus K from the existing source-case input
-    - Then E = 9KG / (3K + G), nu = (3K - 2G) / (2 * (3K + G))
-    """
-    bulk_modulus = float(material.get("bulk_modulus", 1.0))
-    coef1 = float(material.get("coef1", 0.0))
-    coef2 = float(material.get("coef2", 0.0))
-    shear_modulus = max(2.0 * (coef1 + coef2), 1e-9)
-    youngs_modulus = 9.0 * bulk_modulus * shear_modulus / (3.0 * bulk_modulus + shear_modulus)
-    poissons_ratio = (3.0 * bulk_modulus - 2.0 * shear_modulus) / (2.0 * (3.0 * bulk_modulus + shear_modulus))
-    poissons_ratio = min(max(poissons_ratio, -0.49), 0.499)
-    return youngs_modulus, poissons_ratio
 
 
 def generate_comsol_java_builder(

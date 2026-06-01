@@ -90,6 +90,12 @@ follows this path:
   - This is currently the largest and most important implementation file.
   - Contains geometry, selection, material, dynamics, tumor, Cooper, plotting, postprocess, and verification Java generation.
 
+- `java_utils.py`
+  - Small Python helpers used by Java generation, such as safe Java class names and list chunking.
+
+- `material_mapping.py`
+  - Material conversion helpers, including the current Mooney-Rivlin to linear-elastic approximation.
+
 - `run_simulation/comsol_runner.py`
   - Runs COMSOL batch and auxiliary Java classes.
   - Handles build, solve, postprocess, progress logging, timeouts, license errors, and duplicate MPH cleanup.
@@ -141,4 +147,3 @@ These are documentation/maintenance priorities, not requirements before running 
 3. Group `ComsolSettings` into clearer nested setting classes after existing TOMLs are stable.
 4. Replace user-facing `assert` checks with explicit `ValueError` or CLI errors.
 5. Keep `prepare_from_febio.py` only as a temporary compatibility shim.
-
