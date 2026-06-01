@@ -861,6 +861,7 @@ class COMSOLRunner:
         self._console(f"{case_name}: output root = {output_paths['root']}")
         command_preview_file = logs_dir / f"{case_name}.comsol_command.txt"
         prepare_artefacts = payload.get("prepare_artefacts", {})
+        auxiliary_verification_enabled = bool(getattr(settings.comsol, "enable_auxiliary_verification", False))
         configuration_dir = self._resolve_configuration_dir(settings, build_dir)
         build_verification_java = (
             Path(prepare_artefacts.get("comsol_build_verification_java", ""))
@@ -989,26 +990,27 @@ class COMSOLRunner:
         command_preview_file.write_text("\n".join(planned_commands) + "\n", encoding="utf-8")
 
         if build_only:
-            self._console(f"{case_name}: build-only verification")
-            verify_ok, verify_reason = self._capture_verification_json(
-                case_name=case_name,
-                case_dir=case_dir,
-                logs_dir=logs_dir,
-                configuration_dir=configuration_dir,
-                batch_executable=batch_executable,
-                verification_java=build_verification_java,
-                verification_target=build_verification_target,
-                settings=settings,
-            )
-            if not verify_ok:
-                self._write_fallback_verification_json(
+            if auxiliary_verification_enabled:
+                self._console(f"{case_name}: build-only verification")
+                verify_ok, verify_reason = self._capture_verification_json(
                     case_name=case_name,
+                    case_dir=case_dir,
+                    logs_dir=logs_dir,
+                    configuration_dir=configuration_dir,
+                    batch_executable=batch_executable,
+                    verification_java=build_verification_java,
                     verification_target=build_verification_target,
-                    prepare_artefacts=prepare_artefacts,
-                    loaded_model_path=source_mph,
-                    phase="build_only",
-                    reason=verify_reason,
+                    settings=settings,
                 )
+                if not verify_ok:
+                    self._write_fallback_verification_json(
+                        case_name=case_name,
+                        verification_target=build_verification_target,
+                        prepare_artefacts=prepare_artefacts,
+                        loaded_model_path=source_mph,
+                        phase="build_only",
+                        reason=verify_reason,
+                    )
             logger.info("Built COMSOL MPH for %s without starting solve.", case_name)
             self._console(f"{case_name}: build-only complete")
             self._prune_output_artefacts(
@@ -1083,25 +1085,26 @@ class COMSOLRunner:
             elif not metrics_written:
                 logger.info("%s: postprocess did not emit metrics markers; keeping existing/fallback reporting flow.", case_name)
 
-        verify_ok, verify_reason = self._capture_verification_json(
-            case_name=case_name,
-            case_dir=case_dir,
-            logs_dir=logs_dir,
-            configuration_dir=configuration_dir,
-            batch_executable=batch_executable,
-            verification_java=solve_verification_java,
-            verification_target=solve_verification_target,
-            settings=settings,
-        )
-        if not verify_ok:
-            self._write_fallback_verification_json(
+        if auxiliary_verification_enabled:
+            verify_ok, verify_reason = self._capture_verification_json(
                 case_name=case_name,
+                case_dir=case_dir,
+                logs_dir=logs_dir,
+                configuration_dir=configuration_dir,
+                batch_executable=batch_executable,
+                verification_java=solve_verification_java,
                 verification_target=solve_verification_target,
-                prepare_artefacts=prepare_artefacts,
-                loaded_model_path=output_mph,
-                phase="solve",
-                reason=verify_reason,
+                settings=settings,
             )
+            if not verify_ok:
+                self._write_fallback_verification_json(
+                    case_name=case_name,
+                    verification_target=solve_verification_target,
+                    prepare_artefacts=prepare_artefacts,
+                    loaded_model_path=output_mph,
+                    phase="solve",
+                    reason=verify_reason,
+                )
 
         metrics_target = (
             Path(prepare_artefacts.get("comsol_metrics_json_target", ""))
@@ -1113,7 +1116,11 @@ class COMSOLRunner:
                 generate_case_report(
                     case_name=case_name,
                     metrics_path=metrics_target,
-                    verification_path=solve_verification_target if solve_verification_target and solve_verification_target.exists() else None,
+                    verification_path=(
+                        solve_verification_target
+                        if auxiliary_verification_enabled and solve_verification_target and solve_verification_target.exists()
+                        else None
+                    ),
                     log_path=log_file if log_file.exists() else None,
                     output_dir=solve_dir,
                     settings=settings,
@@ -1147,6 +1154,7 @@ class COMSOLRunner:
         solve_dir = output_paths["solve"]
         logs_dir = output_paths["logs"]
         prepare_artefacts = payload.get("prepare_artefacts", {})
+        auxiliary_verification_enabled = bool(getattr(settings.comsol, "enable_auxiliary_verification", False))
         configuration_dir = self._resolve_configuration_dir(settings, output_paths["build"])
         batch_executable = self._resolve_batch_executable(settings)
         if not batch_executable:
@@ -1206,7 +1214,11 @@ class COMSOLRunner:
                 generate_case_report(
                     case_name=case_name,
                     metrics_path=metrics_target,
-                    verification_path=solve_verification_target if solve_verification_target and solve_verification_target.exists() else None,
+                    verification_path=(
+                        solve_verification_target
+                        if auxiliary_verification_enabled and solve_verification_target and solve_verification_target.exists()
+                        else None
+                    ),
                     log_path=log_file if log_file.exists() else None,
                     output_dir=solve_dir,
                     settings=settings,
