@@ -38,8 +38,8 @@ This is only an approximate comparison value, but it is useful for planning stif
 | Material set | Skin E estimate | Adipose E estimate | Glandular E estimate | Interpretation |
 |---|---:|---:|---:|---|
 | Current COMSOL/Chen-like reference | ~500 kPa | ~3.66 kPa | ~10.0 kPa | Literature-anchored fixed reference; likely more stable and physically conservative. |
-| Old FEBio-like all-soft set | ~14.4 kPa | ~1.29 kPa | ~2.55 kPa | Useful lower-stiffness sensitivity; likely more compliant; not best as final skin-layer default. |
-| Proposed hybrid: stiff skin + soft interior | ~500 kPa | ~1.29 kPa | ~2.55 kPa | Best first material-sensitivity route if the current reference under-moves. |
+| Old FEBio-like all-soft set | ~14.4 kPa | ~1.29 kPa | ~2.55 kPa | Useful lower-stiffness sensitivity; likely more compliant; not best as final skin-layer default. Some old sources differ in density, so this should not be copied directly as the new COMSOL reference. |
+| Proposed hybrid: stiff skin + soft interior | ~500 kPa | ~1.29 kPa | ~2.55 kPa | Best first material-sensitivity route if the current reference under-moves. Keep current COMSOL densities and bulk moduli; soften only adipose/glandular C10/C01. |
 | Proposed intermediate interior | ~500 kPa skin, ~100 kPa optional mid-skin | ~2.3-2.5 kPa | ~5 kPa | Useful if all-soft is too compliant but current reference is too stiff. |
 
 ## Literature interpretation
@@ -118,14 +118,22 @@ Preferred next material case:
 
 ```text
 skin = current stiff COMSOL/Chen-like value
-adipose = old soft FEBio-like value
-glandular = old soft FEBio-like value
+adipose/glandular density and bulk modulus = current COMSOL reference
+adipose/glandular C10/C01 = soft interior scout
+```
+
+Recommended clean soft-interior values:
+
+```text
+skin:     density 1100 kg/m3, bulk 8.33 MPa, C10 41667 Pa, C01 41667 Pa
+adipose:  density 950 kg/m3,  bulk 425 kPa,  C10 109 Pa,   C01 106 Pa
+glandular:density 1070 kg/m3, bulk 425 kPa,  C10 230 Pa,   C01 195 Pa
 ```
 
 Recommended amplitudes:
 
-1. 0.50g or 0.75g if runtime allows a cautious scout.
-2. 1.25g only if the moderate-g hybrid case still under-moves.
+1. Use 1.25g after the stiff-reference 1.25g skin case has been visually accepted, so only material stiffness changes.
+2. If this becomes too compliant, use the intermediate material scout below.
 
 Purpose:
 

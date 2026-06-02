@@ -17,9 +17,9 @@ Deze tabel is expres een werkplanning en hoort niet in het report.
 | Prioriteit | Case | TOML / actie | Runstatus | Postprocess/evaluatie | Waarom |
 |---|---|---|---|---|---|
 | 1 | Stage 5 no-Cooper, 1.25g, volumetrische skin, stijve reference | runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_solve_only_preview.toml | Eerst runnen of controleren | Daarna global postprocess + make_comsol_evaluation_plots.py als de animatie er goed uitziet | Nieuwe skin-route valideren op de huidige Stage 5 reference |
-| 2 | Hybrid material scout: stijve skin + zachtere adipose/glandular, 0.50g of 0.75g | TOML nog maken na beoordeling van prioriteit 1 | Nog niet runnen | Eerst alleen global postprocess als de solve stabiel is | Kijken of meer realistische displacement via materiaal kan zonder meteen hogere g |
-| 3 | Hybrid material scout 1.25g | TOML nog maken als prioriteit 2 te weinig beweegt | Nog niet runnen | Global postprocess, daarna plots | Alleen nodig als 0.50g/0.75g nog te laag blijft |
-| 4 | All-soft 1.25g diagnostic | runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_febio_materials_solve_only_preview.toml | Alleen draaien als upper-compliance test | Global postprocess alleen als visueel/numeriek bruikbaar | Niet als eerste baseline gebruiken, wel nuttig als gevoeligheidsgrens |
+| 2 | Hybrid soft-interior scout: stijve skin + zachtere adipose/glandular, 1.25g | TOML nog maken na beoordeling van prioriteit 1 | Nog niet runnen | Global postprocess als de solve stabiel is | Beste tweede run als de stijve skin-reference te weinig displacement geeft; density/bulk blijven gelijk |
+| 3 | Intermediate-interior scout: stijve skin + halfzachte adipose/glandular, 1.25g | TOML nog maken als prioriteit 2 te compliant lijkt | Nog niet runnen | Global postprocess, daarna plots | Compromis als de huidige reference te stijf is maar soft-interior te veel beweegt |
+| 4 | All-soft 1.25g diagnostic | runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_febio_materials_solve_only_preview.toml | Voorlopig niet als hoofdcase | Global postprocess alleen als visueel/numeriek bruikbaar | Bevat ook zachte skin en oude density-keuzes; alleen upper-compliance/diagnostic |
 | 5 | Stage 6 tumor op gekozen controlbasis | Nieuwe matched tumor-TOML maken na keuze van skin/material/g | Nog niet runnen | Eerst global of ews-surface, daarna eventueel full | Tumorvergelijking is alleen eerlijk als control en tumor exact dezelfde basis hebben |
 | 6 | Stage 6 extra locaties/groottes | Pas kiezen na eerste tumor-control vergelijking | Nog niet runnen | Alleen postprocessen wat reportwaarde heeft | Voorkomt veel lange runs zonder duidelijke vergelijking |
 
@@ -57,14 +57,14 @@ Doel:
 Beste volgende scout om te maken/runnen:
 - Stage 5 no-Cooper volumetric skin;
 - skin = huidige stijve COMSOL/Chen-achtige waarde;
-- adipose/glandular = zachte FEBio-achtige waarden;
-- start bij 0.50g of 0.75g;
-- pas naar 1.25g als dit nog te weinig displacement geeft.
+- adipose/glandular density en bulk modulus = huidige COMSOL-reference houden;
+- alleen adipose/glandular c10/c01 zachter zetten;
+- amplitude = 1.25g, zodat alleen materiaal verandert ten opzichte van de nieuwe 1.25g skin-reference.
 
 De al bestaande all-soft 1.25g TOML:
 runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_febio_materials_solve_only_preview.toml
 
-Gebruik die voorlopig alleen als diagnostic upper-compliance case, niet als eerste report-baseline.
+Gebruik die voorlopig alleen als diagnostic upper-compliance case, niet als eerste report-baseline. Die TOML gebruikt ook zachte skin en oude density-keuzes en is dus niet de nette tweede run voor de huidige COMSOL-route.
 
 
 3) Materiaalverschil dat je moet onthouden
@@ -77,12 +77,22 @@ Huidige COMSOL/Chen-achtige stijvere reference:
 Oude FEBio-achtige zachte scout uit de simple ligament baseline:
 - Skin: density 1100, bulk 480 kPa, c10 1200 Pa, c01 1200 Pa, E_schatting ~= 14.4 kPa.
 - Adipose: density 911, bulk 425 kPa, c10 109 Pa, c01 106 Pa, E_schatting ~= 1.29 kPa.
-- Glandular: density 911, bulk 425 kPa, c10 230 Pa, c01 195 Pa, E_schatting ~= 2.55 kPa.
+- Glandular: oude broncode noemt density 1041, sommige oude TOMLs gebruikten 911; voor nieuwe COMSOL-scouts NIET overnemen. Houd glandular density 1070 en bulk 425 kPa, en gebruik alleen c10 230 Pa, c01 195 Pa als zachte stiffness-scout.
 
 Interpretatie:
 - De huidige COMSOL reference is vooral bij skin en glandular veel stijver.
 - De zachte scout kan waarschijnlijk meer displacement geven, maar is een material-sensitivity case.
-- Niet meteen claimen dat die zachtere set anatomisch "beter" is; gebruik hem om beweging en detecteerbaarheid te testen.
+- Niet meteen claimen dat die zachtere c10/c01-set anatomisch "beter" is; gebruik hem om beweging en detecteerbaarheid te testen.
+
+Aanbevolen nette tweede run, als de nieuwe skin-reference stabiel is maar te weinig beweegt:
+- Skin: density 1100, bulk 8.33 MPa, c10 41667 Pa, c01 41667 Pa.
+- Adipose: density 950, bulk 425 kPa, c10 109 Pa, c01 106 Pa.
+- Glandular: density 1070, bulk 425 kPa, c10 230 Pa, c01 195 Pa.
+
+Conservatiever alternatief als bovenstaande te zacht lijkt:
+- Skin: density 1100, bulk 8.33 MPa, c10 41667 Pa, c01 41667 Pa.
+- Adipose: density 950, bulk 425 kPa, c10 200 Pa, c01 195 Pa.
+- Glandular: density 1070, bulk 425 kPa, c10 450 Pa, c01 400 Pa.
 
 
 4) Daarna pas tumorvergelijking kiezen
@@ -120,6 +130,6 @@ Vanavond:
 
 Morgen overdag:
 1. Eerst de volumetric-skin stiff-reference result beoordelen.
-2. Daarna een hybrid soft-interior/stiff-skin TOML maken/runnen, liefst 0.50g of 0.75g.
-3. Alleen als die nog te laag beweegt: hybrid 1.25g of intermediate material set.
+2. Daarna een hybrid soft-interior/stiff-skin TOML maken/runnen op 1.25g.
+3. Als die te veel beweegt of rare vervorming geeft: intermediate material set op 1.25g.
 4. Pas daarna tumorcontrol maken op dezelfde gekozen material/g/skin basis.
