@@ -58,6 +58,16 @@ def generate_comsol_java_builder(
     shell_physics_enabled = bool(comsol_settings.enable_skin_shell_physics) if comsol_settings else False
     shell_coupling_enabled = bool(comsol_settings.enable_skin_solid_coupling_scaffold) if comsol_settings else False
     skin_shell_thickness_m = float(comsol_settings.skin_shell_thickness_m) if comsol_settings else 0.0001
+    volumetric_skin_enabled = (
+        bool(getattr(comsol_settings, "enable_volumetric_skin_layer", False))
+        if comsol_settings
+        else False
+    )
+    volumetric_skin_thickness_m = (
+        float(getattr(comsol_settings, "volumetric_skin_thickness_m", 0.0015))
+        if comsol_settings
+        else 0.0015
+    )
     postprocess_export_plot_images = (
         bool(getattr(comsol_settings, "postprocess_export_plot_images", True))
         if comsol_settings
@@ -454,6 +464,10 @@ def generate_comsol_java_builder(
 
     geometry = build_plan_summary["geometry"]
     radius = float(geometry.get("radius", 0.07))
+    volumetric_skin_thickness_m = max(
+        0.0,
+        min(volumetric_skin_thickness_m, 0.25 * radius),
+    )
     chest_thickness = float(geometry.get("thickness_chest_wall", 0.002))
     left_rel = float(geometry.get("left_relative_position_ellipse", 0.4))
     nipple_rel = float(geometry.get("right_relative_position_ellipse", 0.05))
@@ -481,6 +495,9 @@ def generate_comsol_java_builder(
     outer_semiaxis_x = radius * outer_shape_scale_x
     outer_semiaxis_z = radius * outer_shape_scale_z
     outer_semiaxis_y = radius * transverse_volume_preserve_y_scale * outer_shape_scale_y
+    skin_core_semiaxis_x = max(outer_semiaxis_x - volumetric_skin_thickness_m, 1e-6)
+    skin_core_semiaxis_z = max(outer_semiaxis_z - volumetric_skin_thickness_m, 1e-6)
+    skin_core_semiaxis_y = max(outer_semiaxis_y - volumetric_skin_thickness_m, 1e-6)
     glandular_seed_center_x_offset_m = min(
         max(glandular_seed_center_x_offset_m, -0.60 * outer_semiaxis_x),
         0.60 * outer_semiaxis_x,
@@ -1146,7 +1163,8 @@ def generate_comsol_java_builder(
     }
     selection_hints = {
         "component_domain_selections": {
-            "geom1_breast_union_dom": "Final union of the deformable breast domains (adipose and glandular tissue)",
+            "geom1_breast_union_dom": "Final union of the deformable breast domains (adipose, glandular, and optional volumetric skin layer)",
+            "geom1_skin_layer_dom": "Optional volumetric solid skin layer, generated only when enable_volumetric_skin_layer is true",
             "geom1_adipose_diff_dom": "Adipose region after subtracting glandular volume from outer breast",
             "geom1_gland_clip_dom": "Glandular ellipsoid clipped to the outer breast",
             "geom1_chest_cyl_dom": "Chest-wall support domain",
@@ -1178,6 +1196,8 @@ def generate_comsol_java_builder(
         },
         "geometry_feature_tags": {
             "breast_outer": "Outer breast envelope with source-case baseline and optional light thorax curvature",
+            "skin_core": "Optional inner breast core used to subtract a volumetric skin layer from the outer breast",
+            "skin_layer": "Optional volumetric skin domain made as breast_outer minus skin_core",
             "gland_clip": "Glandular source volume clipped directly to the breast outer volume; no separate anterior clipping block is used.",
             "gland_lobules": "Union of COMSOL-native lobule ellipsoids derived from the exported source-case lobule layout",
             "adipose_diff": "Adipose outer volume minus glandular volume",
@@ -1190,6 +1210,7 @@ def generate_comsol_java_builder(
         },
         "recommended_physics_targets": {
             "full_breast_domain_selection": "geom1_breast_union_dom",
+            "skin_solid_domain_selection": "geom1_skin_layer_dom",
             "skin_shell_boundary_selection": "geom1_breast_outer_bnd",
             "surface_displacement_selection": "outer_skin_free_bnd",
             "surface_displacement_coordinate": "COMSOL z displacement w is used as signed vertical displacement; COMSOL y displacement v is anterior-posterior",
@@ -1231,6 +1252,16 @@ def generate_comsol_java_builder(
             "notes": [
                 "The shell scaffold is generated defensively because COMSOL API identifiers can vary by version/license.",
                 "The Solid-Thin Structure Connection is emitted as a scaffold on the same outer boundary selection and may need manual refinement in COMSOL.",
+            ],
+        },
+        "volumetric_skin_layer": {
+            "enabled": volumetric_skin_enabled,
+            "skin_thickness_m": volumetric_skin_thickness_m,
+            "skin_domain_selection": "geom1_skin_layer_dom",
+            "core_domain_selection": "geom1_skin_core_dom",
+            "notes": [
+                "Diagnostic solid-skin route: adipose and glandular tissue are built inside skin_core, while skin_layer is added back into breast_union.",
+                "The route is intentionally opt-in so existing stage TOMLs keep the previous no-solid-skin geometry unless enabled explicitly.",
             ],
         },
         "chest_wall_scaffold": {
@@ -1965,6 +1996,26 @@ def generate_comsol_java_builder(
         if use_lobules
         else ""
     )
+    skin_solid_hyperelastic_java = f"""
+    if ({str(volumetric_skin_enabled).lower()}) {{
+      boolean skinSolidHyperelasticReady = tryCreateMooneyRivlinFeature(
+        model,
+        "solid",
+        "hmat_skin_solid",
+        3,
+        "geom1_skin_layer_dom",
+        "skin_density",
+        "skin_c10",
+        "skin_c01",
+        "skin_bulk_modulus",
+        hyperelasticNotes
+      );
+      if (skinSolidHyperelasticReady) {{
+        tryCreateRayleighDampingSubfeature(model, "solid", "hmat_skin_solid", "dmp_skin_solid", "mass_damping_alpha", "stiffness_damping_beta", hyperelasticNotes);
+      }}
+      solidHyperelasticReady = skinSolidHyperelasticReady && solidHyperelasticReady;
+    }}
+"""
 
     shell_physics_java = ""
     if shell_physics_enabled:
@@ -2003,6 +2054,7 @@ def generate_comsol_java_builder(
       tryCreateRayleighDampingSubfeature(model, "solid", "hmat_glandular", "dmp_glandular", "mass_damping_alpha", "stiffness_damping_beta", hyperelasticNotes);
     }}
     solidHyperelasticReady = glandularHyperelasticReady && solidHyperelasticReady;
+{skin_solid_hyperelastic_java}
     if (solidHyperelasticReady) {{
       tryRestrictLinearElasticFeature(model, "solid", "geom1_chest_cyl_dom", hyperelasticNotes);
     }} else {{
@@ -2083,6 +2135,7 @@ def generate_comsol_java_builder(
       tryCreateRayleighDampingSubfeature(model, "solid", "hmat_glandular", "dmp_glandular", "mass_damping_alpha", "stiffness_damping_beta", hyperelasticNotes);
     }
     solidHyperelasticReady = glandularHyperelasticReady && solidHyperelasticReady;
+{skin_solid_hyperelastic_java}
     if (solidHyperelasticReady) {
       tryRestrictLinearElasticFeature(model, "solid", "geom1_chest_cyl_dom", hyperelasticNotes);
     } else {
@@ -2090,6 +2143,10 @@ def generate_comsol_java_builder(
     }
     // Do not store free-form debug notes in COMSOL parameters; they are parsed as expressions.
 """
+    shell_physics_java = shell_physics_java.replace(
+        "{skin_solid_hyperelastic_java}",
+        skin_solid_hyperelastic_java,
+    )
 
     java_source = f"""import com.comsol.model.*;
 import com.comsol.model.util.*;
@@ -2104,6 +2161,7 @@ public class {class_name} {{
     model.param().set("breast_radius", "{build_plan_summary["geometry"].get("radius", 0.07)}[m]");
     model.param().set("chest_thickness", "{build_plan_summary["geometry"].get("thickness_chest_wall", 0.002)}[m]");
     model.param().set("skin_shell_thickness", "{skin_shell_thickness_m:.10f}[m]");
+    model.param().set("volumetric_skin_thickness", "{volumetric_skin_thickness_m:.10f}[m]");
     model.param().set("chest_curve_depth", "{chest_curve_depth:.10f}[m]");
     model.param().set("chestwall_curve_center_x_offset", "{chestwall_curve_center_x_offset_m:.10f}[m]");
     model.param().set("chest_curve_si_depth", "{chest_curve_si_depth:.10f}[m]");
@@ -2401,6 +2459,44 @@ public class {class_name} {{
     model.component("comp1").geom("geom1").feature("breast_outer").set("selresultshow", "all");
     model.component("comp1").geom("geom1").run("breast_outer");
     String[] breastOuterObjs = model.component("comp1").geom("geom1").feature("breast_outer").objectNames();
+    String[] breastCoreObjs = breastOuterObjs;
+    String[] skinLayerObjs = new String[0];
+    if ({str(volumetric_skin_enabled).lower()}) {{
+      if ({str(transverse_volume_preserving_enabled or outer_shape_scale_x != 1.0 or outer_shape_scale_y != 1.0 or outer_shape_scale_z != 1.0).lower()}) {{
+        model.component("comp1").geom("geom1").create("skin_core_raw", "Ellipsoid");
+        model.component("comp1").geom("geom1").feature("skin_core_raw").set(
+          "semiaxes",
+          "{skin_core_semiaxis_x:.10f}[m] {skin_core_semiaxis_z:.10f}[m] {skin_core_semiaxis_y:.10f}[m]"
+        );
+      }} else {{
+        model.component("comp1").geom("geom1").create("skin_core_raw", "Sphere");
+        model.component("comp1").geom("geom1").feature("skin_core_raw").set("r", "{skin_core_semiaxis_x:.10f}[m]");
+      }}
+      model.component("comp1").geom("geom1").feature("skin_core_raw").set("pos", "0 0 0");
+      model.component("comp1").geom("geom1").feature("skin_core_raw").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("skin_core_raw").set("selresultshow", "all");
+
+      model.component("comp1").geom("geom1").create("skin_core", "Intersection");
+      model.component("comp1").geom("geom1").feature("skin_core").selection("input").set("skin_core_raw", breastOuterObjs[0]);
+      model.component("comp1").geom("geom1").feature("skin_core").set("keep", "on");
+      model.component("comp1").geom("geom1").feature("skin_core").set("intbnd", "on");
+      model.component("comp1").geom("geom1").feature("skin_core").set("propagatesel", "on");
+      model.component("comp1").geom("geom1").feature("skin_core").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("skin_core").set("selresultshow", "all");
+      model.component("comp1").geom("geom1").run("skin_core");
+      breastCoreObjs = model.component("comp1").geom("geom1").feature("skin_core").objectNames();
+
+      model.component("comp1").geom("geom1").create("skin_layer", "Difference");
+      model.component("comp1").geom("geom1").feature("skin_layer").selection("input").set(breastOuterObjs);
+      model.component("comp1").geom("geom1").feature("skin_layer").selection("input2").set(breastCoreObjs);
+      model.component("comp1").geom("geom1").feature("skin_layer").set("keepsubtract", "on");
+      model.component("comp1").geom("geom1").feature("skin_layer").set("intbnd", "on");
+      model.component("comp1").geom("geom1").feature("skin_layer").set("propagatesel", "on");
+      model.component("comp1").geom("geom1").feature("skin_layer").set("selresult", "on");
+      model.component("comp1").geom("geom1").feature("skin_layer").set("selresultshow", "all");
+      model.component("comp1").geom("geom1").run("skin_layer");
+      skinLayerObjs = model.component("comp1").geom("geom1").feature("skin_layer").objectNames();
+    }}
 
     if ({str(curved_chestwall_enabled).lower()}) {{
       model.component("comp1").geom("geom1").create("thorax_outer", "Cylinder");
@@ -2596,7 +2692,7 @@ public class {class_name} {{
 {lobule_union_java}
 
     model.component("comp1").geom("geom1").create("gland_clip", "Intersection");
-    model.component("comp1").geom("geom1").feature("gland_clip").selection("input").set({gland_source_objects_var}[0], breastOuterObjs[0]);
+    model.component("comp1").geom("geom1").feature("gland_clip").selection("input").set({gland_source_objects_var}[0], breastCoreObjs[0]);
     model.component("comp1").geom("geom1").feature("gland_clip").set("keep", "on");
     model.component("comp1").geom("geom1").feature("gland_clip").set("intbnd", "on");
     model.component("comp1").geom("geom1").feature("gland_clip").set("propagatesel", "on");
@@ -2606,7 +2702,7 @@ public class {class_name} {{
     String[] glandClipObjs = model.component("comp1").geom("geom1").feature("gland_clip").objectNames();
 
     model.component("comp1").geom("geom1").create("adipose_diff", "Difference");
-    model.component("comp1").geom("geom1").feature("adipose_diff").selection("input").set(breastOuterObjs);
+    model.component("comp1").geom("geom1").feature("adipose_diff").selection("input").set(breastCoreObjs);
     model.component("comp1").geom("geom1").feature("adipose_diff").selection("input2").set(glandClipObjs);
     model.component("comp1").geom("geom1").feature("adipose_diff").set("keepsubtract", "on");
     model.component("comp1").geom("geom1").feature("adipose_diff").set("intbnd", "on");
@@ -2617,9 +2713,10 @@ public class {class_name} {{
     String[] adiposeObjs = model.component("comp1").geom("geom1").feature("adipose_diff").objectNames();
 
     model.component("comp1").geom("geom1").create("breast_union", "Union");
-    String[] unionInput = new String[adiposeObjs.length + glandClipObjs.length];
+    String[] unionInput = new String[adiposeObjs.length + glandClipObjs.length + skinLayerObjs.length];
     System.arraycopy(adiposeObjs, 0, unionInput, 0, adiposeObjs.length);
     System.arraycopy(glandClipObjs, 0, unionInput, adiposeObjs.length, glandClipObjs.length);
+    System.arraycopy(skinLayerObjs, 0, unionInput, adiposeObjs.length + glandClipObjs.length, skinLayerObjs.length);
     model.component("comp1").geom("geom1").feature("breast_union").selection("input").set(unionInput);
     model.component("comp1").geom("geom1").feature("breast_union").set("intbnd", "on");
     model.component("comp1").geom("geom1").feature("breast_union").set("propagatesel", "on");
@@ -2866,6 +2963,15 @@ public class {class_name} {{
     model.component("comp1").material("mat_skin_shell").propertyGroup("def").set("density", new String[] {{ "skin_density" }});
     model.component("comp1").material("mat_skin_shell").propertyGroup("def").set("youngsmodulus", new String[] {{ "skin_E" }});
     model.component("comp1").material("mat_skin_shell").propertyGroup("def").set("poissonsratio", new String[] {{ "skin_nu" }});
+
+    if ({str(volumetric_skin_enabled).lower()}) {{
+      model.component("comp1").material().create("mat_skin_solid", "Common");
+      model.component("comp1").material("mat_skin_solid").label("SkinSolidLayer");
+      model.component("comp1").material("mat_skin_solid").selection().named("geom1_skin_layer_dom");
+      model.component("comp1").material("mat_skin_solid").propertyGroup("def").set("density", new String[] {{ "skin_density" }});
+      model.component("comp1").material("mat_skin_solid").propertyGroup("def").set("youngsmodulus", new String[] {{ "skin_E" }});
+      model.component("comp1").material("mat_skin_solid").propertyGroup("def").set("poissonsratio", new String[] {{ "skin_nu" }});
+    }}
 
     model.component("comp1").material().create("mat_adipose", "Common");
     model.component("comp1").material("mat_adipose").label("Adipose");
@@ -5116,9 +5222,11 @@ public class {class_name} {{
     boolean hasShell = hasPhysics(model, "shell1");
     boolean hasHmatAdipose = hasPhysicsFeature(model, "solid", "hmat_adipose");
     boolean hasHmatGlandular = hasPhysicsFeature(model, "solid", "hmat_glandular");
+    boolean hasHmatSkinSolid = hasPhysicsFeature(model, "solid", "hmat_skin_solid");
     boolean hasHmatSkin = hasShell && hasPhysicsFeature(model, "shell1", "hmat_skin");
     boolean hasSthin = hasMultiphysics(model, "sthin1");
     double breastVolume = evalGeometryVolume(model, "ivBuildBreastVol", "geom1_breast_union_dom");
+    double skinVolume = evalGeometryVolume(model, "ivBuildSkinVol", "geom1_skin_layer_dom");
     double glandVolume = evalGeometryVolume(model, "ivBuildGlandVol", "geom1_gland_clip_dom");
     double adiposeVolume = evalGeometryVolume(model, "ivBuildAdiposeVol", "geom1_adipose_diff_dom");
     double glandFraction = (!Double.isNaN(breastVolume) && Math.abs(breastVolume) > 0.0)
@@ -5141,19 +5249,23 @@ public class {class_name} {{
     json.append("  \\"hyperelastic_features\\": {{\\n");
     json.append("    \\"hmat_adipose\\": ").append(hasHmatAdipose).append(",\\n");
     json.append("    \\"hmat_glandular\\": ").append(hasHmatGlandular).append(",\\n");
+    json.append("    \\"hmat_skin_solid\\": ").append(hasHmatSkinSolid).append(",\\n");
     json.append("    \\"hmat_skin\\": ").append(hasHmatSkin).append("\\n");
     json.append("  }},\\n");
     json.append("  \\"materials\\": {{\\n");
     json.append("    \\"mat_chest\\": ").append(hasMaterial(model, "mat_chest")).append(",\\n");
     json.append("    \\"mat_adipose\\": ").append(hasMaterial(model, "mat_adipose")).append(",\\n");
     json.append("    \\"mat_glandular\\": ").append(hasMaterial(model, "mat_glandular")).append(",\\n");
-    json.append("    \\"mat_skin_shell\\": ").append(hasMaterial(model, "mat_skin_shell")).append("\\n");
+    json.append("    \\"mat_skin_shell\\": ").append(hasMaterial(model, "mat_skin_shell")).append(",\\n");
+    json.append("    \\"mat_skin_solid\\": ").append(hasMaterial(model, "mat_skin_solid")).append("\\n");
     json.append("  }},\\n");
     json.append("  \\"geometry_volumes\\": {{\\n");
     json.append("    \\"breast_volume_m3\\": ").append(jsonNumber(breastVolume)).append(",\\n");
+    json.append("    \\"skin_volume_m3\\": ").append(jsonNumber(skinVolume)).append(",\\n");
     json.append("    \\"glandular_volume_m3\\": ").append(jsonNumber(glandVolume)).append(",\\n");
     json.append("    \\"adipose_volume_m3\\": ").append(jsonNumber(adiposeVolume)).append(",\\n");
     json.append("    \\"breast_volume_ml\\": ").append(jsonNumber(1000000.0 * breastVolume)).append(",\\n");
+    json.append("    \\"skin_volume_ml\\": ").append(jsonNumber(1000000.0 * skinVolume)).append(",\\n");
     json.append("    \\"glandular_volume_ml\\": ").append(jsonNumber(1000000.0 * glandVolume)).append(",\\n");
     json.append("    \\"adipose_volume_ml\\": ").append(jsonNumber(1000000.0 * adiposeVolume)).append(",\\n");
     json.append("    \\"glandular_fraction\\": ").append(jsonNumber(glandFraction)).append(",\\n");

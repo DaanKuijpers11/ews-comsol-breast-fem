@@ -5,134 +5,108 @@ Werkmap:
 C:\Users\20223231\ews_fem_clean
 
 Belangrijk:
-- Run niet alles tegelijk. Eerst control, dan postprocess, dan pas tumor.
-- Als een solve faalt of duidelijk partial is: eerst stoppen/evalueren, niet automatisch door naar de volgende case.
+- Run niet alles tegelijk. Eerst control, dan pas material/tumor.
+- Als een solve faalt of partial is: eerst stoppen/evalueren, niet automatisch door naar de volgende case.
 - Bewaar vooral TOMLs, summary CSV/JSON/MD, time_series CSV, plots en screenshots.
-- Grote result/build MPH files mogen later weg zodra de evaluatie en screenshots goed zijn.
+- Grote result/build MPH files mogen later weg zodra evaluatie en screenshots goed zijn.
 
 
-1) Eerst: Stage 5 no-tumor control met skin scaffold aan
---------------------------------------------------------
+1) Eerst: Stage 5 no-Cooper met NIEUWE volumetrische skin layer
+---------------------------------------------------------------
 Doel:
-- Checken of de 1.25g no-Cooper reference stabiel blijft met skin shell + skin-solid coupling.
-- Dit is de nieuwe eerlijkere control voordat Stage 6 tumor-runs met skin worden gedaan.
+- Controleren of de nieuwe volumetrische skin layer stabiel is in de realistische Stage 5 route.
+- Dit vervangt de oude shell-skin/coupling scout, want die gaf visueel rare deuken/bulten.
+- Zelfde 1.25g diagnostic acceleration als de bestaande no-skin 1.25g scout.
 
 Run:
-python -m ews_fem_pipeline_comsol run runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_skin_on_solve_only_preview.toml
+python -m ews_fem_pipeline_comsol run runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_solve_only_preview.toml
 
-Na afloop eerst globaal postprocessen:
-python -m ews_fem_pipeline_comsol postprocess-only --mode global runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_skin_on_solve_only_preview.toml
-
-Daarna evaluatieplots/samenvattingen opnieuw maken:
-python tools\make_comsol_evaluation_plots.py
-
-Check daarna:
+Na afloop eerst visueel checken in COMSOL:
 - Heeft de solve t = 2.2 s gehaald?
-- Is displacement logisch t.o.v. de 1.25g no-skin control?
-- Is stress niet extreem/onrealistisch hoog?
-- Is de skin-on result visueel stabiel in COMSOL?
+- Geen rare local dimples/buckling zoals bij de oude shell-skin route?
+- Displacement vergelijkbaar/logisch t.o.v. de 1.25g no-skin control?
+- Skin layer blijft netjes onderdeel van breast_union.
 
+Als hij visueel goed is, dan global postprocess:
+python -m ews_fem_pipeline_comsol postprocess-only --mode global runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_solve_only_preview.toml
 
-2) Daarna: beslissen of skin-on de nieuwe basis wordt
------------------------------------------------------
-Als Stage 5 skin-on stabiel en verdedigbaar is:
-- Maak daarna pas een Stage 6 skin-on tumor TOML op basis van de medium upper-outer surface-proximal tumor.
-- Belangrijk: tumor-case moet dezelfde settings hebben als de skin-on control, behalve tumorous=true.
-- Gewenste toekomstige naam:
-  runs\comsol_runs\geometry_stage6\stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_skin_on_solve_only_preview.toml
-
-Als Stage 5 skin-on faalt of veel te traag/instabiel is:
-- Gebruik voorlopig no-skin als diagnostic route.
-- Beschrijf skin shell dan als noodzakelijke vervolgverbetering, niet als afgeronde baseline.
-
-
-3) Eerst motion/material scout voordat je veel tumor-runs draait
-----------------------------------------------------------------
-Doel:
-- Het model moet uiteindelijk qua beweging verdedigbaar lijken op echte borstbeweging.
-- De huidige anatomische route geeft bij 0.25g/0.50g/1.25g relatief lage displacement.
-- Test daarom eerst of grotere beweging beter komt door:
-  1. realistisch lagere materiaalstijfheid;
-  2. hogere diagnostic acceleration;
-  3. combinatie van beide, maar alleen nadat 1 en 2 apart begrepen zijn.
-
-Aanpak:
-- Houd eerst dezelfde Stage 5 no-Cooper reference geometry aan.
-- Verander per scout maar 1 hoofdparameter.
-- Vergelijk altijd met de bestaande 1.25g no-skin en nieuwe 1.25g skin-on control.
-
-Prioriteit voor motion/material scouts:
-1. Stage 5 skin-on 1.25g control evalueren.
-2. Als displacement nog te laag is: softer-material Stage 5 scout maken.
-3. Daarna pas hogere acceleration scout maken, bijvoorbeeld 1.75g of 2.0g, als diagnostic excitation.
-
-Belangrijk voor report:
-- Lagere materialen zijn een material-uncertainty/sensitivity route.
-- Hogere g is een diagnostic excitation route, niet letterlijk "echte jump".
-- Een uiteindelijke report-ready tumorvergelijking moet dezelfde gekozen motion/material basis gebruiken.
-
-
-4) Eerste tumorvergelijking: medium upper-outer surface-proximal
-----------------------------------------------------------------
-Reden:
-- Upper-outer quadrant is klinisch een logische eerste locatie.
-- Medium tumor is waarschijnlijk zichtbaarder dan een kleine 6 mm tumor.
-- Surface-proximal ligging sluit beter aan bij het EWS-doel: surface motion/shape detectie.
-
-Huidige bestaande no-skin diagnostic TOML:
-runs\comsol_runs\geometry_stage6\stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_solve_only_preview.toml
-
-Alleen gebruiken als skin-on nog niet de basis is:
-python -m ews_fem_pipeline_comsol run runs\comsol_runs\geometry_stage6\stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_solve_only_preview.toml
-
-Postprocess eerst compact/global:
-python -m ews_fem_pipeline_comsol postprocess-only --mode global runs\comsol_runs\geometry_stage6\stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_solve_only_preview.toml
-
-Daarna, als global nuttig is en je surface-effect wil zien:
-python -m ews_fem_pipeline_comsol postprocess-only --mode ews-surface runs\comsol_runs\geometry_stage6\stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_solve_only_preview.toml
-
-Daarna:
+Daarna evaluatieplots/samenvattingen:
 python tools\make_comsol_evaluation_plots.py
 
 
-5) Tweede tumor-case alleen als de medium upper-outer vergelijking nuttig is
-----------------------------------------------------------------------------
-Optie: large central diagnostic tumor.
+2) Daarna: material/motion scout, maar niet meteen all-soft als hoofdbasis
+--------------------------------------------------------------------------
 Doel:
-- Niet direct report-ready als klinische claim.
-- Wel nuttig als upper-bound test: kan het model uberhaupt een duidelijk tumor-effect laten zien?
+- Testen of realistischere/grotere beweging vooral door materiaalstijfheid komt, zonder meteen hogere g te gebruiken.
+- Niet meteen alle materialen zacht maken bij 1.25g, want dat kan te compliant worden.
+- Eerst liever: stijve/Chen-achtige skin behouden, adipose/glandular zachter maken.
 
-Run:
-python -m ews_fem_pipeline_comsol run runs\comsol_runs\geometry_stage6\stage6_tumor_large_central_xoffset055_125g_solve_only_preview.toml
+Beste volgende scout om te maken/runnen:
+- Stage 5 no-Cooper volumetric skin;
+- skin = huidige stijve COMSOL/Chen-achtige waarde;
+- adipose/glandular = zachte FEBio-achtige waarden;
+- start bij 0.50g of 0.75g;
+- pas naar 1.25g als dit nog te weinig displacement geeft.
 
-Postprocess global:
-python -m ews_fem_pipeline_comsol postprocess-only --mode global runs\comsol_runs\geometry_stage6\stage6_tumor_large_central_xoffset055_125g_solve_only_preview.toml
+De al bestaande all-soft 1.25g TOML:
+runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_febio_materials_solve_only_preview.toml
 
-Optioneel surface:
-python -m ews_fem_pipeline_comsol postprocess-only --mode ews-surface runs\comsol_runs\geometry_stage6\stage6_tumor_large_central_xoffset055_125g_solve_only_preview.toml
-
-Daarna:
-python tools\make_comsol_evaluation_plots.py
+Gebruik die voorlopig alleen als diagnostic upper-compliance case, niet als eerste report-baseline.
 
 
-6) Wat voorlopig NIET tegelijk draaien
+3) Materiaalverschil dat je moet onthouden
+------------------------------------------
+Huidige COMSOL/Chen-achtige stijvere reference:
+- Skin: density 1100, bulk 8.33 MPa, c10 41667 Pa, c01 41667 Pa, E_schatting ~= 500 kPa.
+- Adipose: density 950, bulk 425 kPa, c10 310 Pa, c01 300 Pa, E_schatting ~= 3.66 kPa.
+- Glandular: density 1070, bulk 425 kPa, c10 833 Pa, c01 833 Pa, E_schatting ~= 10.0 kPa.
+
+Oude FEBio-achtige zachte scout uit de simple ligament baseline:
+- Skin: density 1100, bulk 480 kPa, c10 1200 Pa, c01 1200 Pa, E_schatting ~= 14.4 kPa.
+- Adipose: density 911, bulk 425 kPa, c10 109 Pa, c01 106 Pa, E_schatting ~= 1.29 kPa.
+- Glandular: density 911, bulk 425 kPa, c10 230 Pa, c01 195 Pa, E_schatting ~= 2.55 kPa.
+
+Interpretatie:
+- De huidige COMSOL reference is vooral bij skin en glandular veel stijver.
+- De zachte scout kan waarschijnlijk meer displacement geven, maar is een material-sensitivity case.
+- Niet meteen claimen dat die zachtere set anatomisch "beter" is; gebruik hem om beweging en detecteerbaarheid te testen.
+
+
+4) Daarna pas tumorvergelijking kiezen
 --------------------------------------
-- Niet meteen alle kleine tumorlocaties opnieuw draaien.
-- Niet meteen Cooper + tumor combineren.
-- Niet meteen 0.25g, 0.50g, 1.00g, 1.25g allemaal postprocessen met full mode.
-- Niet full postprocess doen voordat global/evaluation laat zien dat de case echt bruikbaar is.
-- Niet tegelijk lagere materialen EN hogere g veranderen, behalve als aparte diagnostic na de single-parameter scouts.
+Pas tumor draaien als je weet welke control zinvol is:
+- volumetric skin stijve reference;
+- of volumetric skin zachte materiaal-scout;
+- of voorlopig no-skin als de skin-route toch solverproblemen geeft.
+
+Eerste tumorvariant blijft logisch:
+- medium upper-outer surface-proximal;
+- zelfde geometry/material/g/skin/Cooper als de gekozen control;
+- alleen tumorous=true en tumorparameters anders.
+
+Belangrijk:
+- Control vs tumor moet dezelfde geometry, acceleration, materiaalinstellingen, skin setting en Cooper setting hebben.
+- Alleen tumor aan/uit, locatie, grootte en eventueel tumorstijfheid mogen veranderen.
 
 
-7) Overzicht prioriteit
------------------------
-Hoogste prioriteit:
-1. Stage 5 1.25g skin-on no-tumor control solve.
-2. Global postprocess van die skin-on control.
-3. Plot/evaluation update.
-4. Als displacement nog te laag is: softer-material scout of hogere-g scout plannen.
-5. Daarna pas Stage 6 medium upper-outer tumor met dezelfde gekozen skin/material/g basis als de control.
+5) Wat voorlopig NIET tegelijk doen
+-----------------------------------
+- Niet oude shell-skin route opnieuw als basis gebruiken.
+- Niet meteen Cooper + skin + tumor combineren.
+- Niet tegelijk hogere g en zachtere materialen veranderen.
+- Niet full postprocess doen voordat global/evaluation laat zien dat de case bruikbaar is.
+- Niet alle kleine tumorlocaties opnieuw draaien voordat de controlkeuze vastligt.
 
-Voor report:
-- Control vs tumor moet dezelfde geometry, acceleration, material settings, skin setting en Cooper setting hebben.
-- Alleen tumorous=true/false en tumor-locatie/grootte mogen veranderen.
+
+6) Prioriteit voor vanavond/morgen
+----------------------------------
+Vanavond:
+1. Stage 5 1.25g volumetric-skin no-Cooper control runnen.
+2. Als die klaar is: openen in COMSOL, animatie/sideview check.
+3. Alleen bij goed resultaat: global postprocess + plots.
+
+Morgen overdag:
+1. Eerst de volumetric-skin stiff-reference result beoordelen.
+2. Daarna een hybrid soft-interior/stiff-skin TOML maken/runnen, liefst 0.50g of 0.75g.
+3. Alleen als die nog te laag beweegt: hybrid 1.25g of intermediate material set.
+4. Pas daarna tumorcontrol maken op dezelfde gekozen material/g/skin basis.

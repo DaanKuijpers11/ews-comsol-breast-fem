@@ -37,6 +37,8 @@ class ComsolSettings:
     enable_skin_shell_physics: bool = False
     enable_skin_solid_coupling_scaffold: bool = False
     skin_shell_thickness_m: float = 0.0001
+    enable_volumetric_skin_layer: bool = False
+    volumetric_skin_thickness_m: float = 0.0015
     enable_curved_chestwall: bool = False
     support_geometry_mode: str = "auto"
     chestwall_curve_depth_m: float = 0.0007
