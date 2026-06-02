@@ -10,6 +10,19 @@ Belangrijk:
 - Bewaar vooral TOMLs, summary CSV/JSON/MD, time_series CSV, plots en screenshots.
 - Grote result/build MPH files mogen later weg zodra evaluatie en screenshots goed zijn.
 
+Actuele run/postprocess tabel
+-----------------------------
+Deze tabel is expres een werkplanning en hoort niet in het report.
+
+| Prioriteit | Case | TOML / actie | Runstatus | Postprocess/evaluatie | Waarom |
+|---|---|---|---|---|---|
+| 1 | Stage 5 no-Cooper, 1.25g, volumetrische skin, stijve reference | runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_solve_only_preview.toml | Eerst runnen of controleren | Daarna global postprocess + make_comsol_evaluation_plots.py als de animatie er goed uitziet | Nieuwe skin-route valideren op de huidige Stage 5 reference |
+| 2 | Hybrid material scout: stijve skin + zachtere adipose/glandular, 0.50g of 0.75g | TOML nog maken na beoordeling van prioriteit 1 | Nog niet runnen | Eerst alleen global postprocess als de solve stabiel is | Kijken of meer realistische displacement via materiaal kan zonder meteen hogere g |
+| 3 | Hybrid material scout 1.25g | TOML nog maken als prioriteit 2 te weinig beweegt | Nog niet runnen | Global postprocess, daarna plots | Alleen nodig als 0.50g/0.75g nog te laag blijft |
+| 4 | All-soft 1.25g diagnostic | runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_febio_materials_solve_only_preview.toml | Alleen draaien als upper-compliance test | Global postprocess alleen als visueel/numeriek bruikbaar | Niet als eerste baseline gebruiken, wel nuttig als gevoeligheidsgrens |
+| 5 | Stage 6 tumor op gekozen controlbasis | Nieuwe matched tumor-TOML maken na keuze van skin/material/g | Nog niet runnen | Eerst global of ews-surface, daarna eventueel full | Tumorvergelijking is alleen eerlijk als control en tumor exact dezelfde basis hebben |
+| 6 | Stage 6 extra locaties/groottes | Pas kiezen na eerste tumor-control vergelijking | Nog niet runnen | Alleen postprocessen wat reportwaarde heeft | Voorkomt veel lange runs zonder duidelijke vergelijking |
+
 
 1) Eerst: Stage 5 no-Cooper met NIEUWE volumetrische skin layer
 ---------------------------------------------------------------

@@ -8,26 +8,39 @@ The older FEBio route remains relevant historically because it provided the orig
 
 \subsection{Overall staged pipeline}
 
-The model was developed in stages so that geometry, tissue distribution, support assumptions, and lesion effects could be separated. Table~\ref{tab:stage_overview} summarizes the current interpretation of each stage.
+The model was developed as a staged COMSOL pipeline so that motion input, anatomical geometry, glandular tissue distribution, support assumptions, and tumor sensitivity could be introduced separately. This was important because the project goal was not to build one final patient-specific model in a single step, but to construct a reproducible model-development route in which each component can be checked before it is used in a dynamic comparison. Figure~\ref{fig:mm_pipeline_overview} summarizes the software workflow from TOML case definition to COMSOL build, solve, post-processing, and report outputs. Figure~\ref{fig:mm_stage_option_overview} summarizes the modelling stages used in the current report.
 
-\begin{table}[H]
+\begin{figure}[H]
 \centering
-\small
-\caption{Current interpretation of the COMSOL model-development stages.}
-\label{tab:stage_overview}
-\begin{tabular}{p{0.12\linewidth} p{0.31\linewidth} p{0.42\linewidth}}
-\toprule
-Stage & Main purpose & Report interpretation \\
-\midrule
-Stage 1 & Motion sanity baseline & Validates the 0.25g fixed-support acceleration pulse; not a direct anatomical comparator because volume and geometry differ. \\
-Stage 2 & Selected chestwall geometry & First fair anatomical baseline using volume-preserving transverse chestwall curvature with xoffset055 and auto-alignment. \\
-Stage 3 & Realistic glandular reference & Adds chestwall-aware realistic lobule spread; anatomically useful, but still described carefully as a diagnostic/reference route. \\
-Stage 4 & Asymmetry control and sensitivity & The current Tier 1 reference is intentionally no-asymmetry; active asymmetry cases remain sensitivity studies. \\
-Stage 5 & Cooper control and support sensitivity & No-Cooper control is valid; a stable Cooper-effect sensitivity has not yet been demonstrated. \\
-Stage 6 & Tumor/lesion sensitivity & Build-only and screening stage using analytic tumor-mask material overlays; not yet a segmented tumor reconstruction. \\
-\bottomrule
-\end{tabular}
-\end{table}
+\includegraphics[width=0.95\linewidth]{Figures/model_overviews/model_pipeline_overview.png}
+\caption{Overview of the COMSOL EWS FEM pipeline. TOML configuration files define the model variant, after which the Python package generates COMSOL Java builders, build and solve artefacts, post-processing scripts, summary metrics, and report figures.}
+\label{fig:mm_pipeline_overview}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\linewidth]{Figures/model_overviews/Model_stages_overview.png}
+\caption{Staged COMSOL breast-model development route. Stage 1 validates the dynamic excitation, Stages 2--5 define matched no-tumor anatomy and mechanics, and Stage 6 adds tumor/lesion sensitivity on top of matched controls.}
+\label{fig:mm_stage_option_overview}
+\end{figure}
+
+\paragraph{Stage 1: motion sanity baseline.}
+Stage 1 was used to test the fixed-support acceleration-pulse input. The selected mild input applies a 0.25g acceleration pulse over 0.60 s after gravity preload with mass damping alpha = 60 s$^{-1}$. This stage is useful for validating the dynamic excitation and checking whether the pipeline produces a clear time-dependent displacement response. It is not used as the final anatomical reference because the geometry, volume, glandular setup, and material context differ from the later matched anatomical route.
+
+\paragraph{Stage 2: chestwall geometry.}
+Stage 2 introduced the first fair anatomical geometry baseline. The selected route uses a transverse xoffset055 chestwall curvature with volume-preserving compensation and automatic nipple/gland alignment. Other chestwall variants, including sagittal or combined superior-inferior curvature, are treated as diagnostic geometry checks rather than the current report route.
+
+\paragraph{Stage 3: glandular tissue distribution.}
+Stage 3 added a realistic chestwall-aware glandular lobule distribution. The selected reference route increased the glandular fraction to approximately 24.3\% and is anatomically more informative than the earlier simple glandular fraction setup. Compact and wide lobule-spread variants are retained as later spatial-distribution sensitivities.
+
+\paragraph{Stage 4: asymmetry and nipple-position options.}
+Stage 4 separates the matched no-asymmetry reference from visible asymmetry and nipple-position sensitivity cases. The current Tier 1 reference intentionally keeps asymmetry disabled so that profile-asymmetry and nipple-shift variants can later be compared against a clean control.
+
+\paragraph{Stage 5: mechanical support and skin-layer development.}
+Stage 5 provides the no-Cooper mechanical control and the route for support sensitivity. The current robust control is the no-Cooper case. Cooper ligament scaffolds are still treated as mechanical support sensitivity because stable dynamic Cooper effects have not yet been demonstrated. A volumetric skin layer was subsequently added as a more defensible skin representation than the earlier shell-scaffold route, but its final dynamic effect is still being evaluated.
+
+\paragraph{Stage 6: tumor/lesion sensitivity.}
+Stage 6 adds tumor/lesion sensitivity on top of the matched anatomical route. The current implementation uses an analytic spherical tumor-mask material overlay rather than a separate segmented tumor domain. This makes the first Stage 6 route suitable for controlled size, stiffness, and location sensitivity, but not yet for patient-specific tumor reconstruction or clinical diagnostic claims.
 
 \subsection{Geometry modelling}
 
