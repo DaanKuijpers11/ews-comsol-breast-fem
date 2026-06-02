@@ -46,7 +46,33 @@ Als Stage 5 skin-on faalt of veel te traag/instabiel is:
 - Beschrijf skin shell dan als noodzakelijke vervolgverbetering, niet als afgeronde baseline.
 
 
-3) Eerste tumorvergelijking: medium upper-outer surface-proximal
+3) Eerst motion/material scout voordat je veel tumor-runs draait
+----------------------------------------------------------------
+Doel:
+- Het model moet uiteindelijk qua beweging verdedigbaar lijken op echte borstbeweging.
+- De huidige anatomische route geeft bij 0.25g/0.50g/1.25g relatief lage displacement.
+- Test daarom eerst of grotere beweging beter komt door:
+  1. realistisch lagere materiaalstijfheid;
+  2. hogere diagnostic acceleration;
+  3. combinatie van beide, maar alleen nadat 1 en 2 apart begrepen zijn.
+
+Aanpak:
+- Houd eerst dezelfde Stage 5 no-Cooper reference geometry aan.
+- Verander per scout maar 1 hoofdparameter.
+- Vergelijk altijd met de bestaande 1.25g no-skin en nieuwe 1.25g skin-on control.
+
+Prioriteit voor motion/material scouts:
+1. Stage 5 skin-on 1.25g control evalueren.
+2. Als displacement nog te laag is: softer-material Stage 5 scout maken.
+3. Daarna pas hogere acceleration scout maken, bijvoorbeeld 1.75g of 2.0g, als diagnostic excitation.
+
+Belangrijk voor report:
+- Lagere materialen zijn een material-uncertainty/sensitivity route.
+- Hogere g is een diagnostic excitation route, niet letterlijk "echte jump".
+- Een uiteindelijke report-ready tumorvergelijking moet dezelfde gekozen motion/material basis gebruiken.
+
+
+4) Eerste tumorvergelijking: medium upper-outer surface-proximal
 ----------------------------------------------------------------
 Reden:
 - Upper-outer quadrant is klinisch een logische eerste locatie.
@@ -69,7 +95,7 @@ Daarna:
 python tools\make_comsol_evaluation_plots.py
 
 
-4) Tweede tumor-case alleen als de medium upper-outer vergelijking nuttig is
+5) Tweede tumor-case alleen als de medium upper-outer vergelijking nuttig is
 ----------------------------------------------------------------------------
 Optie: large central diagnostic tumor.
 Doel:
@@ -89,21 +115,23 @@ Daarna:
 python tools\make_comsol_evaluation_plots.py
 
 
-5) Wat voorlopig NIET tegelijk draaien
+6) Wat voorlopig NIET tegelijk draaien
 --------------------------------------
 - Niet meteen alle kleine tumorlocaties opnieuw draaien.
 - Niet meteen Cooper + tumor combineren.
 - Niet meteen 0.25g, 0.50g, 1.00g, 1.25g allemaal postprocessen met full mode.
 - Niet full postprocess doen voordat global/evaluation laat zien dat de case echt bruikbaar is.
+- Niet tegelijk lagere materialen EN hogere g veranderen, behalve als aparte diagnostic na de single-parameter scouts.
 
 
-6) Overzicht prioriteit
+7) Overzicht prioriteit
 -----------------------
 Hoogste prioriteit:
 1. Stage 5 1.25g skin-on no-tumor control solve.
 2. Global postprocess van die skin-on control.
 3. Plot/evaluation update.
-4. Daarna pas Stage 6 medium upper-outer tumor met dezelfde skin/no-skin basis als de control.
+4. Als displacement nog te laag is: softer-material scout of hogere-g scout plannen.
+5. Daarna pas Stage 6 medium upper-outer tumor met dezelfde gekozen skin/material/g basis als de control.
 
 Voor report:
 - Control vs tumor moet dezelfde geometry, acceleration, material settings, skin setting en Cooper setting hebben.

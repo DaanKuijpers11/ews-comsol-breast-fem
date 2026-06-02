@@ -1,0 +1,55 @@
+<mxfile host="Electron">
+  <diagram name="Page-1" id="5lxSenojmCA7ITSEJAG6">
+    <mxGraphModel dx="680" dy="595" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-4" edge="1" parent="1" source="uv09_nd3Tjos13gaXZ5D-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="uv09_nd3Tjos13gaXZ5D-3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="TOML case config&lt;br&gt;Stage 1-6 parameters" vertex="1">
+          <mxGeometry height="60" width="120" x="410" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-6" edge="1" parent="1" source="uv09_nd3Tjos13gaXZ5D-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="uv09_nd3Tjos13gaXZ5D-5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Python COMSOL pipeline settings + source case" vertex="1">
+          <mxGeometry height="60" width="120" x="610" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-8" edge="1" parent="1" source="uv09_nd3Tjos13gaXZ5D-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="uv09_nd3Tjos13gaXZ5D-7" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-5" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="Geometry generation breast, chestwall, glanduar, tumor" vertex="1">
+          <mxGeometry height="60" width="120" x="810" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-10" edge="1" parent="1" source="uv09_nd3Tjos13gaXZ5D-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="uv09_nd3Tjos13gaXZ5D-9" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-7" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="COMSOL Java scaffold selections, materials, physics" vertex="1">
+          <mxGeometry height="60" width="120" x="1010" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-12" edge="1" parent="1" source="uv09_nd3Tjos13gaXZ5D-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="uv09_nd3Tjos13gaXZ5D-11" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-9" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="Build-only MPH geometry + mesh check" vertex="1">
+          <mxGeometry height="60" width="120" x="1210" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-14" edge="1" parent="1" source="uv09_nd3Tjos13gaXZ5D-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="uv09_nd3Tjos13gaXZ5D-13" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-11" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="Dynamic solve excitation" vertex="1">
+          <mxGeometry height="60" width="120" x="1410" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-16" edge="1" parent="1" source="uv09_nd3Tjos13gaXZ5D-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="uv09_nd3Tjos13gaXZ5D-15" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-13" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="Postprocess global, surface, tumor/internal" vertex="1">
+          <mxGeometry height="60" width="120" x="1610" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="uv09_nd3Tjos13gaXZ5D-15" parent="1" style="whiteSpace=wrap;html=1;rounded=0;" value="" vertex="1">
+          <mxGeometry height="60" width="120" x="1810" y="280" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
