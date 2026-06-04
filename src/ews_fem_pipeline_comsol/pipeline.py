@@ -201,7 +201,10 @@ def postprocess_only_pipeline(input_files: tuple[Path, ...], *, postprocess_mode
     generated = generate_cases(input_files, postprocess_mode_override=postprocess_mode)
     settings_map: dict[Path, Settings] = {}
     for source_toml, generated_json in zip(input_files, generated):
-        settings_map[generated_json] = load_settings_from_toml(source_toml)
+        settings = load_settings_from_toml(source_toml)
+        if postprocess_mode is not None:
+            settings.comsol.postprocess_mode = postprocess_mode
+        settings_map[generated_json] = settings
     return postprocess_cases(generated, settings_map=settings_map)
 
 
