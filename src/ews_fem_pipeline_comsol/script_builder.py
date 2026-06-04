@@ -4615,14 +4615,18 @@ public class {postprocess_class_name} {{
     return out;
   }}
 
+  private static void postprocessStatus(String status) {{
+    System.out.println("COMSOL_POSTPROCESS_STATUS " + status);
+    System.out.flush();
+  }}
+
   public static Model run() throws Exception {{
+    postprocessStatus("init_start");
     ModelUtil.initStandalone(true);
-    System.out.println("COMSOL_POSTPROCESS_STATUS load_start");
+    postprocessStatus("init_complete");
+    postprocessStatus("load_start");
     Model model = ModelUtil.load("PostModel", "{postprocess_result_mph_java}");
-    System.out.println("COMSOL_POSTPROCESS_STATUS load_complete");
-    ensureExtendedEvaluationSelections(model);
-    ensureDefaultResultPlotData(model);
-    System.out.println("COMSOL_POSTPROCESS_STATUS selections_ready");
+    postprocessStatus("load_complete");
     String postprocessMode = "{postprocess_mode_java}";
     boolean tumorMetricsEnabled = {str(tumor_enabled).lower()};
     boolean exportTumorMetrics = tumorMetricsEnabled && (postprocessMode.equals("full") || postprocessMode.equals("internal_tumor"));
@@ -4630,6 +4634,18 @@ public class {postprocess_class_name} {{
     boolean exportLandmarkMetrics = postprocessMode.equals("full") || postprocessMode.equals("ews_surface");
     boolean exportStressStdMetrics = postprocessMode.equals("full");
     boolean exportImages = postprocessMode.equals("full") && {postprocess_export_plot_images_java};
+    if (exportSurfaceMetrics || exportLandmarkMetrics) {{
+      ensureExtendedEvaluationSelections(model);
+      postprocessStatus("extended_selections_ready");
+    }} else {{
+      postprocessStatus("extended_selections_skipped_by_mode");
+    }}
+    if (exportImages) {{
+      ensureDefaultResultPlotData(model);
+      postprocessStatus("plot_setup_ready");
+    }} else {{
+      postprocessStatus("plot_setup_skipped_by_mode");
+    }}
 
     double breastVolume = evalIntVolume(model, "ivBreastVol", "geom1_breast_union_dom", "1");
     double glandVolume = evalIntVolume(model, "ivGlandVol", "geom1_gland_clip_dom", "1");
@@ -4637,7 +4653,7 @@ public class {postprocess_class_name} {{
     double tumorVolume = exportTumorMetrics
       ? evalIntVolume(model, "ivTumorMaskVol", "geom1_breast_union_dom", "tumor_mask")
       : 0.0;
-    System.out.println("COMSOL_POSTPROCESS_STATUS volume_scalars_ready");
+    postprocessStatus("volume_scalars_ready");
 
     double maxDispBreast = evalMaxVolume(model, "mvDispBreast", "geom1_breast_union_dom", "solid.disp");
     double intDispBreast = evalIntVolume(model, "ivDispBreast", "geom1_breast_union_dom", "solid.disp");
@@ -4658,10 +4674,10 @@ public class {postprocess_class_name} {{
     double avgMisesGland = glandVolume != 0.0 ? intMisesGland / glandVolume : Double.NaN;
     double avgMisesAdipose = adiposeVolume != 0.0 ? intMisesAdipose / adiposeVolume : Double.NaN;
     double avgMisesTumor = tumorVolume != 0.0 ? intMisesTumor / tumorVolume : Double.NaN;
-    System.out.println("COMSOL_POSTPROCESS_STATUS scalar_review_metrics_ready");
+    postprocessStatus("scalar_review_metrics_ready");
 
     double[] timeValues = getTimeValues(model);
-    System.out.println("COMSOL_POSTPROCESS_STATUS time_values_ready");
+    postprocessStatus("time_values_ready");
     double[] maxDispBreastSeries = evalMaxVolumeSeries(model, "mvDispBreastSeries", "geom1_breast_union_dom", "solid.disp");
     double[] intDispBreastSeries = evalIntVolumeSeries(model, "ivDispBreastSeries", "geom1_breast_union_dom", "solid.disp");
     double[] maxDispTumorSeries = exportTumorMetrics ? evalMaxVolumeSeries(model, "mvDispTumorSeries", "geom1_breast_union_dom", "if(tumor_mask>0.5,solid.disp,0)") : new double[0];
@@ -4678,7 +4694,7 @@ public class {postprocess_class_name} {{
     double[] intMisesGlandSqSeries = exportStressStdMetrics ? evalIntVolumeSeries(model, "ivMisesGlandSqSeries", "geom1_gland_clip_dom", "(solid.mises)^2") : new double[0];
     double[] intMisesAdiposeSqSeries = exportStressStdMetrics ? evalIntVolumeSeries(model, "ivMisesAdiposeSqSeries", "geom1_adipose_diff_dom", "(solid.mises)^2") : new double[0];
     double[] intMisesTumorSqSeries = exportStressStdMetrics && exportTumorMetrics ? evalIntVolumeSeries(model, "ivMisesTumorSqSeries", "geom1_breast_union_dom", "tumor_mask*(solid.mises)^2") : new double[0];
-    System.out.println("COMSOL_POSTPROCESS_STATUS volume_series_ready");
+    postprocessStatus("volume_series_ready");
     int seriesLength = minLength(
       timeValues,
       maxDispBreastSeries,
@@ -4825,7 +4841,7 @@ public class {postprocess_class_name} {{
       System.out.println("COMSOL_METRICS_JSON_BEGIN");
       System.out.print(json);
       System.out.println("COMSOL_METRICS_JSON_END");
-      System.out.println("COMSOL_POSTPROCESS_STATUS quick_metrics_ready");
+      postprocessStatus("quick_metrics_ready");
       return model;
     }}
 
@@ -4856,7 +4872,7 @@ public class {postprocess_class_name} {{
       minSurfaceVSeries = evalMinSurfaceSeries(model, "minsOuterSkinV", surfaceSelectionTag, "v");
       maxSurfaceVSeries = evalMaxSurfaceSeries(model, "maxsOuterSkinV", surfaceSelectionTag, "v");
     }}
-    System.out.println(exportSurfaceMetrics ? "COMSOL_POSTPROCESS_STATUS surface_series_ready" : "COMSOL_POSTPROCESS_STATUS surface_series_skipped");
+    postprocessStatus(exportSurfaceMetrics ? "surface_series_ready" : "surface_series_skipped");
     int surfaceSeriesLength = minLength(
       timeValues,
       intSurfaceDispSeries,
@@ -4914,7 +4930,7 @@ public class {postprocess_class_name} {{
         landmarkDispMeanSeries[i] = new double[0];
       }}
     }}
-    System.out.println(exportLandmarkMetrics ? "COMSOL_POSTPROCESS_STATUS landmark_series_ready" : "COMSOL_POSTPROCESS_STATUS landmark_series_skipped");
+    postprocessStatus(exportLandmarkMetrics ? "landmark_series_ready" : "landmark_series_skipped");
     int peakDispIdx = peakIndex(maxDispBreastSeries);
     int peakVmIdx = peakIndex(maxMisesBreastSeries);
     int peakGlandVmIdx = peakIndex(maxMisesGlandSeries);

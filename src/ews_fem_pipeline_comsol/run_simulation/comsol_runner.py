@@ -238,6 +238,21 @@ class COMSOLRunner:
         return candidate
 
     @staticmethod
+    def _resolve_auxiliary_configuration_dir(base_configuration_dir: Path, java_file: Path) -> Path:
+        """Use a fresh COMSOL cache for generated postprocess/verification classes.
+
+        Interrupted COMSOL batch runs can leave stale OSGi/cache files behind. A
+        fresh, short auxiliary configuration path prevents those stale files from
+        blocking the Java class before its first status print.
+        """
+        role = "postprocess" if "postprocess" in java_file.stem else "verify"
+        stamp = time.strftime("%Y%m%d_%H%M%S")
+        aux_root = base_configuration_dir.parent / "comsol_aux_config"
+        candidate = (aux_root / f"{role}_{stamp}_{os.getpid()}").resolve()
+        candidate.mkdir(parents=True, exist_ok=True)
+        return candidate
+
+    @staticmethod
     def _resolve_generated_mph_candidate(generated_mph: Path) -> Path | None:
         fallback = generated_mph.with_name(f"{generated_mph.stem}_Model{generated_mph.suffix}")
         candidates = [candidate for candidate in (generated_mph, fallback) if candidate.exists()]
@@ -413,6 +428,7 @@ class COMSOLRunner:
         progress_log: Path | None = None,
         progress_label: str | None = None,
         announce: bool = True,
+        no_progress_notice_s: float | None = None,
     ) -> tuple[int, str, str]:
         """Run a subprocess, write a debug log, and stream selected COMSOL progress."""
         started = time.time()
@@ -422,6 +438,8 @@ class COMSOLRunner:
         log_position = 0
         last_progress: str | None = None
         last_progress_pct: int | None = None
+        last_log_activity = started
+        last_no_progress_notice = started
         try:
             process = subprocess.Popen(
                 proc_args,
@@ -434,6 +452,7 @@ class COMSOLRunner:
             )
             deadline = time.time() + timeout_s if timeout_s and timeout_s > 0 else None
             while process.poll() is None:
+                previous_log_position = log_position
                 log_position, last_progress, last_progress_pct = cls._tail_progress_log(
                     log_path=progress_log,
                     position=log_position,
@@ -441,6 +460,20 @@ class COMSOLRunner:
                     last_progress_pct=last_progress_pct,
                     label=label,
                 )
+                now = time.time()
+                if log_position != previous_log_position:
+                    last_log_activity = now
+                if (
+                    no_progress_notice_s is not None
+                    and no_progress_notice_s > 0
+                    and now - last_log_activity >= no_progress_notice_s
+                    and now - last_no_progress_notice >= no_progress_notice_s
+                ):
+                    cls._console(
+                        f"{label}: geen nieuwe COMSOL batchlog-output sinds "
+                        f"{(now - last_log_activity) / 60:.1f} min"
+                    )
+                    last_no_progress_notice = now
                 if deadline is not None and time.time() > deadline:
                     process.kill()
                     stdout, stderr = process.communicate()
@@ -715,10 +748,12 @@ class COMSOLRunner:
 
         run_log = logs_dir / f"{case_name}_{java_file.stem}.log"
         self._safe_unlink(run_log)
+        aux_configuration_dir = self._resolve_auxiliary_configuration_dir(configuration_dir, java_file)
+        self._console(f"{case_name} {java_file.stem}: auxiliary COMSOL configuration = {aux_configuration_dir}")
         class_args = [
             str(batch_executable),
             "-configuration",
-            str(configuration_dir),
+            str(aux_configuration_dir),
             "-inputfile",
             str(class_file.resolve()),
             "-batchlog",
@@ -738,6 +773,7 @@ class COMSOLRunner:
             timeout_s=_normalize_timeout_seconds(settings.comsol.postprocess_timeout_s, 60),
             progress_log=run_log,
             progress_label=f"{case_name} {java_file.stem}",
+            no_progress_notice_s=120.0,
         )
         run_log_text = run_log.read_text(encoding="utf-8", errors="replace") if run_log.exists() else ""
         run_text = "\n".join([class_out, class_err, run_log_text])
