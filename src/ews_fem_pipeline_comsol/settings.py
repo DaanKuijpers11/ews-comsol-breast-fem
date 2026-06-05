@@ -26,6 +26,7 @@ class ComsolSettings:
     study: str = "std1"
     execute: bool = True
     auto_build_from_java: bool = True
+    reuse_mph_apply_toml_parameters: bool = False
     java_compile_first: bool = False
     jdk_root: str | None = None
     extra_args: list[str] = field(default_factory=list)

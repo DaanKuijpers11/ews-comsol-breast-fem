@@ -223,6 +223,140 @@ class COMSOLRunner:
         metrics_target.write_text(metrics_json + "\n", encoding="utf-8")
         return True
 
+    @staticmethod
+    def _java_string(value: str) -> str:
+        return value.replace("\\", "\\\\").replace('"', '\\"')
+
+    @classmethod
+    def _reuse_parameter_overrides_from_builder(cls, builder_java: Path | None) -> list[tuple[str, str]]:
+        """Extract non-geometric TOML-driven COMSOL parameters from generated Java."""
+        if not builder_java or not builder_java.exists():
+            return []
+        text = builder_java.read_text(encoding="utf-8", errors="replace")
+        matches = re.findall(r'model\.param\(\)\.set\("([^"]+)",\s*"([^"]+)"\);', text)
+        overrides: list[tuple[str, str]] = []
+        for name, value in matches:
+            material_like = (
+                name.endswith("_density")
+                or name.endswith("_bulk_modulus")
+                or name.endswith("_c10")
+                or name.endswith("_c01")
+                or name.endswith("_E")
+                or name.endswith("_nu")
+            )
+            dynamic_like = (
+                name in {
+                    "g_acc",
+                    "pulse_acc_amp",
+                    "mass_damping_alpha",
+                    "stiffness_damping_beta",
+                    "t_output_step",
+                    "t_pulse_output_step",
+                    "t_gravity_end",
+                    "t_dynamic_start",
+                    "t_dynamic_end",
+                    "t_jump_hold",
+                    "t_jump_start",
+                    "t_jump_duration",
+                    "t_pulse_duration",
+                    "t_excitation_duration",
+                    "jump_v0",
+                    "jump_amp",
+                }
+            )
+            tumor_like = name.startswith("tumor_")
+            if material_like or dynamic_like or tumor_like:
+                overrides.append((name, value))
+        return overrides
+
+    def _write_reuse_mph_patch_java(
+        self,
+        *,
+        case_name: str,
+        java_file: Path,
+        source_mph: Path,
+        patched_mph: Path,
+        overrides: list[tuple[str, str]],
+    ) -> None:
+        lines = [
+            "import com.comsol.model.*;",
+            "import com.comsol.model.util.*;",
+            "",
+            f"public class {java_file.stem} {{",
+            "  public static Model run() throws Exception {",
+            '    System.out.println("COMSOL_REUSE_PATCH_STATUS init_start");',
+            "    ModelUtil.initStandalone(true);",
+            '    System.out.println("COMSOL_REUSE_PATCH_STATUS load_start");',
+            f'    Model model = ModelUtil.load("model", "{self._java_string(str(source_mph.resolve()))}");',
+            '    System.out.println("COMSOL_REUSE_PATCH_STATUS parameters_start");',
+        ]
+        for name, value in overrides:
+            lines.append(
+                f'    model.param().set("{self._java_string(name)}", "{self._java_string(value)}");'
+            )
+        lines.extend(
+            [
+                f'    System.out.println("COMSOL_REUSE_PATCH_STATUS parameters_done count={len(overrides)}");',
+                '    System.out.println("COMSOL_REUSE_PATCH_STATUS save_start");',
+                f'    model.save("{self._java_string(str(patched_mph.resolve()))}");',
+                '    System.out.println("COMSOL_REUSE_PATCH_STATUS done");',
+                "    return model;",
+                "  }",
+                "",
+                "  public static void main(String[] args) throws Exception {",
+                "    run();",
+                "    ModelUtil.disconnect();",
+                "  }",
+                "}",
+                "",
+            ]
+        )
+        java_file.parent.mkdir(parents=True, exist_ok=True)
+        java_file.write_text("\n".join(lines), encoding="utf-8")
+
+    def _prepare_reused_mph_with_parameter_overrides(
+        self,
+        *,
+        case_name: str,
+        case_dir: Path,
+        build_dir: Path,
+        logs_dir: Path,
+        configuration_dir: Path,
+        batch_executable: str,
+        source_mph: Path,
+        builder_java: Path | None,
+        settings: Settings,
+    ) -> tuple[Path | None, str]:
+        """Copy a built MPH conceptually by loading it, applying TOML params, and saving a patched MPH."""
+        overrides = self._reuse_parameter_overrides_from_builder(builder_java)
+        if not overrides:
+            return None, "No TOML parameter overrides could be extracted from generated builder Java."
+        patch_java = build_dir / f"{case_name}_comsol_reuse_patch.java"
+        patched_mph = build_dir / f"{case_name}_reuse_parameter_patched.mph"
+        self._safe_unlink(patched_mph)
+        self._write_reuse_mph_patch_java(
+            case_name=case_name,
+            java_file=patch_java,
+            source_mph=source_mph,
+            patched_mph=patched_mph,
+            overrides=overrides,
+        )
+        self._console(f"{case_name}: reuse MPH + TOML parameter override ({len(overrides)} params)")
+        ok, reason, _ = self._run_aux_java_class(
+            case_name=case_name,
+            case_dir=case_dir,
+            logs_dir=logs_dir,
+            configuration_dir=configuration_dir,
+            batch_executable=batch_executable,
+            java_file=patch_java,
+            settings=settings,
+        )
+        if not ok:
+            return None, reason
+        if not patched_mph.exists():
+            return None, "Reuse MPH patch class ran but did not save patched MPH."
+        return patched_mph.resolve(), ""
+
     def _resolve_configuration_dir(self, settings: Settings, output_dir: Path) -> Path:
         if settings.comsol.configuration_dir:
             candidate = Path(settings.comsol.configuration_dir)
@@ -245,7 +379,13 @@ class COMSOLRunner:
         fresh, short auxiliary configuration path prevents those stale files from
         blocking the Java class before its first status print.
         """
-        role = "postprocess" if "postprocess" in java_file.stem else "verify"
+        stem = java_file.stem.lower()
+        if "postprocess" in stem:
+            role = "postprocess"
+        elif "reuse_patch" in stem:
+            role = "reuse"
+        else:
+            role = "verify"
         stamp = time.strftime("%Y%m%d_%H%M%S")
         aux_root = base_configuration_dir.parent / "comsol_aux_config"
         candidate = (aux_root / f"{role}_{stamp}_{os.getpid()}").resolve()
@@ -779,6 +919,8 @@ class COMSOLRunner:
         run_text = "\n".join([class_out, class_err, run_log_text])
         if class_code != 0:
             return False, f"Auxiliary COMSOL Java class {java_file.name} failed.", class_out
+        if "error loading java class" in run_text.lower():
+            return False, f"Auxiliary COMSOL Java class {java_file.name} could not be loaded by COMSOL batch.", class_out
         if self._detect_license_error(run_text):
             return False, "COMSOL license error during postprocess metrics export.", class_out
         return True, "", class_out
@@ -1003,6 +1145,23 @@ class COMSOLRunner:
             if planned_commands:
                 command_preview_file.write_text("\n".join(planned_commands) + "\n", encoding="utf-8")
             return False
+
+        if settings.comsol.reuse_mph_apply_toml_parameters:
+            patched_source_mph, patch_reason = self._prepare_reused_mph_with_parameter_overrides(
+                case_name=case_name,
+                case_dir=case_dir,
+                build_dir=build_dir,
+                logs_dir=logs_dir,
+                configuration_dir=configuration_dir,
+                batch_executable=batch_executable,
+                source_mph=source_mph,
+                builder_java=builder_java,
+                settings=settings,
+            )
+            if patched_source_mph is None:
+                logger.error("%s: failed to prepare reused MPH with TOML parameters: %s", case_name, patch_reason)
+                return False
+            source_mph = patched_source_mph
 
         output_mph = solve_dir / f"{case_name}_result.mph"
         log_file = logs_dir / f"{case_name}_comsol.log"
