@@ -27,6 +27,9 @@ Higher acceleration amplitudes such as `0.50g`, `1.00g`, and `1.25g` are used as
 
 ## Repository Layout
 
+- `README.md`
+  - startpunt voor nieuwe gebruikers: projectdoel, mapstructuur, actieve commands en outputbeleid
+
 - `src/ews_fem_pipeline_comsol/`
   - active COMSOL pipeline package
   - TOML loading, source-case preparation, Java builder generation, COMSOL batch execution, and post-processing
@@ -55,6 +58,31 @@ Higher acceleration amplitudes such as `0.50g`, `1.00g`, and `1.25g` are used as
 - `src/ews_fem_pipeline_clean/`
   - legacy/source-reference code from the earlier FEM pipeline
   - normal COMSOL development should use `src/ews_fem_pipeline_comsol`
+
+## Where To Look First
+
+For new users, the most useful entry points are:
+
+1. `src/ews_fem_pipeline_comsol/README.md`
+   - explains the COMSOL package structure and pipeline order
+
+2. `runs/comsol_runs/geometry_stage5/`
+   - current dynamic/material/skin sensitivity cases
+   - most useful control route for recent model calibration work
+
+3. `runs/comsol_runs/geometry_stage6/`
+   - current tumor/lesion sensitivity TOMLs
+   - use only matched control/tumor pairs when interpreting tumor effects
+
+4. `analysis_output/comsol_pipeline/manual_postprocess/`
+   - manually exported COMSOL Derived Values CSVs for solve-only scouts
+   - useful when automated postprocess is slow or unreliable
+
+5. `docs/report_notes/comsol_pipeline/model_justification/`
+   - model assumptions and literature justification notes
+
+6. `model_pictures/`
+   - screenshots and animations used to judge geometry and motion visually
 
 ## Active Stage Structure
 
@@ -117,6 +145,46 @@ Check CLI options:
 ```powershell
 python -m ews_fem_pipeline_comsol --help
 ```
+
+## Manual COMSOL Workflow
+
+The normal route is to run COMSOL through the Python CLI. For diagnostic cases,
+it is also acceptable to run or inspect a case manually in COMSOL, especially
+when only a `result.mph` file or a quick Derived Values export is needed.
+
+Manual solve from an existing built/generated model:
+
+1. Open the generated or patched model in COMSOL:
+   - `runs/comsol_runs/<stage>/outputs/<case>/build/*generated_Model.mph`
+   - or `runs/comsol_runs/<stage>/outputs/<case>/build/*reuse_parameter_patched.mph`
+
+2. Confirm the model setup:
+   - geometry is present;
+   - expected domains/selections exist;
+   - Study 1 is the intended transient study;
+   - dynamic parameters match the TOML.
+
+3. Run `Study 1` manually in COMSOL.
+
+4. Save the solved model as:
+   - `runs/comsol_runs/<stage>/outputs/<case>/solve/<case>_result.mph`
+
+5. Export manual Derived Values CSVs to:
+   - `analysis_output/comsol_pipeline/manual_postprocess/<case_name>/`
+
+Recommended manual Derived Values:
+
+- Volume Maximum:
+  - `solid.disp` for maximum displacement magnitude
+  - `solid.mises` for maximum von Mises stress
+
+- Volume Average:
+  - `solid.disp` for average displacement magnitude
+  - `solid.mises` for average von Mises stress
+
+Use the breast-domain selection for whole-breast metrics. For visual validation,
+also inspect a displacement surface plot and a von Mises stress plot at the peak
+motion/stress time.
 
 ## Output Policy
 
@@ -184,4 +252,3 @@ Start with:
 4. Use `postprocess-only --mode global` first for quick solved-case checks.
 5. Run heavier surface/tumor post-processing only for cases that are worth keeping.
 6. Regenerate `analysis_output/comsol_pipeline` summaries for report-ready comparisons.
-

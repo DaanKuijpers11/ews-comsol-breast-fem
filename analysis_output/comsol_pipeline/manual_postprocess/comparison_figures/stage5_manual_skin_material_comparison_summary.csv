@@ -1,0 +1,5 @@
+"case_id","label","peak_max_disp_mm","peak_max_disp_time_s","peak_avg_disp_mm","peak_avg_disp_time_s","peak_max_vm_kpa","peak_max_vm_time_s","peak_avg_vm_kpa","peak_avg_vm_time_s"
+"no_skin_100g","No skin 1.00g","12.51","1.355","6.478","1.36","3.465","1.36","0.709","1.36"
+"no_skin_125g","No skin 1.25g","14.233","1.355","7.337","1.36","3.924","1.36","0.805","1.355"
+"vol_skin_125g","Volumetric skin 1.25g","5.934","1.4","3.401","1.4","51.63","1.395","1.379","1.4"
+"vol_skin_soft_interior_125g","Vol skin + soft interior 1.25g","10.897","1.445","5.9","1.445","72.382","1.445","1.801","1.445"
