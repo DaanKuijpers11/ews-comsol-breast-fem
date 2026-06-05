@@ -119,7 +119,7 @@ The default Stage 5B Cooper run is not report-ready because it failed almost imm
 
 After the no-Cooper control was established, a diagnostic skin-layer scout was performed to test whether a separate volumetric skin layer could be added without the nonphysical deformation observed in the earlier shell-scaffold skin route. The shell/scaffold route produced visible dimples and surface artefacts during motion and is therefore not used as a main result. The volumetric skin case produced a visually stable motion pattern, but it substantially reduced the displacement amplitude.
 
-Table~\ref{tab:stage5_skin_scout} summarizes the manual Derived Values comparison. All three cases use the matched Stage 5 no-Cooper anatomy and the same breast volume of approximately 585 mL. The comparison should be interpreted as a scout because the values were exported manually from COMSOL tables and do not include the full automated surface or landmark post-processing.
+Table~\ref{tab:stage5_skin_scout} summarizes the manual Derived Values comparison. All four cases use the matched Stage 5 no-Cooper anatomy and the same breast volume of approximately 585 mL. The comparison should be interpreted as a scout because the values were exported manually from COMSOL tables and do not include the full automated surface or landmark post-processing.
 
 \begin{table}[H]
 \centering
@@ -134,48 +134,49 @@ Case & Peak avg disp. & Peak max disp. & Peak avg VM & Peak max VM \\
 No skin, 1.00g & 6.48 & 12.51 & 0.709 & 3.47 \\
 No skin, 1.25g & 7.34 & 14.23 & 0.805 & 3.92 \\
 Volumetric skin, 1.25g & 3.40 & 5.93 & 1.379 & 51.63 \\
+Vol. skin + soft interior, 1.25g & 5.90 & 10.90 & 1.801 & 72.38 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Increasing the acceleration from 1.00g to 1.25g in the no-skin model increased peak maximum displacement from 12.51 mm to 14.23 mm. In contrast, adding the volumetric skin layer at 1.25g reduced the peak maximum displacement to 5.93 mm. This indicates that the current volumetric skin implementation has a larger effect on the global motion amplitude than the 1.00g to 1.25g excitation change.
+Increasing the acceleration from 1.00g to 1.25g in the no-skin model increased peak maximum displacement from 12.51 mm to 14.23 mm. In contrast, adding the volumetric skin layer at 1.25g reduced the peak maximum displacement to 5.93 mm. Softening the adipose and glandular interior while retaining the volumetric skin increased the peak maximum displacement to 10.90 mm. This indicates that the current volumetric skin implementation has a larger effect on the global motion amplitude than the 1.00g to 1.25g excitation change, and that internal tissue compliance partly compensates for this damping.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\linewidth]{Figures/stage5_manual_postprocess/stage5_manual_peak_comparison.png}
-\caption{Manual Stage 5 peak comparison from COMSOL Derived Values. The volumetric skin case strongly damps displacement but introduces a higher localized maximum VM stress.}
+\caption{Manual Stage 5 peak comparison from COMSOL Derived Values. The volumetric skin case strongly damps displacement, while the soft-interior variant partially recovers displacement at the cost of higher localized maximum VM stress.}
 \label{fig:stage5_skin_scout_peaks}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\linewidth]{Figures/stage5_manual_postprocess/stage5_manual_max_displacement_timeseries.png}
-\caption{Manual Stage 5 maximum displacement time series. The volumetric skin case follows the same broad dynamic pattern as the no-skin cases, but with lower amplitude.}
+\caption{Manual Stage 5 maximum displacement time series. The volumetric skin cases follow the same broad dynamic pattern as the no-skin cases, but with lower amplitude. The soft-interior variant lies between the stiff volumetric-skin case and the no-skin cases.}
 \label{fig:stage5_skin_scout_timeseries}
 \end{figure}
 
-The high maximum VM stress in the volumetric skin case occurred near the superior and inferior chestwall/support attachment region rather than as an isolated hotspot in the free breast volume. This supports interpretation as a local support/interface stress concentration. Therefore, the maximum VM value should be treated as a diagnostic hotspot metric, while average stress and displacement are more appropriate for global model comparison.
+The high maximum VM stress in the volumetric-skin cases occurred near the superior and inferior chestwall/support attachment region rather than as an isolated hotspot in the free breast volume. This supports interpretation as a local support/interface stress concentration. Therefore, the maximum VM value should be treated as a diagnostic hotspot metric, while average stress and displacement are more appropriate for global model comparison.
 
 \begin{figure}[H]
 \centering
 \begin{subfigure}{0.32\linewidth}
 \centering
-\includegraphics[width=\linewidth]{Figures/model_pictures/stage5_cooper/stage5_nocooper_125g_vonMises_bovenaanzicht.png}
+\includegraphics[width=\linewidth]{Figures/model_pictures/stage5_cooper/stage5_nocooper_125g_soft_interior_materials_vonMises_bovenaanzicht.png}
 \caption{Superior view}
 \end{subfigure}
 \hfill
 \begin{subfigure}{0.32\linewidth}
 \centering
-\includegraphics[width=\linewidth]{Figures/model_pictures/stage5_cooper/stage5_nocooper_125g_vonMises_onderaanzicht.png}
+\includegraphics[width=\linewidth]{Figures/model_pictures/stage5_cooper/stage5_nocooper_125g_soft_interior_materials_vonMises_onderaanzicht.png}
 \caption{Inferior view}
 \end{subfigure}
 \hfill
 \begin{subfigure}{0.32\linewidth}
 \centering
-\includegraphics[width=\linewidth]{Figures/model_pictures/stage5_cooper/stage5_nocooper_125g_vonMises_zijaanzicht.png}
+\includegraphics[width=\linewidth]{Figures/model_pictures/stage5_cooper/stage5_nocooper_125g_soft_interior_materials_vonMises_zijaanzicht.png}
 \caption{Lateral view}
 \end{subfigure}
-\caption{Volumetric-skin 1.25g VM stress distribution at the support/interface region. The peak stress is localized near the chestwall attachment rather than distributed through the free breast volume.}
+\caption{Volumetric-skin soft-interior 1.25g VM stress distribution at the support/interface region. The peak stress is localized near the chestwall attachment rather than distributed through the free breast volume.}
 \label{fig:stage5_volumetric_skin_stress_hotspots}
 \end{figure}
 

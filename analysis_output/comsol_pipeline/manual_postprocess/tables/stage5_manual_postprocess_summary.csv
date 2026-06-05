@@ -1,5 +1,5 @@
-"case_id","label","peak_max_displacement_mm","peak_max_displacement_time_s","peak_avg_displacement_mm","peak_avg_displacement_time_s","peak_max_vm_kpa","peak_max_vm_time_s","peak_avg_vm_kpa","peak_avg_vm_time_s"
-"stage5_no_skin_100g","No skin 1.00g","12.509606","1.355","6.47759","1.36","3.46515","1.36","0.709108","1.36"
-"stage5_no_skin_125g","No skin 1.25g","14.233234","1.355","7.336728","1.36","3.923849","1.36","0.804798","1.355"
-"stage5_volumetric_skin_125g","Volumetric skin 1.25g","5.933592","1.4","3.401142","1.4","51.629797","1.395","1.378928","1.4"
-"stage5_volumetric_skin_soft_interior_125g","Vol skin + soft interior 1.25g","10.897359","1.445","5.900392","1.445","72.381945","1.445","1.800749","1.445"
+case_id,label,peak_max_displacement_mm,peak_max_displacement_time_s,peak_avg_displacement_mm,peak_avg_displacement_time_s,peak_max_vm_kpa,peak_max_vm_time_s,peak_avg_vm_kpa,peak_avg_vm_time_s
+stage5_no_skin_100g,No skin 1.00g,12.509606,1.355,6.477590,1.36,3.465150,1.36,0.709108,1.36
+stage5_no_skin_125g,No skin 1.25g,14.233234,1.355,7.336728,1.36,3.923849,1.36,0.804798,1.355
+stage5_volumetric_skin_125g,Volumetric skin 1.25g,5.933592,1.4,3.401142,1.4,51.629797,1.395,1.378928,1.4
+stage5_volumetric_skin_soft_interior_125g,Vol. skin + soft interior 1.25g,10.897359,1.445,5.900392,1.445,72.381945,1.445,1.800749,1.445

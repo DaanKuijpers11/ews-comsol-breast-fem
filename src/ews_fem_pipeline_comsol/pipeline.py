@@ -81,7 +81,7 @@ def generate_cases(input_files: tuple[Path, ...], *, postprocess_mode_override: 
     generated: list[Path] = []
     total = len(input_files)
     for index, filepath in enumerate(input_files, start=1):
-        print(f"[COMSOL pipeline] ({index}/{total}) generate: {filepath}", flush=True)
+        print(f"[COMSOL pipeline] ({index}/{total}) generate: {filepath.name}", flush=True)
         settings = load_settings_from_toml(filepath)
         if postprocess_mode_override is not None:
             settings.comsol.postprocess_mode = postprocess_mode_override
@@ -124,7 +124,7 @@ def generate_cases(input_files: tuple[Path, ...], *, postprocess_mode_override: 
         json_file.write_text(json.dumps(payload, indent=2), encoding="utf-8")
         manifest_file = output_root / f"{filepath.stem}_output_manifest.json"
         manifest_file.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-        print(f"[COMSOL pipeline] ({index}/{total}) generated input: {json_file}", flush=True)
+        print(f"[COMSOL pipeline] ({index}/{total}) generated input: {json_file.name}", flush=True)
         generated.append(json_file)
 
     return tuple(generated)

@@ -41,15 +41,32 @@ volume_ml = volume_m3 * 1e6
 4. Bewaar de CSV onder:
 
 ```text
-analysis_output\comsol_pipeline\manual_postprocess\<case_name>\
+analysis_output\comsol_pipeline\manual_postprocess\tables\<case_id>\
 ```
 
-Gebruik consequente namen, bijvoorbeeld:
+Gebruik exact deze namen:
 
 ```text
-stage5_volumetric_skin_125g_avg_disp.csv
-stage5_volumetric_skin_125g_avg_mises.csv
-stage5_volumetric_skin_125g_max_disp_and_mises.csv
+<case_id>_avg_timeseries.csv
+<case_id>_max_timeseries.csv
+```
+
+De `avg_timeseries` CSV bevat:
+
+```text
+time_s, avg_displacement_mm, avg_vm_kpa
+```
+
+De `max_timeseries` CSV bevat:
+
+```text
+time_s, max_displacement_mm, max_vm_kpa
+```
+
+Daarna kan de samenvatting opnieuw worden opgebouwd met:
+
+```text
+python tools\update_manual_postprocess_summary.py
 ```
 
 ## Let Op

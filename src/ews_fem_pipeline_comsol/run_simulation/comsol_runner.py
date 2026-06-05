@@ -39,6 +39,32 @@ class COMSOLRunner:
         print(f"[COMSOL pipeline] {message}", flush=True)
 
     @staticmethod
+    def _display_path(path: Path) -> str:
+        try:
+            return str(path.resolve().relative_to(Path.cwd().resolve()))
+        except ValueError:
+            return path.name
+
+    @staticmethod
+    def _case_name_from_input(input_file: Path) -> str:
+        name = input_file.stem
+        suffix = "_comsol_input"
+        return name[: -len(suffix)] if name.endswith(suffix) else name
+
+    @staticmethod
+    def _aux_phase_label(java_file: Path) -> str:
+        stem = java_file.stem.lower()
+        if "reuse_patch" in stem:
+            return "reuse patch"
+        if "verify_build" in stem:
+            return "verify build"
+        if "verify_solve" in stem:
+            return "verify solve"
+        if "postprocess" in stem:
+            return "postprocess"
+        return "auxiliary step"
+
+    @staticmethod
     def _finish_progress_line() -> None:
         return
 
@@ -341,7 +367,7 @@ class COMSOLRunner:
             patched_mph=patched_mph,
             overrides=overrides,
         )
-        self._console(f"{case_name}: reuse MPH + TOML parameter override ({len(overrides)} params)")
+        self._console(f"reuse MPH + TOML parameter override ({len(overrides)} params)")
         ok, reason, _ = self._run_aux_java_class(
             case_name=case_name,
             case_dir=case_dir,
@@ -690,6 +716,19 @@ class COMSOLRunner:
         multiphysics_root = Path(batch_executable).resolve().parents[2]
         plugins_dir = multiphysics_root / "plugins"
 
+        def _detect_build_error(text: str) -> str:
+            lowered = text.lower()
+            mesh_error_markers = [
+                "error running java class",
+                "failed to generate mesh",
+                "a problem occurred when building mesh feature",
+                "failed to respect boundary element",
+                "internal error in boundary respecting",
+            ]
+            if any(marker in lowered for marker in mesh_error_markers):
+                return "COMSOL build saved an MPH but reported a mesh/build error. Check *_comsol_build.log before using the model."
+            return ""
+
         # Preferred route: plain javac with COMSOL plugin jars on classpath.
         if javac_executable and plugins_dir.exists():
             javac_cp = str(plugins_dir / "*")
@@ -731,11 +770,14 @@ class COMSOLRunner:
                     class_debug,
                     timeout_s=_normalize_timeout_seconds(settings.comsol.java_build_timeout_s, 60),
                     progress_log=build_log,
-                    progress_label=f"{case_name} build",
+                    progress_label="build",
                 )
                 class_log_text = build_log.read_text(encoding="utf-8", errors="replace") if build_log.exists() else ""
                 class_text = "\n".join([class_out, class_err, class_log_text])
                 generated_candidate = self._resolve_fresh_generated_mph_candidate(generated_mph, class_started_at)
+                build_error = _detect_build_error(class_text)
+                if build_error:
+                    return False, build_error
                 if class_code == 0 and generated_candidate is not None:
                     return True, ""
                 if class_code == 124:
@@ -790,11 +832,14 @@ class COMSOLRunner:
                     class_debug,
                     timeout_s=_normalize_timeout_seconds(settings.comsol.java_build_timeout_s, 60),
                     progress_log=build_log,
-                    progress_label=f"{case_name} build",
+                    progress_label="build",
                 )
                 class_log_text = build_log.read_text(encoding="utf-8", errors="replace") if build_log.exists() else ""
                 class_text = "\n".join([class_out, class_err, class_log_text])
                 generated_candidate = self._resolve_fresh_generated_mph_candidate(generated_mph, class_started_at)
+                build_error = _detect_build_error(class_text)
+                if build_error:
+                    return False, build_error
                 if class_code == 0 and generated_candidate is not None:
                     return True, ""
                 if class_code == 124:
@@ -831,11 +876,14 @@ class COMSOLRunner:
             direct_debug,
             timeout_s=_normalize_timeout_seconds(settings.comsol.java_build_timeout_s, 60),
             progress_log=build_log,
-            progress_label=f"{case_name} build",
+            progress_label="build",
         )
         build_log_text = build_log.read_text(encoding="utf-8", errors="replace") if build_log.exists() else ""
         direct_text = "\n".join([stdout, stderr, build_log_text])
         generated_candidate = self._resolve_fresh_generated_mph_candidate(generated_mph, direct_started_at)
+        build_error = _detect_build_error(direct_text)
+        if build_error:
+            return False, build_error
         if code == 0 and generated_candidate is not None:
             return True, ""
         if self._detect_license_error(direct_text):
@@ -889,7 +937,8 @@ class COMSOLRunner:
         run_log = logs_dir / f"{case_name}_{java_file.stem}.log"
         self._safe_unlink(run_log)
         aux_configuration_dir = self._resolve_auxiliary_configuration_dir(configuration_dir, java_file)
-        self._console(f"{case_name} {java_file.stem}: auxiliary COMSOL configuration = {aux_configuration_dir}")
+        phase_label = self._aux_phase_label(java_file)
+        logger.debug("%s %s auxiliary COMSOL configuration: %s", case_name, phase_label, aux_configuration_dir)
         class_args = [
             str(batch_executable),
             "-configuration",
@@ -912,7 +961,7 @@ class COMSOLRunner:
             class_debug,
             timeout_s=_normalize_timeout_seconds(settings.comsol.postprocess_timeout_s, 60),
             progress_log=run_log,
-            progress_label=f"{case_name} {java_file.stem}",
+            progress_label=phase_label,
             no_progress_notice_s=120.0,
         )
         run_log_text = run_log.read_text(encoding="utf-8", errors="replace") if run_log.exists() else ""
@@ -930,7 +979,7 @@ class COMSOLRunner:
         total = len(input_files)
         mode = "build-only" if build_only else "run"
         for index, input_file in enumerate(input_files, start=1):
-            self._console(f"({index}/{total}) {mode}: {input_file}")
+            self._console(f"({index}/{total}) {mode}: {self._case_name_from_input(input_file)}")
             settings = settings_map[input_file]
             if self.run_case(input_file, settings, build_only=build_only):
                 completed.append(input_file)
@@ -940,7 +989,7 @@ class COMSOLRunner:
         completed: list[Path] = []
         total = len(input_files)
         for index, input_file in enumerate(input_files, start=1):
-            self._console(f"({index}/{total}) postprocess-only: {input_file}")
+            self._console(f"({index}/{total}) postprocess-only: {self._case_name_from_input(input_file)}")
             settings = settings_map[input_file]
             if self.postprocess_case(input_file, settings):
                 completed.append(input_file)
@@ -1036,7 +1085,7 @@ class COMSOLRunner:
         build_dir = output_paths["build"]
         solve_dir = output_paths["solve"]
         logs_dir = output_paths["logs"]
-        self._console(f"{case_name}: output root = {output_paths['root']}")
+        self._console(f"output root: {self._display_path(output_paths['root'])}")
         command_preview_file = logs_dir / f"{case_name}.comsol_command.txt"
         prepare_artefacts = payload.get("prepare_artefacts", {})
         auxiliary_verification_enabled = bool(getattr(settings.comsol, "enable_auxiliary_verification", False))
@@ -1104,7 +1153,7 @@ class COMSOLRunner:
 
             if True:
                 logger.debug("Building MPH from Java scaffold for %s", case_name)
-                self._console(f"{case_name}: build Java -> MPH")
+                self._console("build: Java -> MPH")
                 built, reason = self._try_build_mph_from_java(
                     case_name=case_name,
                     case_dir=case_dir,
@@ -1186,7 +1235,7 @@ class COMSOLRunner:
 
         if build_only:
             if auxiliary_verification_enabled:
-                self._console(f"{case_name}: build-only verification")
+                self._console("build-only: verification")
                 verify_ok, verify_reason = self._capture_verification_json(
                     case_name=case_name,
                     case_dir=case_dir,
@@ -1207,7 +1256,7 @@ class COMSOLRunner:
                         reason=verify_reason,
                     )
             logger.info("Built COMSOL MPH for %s without starting solve.", case_name)
-            self._console(f"{case_name}: build-only complete")
+            self._console("build-only: complete")
             self._prune_output_artefacts(
                 case_name=case_name,
                 output_paths=output_paths,
@@ -1228,7 +1277,7 @@ class COMSOLRunner:
             return True
 
         logger.info("Running COMSOL for %s", case_name)
-        self._console(f"{case_name}: solve start")
+        self._console("solve: start")
         debug_path = logs_dir / f"{case_name}_comsol_runner_debug.log"
         code, _, _ = self._run_logged_command(
             proc_args,
@@ -1236,7 +1285,7 @@ class COMSOLRunner:
             debug_path,
             timeout_s=_normalize_timeout_seconds(settings.comsol.solve_timeout_s, 120),
             progress_log=log_file,
-            progress_label=f"{case_name} solve",
+            progress_label="solve",
         )
         if code != 0:
             if output_mph.exists():
@@ -1257,9 +1306,9 @@ class COMSOLRunner:
         postprocess_mode = str(getattr(settings.comsol, "postprocess_mode", "full") or "full").strip().lower().replace("-", "_")
         skip_postprocess = postprocess_mode in {"none", "skip", "off", "disabled", "false"}
         if skip_postprocess:
-            self._console(f"{case_name}: postprocess skipped by postprocess_mode={postprocess_mode}")
+            self._console(f"postprocess: skipped by postprocess_mode={postprocess_mode}")
         elif postprocess_java and postprocess_java.exists():
-            self._console(f"{case_name}: postprocess metrics/export")
+            self._console("postprocess: metrics/export")
             ok, reason, aux_stdout = self._run_aux_java_class(
                 case_name=case_name,
                 case_dir=case_dir,
@@ -1336,7 +1385,7 @@ class COMSOLRunner:
             preferred_generated_mph=source_mph,
             settings=settings,
         )
-        self._console(f"{case_name}: run complete")
+        self._console("run: complete")
         return True
 
     def postprocess_case(self, input_file: Path, settings: Settings) -> bool:

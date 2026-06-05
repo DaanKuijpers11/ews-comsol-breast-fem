@@ -1,0 +1,62 @@
+EWS COMSOL CURRENT RUN PLAN
+Last updated: 2026-06-05
+
+Doel
+- Eerst Stage 5 materiaal/skin baseline kiezen.
+- Daarna pas matched Stage 6 tumorcases draaien.
+- Voor nu geen automatische full postprocess vertrouwen als de COMSOL batch blijft hangen.
+- Solve-only resultaten handmatig in COMSOL postprocessen via Derived Values CSV.
+
+1) Nu lopend: handmatige COMSOL solve
+Case:
+runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_febio_materials_solve_only_preview.toml
+
+Als de handmatige solve klaar is:
+- Save As:
+  runs\comsol_runs\geometry_stage5\outputs\output_stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_febio_materials_solve_only_preview\solve\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_febio_materials_solve_only_preview_result.mph
+- Maak handmatige Derived Values CSV's:
+  Volume maximum solid.disp
+  Volume average solid.disp
+  Volume maximum solid.mises
+  Volume average solid.mises
+- Zet CSV's in:
+  analysis_output\comsol_pipeline\manual_postprocess\tables\stage5_volumetric_skin_soft_febio_materials_125g
+- Gebruik exact deze namen:
+  stage5_volumetric_skin_soft_febio_materials_125g_avg_timeseries.csv
+  stage5_volumetric_skin_soft_febio_materials_125g_max_timeseries.csv
+
+2) Als handmatig solven mislukt of veel trager blijkt
+Run dezelfde case via de pipeline:
+python -m ews_fem_pipeline_comsol run runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_febio_materials_solve_only_preview.toml
+
+3) Na manual CSV's: evaluation plots opnieuw maken
+python tools\update_manual_postprocess_summary.py
+python tools\make_comsol_evaluation_plots.py
+
+4) Weekend run optie A: eerst tumor op huidige soft-interior volumetric-skin baseline
+Alleen draaien als de huidige Stage 5 baseline voldoende logisch/stabiel lijkt.
+
+python -m ews_fem_pipeline_comsol run runs\comsol_runs\geometry_stage6\stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_volumetric_skin_soft_interior_solve_only_preview.toml
+
+Daarna handmatig postprocessen en vergelijken met:
+runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_interior_solve_only_preview.toml
+
+5) Weekend run optie B: duidelijke tumor-amplitude scout
+Alleen draaien als je vooral wilt zien of een grotere tumor zichtbaar effect geeft.
+
+python -m ews_fem_pipeline_comsol run runs\comsol_runs\geometry_stage6\stage6_tumor_large_central_xoffset055_125g_volumetric_skin_soft_interior_solve_only_preview.toml
+
+6) Niet tegelijk twee COMSOL solves starten
+- Liever serieel runnen.
+- Twee terminals tegelijk geeft veel CPU/RAM/IO druk en verhoogt risico op langere runtimes, licentieproblemen of recoveries/cache-fouten.
+
+7) Eerstvolgende inhoudelijke beslissing
+Vergelijk:
+- No skin 1.25g
+- Volumetric skin 1.25g
+- Volumetric skin + soft interior 1.25g
+- Volumetric skin + soft FEBio materials 1.25g
+
+Kies daarna:
+- stabiele anatomische baseline voor Stage 6;
+- of nog een hogere diagnostic g/compliance scout nodig is.
