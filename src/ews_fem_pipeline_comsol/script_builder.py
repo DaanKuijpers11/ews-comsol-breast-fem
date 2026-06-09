@@ -453,6 +453,30 @@ def generate_comsol_java_builder(
     tumor_coef2_adipose = float(tumor_material.get("coef2_adipose", tumor_material.get("coef2", 939.0)))
     tumor_coef1_glandular = float(tumor_material.get("coef1_glandular", tumor_material.get("coef1", 920.0)))
     tumor_coef2_glandular = float(tumor_material.get("coef2_glandular", tumor_material.get("coef2", 870.0)))
+    tumor_E_default_adipose = 6.0 * (tumor_coef1_adipose + tumor_coef2_adipose)
+    tumor_E_default_glandular = 6.0 * (tumor_coef1_glandular + tumor_coef2_glandular)
+    tumor_E_common = tumor_material.get(
+        "youngs_modulus_pa",
+        tumor_material.get("youngs_modulus", tumor_material.get("E", None)),
+    )
+    tumor_E_adipose = float(
+        tumor_material.get(
+            "youngs_modulus_adipose_pa",
+            tumor_material.get(
+                "youngs_modulus_adipose",
+                tumor_E_common if tumor_E_common is not None else tumor_E_default_adipose,
+            ),
+        )
+    )
+    tumor_E_glandular = float(
+        tumor_material.get(
+            "youngs_modulus_glandular_pa",
+            tumor_material.get(
+                "youngs_modulus_glandular",
+                tumor_E_common if tumor_E_common is not None else tumor_E_default_glandular,
+            ),
+        )
+    )
     skin_E, skin_nu = _linearize_mooney_rivlin(skin_material)
     adipose_E, adipose_nu = _linearize_mooney_rivlin(adipose_material)
     glandular_E, glandular_nu = _linearize_mooney_rivlin(glandular_material)
@@ -1226,12 +1250,14 @@ def generate_comsol_java_builder(
         },
         "tumor_material_overlay": {
             "enabled": tumor_enabled,
-            "implementation": "Analytic spherical tumor_mask material overlay inside the existing adipose/glandular domains; no separate COMSOL tumor domain is generated yet.",
+            "implementation": "Analytic spherical tumor_mask material overlay inside the existing adipose/glandular domains; no separate COMSOL tumor domain is generated yet. The linear-elastic material nodes use adipose_E_eff/glandular_E_eff so COMSOL's Solid Mechanics 'From material' path can see the tumor stiffness.",
             "preview_geometry": "tumor_preview_sphere is emitted in separate component comp_tumor_preview/geom_preview using the same center and radius so placement can be visually inspected without changing the FEM union.",
             "radius_m": tumor_radius,
             "diameter_mm": 2000.0 * tumor_radius,
             "position_m": [tumor_x, tumor_y, tumor_z],
             "density_kg_m3": tumor_density,
+            "youngs_modulus_adipose_pa": tumor_E_adipose,
+            "youngs_modulus_glandular_pa": tumor_E_glandular,
             "coef1_adipose_pa": tumor_coef1_adipose,
             "coef2_adipose_pa": tumor_coef2_adipose,
             "coef1_glandular_pa": tumor_coef1_glandular,
@@ -1241,6 +1267,7 @@ def generate_comsol_java_builder(
                 "Use build-only verification and the generated tumor_volume metric after solve/postprocess to confirm the analytic sphere intersects the breast domain.",
                 "In the generated MPH, inspect Component comp_tumor_preview > geom_preview > tumor_preview_sphere and compare its coordinates/radius with comp1 breast_union/gland_clip/adipose_diff; it is a visual helper, not mat_tumor.",
                 "Because this is not a separate geometry domain, COMSOL selection lists will not contain a tumor domain; local tumor metrics are computed with tumor_mask integrals over the breast domain.",
+                "Stage 6 tumor-material validation cases should be rebuilt from Java rather than using MPH parameter reuse unless the reused MPH is known to contain adipose_E_eff/glandular_E_eff material expressions.",
                 "If boolean clipping becomes necessary for inspection or meshing, add a later explicit inclusion/domain route rather than treating this overlay as an anatomical segmentation.",
             ],
         },
@@ -2211,6 +2238,8 @@ public class {class_name} {{
     model.param().set("tumor_coef2_adipose", "{tumor_coef2_adipose:.12f}[Pa]");
     model.param().set("tumor_coef1_glandular", "{tumor_coef1_glandular:.12f}[Pa]");
     model.param().set("tumor_coef2_glandular", "{tumor_coef2_glandular:.12f}[Pa]");
+    model.param().set("tumor_E_adipose", "{tumor_E_adipose:.12f}[Pa]");
+    model.param().set("tumor_E_glandular", "{tumor_E_glandular:.12f}[Pa]");
     model.param().set("t_output_step", "{output_dt_s:.12f}[s]");
     model.param().set("t_pulse_output_step", "{pulse_output_dt_s:.12f}[s]");
     model.param().set("mass_damping_alpha", "{mass_damping_alpha:.12f}[1/s]");
@@ -2244,9 +2273,11 @@ public class {class_name} {{
     model.component("comp1").variable("var1").set("grav_scale_t", "if(t<t_gravity_end,t/t_gravity_end,1)");
     model.component("comp1").variable("var1").set("tumor_mask", "if(tumor_enabled>0.5,if((x-tumor_x)^2+(y-tumor_y)^2+(z-tumor_z)^2<=tumor_radius^2,1,0),0)");
     model.component("comp1").variable("var1").set("adipose_density_eff", "adipose_density+tumor_mask*(tumor_density-adipose_density)");
+    model.component("comp1").variable("var1").set("adipose_E_eff", "adipose_E+tumor_mask*(tumor_E_adipose-adipose_E)");
     model.component("comp1").variable("var1").set("adipose_c10_eff", "adipose_c10+tumor_mask*(tumor_coef1_adipose)");
     model.component("comp1").variable("var1").set("adipose_c01_eff", "adipose_c01+tumor_mask*(tumor_coef2_adipose)");
     model.component("comp1").variable("var1").set("glandular_density_eff", "glandular_density+tumor_mask*(tumor_density-glandular_density)");
+    model.component("comp1").variable("var1").set("glandular_E_eff", "glandular_E+tumor_mask*(tumor_E_glandular-glandular_E)");
     model.component("comp1").variable("var1").set("glandular_c10_eff", "glandular_c10+tumor_mask*(tumor_coef1_glandular)");
     model.component("comp1").variable("var1").set("glandular_c01_eff", "glandular_c01+tumor_mask*(tumor_coef2_glandular)");
     model.component("comp1").variable("var1").set(
@@ -2976,15 +3007,15 @@ public class {class_name} {{
     model.component("comp1").material().create("mat_adipose", "Common");
     model.component("comp1").material("mat_adipose").label("Adipose");
     model.component("comp1").material("mat_adipose").selection().named("geom1_adipose_diff_dom");
-    model.component("comp1").material("mat_adipose").propertyGroup("def").set("density", new String[] {{ "adipose_density" }});
-    model.component("comp1").material("mat_adipose").propertyGroup("def").set("youngsmodulus", new String[] {{ "adipose_E" }});
+    model.component("comp1").material("mat_adipose").propertyGroup("def").set("density", new String[] {{ "adipose_density_eff" }});
+    model.component("comp1").material("mat_adipose").propertyGroup("def").set("youngsmodulus", new String[] {{ "adipose_E_eff" }});
     model.component("comp1").material("mat_adipose").propertyGroup("def").set("poissonsratio", new String[] {{ "adipose_nu" }});
 
     model.component("comp1").material().create("mat_glandular", "Common");
     model.component("comp1").material("mat_glandular").label("Glandular");
     model.component("comp1").material("mat_glandular").selection().named("geom1_gland_clip_dom");
-    model.component("comp1").material("mat_glandular").propertyGroup("def").set("density", new String[] {{ "glandular_density" }});
-    model.component("comp1").material("mat_glandular").propertyGroup("def").set("youngsmodulus", new String[] {{ "glandular_E" }});
+    model.component("comp1").material("mat_glandular").propertyGroup("def").set("density", new String[] {{ "glandular_density_eff" }});
+    model.component("comp1").material("mat_glandular").propertyGroup("def").set("youngsmodulus", new String[] {{ "glandular_E_eff" }});
     model.component("comp1").material("mat_glandular").propertyGroup("def").set("poissonsratio", new String[] {{ "glandular_nu" }});
 
     model.component("comp1").physics().create("solid", "SolidMechanics", "geom1");
@@ -5294,9 +5325,14 @@ public class {class_name} {{
     json.append("    \\"adipose_c10\\": \\"").append(paramOrEmpty(model, "adipose_c10")).append("\\",\\n");
     json.append("    \\"adipose_c01\\": \\"").append(paramOrEmpty(model, "adipose_c01")).append("\\",\\n");
     json.append("    \\"adipose_bulk_modulus\\": \\"").append(paramOrEmpty(model, "adipose_bulk_modulus")).append("\\",\\n");
+    json.append("    \\"adipose_E\\": \\"").append(paramOrEmpty(model, "adipose_E")).append("\\",\\n");
     json.append("    \\"glandular_c10\\": \\"").append(paramOrEmpty(model, "glandular_c10")).append("\\",\\n");
     json.append("    \\"glandular_c01\\": \\"").append(paramOrEmpty(model, "glandular_c01")).append("\\",\\n");
     json.append("    \\"glandular_bulk_modulus\\": \\"").append(paramOrEmpty(model, "glandular_bulk_modulus")).append("\\",\\n");
+    json.append("    \\"glandular_E\\": \\"").append(paramOrEmpty(model, "glandular_E")).append("\\",\\n");
+    json.append("    \\"tumor_enabled\\": \\"").append(paramOrEmpty(model, "tumor_enabled")).append("\\",\\n");
+    json.append("    \\"tumor_E_adipose\\": \\"").append(paramOrEmpty(model, "tumor_E_adipose")).append("\\",\\n");
+    json.append("    \\"tumor_E_glandular\\": \\"").append(paramOrEmpty(model, "tumor_E_glandular")).append("\\",\\n");
     json.append("    \\"chest_E\\": \\"").append(paramOrEmpty(model, "chest_E")).append("\\",\\n");
     json.append("    \\"chest_nu\\": \\"").append(paramOrEmpty(model, "chest_nu")).append("\\"\\n");
     json.append("  }}\\n");
