@@ -1,6 +1,6 @@
 [pipeline]
 model_name = "breast_model_comsol"
-output_subdir = "outputs/output_stage6_tumor_large_central_xoffset055_125g_volumetric_skin_soft_interior_solve_only_preview"
+output_subdir = "outputs/output_stage6_tumor_large_central_hard100kpa_xoffset055_125g_volumetric_skin_soft_interior_solve_only_preview"
 
 [comsol]
 enabled = true
@@ -84,7 +84,7 @@ reuse_febio_prepare = true
 export_mesh_npz = false
 export_mesh_csv = false
 export_lobules_json = true
-notes = "Stage 6 matched tumor scout: large central tumor on the Stage 5 1.25g volumetric-skin soft-interior no-Cooper basis. This case reuses the verified Stage 5 volumetric-skin soft-interior MPH and patches TOML parameters, because the tumor is an analytic material mask and does not require rebuilding the breast geometry."
+notes = "Stage 6 diagnostic tumor-material-path scout: large central tumor on the Stage 5 1.25g volumetric-skin soft-interior no-Cooper basis, with a deliberately stronger ~100 kPa tumor stiffness target. This is intended to test whether the analytic tumor_mask actually affects the solved material response. It should be interpreted as a diagnostic/high-contrast sensitivity case, not as the default report-ready tumor material."
 
 [source_case]
 [source_case.model]
@@ -186,10 +186,10 @@ tumorous = true
 density = 1079.0
 radius = 0.01
 position = [ 0.0, 0.043, 0.0 ]
-coef1_adipose = 971.0
-coef2_adipose = 939.0
-coef1_glandular = 920.0
-coef2_glandular = 870.0
+coef1_adipose = 8333.0
+coef2_adipose = 8333.0
+coef1_glandular = 8333.0
+coef2_glandular = 8333.0
 
 [source_case.simulation]
 [source_case.simulation.control_step1]

@@ -2,7 +2,7 @@
 
 \subsection{Finite element modelling approach}
 
-The finite element modelling workflow used in this project is a Python-controlled COMSOL Multiphysics pipeline. Model variants are defined in TOML configuration files, from which the pipeline generates source-case settings, COMSOL Java builder scripts, build manifests, solver/post-processing scripts, and summary metrics. The active package is \texttt{ews\_fem\_pipeline\_comsol}. The source-case settings used by COMSOL are now contained inside this package, so normal COMSOL generation, build-only checks, and post-processing do not require the older FEBio-oriented package at runtime.
+The finite element modelling workflow used in this project is a Python-controlled COMSOL Multiphysics pipeline. Model variants are defined in TOML configuration files, from which the pipeline generates source-case settings, COMSOL Java builder scripts, build manifests, solver/post-processing scripts, and summary metrics. The active package is \texttt{ews\_fem\_pipeline\_comsol}. The source-case settings used by COMSOL are now contained inside this package, so normal COMSOL generation, build-only checks, and post-processing do not require the older FEBio-oriented package at runtime. The project repository, containing the source code, active TOML cases, report notes, and compact evaluation outputs, is available at \url{https://github.com/DaanKuijpers11/ews-comsol-breast-fem}.
 
 The older FEBio route remains relevant historically because it provided the original soft-tissue modelling structure and Mooney--Rivlin-style material parameters \cite{BabarendaGamage2017}. In the current work, however, COMSOL is the active implementation route because it supports constructive geometry operations, boolean region definitions, automated selections, and structured post-processing for multiple model variants. The results should therefore be interpreted as controlled model-development comparisons, not as clinical validation against patient-specific measurements.
 
@@ -77,6 +77,25 @@ The standard transient input is a fixed-support acceleration pulse with amplitud
 
 The source-case material settings contain adipose, glandular, skin, support, and optional tumor/lesion parameters. The tissue parameters are based on Mooney--Rivlin-style coefficients and density values, while the COMSOL implementation maps these into the current material scaffold used by the Java builder. Literature values for breast soft tissue vary strongly with test protocol, tissue type, loading state, and subject characteristics \cite{Samani2007,Ramiao2016,Teixeira2023,Chen2025}. The material set is therefore used as a controlled reference for sensitivity studies, not as a patient-specific calibration.
 
+For interpretability, the Mooney--Rivlin coefficients were also converted to an approximate small-strain Young's modulus using \(E \approx 6(C_{10}+C_{01})\), which is appropriate as a simple near-incompressible comparison metric. These values should not be interpreted as a full replacement for the nonlinear material law, but they make the material sensitivity cases easier to compare. The main material sets considered in the current Stage 5 development route are summarized in Table~\ref{tab:mm_material_sets}.
+
+\begin{table}[H]
+\centering
+\caption{Approximate Young's modulus equivalents for the main material sensitivity sets. Values are linearized estimates from the configured Mooney--Rivlin coefficients and are used only to compare material stiffness levels.}
+\label{tab:mm_material_sets}
+\begin{tabular}{p{0.29\linewidth}ccc p{0.27\linewidth}}
+\toprule
+Material set & Skin \(E\) [kPa] & Adipose \(E\) [kPa] & Glandular \(E\) [kPa] & Use in model \\
+\midrule
+Current reference & 500 & 3.66 & 10.0 & Stiffer literature-based baseline \\
+Volumetric skin & 500 & 3.66 & 10.0 & Same material set with active skin layer \\
+Volumetric skin + soft interior & 500 & 1.29 & 2.55 & Internal compliance scout \\
+FEBio-like soft set & 14.4 & 1.29 & 2.55 & Historical soft-material comparison \\
+Mid-skin sensitivity & 88 & 3.66 & 10.0 & Planned/intermediate skin scout \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 The skin layer is treated as a separate development issue. An earlier shell/scaffold representation was rejected for the main route because it produced nonphysical surface dimples and bulges during motion. The current skin route uses a volumetric layer around the breast as an active material component. Because this layer strongly affects global displacement, an additional soft-interior scout was performed in which the adipose and glandular coefficients were reduced while the stiffer volumetric skin layer was retained. This case is used to test whether internal compliance can recover motion amplitude without removing the anatomically motivated skin layer.
 
 The current Stage 6 tumor implementation is an analytic material overlay. A spherical \texttt{tumor\_mask} is defined from radius and position parameters. Inside that mask, density and Mooney--Rivlin coefficients are modified locally in adipose and glandular material expressions. This does not create a separate COMSOL tumor domain and does not create a separate \texttt{mat\_tumor} material. Tumor-region metrics are computed by mask-weighted volume integrations over the breast union. This route is deliberately used as a first stiffness and location sensitivity because it avoids fragile Boolean operations while still allowing local displacement and stress metrics to be exported.
@@ -109,6 +128,25 @@ Cooper ligament support is currently treated as a mechanical support sensitivity
 \subsection{Mesh, build, and solver checks}
 
 The pipeline supports generate-only, build-only, full run, and postprocess-only workflows. For new geometry or lesion cases, build-only is used first to verify geometry construction, selections, source-case expansion, and generated Java builder output without starting a heavy solve. This is especially important for Stage 6, where the tumor location must be checked visually and numerically before interpreting displacement or stress results.
+
+The current report-oriented COMSOL cases use a free tetrahedral mesh with a source-case characteristic length setting of \texttt{ls = 0.005} m, corresponding to approximately 5 mm. The mesh density hint is set to 125 and the active dynamic cases use second-order elements. These settings were selected as a practical compromise between resolving the breast surface, nipple region, glandular lobules, and volumetric skin layer while keeping overnight dynamic solves feasible on the available workstation. Figure~\ref{fig:mm_mesh_overview} shows the generated mesh qualitatively. A full mesh-convergence study was not completed, so the current mesh should be interpreted as a verified working mesh for model-development comparisons rather than as a final discretization-independent solution.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.48\linewidth}
+\centering
+\IfFileExists{Figures/model_pictures/mesh/mesh_overview.png}{\includegraphics[width=\linewidth]{Figures/model_pictures/mesh/mesh_overview.png}}{\fbox{\parbox[c][0.24\textheight][c]{0.9\linewidth}{\centering Placeholder: mesh overview}}}
+\caption{Global mesh overview}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\linewidth}
+\centering
+\IfFileExists{Figures/model_pictures/mesh/mesh_zoomed_nipple_view.png}{\includegraphics[width=\linewidth]{Figures/model_pictures/mesh/mesh_zoomed_nipple_view.png}}{\fbox{\parbox[c][0.24\textheight][c]{0.9\linewidth}{\centering Placeholder: local nipple mesh}}}
+\caption{Nipple-region refinement}
+\end{subfigure}
+\caption{Representative free tetrahedral mesh used for the current COMSOL model-development route. The images are included to document the working discretization and local surface resolution used in build and solve checks.}
+\label{fig:mm_mesh_overview}
+\end{figure}
 
 The generated output includes resolved TOMLs, single-file cases, source-case expansion files, COMSOL build plans, selection hints, Java builder scripts, solver logs, metrics JSON files, time-series CSV files, and screenshot folders. Large generated MPH files, recovery files, COMSOL configuration caches, and full run folders are treated as local artefacts rather than GitHub-ready repository content.
 

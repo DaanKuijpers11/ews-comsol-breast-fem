@@ -1,62 +1,74 @@
 EWS COMSOL CURRENT RUN PLAN
-Last updated: 2026-06-05
+Last updated: 2026-06-09
 
 Doel
-- Eerst Stage 5 materiaal/skin baseline kiezen.
-- Daarna pas matched Stage 6 tumorcases draaien.
-- Voor nu geen automatische full postprocess vertrouwen als de COMSOL batch blijft hangen.
-- Solve-only resultaten handmatig in COMSOL postprocessen via Derived Values CSV.
+- De huidige Stage 5 basis is: 1.25g, volumetric skin, soft interior, no-Cooper.
+- Stage 6 tumorcases zijn nu gedraaid, maar de globale displacement/stress response verandert praktisch niet.
+- Eerst controleren of de analytic tumor_mask mechanisch echt doorwerkt voordat nieuwe tumor-runs worden gestart.
+- Voor postprocess voorlopig handmatige COMSOL Derived Values CSV gebruiken; automatische postprocess blijft secundair.
 
-1) Nu lopend: handmatige COMSOL solve
-Case:
-runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_febio_materials_solve_only_preview.toml
+1) Directe prioriteit: Stage 6 tumor material-path check in COMSOL
+Open de solved Stage 6 hard100kPa result.mph:
+runs\comsol_runs\geometry_stage6\outputs\output_stage6_tumor_large_central_hard100kpa_xoffset055_125g_volumetric_skin_soft_interior_solve_only_preview\solve\stage6_tumor_large_central_hard100kpa_xoffset055_125g_volumetric_skin_soft_interior_solve_only_preview_result.mph
 
-Als de handmatige solve klaar is:
-- Save As:
-  runs\comsol_runs\geometry_stage5\outputs\output_stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_febio_materials_solve_only_preview\solve\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_febio_materials_solve_only_preview_result.mph
-- Maak handmatige Derived Values CSV's:
-  Volume maximum solid.disp
-  Volume average solid.disp
-  Volume maximum solid.mises
-  Volume average solid.mises
-- Zet CSV's in:
-  analysis_output\comsol_pipeline\manual_postprocess\tables\stage5_volumetric_skin_soft_febio_materials_125g
-- Gebruik exact deze namen:
-  stage5_volumetric_skin_soft_febio_materials_125g_avg_timeseries.csv
-  stage5_volumetric_skin_soft_febio_materials_125g_max_timeseries.csv
+Maak Derived Values om te controleren waar de tumor_mask ligt:
+- Volume Integration, selection geom1_breast_union_dom, expression: tumor_mask
+- Volume Integration, selection geom1_adipose_diff_dom, expression: tumor_mask
+- Volume Integration, selection geom1_gland_clip_dom, expression: tumor_mask
+- Volume Integration, selection geom1_skin_layer_dom, expression: tumor_mask
 
-2) Als handmatig solven mislukt of veel trager blijkt
-Run dezelfde case via de pipeline:
-python -m ews_fem_pipeline_comsol run runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_febio_materials_solve_only_preview.toml
+Maak daarna materiaalcontrast checks:
+- Volume Average, selection geom1_adipose_diff_dom, expression: if(tumor_mask>0.5,adipose_c10_eff,0)
+- Volume Average, selection geom1_gland_clip_dom, expression: if(tumor_mask>0.5,glandular_c10_eff,0)
+- Volume Maximum, selection geom1_breast_union_dom, expression: tumor_mask
+- Volume Maximum, selection geom1_breast_union_dom, expression: if(tumor_mask>0.5,adipose_c10_eff,0)
+- Volume Maximum, selection geom1_breast_union_dom, expression: if(tumor_mask>0.5,glandular_c10_eff,0)
 
-3) Na manual CSV's: evaluation plots opnieuw maken
+Interpretatie:
+- Als tumor_mask volume klopt maar c10_eff niet hoger wordt: materiaalpad/variable-propagation bug.
+- Als c10_eff wel hoger wordt maar global displacement gelijk blijft: globale metrics zijn te grof; focus op local/surface-patch metrics.
+- Als tumor_mask vooral in skin/lege ruimte zit: locatie of selection-overlap corrigeren.
+
+2) Manual CSV comparison bijwerken
+Na nieuwe manual CSVs:
 python tools\update_manual_postprocess_summary.py
-python tools\make_comsol_evaluation_plots.py
 
-4) Weekend run optie A: eerst tumor op huidige soft-interior volumetric-skin baseline
-Alleen draaien als de huidige Stage 5 baseline voldoende logisch/stabiel lijkt.
+Belangrijke output:
+analysis_output\comsol_pipeline\manual_postprocess\tables\manual_postprocess_summary.csv
+analysis_output\comsol_pipeline\manual_postprocess\comparison_figures\stage6_tumor_avg_displacement_timeseries.png
+analysis_output\comsol_pipeline\manual_postprocess\comparison_figures\stage6_tumor_delta_avg_displacement.png
+analysis_output\comsol_pipeline\manual_postprocess\comparison_figures\stage6_tumor_max_displacement_timeseries.png
 
-python -m ews_fem_pipeline_comsol run runs\comsol_runs\geometry_stage6\stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_volumetric_skin_soft_interior_solve_only_preview.toml
+3) Nu geen nieuwe lange tumor-runs totdat de material-path check duidelijk is
+Niet opnieuw draaien:
+- gewone large central tumor
+- hard100kPa large central tumor
+- medium upper-outer tumor
 
-Daarna handmatig postprocessen en vergelijken met:
-runs\comsol_runs\geometry_stage5\stage5_reference_no_cooper_xoffset055_125g_volumetric_skin_soft_interior_solve_only_preview.toml
+Deze zijn al voldoende om te zien dat de globale response nauwelijks verandert.
 
-5) Weekend run optie B: duidelijke tumor-amplitude scout
-Alleen draaien als je vooral wilt zien of een grotere tumor zichtbaar effect geeft.
+4) Als material-path wel klopt
+Dan vervolg:
+- Maak tumor-local metrics standaard: tumor volume, tumor avg/max displacement, tumor avg/max VM.
+- Voeg surface-patch metrics toe rond de tumorprojectie op het borstoppervlak.
+- Vergelijk niet alleen global breast average/max, maar vooral local tumor response en surface displacement difference.
 
-python -m ews_fem_pipeline_comsol run runs\comsol_runs\geometry_stage6\stage6_tumor_large_central_xoffset055_125g_volumetric_skin_soft_interior_solve_only_preview.toml
+5) Als material-path niet klopt
+Dan eerst codefix:
+- Check of hmat_adipose/hmat_glandular echt actief zijn.
+- Check of COMSOL niet terugvalt op mat_adipose/mat_glandular linear elastic fallback.
+- Overweeg c10/c01 tumorformule te veranderen van additive naar replacement:
+  adipose_c10 + tumor_mask*(tumor_coef1_adipose - adipose_c10)
+- Eventueel ook linear fallback effectieve E/rho laten gebruiken.
+- Daarna alleen één korte/diagnostic rerun: hard100kPa large central.
 
-6) Niet tegelijk twee COMSOL solves starten
-- Liever serieel runnen.
-- Twee terminals tegelijk geeft veel CPU/RAM/IO druk en verhoogt risico op langere runtimes, licentieproblemen of recoveries/cache-fouten.
+6) Overige nuttige taken zonder nieuwe solves
+- COMSOL screenshots maken van tumor_mask en c10_eff slices.
+- Manual Derived Values workflow verder standaardiseren.
+- Reporttekst Stage 6 voorzichtig formuleren: tumor route is nu implemented/validated geometrically, but quantitative detectability is not yet demonstrated.
+- Presentation update: Stage 6 tonen als current diagnostic/debug phase, niet als bewezen tumor-detectie.
 
-7) Eerstvolgende inhoudelijke beslissing
-Vergelijk:
-- No skin 1.25g
-- Volumetric skin 1.25g
-- Volumetric skin + soft interior 1.25g
-- Volumetric skin + soft FEBio materials 1.25g
-
-Kies daarna:
-- stabiele anatomische baseline voor Stage 6;
-- of nog een hogere diagnostic g/compliance scout nodig is.
+7) Algemene runregel
+- Eén COMSOL solve tegelijk.
+- Geen postprocess direct achter lange solve als je daarna handmatig CSVs nodig hebt.
+- Grote result.mph bewaren totdat manual CSVs, screenshots en interpretatie klaar zijn.
