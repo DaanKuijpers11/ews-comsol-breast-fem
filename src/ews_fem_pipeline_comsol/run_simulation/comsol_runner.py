@@ -1171,6 +1171,14 @@ class COMSOLRunner:
                     source_mph = self._resolve_generated_mph_candidate(generated_mph_target)
                 else:
                     build_failure_reason = reason
+                    recoverable_mph = self._resolve_generated_mph_candidate(generated_mph_target)
+                    if recoverable_mph is not None:
+                        logger.warning(
+                            "%s: COMSOL build reported a warning/error but saved %s; continuing with the saved MPH.",
+                            case_name,
+                            recoverable_mph,
+                        )
+                        source_mph = recoverable_mph
 
         if source_mph is None and configured_mph and configured_mph.exists():
             source_mph = configured_mph
