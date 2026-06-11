@@ -10,6 +10,8 @@ The goal is not yet to reconstruct patient-specific Cooper ligaments. The curren
 
 Femke's FEBio route used an HGO-type anisotropic reinforcement in adipose tissue as an implicit Cooper-like support representation. That approach is biomechanically richer than the current COMSOL scaffold because it adds direction-dependent stiffness throughout the adipose domain. It is also harder to validate because fiber direction, dispersion, and HGO parameters must be justified.
 
+An initial COMSOL Java API probe for an HGO-like adipose reinforcement was attempted as a build-only diagnostic. The expected HGO adipose physics/material feature did not appear in the generated COMSOL model, so this route was removed from the active pipeline and should remain future work. A future implementation would require direct confirmation of the correct COMSOL anisotropic hyperelastic Java feature and a validated fiber-direction definition before it can be used for results.
+
 The current COMSOL route instead uses explicit scaffold variants:
 
 - `glandular_to_skin`
@@ -75,4 +77,4 @@ Use cautious wording:
 
 - "Cooper ligament support was explored as a mechanical support sensitivity."
 - "The current scaffold implementation did not produce a strong global displacement effect at mild settings."
-- "Femke's HGO-style adipose reinforcement is a more distributed anisotropic support concept and may be a better future implementation route, but it was not yet ported and validated in the COMSOL pipeline."
+- "Femke's HGO-style adipose reinforcement is a more distributed anisotropic support concept and may be a better future implementation route, but an initial COMSOL build-only probe did not create a usable HGO feature and this route was therefore left as future work."
