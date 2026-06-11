@@ -10,7 +10,7 @@ The current clean evaluation output is stored under \texttt{analysis\_output/com
 
 \begin{table}[H]
 \centering
-\small
+\scriptsize
 \caption{Current report-ready status of the main COMSOL branches.}
 \label{tab:completed_branches}
 \begin{tabular}{p{0.18\linewidth} p{0.28\linewidth} p{0.39\linewidth}}
@@ -119,12 +119,12 @@ The default Stage 5B Cooper run is not report-ready because it failed almost imm
 
 After the no-Cooper control was established, a diagnostic skin-layer scout was performed to test whether a separate volumetric skin layer could be added without the nonphysical deformation observed in the earlier shell-scaffold skin route. The shell/scaffold route produced visible dimples and surface artefacts during motion and is therefore not used as a main result. The volumetric skin case produced a visually stable motion pattern, but it substantially reduced the displacement amplitude.
 
-Table~\ref{tab:stage5_skin_scout} summarizes the manual Derived Values comparison. All four cases use the matched Stage 5 no-Cooper anatomy and the same breast volume of approximately 585 mL. The comparison should be interpreted as a scout because the values were exported manually from COMSOL tables and do not include the full automated surface or landmark post-processing.
+Table~\ref{tab:stage5_skin_scout} summarizes the first manual Derived Values comparison on the more complete Stage 5 anatomy. All four cases use the same Stage 5 no-Cooper geometry and the same breast volume of approximately 585 mL. The comparison should be interpreted as a scout because the values were exported manually from COMSOL tables and do not include the full automated surface or landmark post-processing.
 
 \begin{table}[H]
 \centering
 \small
-\caption{Manual Stage 5 skin/material scout. VM denotes von Mises stress.}
+\caption{Manual Stage 5 skin/material scout on the matched Stage 5 anatomy. VM denotes von Mises stress.}
 \label{tab:stage5_skin_scout}
 \begin{tabular}{lrrrr}
 \toprule
@@ -140,6 +140,69 @@ Vol. skin + soft interior, 1.25g & 5.90 & 10.90 & 1.801 & 72.38 \\
 \end{table}
 
 Increasing the acceleration from 1.00g to 1.25g in the no-skin model increased peak maximum displacement from 12.51 mm to 14.23 mm. In contrast, adding the volumetric skin layer at 1.25g reduced the peak maximum displacement to 5.93 mm. Softening the adipose and glandular interior while retaining the volumetric skin increased the peak maximum displacement to 10.90 mm. This indicates that the current volumetric skin implementation has a larger effect on the global motion amplitude than the 1.00g to 1.25g excitation change, and that internal tissue compliance partly compensates for this damping.
+
+Because the realistic glandular model is expensive to solve repeatedly, a simple-gland Stage 5 scout was then used to isolate the influence of skin stiffness and Cooper-like support more efficiently. These runs should not replace the realistic-gland reference, but they are useful for selecting which material settings are worth confirming later. Table~\ref{tab:stage5_simple_gland_skin_scout} shows that skin stiffness dominated the dynamic response. The no-skin case gave the largest motion. Adding a 1.5 mm soft volumetric skin reduced peak average displacement by approximately 18\% and peak maximum displacement by approximately 26\%. Increasing the skin stiffness to an intermediate 88 kPa or to the stiff reference setting reduced the motion much more strongly.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Simple-gland Stage 5 skin/material scout at 1.25g. These cases isolate skin and material effects and are not final anatomical simulations.}
+\label{tab:stage5_simple_gland_skin_scout}
+\begin{tabular}{lrrrrrr}
+\toprule
+Case & Peak avg disp. & Peak max disp. & Peak avg VM & Peak max VM & Avg change & Max change \\
+ & (mm) & (mm) & (kPa) & (kPa) & (\%) & (\%) \\
+\midrule
+No skin, soft interior & 27.56 & 61.53 & 0.956 & 3.13 & 0.0 & 0.0 \\
+1.5 mm soft skin & 22.55 & 45.58 & 1.065 & 19.28 & -18.2 & -25.9 \\
+1.5 mm skin, 88 kPa & 13.24 & 25.49 & 1.271 & 42.90 & -52.0 & -58.6 \\
+1.5 mm stiff skin & 5.70 & 11.14 & 1.747 & 69.67 & -79.3 & -81.9 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The same trend was observed in the free-surface exports, which are more directly relevant to the EWS surface-measurement concept. Table~\ref{tab:stage5_surface_scout} summarizes aggregate outer-surface displacement. The soft-skin case retained a peak mean surface displacement of approximately 28.0 mm, while the 88 kPa skin case reduced this to approximately 13.0 mm. The no-skin case had the largest surface motion but is anatomically less defensible because it lacks an explicit skin layer.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\caption{Simple-gland Stage 5 outer-surface response from manual COMSOL surface exports. The no-skin export used fewer surface nodes, so these values are aggregate comparisons rather than node-wise difference maps.}
+\label{tab:stage5_surface_scout}
+\begin{tabular}{lrrrrr}
+\toprule
+Case & Surface nodes & Peak mean disp. & Peak max disp. & Peak mean $|w|$ & Most negative $w$ \\
+ & (-) & (mm) & (mm) & (mm) & (mm) \\
+\midrule
+No skin & 754 & 54.13 & 61.51 & 54.04 & -61.51 \\
+1.5 mm soft skin & 2776 & 28.00 & 45.35 & 27.78 & -45.35 \\
+1.5 mm skin, 88 kPa & 2776 & 13.02 & 20.77 & 12.79 & -20.77 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The current COMSOL Cooper scaffold was also evaluated on the simple-gland soft-skin baseline. Table~\ref{tab:stage5_cooper_scout} shows that the tested scaffold variants produced only small global differences. Increasing the glandular-to-skin scaffold area fraction from 0.03 to 0.12 changed peak average displacement by only about 0.5\% and peak maximum displacement by about 1.4\%. Therefore, this scaffold should be interpreted as a diagnostic support surrogate rather than as a demonstrated Cooper-ligament effect.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\caption{Simple-gland Stage 5 Cooper scaffold scout on the 1.5 mm soft-skin baseline. The small displacement changes indicate that the current scaffold is diagnostic only.}
+\label{tab:stage5_cooper_scout}
+\begin{tabular}{lrrrrrr}
+\toprule
+Case & Peak avg disp. & Peak max disp. & Peak avg VM & Peak max VM & Avg change & Max change \\
+ & (mm) & (mm) & (kPa) & (kPa) & (\%) & (\%) \\
+\midrule
+No Cooper baseline & 22.55 & 45.58 & 1.065 & 19.28 & 0.0 & 0.0 \\
+Gland-to-skin, area 0.03 & 22.44 & 44.99 & 1.061 & 19.07 & -0.5 & -1.3 \\
+Gland-to-skin, area 0.06 & 22.44 & 44.97 & 1.061 & 19.06 & -0.5 & -1.3 \\
+Gland-to-skin, area 0.12 & 22.43 & 44.96 & 1.061 & 19.06 & -0.5 & -1.4 \\
+Nipple-to-chest, area 0.03 & 22.55 & 45.64 & 1.065 & 19.27 & 0.0 & 0.1 \\
+Dense network, area 0.03 & 22.44 & 44.99 & 1.061 & 19.07 & -0.5 & -1.3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A build-only probe for a Femke-style HGO anisotropic adipose reinforcement was attempted as a possible future Cooper route, but the expected HGO feature did not appear in the generated COMSOL model. This route was therefore removed from the active model and kept as future work. A future HGO implementation would require direct confirmation of the correct COMSOL anisotropic hyperelastic feature and a validated fiber-direction definition before any dynamic results are interpreted.
 
 \begin{figure}[H]
 \centering
