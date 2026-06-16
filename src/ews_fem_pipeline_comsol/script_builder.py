@@ -118,6 +118,7 @@ def generate_comsol_java_builder(
         "febio_parabolic_support",
         "parabolic_support",
         "smooth_cosine_bump",
+        "smooth_c2_bump",
         "none",
     }:
         dynamic_motion_profile = "cosine_down_pulse"
@@ -843,7 +844,20 @@ def generate_comsol_java_builder(
     )
     pulse_output_dt_s = min(max(pulse_output_dt_s, 0.001), output_dt_s)
     jump_initial_velocity = float(np.sqrt(max(2.0 * 9.81 * jump_max_height_m, 0.0)))
-    jump_duration_s = float(2.0 * jump_initial_velocity / 9.81) if jump_initial_velocity > 0.0 else 0.0
+    legacy_jump_duration_s = float(2.0 * jump_initial_velocity / 9.81) if jump_initial_velocity > 0.0 else 0.0
+    support_displacement_amplitude_m = (
+        float(getattr(comsol_settings, "dynamic_support_displacement_amplitude_m", 0.0))
+        if comsol_settings
+        else 0.0
+    )
+    support_displacement_duration_s = (
+        float(getattr(comsol_settings, "dynamic_support_displacement_duration_s", 0.0))
+        if comsol_settings
+        else 0.0
+    )
+    support_displacement_amplitude_m = support_displacement_amplitude_m if support_displacement_amplitude_m > 0.0 else jump_max_height_m
+    support_displacement_duration_s = support_displacement_duration_s if support_displacement_duration_s > 0.0 else legacy_jump_duration_s
+    jump_duration_s = support_displacement_duration_s
     pulse_duration_s = dynamic_acceleration_duration_s
     dynamic_start_s = gravity_duration_s
     jump_start_s = dynamic_start_s + dynamic_motion_hold_s
@@ -857,6 +871,13 @@ def generate_comsol_java_builder(
             '"if(t<t_jump_start,0,"'
             '\n      + "if(t<(t_jump_start+t_jump_duration),"'
             '\n      + "jump_amp*0.5*(1-cos(2*pi*(t-t_jump_start)/t_jump_duration)),"'
+            '\n      + "0))"'
+        )
+    elif dynamic_motion_profile == "smooth_c2_bump":
+        jump_z_expression_java = (
+            '"if(t<t_jump_start,0,"'
+            '\n      + "if(t<(t_jump_start+t_jump_duration),"'
+            '\n      + "jump_amp*64*((t-t_jump_start)/t_jump_duration)^3*(1-((t-t_jump_start)/t_jump_duration))^3,"'
             '\n      + "0))"'
         )
     elif dynamic_motion_profile in {"febio_parabolic_support", "parabolic_support"}:
@@ -1435,6 +1456,8 @@ def generate_comsol_java_builder(
             "jump_start_time_s": jump_start_s,
             "jump_duration_s": jump_duration_s,
             "jump_max_height_m": jump_max_height_m,
+            "support_displacement_amplitude_m": support_displacement_amplitude_m,
+            "support_displacement_duration_s": support_displacement_duration_s,
             "pulse_duration_s": pulse_duration_s,
             "pulse_acceleration_amplitude_g": dynamic_acceleration_amplitude_g,
             "notes": [
@@ -2226,7 +2249,7 @@ public class {class_name} {{
     model.param().set("t_pulse_duration", "{pulse_duration_s:.12f}[s]");
     model.param().set("t_excitation_duration", "{dynamic_excitation_duration_s:.12f}[s]");
     model.param().set("jump_v0", "{jump_initial_velocity:.12f}[m/s]");
-    model.param().set("jump_amp", "{jump_max_height_m:.12f}[m]");
+    model.param().set("jump_amp", "{support_displacement_amplitude_m:.12f}[m]");
     model.param().set("pulse_acc_amp", "{dynamic_acceleration_amplitude_g:.12f}");
     model.param().set("tumor_enabled", "{1 if tumor_enabled else 0}");
     model.param().set("tumor_density", "{tumor_density:.12f}[kg/m^3]");
@@ -4807,6 +4830,8 @@ public class {postprocess_class_name} {{
         + "  \\"jump_start_time_s\\": {jump_start_s:.12f},\\n"
         + "  \\"jump_duration_s\\": {jump_duration_s:.12f},\\n"
         + "  \\"jump_max_height_m\\": {jump_max_height_m:.12f},\\n"
+        + "  \\"support_displacement_amplitude_m\\": {support_displacement_amplitude_m:.12f},\\n"
+        + "  \\"support_displacement_duration_s\\": {support_displacement_duration_s:.12f},\\n"
         + "  \\"pulse_duration_s\\": {pulse_duration_s:.12f},\\n"
         + "  \\"pulse_acceleration_amplitude_g\\": {dynamic_acceleration_amplitude_g:.12f},\\n"
         + "  \\"dynamic_motion_boundary_selection\\": \\"breast_attach_bnd\\",\\n"
@@ -5044,6 +5069,8 @@ public class {postprocess_class_name} {{
       + "  \\"jump_start_time_s\\": {jump_start_s:.12f},\\n"
       + "  \\"jump_duration_s\\": {jump_duration_s:.12f},\\n"
       + "  \\"jump_max_height_m\\": {jump_max_height_m:.12f},\\n"
+      + "  \\"support_displacement_amplitude_m\\": {support_displacement_amplitude_m:.12f},\\n"
+      + "  \\"support_displacement_duration_s\\": {support_displacement_duration_s:.12f},\\n"
       + "  \\"pulse_duration_s\\": {pulse_duration_s:.12f},\\n"
       + "  \\"pulse_acceleration_amplitude_g\\": {dynamic_acceleration_amplitude_g:.12f},\\n"
       + "  \\"dynamic_motion_boundary_selection\\": \\"breast_attach_bnd\\",\\n"

@@ -315,3 +315,84 @@ Voor verslag/meeting:
 Nederlandse versie:
 
 > De gekozen Stage 1 dynamische kandidaat gebruikt na gravity preload een milde verticale inertiele versnelling van 0.25g gedurende 0.60 s. Dit is geen lokale kracht of klap op de borst, maar een vereenvoudigde inertiele belasting in een fixed-torso frame, vergelijkbaar met een zachte platformachtige verticale versnelling met een equivalente verplaatsingsschaal van enkele centimeters. De nipple response is ongeveer 37 mm peak-to-peak en is daarmee veel realistischer dan de 0.75g diagnostic case.
+
+## Stage 5.1 prescribed-support displacement scout
+
+Naast de fixed-support acceleration route is nu een aparte Stage 5.1 motion-scout route toegevoegd. Het doel is niet om de huidige acceleration baseline direct te vervangen, maar om een fysisch intuitievere support-motion input te testen:
+
+```text
+runs/comsol_runs/geometry_stage5_1_motion_scout
+```
+
+Deze nieuwe route gebruikt:
+
+```toml
+dynamic_motion_mode = "prescribed_support_displacement"
+dynamic_motion_profile = "smooth_c2_bump"
+dynamic_support_displacement_amplitude_m = ...
+dynamic_support_displacement_duration_s = 0.60
+```
+
+Belangrijk verschil met de bestaande acceleration baseline:
+
+| Route | Wat beweegt er? | Interpretatie |
+|---|---|---|
+| `fixed_support_acceleration_pulse` | de support blijft vast; het borstvolume krijgt een tijdelijke inertiele versnelling | controlled diagnostic acceleration excitation |
+| `prescribed_support_displacement` + `smooth_c2_bump` | de posterior attachment boundary `breast_attach_bnd` krijgt een expliciete verticale verplaatsing | platform/torso-motion scout |
+
+De nieuwe `smooth_c2_bump` gebruikt een gladde bumpfunctie:
+
+```text
+s = (t - t_start) / T
+z_support(t) = A * 64*s^3*(1-s)^3
+```
+
+voor:
+
+```text
+t_start <= t <= t_start + T
+```
+
+Daarbuiten is `z_support = 0`.
+
+Deze vorm is gekozen omdat:
+
+- de supportverplaatsing bij begin en einde nul is;
+- de snelheid bij begin en einde nul is;
+- de versnelling bij begin en einde nul is;
+- de beweging daardoor minder abrupte pieken introduceert dan een korte parabolische jump.
+
+Dit verschilt van de oudere FEBio/Femke-route. De FEBio-route gebruikte na gravity loading een parabolische prescribed displacement op de chest boundary. De default amplitude was ongeveer 10 mm, maar de actieve jumpduur was kort, ongeveer 0.09 s. De nieuwe COMSOL Stage 5.1 route houdt amplitude en duur expliciet gescheiden, zodat bijvoorbeeld 40 mm support motion over 0.60 s getest kan worden zonder dat de input automatisch een korte, felle jump wordt.
+
+De eerste Stage 5.1 scouts zijn:
+
+| Case | Support amplitude | Duration | Doel |
+|---|---:|---:|---|
+| `stage5_1_support20mm_060s_softskin_softint.toml` | 20 mm | 0.60 s | milde support-motion scout |
+| `stage5_1_support40mm_060s_softskin_softint.toml` | 40 mm | 0.60 s | aanbevolen eerste solve scout |
+| `stage5_1_support60mm_060s_softskin_softint.toml` | 60 mm | 0.60 s | sterkere diagnostic support-motion scout |
+
+Alle drie gebruiken dezelfde eenvoudige scoutbasis:
+
+- Stage 2 xoffset055 transverse chestwall;
+- simple glandular structure;
+- no Cooper scaffold;
+- 1.5 mm volumetric skin;
+- Femke/Ryan-like soft skin coefficients;
+- soft adipose/glandular interior;
+- postprocess uit in de TOML, zodat de result eerst visueel en handmatig gecontroleerd kan worden.
+
+Voor evaluatie moet support motion apart worden gecontroleerd. Bij prescribed support displacement is absolute `w` op de outer surface niet genoeg, omdat een deel daarvan de opgelegde supportbeweging volgt. Daarom zijn de belangrijkste handmatige exports:
+
+| Metric | Selection | Expression | Reden |
+|---|---|---|---|
+| imposed support displacement | `breast_attach_bnd` | `jump_z_t/1[mm]` | controle dat de support echt beweegt |
+| support boundary displacement | `breast_attach_bnd` | `w/1[mm]` | controle dat COMSOL de boundary condition volgt |
+| absolute surface vertical displacement | `outer_skin_free_bnd` | `w/1[mm]` | zichtbaar oppervlak |
+| support-relative surface displacement | `outer_skin_free_bnd` | `(w-jump_z_t)/1[mm]` | werkelijke breast deformation t.o.v. de bewegende support |
+| surface displacement magnitude | `outer_skin_free_bnd` | `solid.disp/1[mm]` | globale bewegingsgrootte |
+| surface VM stress | `outer_skin_free_bnd` | `solid.mises/1[kPa]` | controle op stress-hotspots |
+
+De support-relative maat `(w-jump_z_t)` is vooral belangrijk voor de EWS-interpretatie. Die geeft beter weer hoeveel de borstvorm verandert ten opzichte van de opgelegde torso/support motion.
+
+Deze Stage 5.1 scouts moeten voorlopig als diagnostic motion scouts worden beschreven. Ze zijn bedoeld om te testen of een expliciet bewegende support visueel en numeriek beter interpreteerbare surface motion geeft dan de fixed-support acceleration pulse. Ze zijn nog geen gevalideerde patient- of EWS-device motion input.

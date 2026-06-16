@@ -53,6 +53,19 @@ analysis_output/figures_Febio_pipeline/
 analysis_output/metrics_compare/
 analysis_output/legacy_benchmark/
 
+# Large manual COMSOL raw surface exports; keep derived summaries/plots instead.
+analysis_output/**/outer_skin_free_bnd_dataset*.csv
+analysis_output/**/surface_timeseries*.csv
+analysis_output/**/*_surface.csv
+!analysis_output/**/surface_comparison/**/*.csv
+!analysis_output/**/comparison_figures/*.csv
+!analysis_output/**/manual_postprocess_summary.csv
+!analysis_output/**/stage5_manual_postprocess_summary.csv
+
+# Local archive/delete staging areas are intentionally not versioned.
+runs/_archive_delete_candidates/
+analysis_output/_archive_delete_candidates/
+
 # OS/editor noise
 .DS_Store
 Thumbs.db

@@ -116,6 +116,8 @@ class ComsolSettings:
     dynamic_motion_hold_s: float = 0.25
     dynamic_acceleration_amplitude_g: float = 0.75
     dynamic_acceleration_duration_s: float = 0.45
+    dynamic_support_displacement_amplitude_m: float = 0.0
+    dynamic_support_displacement_duration_s: float = 0.0
     dynamic_mass_damping_alpha_s_inv: float = 20.0
     dynamic_output_step_s: float = 0.0
     dynamic_pulse_output_step_s: float = 0.002

@@ -44,10 +44,13 @@ LABELS = {
     "stage5_no_skin_125g": "No skin 1.25g",
     "stage5_volumetric_skin_125g": "Volumetric skin 1.25g",
     "stage5_volumetric_skin_soft_interior_125g": "Vol. skin + soft interior 1.25g",
+    "full_gland_088kPa": "Vol. skin 88 kPa + soft interior 1.25g",
+    "01mm_skin_soft_interior": "0.1 mm soft skin + soft interior 1.25g",
     "stage5_volumetric_skin_soft_febio_materials_125g": "Vol. skin + soft FEBio materials 1.25g",
     "stage6_tumor_large_central_xoffset055_125g_volumetric_skin_soft_interior_solve": "Large central tumor",
     "stage6_tumor_large_central_hard100kPa": "Large central tumor hard 100 kPa",
     "stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_volumetric_skin_soft_interior_solve": "Medium upper-outer tumor",
+    "stage6_tumor_medium_upper_outer_surface": "Medium upper-outer tumor surface",
 }
 
 
@@ -56,10 +59,13 @@ CASE_ORDER = [
     "stage5_no_skin_125g",
     "stage5_volumetric_skin_125g",
     "stage5_volumetric_skin_soft_interior_125g",
+    "full_gland_088kPa",
+    "01mm_skin_soft_interior",
     "stage5_volumetric_skin_soft_febio_materials_125g",
     "stage6_tumor_medium_upper_outer_surface_proximal_xoffset055_125g_volumetric_skin_soft_interior_solve",
     "stage6_tumor_large_central_xoffset055_125g_volumetric_skin_soft_interior_solve",
     "stage6_tumor_large_central_hard100kPa",
+    "stage6_tumor_medium_upper_outer_surface",
 ]
 
 
@@ -77,20 +83,27 @@ def _read_comsol_csv(path: Path, kind: str) -> list[dict[str, str]]:
                 lines.append(stripped.lstrip("%").lstrip())
             elif not stripped.startswith("%"):
                 lines.append(line)
-    rows = list(csv.DictReader(lines))
+    if not lines:
+        return []
+    delimiter = "\t" if "\t" in lines[0] else ","
+    rows = list(csv.DictReader(lines, delimiter=delimiter))
     normalized: list[dict[str, str]] = []
     for row in rows:
         time_s = row.get("time_s") or row.get("Time (s)")
         disp_mm = row.get("avg_displacement_mm") or row.get("max_displacement_mm") or row.get("Displacement magnitude (mm)")
+        disp_m = row.get("Displacement magnitude (m)")
         vm = row.get("avg_vm_kpa") or row.get("max_vm_kpa") or row.get("von Mises stress (N/m^2)")
-        if time_s is None or disp_mm is None or vm is None:
+        if time_s is None or (disp_mm is None and disp_m is None) or vm is None:
             continue
+        disp_value_mm = float(str(disp_mm if disp_mm is not None else disp_m).replace(",", "."))
+        if disp_m is not None and disp_mm is None:
+            disp_value_mm *= 1000.0
         vm_kpa = float(str(vm).replace(",", ".")) / 1000.0 if "von Mises stress (N/m^2)" in row else float(str(vm).replace(",", "."))
         if kind == "avg":
             normalized.append(
                 {
                     "time_s": str(time_s),
-                    "avg_displacement_mm": str(disp_mm),
+                    "avg_displacement_mm": f"{disp_value_mm:.12g}",
                     "avg_vm_kpa": f"{vm_kpa:.12g}",
                 }
             )
@@ -98,7 +111,7 @@ def _read_comsol_csv(path: Path, kind: str) -> list[dict[str, str]]:
             normalized.append(
                 {
                     "time_s": str(time_s),
-                    "max_displacement_mm": str(disp_mm),
+                    "max_displacement_mm": f"{disp_value_mm:.12g}",
                     "max_vm_kpa": f"{vm_kpa:.12g}",
                 }
             )
@@ -285,7 +298,7 @@ def write_plots(summary_rows: list[dict[str, object]], max_rows: list[dict[str, 
         values = [float(row[key]) for row in plot_rows]
         plot_labels = [str(row["label"]) for row in plot_rows]
         x_values = list(range(len(values)))
-        ax.bar(x_values, values, color=colors, width=0.65)
+        ax.bar(x_values, values, color=[_case_color(index) for index, _ in enumerate(plot_rows)], width=0.65)
         ax.set_title(title, loc="left", fontsize=11)
         ax.set_xticks(x_values)
         ax.set_xticklabels(plot_labels, rotation=30, ha="right", fontsize=9)

@@ -1,74 +1,125 @@
 EWS COMSOL CURRENT RUN PLAN
-Last updated: 2026-06-09
+Last updated: 2026-06-12
 
 Doel
-- De huidige Stage 5 basis is: 1.25g, volumetric skin, soft interior, no-Cooper.
-- Stage 6 tumorcases zijn nu gedraaid, maar de globale displacement/stress response verandert praktisch niet.
-- Eerst controleren of de analytic tumor_mask mechanisch echt doorwerkt voordat nieuwe tumor-runs worden gestart.
-- Voor postprocess voorlopig handmatige COMSOL Derived Values CSV gebruiken; automatische postprocess blijft secundair.
+- De huidige hoofdvraag is verschoven naar: welke motion input geeft een verdedigbare, visueel realistische borstbeweging en bruikbare EWS-surface respons?
+- De automatische COMSOL postprocess moet weer betrouwbaar worden, zodat runs direct bruikbare CSVs/plots opleveren.
+- Daarna pas verder met grote Stage 6 tumor-runs.
+- Cleanup blijft nodig: runs, analysis_output en lange paden worden te groot/onoverzichtelijk.
 
-1) Directe prioriteit: Stage 6 tumor material-path check in COMSOL
-Open de solved Stage 6 hard100kPa result.mph:
-runs\comsol_runs\geometry_stage6\outputs\output_stage6_tumor_large_central_hard100kpa_xoffset055_125g_volumetric_skin_soft_interior_solve_only_preview\solve\stage6_tumor_large_central_hard100kpa_xoffset055_125g_volumetric_skin_soft_interior_solve_only_preview_result.mph
+Belangrijk
+- Geen zware COMSOL solves starten zonder bewuste keuze.
+- Geen outputs verwijderen voordat summary tables, figures/screens en interpretatie veilig bewaard zijn.
+- Een COMSOL result.mph mag pas weg als de bijbehorende manual/automatic CSVs en relevante screenshots bestaan.
+- Een run met partial solve mag niet als geldig resultaat worden gebruikt.
 
-Maak Derived Values om te controleren waar de tumor_mask ligt:
-- Volume Integration, selection geom1_breast_union_dom, expression: tumor_mask
-- Volume Integration, selection geom1_adipose_diff_dom, expression: tumor_mask
-- Volume Integration, selection geom1_gland_clip_dom, expression: tumor_mask
-- Volume Integration, selection geom1_skin_layer_dom, expression: tumor_mask
+1) Eerste prioriteit: Stage 5.1 motion scout begrijpen
+Nieuwe motion route:
+- Eerst gravity/ptosis fase: borst zakt naar hangende positie terwijl chestwall/support stil blijft.
+- Daarna prescribed support displacement: de support/chestwall krijgt een gladde op-neer beweging.
+- Doel: een beweging die beter lijkt op een gecontroleerde jump/platform-excitatie dan de oude fixed-support acceleration pulse.
 
-Maak daarna materiaalcontrast checks:
-- Volume Average, selection geom1_adipose_diff_dom, expression: if(tumor_mask>0.5,adipose_c10_eff,0)
-- Volume Average, selection geom1_gland_clip_dom, expression: if(tumor_mask>0.5,glandular_c10_eff,0)
-- Volume Maximum, selection geom1_breast_union_dom, expression: tumor_mask
-- Volume Maximum, selection geom1_breast_union_dom, expression: if(tumor_mask>0.5,adipose_c10_eff,0)
-- Volume Maximum, selection geom1_breast_union_dom, expression: if(tumor_mask>0.5,glandular_c10_eff,0)
+Actuele Stage 5.1 TOMLs:
+- runs\comsol_runs\geometry_stage5_1_motion_scout\stage5_1_support20mm_060s_softskin_softint.toml
+- runs\comsol_runs\geometry_stage5_1_motion_scout\stage5_1_support40mm_060s_softskin_softint.toml
+- runs\comsol_runs\geometry_stage5_1_motion_scout\stage5_1_support40mm_0181s_softskin_softint.toml
+- runs\comsol_runs\geometry_stage5_1_motion_scout\stage5_1_support60mm_060s_softskin_softint.toml
+- runs\comsol_runs\geometry_stage5_1_motion_scout\stage5_1_support150mm_060s_softskin_softint.toml
+- runs\comsol_runs\geometry_stage5_1_motion_scout\stage5_1_support400mm_060s_softskin_softint.toml
 
-Interpretatie:
-- Als tumor_mask volume klopt maar c10_eff niet hoger wordt: materiaalpad/variable-propagation bug.
-- Als c10_eff wel hoger wordt maar global displacement gelijk blijft: globale metrics zijn te grof; focus op local/surface-patch metrics.
-- Als tumor_mask vooral in skin/lege ruimte zit: locatie of selection-overlap corrigeren.
+Huidige interpretatie:
+- 20/40/60 mm over 0.60 s lijken mogelijk te weinig visuele respons te geven.
+- 400 mm over 0.60 s is visueel nuttig als extreme diagnostic, maar niet fysisch als report-baseline.
+- 150 mm over 0.60 s is nu een logische tussenstap om te bekijken.
+- 40 mm over 0.60 s is niet geldig als result: solve faalde/stopte rond t=1.2606 s, voor de support-piek.
 
-2) Manual CSV comparison bijwerken
-Na nieuwe manual CSVs:
-python tools\update_manual_postprocess_summary.py
+Te exporteren per Stage 5.1 scout:
+- Support check, selection Breast Posterior Attachment:
+  - jump_z_t
+  - w
+  - w-jump_z_t
+- Outer surface, selection Outer Skin Free Boundary:
+  - Surface Average: w, w-jump_z_t, solid.disp, solid.mises
+  - Surface Maximum: abs(w-jump_z_t), solid.disp, solid.mises
+  - Surface Minimum: w, w-jump_z_t
+- Surface data export:
+  - x, y, z, u, v, w, jump_z_t, w-jump_z_t, solid.disp, solid.mises
 
-Belangrijke output:
-analysis_output\comsol_pipeline\manual_postprocess\tables\manual_postprocess_summary.csv
-analysis_output\comsol_pipeline\manual_postprocess\comparison_figures\stage6_tumor_avg_displacement_timeseries.png
-analysis_output\comsol_pipeline\manual_postprocess\comparison_figures\stage6_tumor_delta_avg_displacement.png
-analysis_output\comsol_pipeline\manual_postprocess\comparison_figures\stage6_tumor_max_displacement_timeseries.png
+Acceptatiecheck:
+- jump_z_t moet de ingestelde amplitude echt bereiken.
+  Bijvoorbeeld 150 mm scout: jump_z_t max ongeveer 0.150 m.
+- De result moet tijdstappen bevatten tot na de support-piek en recovery, niet alleen tot rond 1.26 s.
+- Als COMSOL faalt op een tijdstap, markeer de run als partial/failed.
 
-3) Nu geen nieuwe lange tumor-runs totdat de material-path check duidelijk is
-Niet opnieuw draaien:
-- gewone large central tumor
-- hard100kPa large central tumor
-- medium upper-outer tumor
+2) Automatische postprocess herstellen
+Probleem:
+- Manual export werkt als de filename handmatig kort wordt ingevuld.
+- COMSOL GUI/export lijkt fouten te geven wanneer default export paths of namen te lang worden.
+- Automatic postprocess hangt soms of schrijft geen CSVs.
 
-Deze zijn al voldoende om te zien dat de globale response nauwelijks verandert.
+Onderzoek/fix-richting:
+- Inspecteer generated postprocess Java en export file paths.
+- Zorg dat automatic postprocess altijd korte, expliciete export filenames gebruikt.
+- Gebruik kortere submappen/namen voor stage scouts.
+- Geen reliance op COMSOL GUI-default export location.
+- Global/scalar postprocess moet geen image export of lange surface export doen.
+- Full postprocess mag surface exports doen, maar alleen met korte filenames.
+- Voeg duidelijke statusregels toe: init_start, load_start, evaluate_start, export_start, done.
 
-4) Als material-path wel klopt
-Dan vervolg:
-- Maak tumor-local metrics standaard: tumor volume, tumor avg/max displacement, tumor avg/max VM.
-- Voeg surface-patch metrics toe rond de tumorprojectie op het borstoppervlak.
-- Vergelijk niet alleen global breast average/max, maar vooral local tumor response en surface displacement difference.
+Gewenst eindresultaat:
+- In een TOML kan postprocess_mode weer aan.
+- Na een run verschijnen automatisch compacte CSVs in een voorspelbare outputmap.
+- Manual Derived Values blijft fallback, niet de hoofdroute.
 
-5) Als material-path niet klopt
-Dan eerst codefix:
-- Check of hmat_adipose/hmat_glandular echt actief zijn.
-- Check of COMSOL niet terugvalt op mat_adipose/mat_glandular linear elastic fallback.
-- Overweeg c10/c01 tumorformule te veranderen van additive naar replacement:
-  adipose_c10 + tumor_mask*(tumor_coef1_adipose - adipose_c10)
-- Eventueel ook linear fallback effectieve E/rho laten gebruiken.
-- Daarna alleen één korte/diagnostic rerun: hard100kPa large central.
+3) Cleanup en opslag
+Te inventariseren, niet direct verwijderen:
+- runs\comsol_runs\geometry_stage5\outputs
+- runs\comsol_runs\geometry_stage6\outputs
+- runs\comsol_runs\geometry_stage5_1_motion_scout\outputs
+- analysis_output\comsol_pipeline\manual_postprocess
+- oude partial/failed solve folders
+- duplicate generated_Model.mph/result.mph/postprocessed MPH bestanden
 
-6) Overige nuttige taken zonder nieuwe solves
-- COMSOL screenshots maken van tumor_mask en c10_eff slices.
-- Manual Derived Values workflow verder standaardiseren.
-- Reporttekst Stage 6 voorzichtig formuleren: tumor route is nu implemented/validated geometrically, but quantitative detectability is not yet demonstrated.
-- Presentation update: Stage 6 tonen als current diagnostic/debug phase, niet als bewezen tumor-detectie.
+Cleanup-principe:
+- KEEP: TOMLs, source code, docs, report notes, kleine CSV/MD/PNG summaries, final selected figures.
+- DELETE CANDIDATE: failed/partial results, duplicate MPH, old generated build artefacts, cached COMSOL configs.
+- ARCHIVE/REVIEW: grote result.mph bestanden waarvan screenshots/tables al bestaan.
+- REGENERATABLE: build folders en generated Java/JSON, tenzij nodig voor debug/provenance.
 
-7) Algemene runregel
-- Eén COMSOL solve tegelijk.
-- Geen postprocess direct achter lange solve als je daarna handmatig CSVs nodig hebt.
-- Grote result.mph bewaren totdat manual CSVs, screenshots en interpretatie klaar zijn.
+4) Kortere namen en paden
+Probleem:
+- Lange case IDs en diepe outputpaden veroorzaken exportproblemen en maken de mapstructuur onduidelijk.
+
+Nieuwe richtlijn:
+- Voor scouts korte case IDs gebruiken:
+  - s51_150mm_060s_soft
+  - s5_softskin088
+  - s6_medUO_soft
+- In analysis_output korte folders gebruiken:
+  - stage51_motion
+  - stage5_scouts
+  - stage6_tumor
+- Lange beschrijving hoort in TOML notes/report notes, niet in elke mapnaam.
+
+5) Stage 6 tumor voorlopig parkeren tot motion/postprocess stabiel is
+Status:
+- Tumor material coupling is gerepareerd/gecontroleerd.
+- Grote hard100kPa full-gland tumorcase is zwaar op de laptop.
+- Global displacement verandert weinig; EWS-gerichte surface/local metrics zijn belangrijker.
+
+Vervolg pas na Stage 5.1/postprocess:
+- Eerst EWS-surface difference metrics betrouwbaar maken.
+- Daarna 1 of 2 tumorcases draaien op gekozen motion/material baseline.
+- Niet opnieuw veel tumorvarianten draaien voordat postprocess en motionkeuze stabiel zijn.
+
+6) Praktische runregel
+- Voor nieuwe scouts: bij voorkeur postprocess_mode tijdelijk op none of global-light tot automatic postprocess gefixt is.
+- Eerst 1 case controleren met build/solve/result/exports.
+- Pas daarna meerdere cases achter elkaar runnen.
+- Een complete run is pas bruikbaar als:
+  - solve eindtijd klopt;
+  - jump/input-amplitude klopt;
+  - CSVs bestaan;
+  - screenshots/animatie visueel logisch zijn;
+  - interpretation note/report summary is bijgewerkt.
+
