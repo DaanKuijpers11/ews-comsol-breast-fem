@@ -1,7 +1,19 @@
 \appendix
-\section*{Appendix A: Figure and metric sources}
+\section*{Appendix A: Repository and previous-work context}
+\phantomsection
+\label{sec:appendix_repository_previous_work}
+\addcontentsline{toc}{section}{Appendix A: Repository and previous-work context}
+
+The active implementation used in this report is the COMSOL source-case pipeline developed during this project. The public project repository stores the reproducible parts of the work, including the source code, active TOML case definitions, report notes, plotting scripts, compact post-processing tables, and selected report figures \cite{KuijpersEWSComsolGitHub}. Large COMSOL build and solve artefacts are not part of the intended repository content because individual MPH files and recovery folders can become several gigabytes per case.
+
+This work was developed in the context of previous EWS finite element modelling work. Ryan Engels' earlier FEBio-based model provided a useful reference for the older soft-tissue modelling route and displacement-based evaluation \cite{EngelsEWSReport}. Femke Storm's Sioux/EWS work provided additional context for soft material settings, skin representation, and an HGO-like adipose reinforcement concept for Cooper-like support \cite{StormEWSReport}. These documents were used as internal project context and engineering comparison material. They are therefore cited separately from peer-reviewed literature and should not be interpreted as independent validation sources.
+
+The main difference between the current repository and the earlier FEBio-oriented work is the implementation strategy. The current route emphasizes COMSOL geometry generation, boolean region construction, automatic selections, build-only checks, and structured case management through TOML files. The older FEBio route remains useful for comparison, especially for material choices and expected dynamic response ranges, but the active model development and report figures are based on the COMSOL pipeline.
+
+\section*{Appendix B: Figure and metric sources}
+\phantomsection
 \label{sec:appendix_figures}
-\addcontentsline{toc}{section}{Appendix A: Figure and metric sources}
+\addcontentsline{toc}{section}{Appendix B: Figure and metric sources}
 
 This appendix records the generated contact-sheet figures used in the report. The complete source index is stored in \texttt{docs/report\_notes/comsol\_pipeline/report\_figures\_metrics\_index.md}; it lists the exact COMSOL output folders, metric JSON files, and source PNG panels used for each contact sheet.
 
@@ -33,15 +45,17 @@ This appendix records the generated contact-sheet figures used in the report. Th
 \label{fig:appendix_stage5_figures}
 \end{figure}
 
-\section*{Appendix B: Run-status notes}
+\section*{Appendix C: Run-status notes}
+\phantomsection
 \label{sec:appendix_status}
-\addcontentsline{toc}{section}{Appendix B: Run-status notes}
+\addcontentsline{toc}{section}{Appendix C: Run-status notes}
 
 The current report distinguishes between solved report-ready cases, control cases, and exploratory cases. Stage 1 is a motion sanity baseline rather than the final anatomical reference. Stage 2 is the first fair anatomical baseline. Stage 3 is the current realistic glandular reference, while Stage 4 and Stage 5 are currently interpreted as no-asymmetry and no-Cooper controls in the Tier 1 comparison. Stage 6 tumor cases should only be used quantitatively after complete tumor-mask metrics are available. The older Stage 4 additive lateral/fullness ellipsoid cases should not be used as report evidence because the helper ellipsoids were included as separate volumes in the final breast union.
 
-\section*{Appendix C: Breast-volume dataset summary}
+\section*{Appendix D: Breast-volume dataset summary}
+\phantomsection
 \label{sec:appendix_volume_summary}
-\addcontentsline{toc}{section}{Appendix C: Breast-volume dataset summary}
+\addcontentsline{toc}{section}{Appendix D: Breast-volume dataset summary}
 
 The table below summarizes the 100-sample breast-volume dataset used to benchmark the COMSOL model volume range. The contours were drawn approximately 5 mm inside the outer breast boundary and in a lying/supine-like position, so these values should be interpreted as conservative internal-envelope volumes rather than full external breast volumes. The detailed literature comparison is stored in \texttt{docs/report\_notes/comsol\_pipeline/model\_justification/breast\_volume\_literature\_context\_2026-05-26.md}.
 
@@ -68,9 +82,10 @@ IQR & 409.05 \\
 \end{tabular}
 \end{table}
 
-\section*{Appendix D: Stage 6 tumor candidate definitions}
+\section*{Appendix E: Stage 6 tumor candidate definitions}
+\phantomsection
 \label{sec:appendix_stage6_tumor_candidates}
-\addcontentsline{toc}{section}{Appendix D: Stage 6 tumor candidate definitions}
+\addcontentsline{toc}{section}{Appendix E: Stage 6 tumor candidate definitions}
 
 The table below records the current Stage 6 tumor-screening candidates. Positions are COMSOL model coordinates in metres. These cases use the analytic spherical \texttt{tumor\_mask}; they should therefore be interpreted as internal material-overlay sensitivity cases rather than separate segmented tumor geometries.
 
@@ -101,9 +116,10 @@ Mild/stiff tumor variants & case-specific & usually central or upper-outer & Mat
 
 The most report-useful first dynamic comparison is not the full list above, but a compact subset: no-tumor control, small central, small upper-outer, small subareolar, small posterior, and one surface-proximal upper-outer candidate. Medium and large cases are most useful after the small cases show stable tumor-mask volume and measurable local metrics.
 
-\section*{Appendix E: Model-geometry screenshots}
+\section*{Appendix F: Model-geometry screenshots}
+\phantomsection
 \label{sec:appendix_model_geometry_screens}
-\addcontentsline{toc}{section}{Appendix E: Model-geometry screenshots}
+\addcontentsline{toc}{section}{Appendix F: Model-geometry screenshots}
 
 This appendix is reserved for the manually captured COMSOL geometry screenshots. These images document what changed between model stages and are separate from the automated displacement and stress contact sheets. The files are expected under \texttt{Figures/model\_pictures/} in the final report folder.
 
