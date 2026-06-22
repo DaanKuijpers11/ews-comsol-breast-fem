@@ -1,0 +1,58 @@
+\section{Discussion}
+\label{discussion}
+
+\subsection{Interpretation for Early Warning Scan surface measurements}
+\label{discussion_ews_surface_measurements}
+
+% Hoofdpunt: EWS meet/observeert surface motion, dus surface displacement en landmark patches zijn belangrijker dan whole-volume metrics.
+% Bespreek wat jouw model wel/niet zegt over detecteerbaarheid.
+
+\subsection{Influence of material parameters}
+\label{discussion_material_parameters}
+
+% Bespreek onzekerheid in literatuurwaarden, small-strain equivalent E, skin stiffness, soft interior.
+% Hier kun je zeggen dat materiaalkeuze waarschijnlijk een grote invloed heeft op amplitude.
+
+\subsection{Influence of model variants and support assumptions}
+\label{discussion_model_variants_support}
+
+% Skin, Cooper-like support, chestwall/support assumptions samen bespreken.
+% Niet opnieuw methods; vooral beperkingen en interpretatie.
+
+\subsection{Glandular complexity and anatomical representation}
+\label{discussion_glandular_complexity}
+
+% Complexe glandular region, lobule spread, heterogeneity.
+% Bespreek dat echte glandular anatomy patiëntspecifiek en complexer is dan je parametrische route.
+
+\subsection{Tumor representation and tumor shape}
+\label{discussion_tumor_shape}
+
+% Spherical analytic tumor mask als eerste stap.
+% Beperkingen: geen irregular/spiculated shape, geen segmented tumor boundary, geen surface deformation/bulge tenzij apart gemodelleerd.
+% Toekomst: ellipsoid/lobulated/patient-specific segmentation.
+
+\subsection{Dynamic loading assumptions}
+\label{discussion_dynamic_loading}
+
+% 0.25g/hogere g-cases, support displacement route, damping, geen volledige jump/body-motion validation.
+% Koppeling met EWS: controlled excitation vs echte meetopstelling.
+
+\subsection{Computational limitations}
+\label{discussion_computational_limitations}
+
+% Laptop, COMSOL time-dependent solves, 16 GB RAM, second-order elements, volumetric skin, tumor/Cooper variants.
+% Hier past jouw punt over snellere computer/HPC.
+% Niet als excuus, maar als praktische beperking voor parameter sweeps en mesh convergence.
+
+\subsection{Reproducibility and pipeline value}
+\label{discussion_reproducibility_pipeline_value}
+
+% GitHub, TOML cases, scripted Java builders, compact outputs.
+% Bespreek dat pipeline zelf een belangrijk projectresultaat is.
+
+\subsection{Future work}
+\label{discussion_future_work}
+
+% Kort en concreet:
+% material calibration, mesh convergence, stable HPC sweeps, improved tumor shapes, patient-specific geometry, EWS experimental validation.
