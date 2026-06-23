@@ -94,7 +94,7 @@ def generate_comsol_java_builder(
         postprocess_mode = "full"
     postprocess_export_plot_images_java = "true" if postprocess_export_plot_images else "false"
     postprocess_save_postprocessed_mph_java = "true" if postprocess_save_postprocessed_mph else "false"
-    postprocess_quick_mode_java = "false"
+    postprocess_quick_mode_java = "true" if postprocess_quick_mode and postprocess_mode == "global" else "false"
     postprocess_mode_java = postprocess_mode
     dynamic_motion_profile = (
         str(getattr(comsol_settings, "dynamic_motion_profile", "cosine_down_pulse") or "cosine_down_pulse")
@@ -4066,10 +4066,11 @@ public class {class_name} {{
     script_path.write_text(java_source, encoding="utf-8")
 
     readme_path = output_dir / f"{case_name}_comsol_builder_README.txt"
-    postprocess_class_name = _safe_java_identifier(f"{case_name}_comsol_postprocess")
+    postprocess_class_name = "ComsolPostprocess"
     postprocess_java_path = output_dir / f"{postprocess_class_name}.java"
     postprocess_result_mph_java = (solve_dir / f"{case_name}_result.mph").resolve().as_posix()
     postprocess_metrics_json_java = metrics_json_path.resolve().as_posix()
+    postprocess_progress_log_java = (output_root / "postprocess_progress.log").resolve().as_posix()
     build_verification_class_name = _safe_java_identifier(f"{case_name}_comsol_verify_build")
     build_verification_java_path = output_dir / f"{build_verification_class_name}.java"
     solve_verification_class_name = _safe_java_identifier(f"{case_name}_comsol_verify_solve")
@@ -4082,8 +4083,11 @@ public class {class_name} {{
     postprocess_java = f"""import com.comsol.model.*;
 import com.comsol.model.util.*;
 import java.io.File;
+import java.io.FileWriter;
 
 public class {postprocess_class_name} {{
+  private static final String PROGRESS_LOG_PATH = "{postprocess_progress_log_java}";
+
   private static double firstReal(double[][] values) {{
     if (values == null || values.length == 0 || values[0].length == 0) {{
       return Double.NaN;
@@ -4672,6 +4676,12 @@ public class {postprocess_class_name} {{
   private static void postprocessStatus(String status) {{
     System.out.println("COMSOL_POSTPROCESS_STATUS " + status);
     System.out.flush();
+    try {{
+      FileWriter writer = new FileWriter(PROGRESS_LOG_PATH, true);
+      writer.write(new java.util.Date().toString() + " COMSOL_POSTPROCESS_STATUS " + status + "\\n");
+      writer.close();
+    }} catch (Exception ignored) {{
+    }}
   }}
 
   public static Model run() throws Exception {{
@@ -4701,6 +4711,7 @@ public class {postprocess_class_name} {{
       postprocessStatus("plot_setup_skipped_by_mode");
     }}
 
+    postprocessStatus("volume_scalars_start");
     double breastVolume = evalIntVolume(model, "ivBreastVol", "geom1_breast_union_dom", "1");
     double glandVolume = evalIntVolume(model, "ivGlandVol", "geom1_gland_clip_dom", "1");
     double adiposeVolume = evalIntVolume(model, "ivAdiposeVol", "geom1_adipose_diff_dom", "1");
@@ -4709,6 +4720,7 @@ public class {postprocess_class_name} {{
       : 0.0;
     postprocessStatus("volume_scalars_ready");
 
+    postprocessStatus("scalar_review_metrics_start");
     double maxDispBreast = evalMaxVolume(model, "mvDispBreast", "geom1_breast_union_dom", "solid.disp");
     double intDispBreast = evalIntVolume(model, "ivDispBreast", "geom1_breast_union_dom", "solid.disp");
     double avgDispBreast = breastVolume != 0.0 ? intDispBreast / breastVolume : Double.NaN;
@@ -4732,6 +4744,7 @@ public class {postprocess_class_name} {{
 
     double[] timeValues = getTimeValues(model);
     postprocessStatus("time_values_ready");
+    postprocessStatus("volume_series_start");
     double[] maxDispBreastSeries = evalMaxVolumeSeries(model, "mvDispBreastSeries", "geom1_breast_union_dom", "solid.disp");
     double[] intDispBreastSeries = evalIntVolumeSeries(model, "ivDispBreastSeries", "geom1_breast_union_dom", "solid.disp");
     double[] maxDispTumorSeries = exportTumorMetrics ? evalMaxVolumeSeries(model, "mvDispTumorSeries", "geom1_breast_union_dom", "if(tumor_mask>0.5,solid.disp,0)") : new double[0];
@@ -4915,6 +4928,7 @@ public class {postprocess_class_name} {{
     double[] minSurfaceVSeries = new double[0];
     double[] maxSurfaceVSeries = new double[0];
     if (exportSurfaceMetrics) {{
+      postprocessStatus("surface_series_start");
       surfaceArea = evalIntSurface(model, "isOuterSkinArea", surfaceSelectionTag, "1");
       intSurfaceDispSeries = evalIntSurfaceSeries(model, "isOuterSkinDisp", surfaceSelectionTag, "solid.disp");
       intSurfaceDispSqSeries = exportStressStdMetrics ? evalIntSurfaceSeries(model, "isOuterSkinDispSq", surfaceSelectionTag, "(solid.disp)^2") : new double[0];
@@ -4950,6 +4964,7 @@ public class {postprocess_class_name} {{
     double[] supportWMeanSeries = new double[0];
     double[] supportDispMeanSeries = new double[0];
     if (exportSurfaceMetrics || exportLandmarkMetrics) {{
+      postprocessStatus("support_series_start");
       supportArea = evalIntSurface(model, "isBreastAttachArea", supportSelectionTag, "1");
       supportWMeanSeries = evalSurfaceMeanSeries(model, "isBreastAttachW", supportSelectionTag, "w", supportArea, seriesLength);
       supportDispMeanSeries = evalSurfaceMeanSeries(model, "isBreastAttachDisp", supportSelectionTag, "solid.disp", supportArea, seriesLength);
@@ -4969,6 +4984,7 @@ public class {postprocess_class_name} {{
     double[][] landmarkVMeanSeries = new double[landmarkSelections.length][];
     double[][] landmarkWMeanSeries = new double[landmarkSelections.length][];
     double[][] landmarkDispMeanSeries = new double[landmarkSelections.length][];
+    postprocessStatus("landmark_series_start");
     for (int i = 0; i < landmarkSelections.length; i++) {{
       String selection = landmarkSelections[i];
       String prefix = "lm" + i;
@@ -5185,6 +5201,7 @@ public class {postprocess_class_name} {{
 
   public static void main(String[] args) throws Exception {{
     run();
+    postprocessStatus("main_run_complete");
     ModelUtil.disconnect();
   }}
 }}

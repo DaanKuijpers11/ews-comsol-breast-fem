@@ -1,59 +1,340 @@
 \section{Results}
 \label{results}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 4.1 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \subsection{Overview of completed model variants}
 \label{overview_completed_model_variants}
 
-% Kort: welke cases zijn succesvol gebouwd/gerund en welke vergelijking hoort bij welke route.
-% Hier past een overzichtstabel met: case group, comparison case, tested variants, output status.
-% Niet te veel interpretatie hier.
+The Results chapter focuses on the model variants that were generated to evaluate the developed COMSOL breast model. Table~\ref{completed_model_variant_overview_table} summarises which result groups were available and how they are used in the following subsections. This distinction is included because some routes produced complete quantitative outputs, while others were retained as scout, diagnostic or build-level outputs.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Overview of model-variant groups used in the Results chapter.}
+\label{completed_model_variant_overview_table}
+\begin{tabular}{
+>{\raggedright\arraybackslash}p{0.24\linewidth}
+>{\raggedright\arraybackslash}p{0.34\linewidth}
+>{\raggedright\arraybackslash}p{0.32\linewidth}
+}
+\toprule
+Result group & Available output & Use in this Results chapter \\
+\midrule
+Reference anatomical model 
+& Solved anatomical route with selected chestwall geometry and realistic glandular distribution 
+& Establishes the main anatomical model used for later comparisons \\
+
+Material and skin variants 
+& Quantitative displacement and stress outputs for selected material and volumetric-skin cases 
+& Used to compare material and skin-related response changes \\
+
+Cooper-like support 
+& No-Cooper comparison case and Cooper-like support scout outputs 
+& Used to report current support-sensitivity status \\
+
+Dynamic loading 
+& Solved fixed-support acceleration cases and prescribed support-displacement output 
+& Used to compare loading-route response measures \\
+
+Tumor overlay 
+& Build-level tumor placement examples 
+& Used to show successful tumor-mask implementation and placement \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The following subsections report quantitative trends only when the output status supports such comparison. Diagnostic, build-level or incomplete cases are reported as implementation status rather than as final quantitative trends.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 4.2 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Reference model response}
 \label{reference_model_response}
 
-% Hoofdresultaat van je gekozen/reference COMSOL route.
-% Toon surface displacement, displacement magnitude, signed vertical displacement en von Mises stress.
-% Hier past een contact sheet / surface displacement figure + compacte tabel met peak/mean metrics.
+The developed COMSOL workflow produced a solvable anatomical breast model with the selected curved chestwall geometry and realistic glandular distribution. This model was used as the anatomical basis for the sensitivity comparisons in the following subsections. The reference route retained a breast volume close to $585~\mathrm{mL}$ and increased the glandular fraction to approximately $24.3\%$ after introducing the realistic glandular tissue distribution.
+
+The generated analysis outputs included displacement fields, signed vertical surface response, displacement statistics and von Mises stress fields. An example of the exported surface-response output is shown in Figure~\ref{reference_surface_response_example}. These outputs were used to check that the model produced a measurable dynamic response under the fixed-support acceleration input before individual material, skin, Cooper-like support, loading and tumor-overlay variants were compared.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\linewidth]{Figures/results/reference_surface_signed_vertical_response.png}
+\caption{Example of the signed vertical surface-response output generated for the anatomical reference route. The figure illustrates the type of surface-motion metric used for later comparison between model variants.}
+\label{reference_surface_response_example}
+\end{figure}
+
+Time-dependent displacement and stress visualisations were also generated during post-processing. These outputs were used for visual inspection of the deformation pattern and local stress distribution, while the quantitative comparisons in the following subsections are based on the exported displacement and stress metrics.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 4.3 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Effect of material-parameter variation}
 \label{material_parameter_sensitivity_results}
 
-% Resultaten van stiffness/material variants.
-% Denk aan no-skin/stiff/soft-interior etc.
-% Focus op: surface displacement amplitude, stress response, verschil t.o.v. comparison case.
-% Hier hoort je material-parameter sensitivity waar je in 3.3.2 naar verwijst.
+Material-parameter variation was evaluated using skin-enabled full-glandular model variants with different internal tissue and skin stiffness settings. The peak displacement and von Mises stress values are summarised in Table~\ref{material_parameter_scout_results_table}.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Material-parameter variation results for skin-enabled model variants. VM denotes von Mises stress.}
+\label{material_parameter_scout_results_table}
+\begin{tabular}{
+>{\raggedright\arraybackslash}p{0.36\linewidth}
+>{\raggedleft\arraybackslash}p{0.14\linewidth}
+>{\raggedleft\arraybackslash}p{0.14\linewidth}
+>{\raggedleft\arraybackslash}p{0.14\linewidth}
+>{\raggedleft\arraybackslash}p{0.14\linewidth}
+}
+\toprule
+Case & Peak avg. disp. & Peak max. disp. & Peak avg. VM & Peak max. VM \\
+& $(\mathrm{mm})$ & $(\mathrm{mm})$ & $(\mathrm{kPa})$ & $(\mathrm{kPa})$ \\
+\midrule
+Volumetric skin, $1.25g$ 
+& 3.40 & 5.93 & 1.38 & 51.63 \\
+
+Volumetric skin + soft interior, $1.25g$ 
+& 5.90 & 10.90 & 1.80 & 72.38 \\
+
+Volumetric skin $88~\mathrm{kPa}$ + soft interior, $1.25g$ 
+& 13.70 & 24.84 & 1.30 & 44.31 \\
+
+$0.1~\mathrm{mm}$ soft skin + soft interior, $1.25g$ 
+& 27.20 & 60.03 & 0.96 & 44.58 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Within the skin-enabled variants, the peak maximum displacement increased from $5.93~\mathrm{mm}$ for the volumetric-skin case to $10.90~\mathrm{mm}$ when the internal tissue stiffness was reduced. The lower-stiffness skin variants produced larger peak maximum displacements of $24.84~\mathrm{mm}$ and $60.03~\mathrm{mm}$. Peak maximum von Mises stress ranged from $44.31~\mathrm{kPa}$ to $72.38~\mathrm{kPa}$ across the same material-parameter set.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 4.4 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Effect of volumetric skin representation}
 \label{volumetric_skin_results}
 
-% Skin-enabled vs no-skin comparison.
-% Vooral: skin dempt displacement, verandert stressverdeling, eventuele local stress hotspots.
-% Niet opnieuw uitleggen hoe skin gemaakt is; alleen resultaten.
+The volumetric skin representation was evaluated on the same full-glandular model route by comparing the no-skin case with skin-enabled variants at the same $1.25g$ dynamic input. The skin-enabled cases used a $1.5~\mathrm{mm}$ volumetric skin layer. The peak displacement and von Mises stress values are summarised in Table~\ref{volumetric_skin_scout_results_table}.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Comparison of no-skin and $1.5~\mathrm{mm}$ volumetric-skin model variants at $1.25g$. VM denotes von Mises stress.}
+\label{volumetric_skin_scout_results_table}
+\begin{tabular}{
+>{\raggedright\arraybackslash}p{0.36\linewidth}
+>{\raggedleft\arraybackslash}p{0.14\linewidth}
+>{\raggedleft\arraybackslash}p{0.14\linewidth}
+>{\raggedleft\arraybackslash}p{0.14\linewidth}
+>{\raggedleft\arraybackslash}p{0.14\linewidth}
+}
+\toprule
+Case & Peak avg. disp. & Peak max. disp. & Peak avg. VM & Peak max. VM \\
+& $(\mathrm{mm})$ & $(\mathrm{mm})$ & $(\mathrm{kPa})$ & $(\mathrm{kPa})$ \\
+\midrule
+No skin, $1.25g$ 
+& 7.34 & 14.23 & 0.80 & 3.92 \\
+
+Volumetric skin, $1.25g$ 
+& 3.40 & 5.93 & 1.38 & 51.63 \\
+
+Volumetric skin + soft interior, $1.25g$ 
+& 5.90 & 10.90 & 1.80 & 72.38 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Compared with the no-skin case, the volumetric-skin case reduced peak average displacement from $7.34~\mathrm{mm}$ to $3.40~\mathrm{mm}$ and peak maximum displacement from $14.23~\mathrm{mm}$ to $5.93~\mathrm{mm}$. With the soft-interior material variant, peak average displacement increased to $5.90~\mathrm{mm}$ and peak maximum displacement increased to $10.90~\mathrm{mm}$. Peak maximum von Mises stress was higher in both skin-enabled variants than in the no-skin case.
+
+An example von Mises stress field for the Stage 5 no-Cooper $1.25g$ case is shown in Figure~\ref{fig:stage5_nocooper_vonmises_example}. The highest stress values in this example were located near the posterior chestwall/support attachment region.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\linewidth]{Figures/results/report_vonmises.png}
+\caption{Example von Mises stress distribution for the Stage 5 no-Cooper $1.25g$ case at $t=1.375~\mathrm{s}$. The highest stress values are located near the posterior chestwall/support attachment region, while the free breast volume shows lower stress values.}
+\label{fig:stage5_nocooper_vonmises_example}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 4.5 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Effect of Cooper-like support}
 \label{cooper_support_results}
 
-% De drie Cooper varianten: nipple--chestwall, skin-to-glandular, dense skin-to-glandular.
-% Vergelijk met no-Cooper model.
-% Alleen claims doen op basis van cases die echt goed gerund/gepostprocessed zijn.
+The Cooper-like support approximation was first evaluated against the no-Cooper comparison case. In the anatomical Stage 5 route, the no-Cooper case reached the expected final time of $2.2~\mathrm{s}$, while the default Cooper-support case failed immediately during the dynamic solve because of solver-capacity limitations. The failed case was therefore not used for quantitative response comparison.
+
+A separate simple-gland Cooper-support scout was used to compare the implemented support-selection variants. The resulting peak displacement values are summarised in Table~\ref{cooper_support_scout_results_table}.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Cooper-like support scout results for the simple-gland model route.}
+\label{cooper_support_scout_results_table}
+\begin{tabular}{
+>{\raggedright\arraybackslash}p{0.36\linewidth}
+>{\raggedleft\arraybackslash}p{0.14\linewidth}
+>{\raggedleft\arraybackslash}p{0.14\linewidth}
+>{\raggedleft\arraybackslash}p{0.14\linewidth}
+>{\raggedleft\arraybackslash}p{0.14\linewidth}
+}
+\toprule
+Case & Peak avg. disp. & Peak max. disp. & Avg. disp. change & Max. disp. change \\
+& $(\mathrm{mm})$ & $(\mathrm{mm})$ & $(\%)$ & $(\%)$ \\
+\midrule
+No Cooper baseline 
+& 22.55 & 45.58 & 0.00 & 0.00 \\
+
+Gland-to-skin area 0.03 
+& 22.44 & 44.99 & -0.50 & -1.29 \\
+
+Gland-to-skin area 0.06 
+& 22.44 & 44.97 & -0.52 & -1.34 \\
+
+Gland-to-skin area 0.12 
+& 22.43 & 44.96 & -0.53 & -1.37 \\
+
+Nipple-to-chest area 0.03 
+& 22.55 & 45.64 & -0.03 & 0.12 \\
+
+Dense network area 0.03 
+& 22.44 & 44.99 & -0.50 & -1.29 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In the simple-gland scout, the gland-to-skin support variants changed peak average displacement by $-0.50\%$ to $-0.53\%$ and peak maximum displacement by $-1.29\%$ to $-1.37\%$ relative to the no-Cooper baseline. The nipple-to-chest variant changed peak average displacement by $-0.03\%$ and peak maximum displacement by $0.12\%$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 4.6 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Effect of dynamic loading route}
 \label{dynamic_loading_results}
 
-% Vergelijk acceleration amplitudes en/of prescribed support displacement route.
-% Focus op surface response, vertical signed motion, support-relative displacement indien relevant.
-% Geen uitgebreide method uitleg meer.
+\subsubsection{Fixed-support acceleration amplitude}
+\label{fixed_support_acceleration_amplitude_results}
+
+The fixed-support acceleration response was evaluated on the no-Cooper full-glandular model route. The $0.25g$ and $0.50g$ cases reached the expected final time of $2.2~\mathrm{s}$, while the $0.75g$ case did not produce a valid solved output. The compact review metrics are summarised in Table~\ref{dynamic_amplitude_scout_results_table}.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Dynamic-amplitude results for the fixed-support acceleration route.}
+\label{dynamic_amplitude_scout_results_table}
+\begin{tabular}{
+>{\raggedright\arraybackslash}p{0.34\linewidth}
+>{\raggedleft\arraybackslash}p{0.13\linewidth}
+>{\raggedleft\arraybackslash}p{0.15\linewidth}
+>{\raggedleft\arraybackslash}p{0.16\linewidth}
+>{\raggedleft\arraybackslash}p{0.14\linewidth}
+}
+\toprule
+Case & End time & Review avg. disp. & Surface signed $w$ & Output status \\
+& $(\mathrm{s})$ & $(\mathrm{mm})$ & $(\mathrm{mm})$ & \\
+\midrule
+No Cooper xoffset055, $0.25g$ 
+& 2.20 & 3.00 & 0.161 & Solved \\
+
+No Cooper xoffset055, $0.50g$ 
+& 2.20 & 2.86 & 0.310 & Solved \\
+
+No Cooper xoffset055, $0.75g$ 
+& -- & -- & -- & Failed/not valid \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The surface signed vertical response increased from $0.161~\mathrm{mm}$ for the $0.25g$ case to $0.310~\mathrm{mm}$ for the $0.50g$ case. The no-skin $1.00g$ and $1.25g$ cases were evaluated in the separate skin/material scout, which used a simple-glandular model basis. They are therefore not included in the fixed-support amplitude comparison in Table~\ref{dynamic_amplitude_scout_results_table}.
+
+\subsubsection{Prescribed support-displacement route}
+\label{prescribed_support_displacement_results}
+
+A prescribed support-displacement route was evaluated as a separate motion variant. This case used the xoffset055 chestwall geometry with a simple glandular structure, no Cooper-like support, a $1.5~\mathrm{mm}$ volumetric skin layer and soft internal material settings. For the $40~\mathrm{mm}$, $0.60~\mathrm{s}$ support-displacement case, support-relative displacement metrics were extracted from the free outer surface and nipple landmark region.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Prescribed support-displacement response for the $40~\mathrm{mm}$, $0.60~\mathrm{s}$ motion variant.}
+\label{prescribed_support_displacement_results_table}
+\begin{tabular}{
+>{\raggedright\arraybackslash}p{0.48\linewidth}
+>{\raggedleft\arraybackslash}p{0.20\linewidth}
+>{\raggedright\arraybackslash}p{0.22\linewidth}
+}
+\toprule
+Metric & Maximum value & Selection \\
+\midrule
+Support-relative spatial average of $w$ 
+& $8.81~\mathrm{mm}$ 
+& Free outer surface \\
+
+Support-relative maximum of $w$ 
+& $15.70~\mathrm{mm}$ 
+& Free outer surface \\
+
+Support-relative spatial average of $w$ 
+& $15.51~\mathrm{mm}$ 
+& Nipple landmark region \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 4.7 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Tumor-overlay sensitivity}
 \label{tumor_overlay_results}
 
-% Tumor/no-tumor, locatie, grootte, stiffness contrast.
-% Focus op EWS-relevante surface motion + lokale tumor-mask metrics.
-% Hier duidelijk maken of effect globaal zichtbaar is of vooral lokaal in stress/displacement metrics.
+The tumor-overlay route was successfully implemented as a build-level model variant. The analytic tumor mask could be placed inside the existing breast volume and visualised for different tumor positions and sizes. Figure~\ref{fig:tumor_overlay_placement_examples} shows representative examples of central, upper-outer surface-proximal and subareolar tumor-overlay placements.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.29\linewidth}
+\centering
+\includegraphics[height=0.24\textheight,width=\linewidth,keepaspectratio]{Figures/results/report_large_central.png}
+\caption{Large central}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.36\linewidth}
+\centering
+\includegraphics[height=0.24\textheight,width=\linewidth,keepaspectratio]{Figures/results/report_medium_upper_outer_surface.png}
+\caption{Medium upper-outer surface-proximal}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.29\linewidth}
+\centering
+\includegraphics[height=0.24\textheight,width=\linewidth,keepaspectratio]{Figures/results/report_small_subareolar.png}
+\caption{Small subareolar}
+\end{subfigure}
+\caption{Representative build-level tumor-overlay placements generated in COMSOL. The breast volume and glandular structures are shown semi-transparently, while the analytic spherical tumor overlay is highlighted in red. These views show that the tumor mask could be positioned inside the existing anatomical breast model for different locations and sizes.}
+\label{fig:tumor_overlay_placement_examples}
+\end{figure}
+
+The build-level tumor variants included central, upper-outer, subareolar, posterior and surface-proximal placements. These variants confirmed that the tumor mask could be positioned and visually inspected within the anatomical breast model. Due to local solver-capacity and project-time limitations, complete dynamic tumor-overlay solves were not included as final quantitative result cases in this report.
+
+The tumor-overlay results in this chapter are therefore limited to successful build-level placement examples. Complete dynamic tumor-overlay sensitivity results require a larger solved case set with complete tumor-mask post-processing.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 4.8 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Summary of main result trends}
 \label{summary_main_result_trends}
 
-% Korte samenvattende tabel of bullet-like prose.
-% Bijvoorbeeld: material stiffness strongest effect, skin damped motion, Cooper support route effect, tumor contrast effect.
-% Geen discussie; alleen wat uit de resultaten kwam.
+The Results show that the COMSOL workflow produced a more anatomically complete breast model route and several controlled model variants. The selected chestwall geometry and realistic glandular distribution provided the anatomical basis for the later sensitivity comparisons. On top of this reference route, material-parameter changes, the $1.5~\mathrm{mm}$ volumetric skin layer, Cooper-like support definitions, dynamic loading variants and analytic tumor-overlay placements were implemented as separate model-development routes.
+
+The strongest quantitative result sets were obtained for the material, skin and dynamic-loading comparisons. Lower-stiffness material settings increased the reported displacement amplitudes in the skin-enabled variants, while the $1.5~\mathrm{mm}$ volumetric skin layer reduced displacement compared with the no-skin case at the same $1.25g$ input. For the dynamic loading route, the $0.25g$ and $0.50g$ fixed-support acceleration cases solved successfully, and the prescribed support-displacement route produced measurable support-relative surface displacement.
+
+The Cooper-like support and tumor-overlay routes added additional model functionality, but were reported with their current evidence status. Cooper-like support was available as a simple-gland scout and as an anatomical implementation route, while the default anatomical Cooper-support solve was not retained as a final quantitative result. The tumor-overlay route was successfully generated and visualised at build level, but complete dynamic tumor-overlay sensitivity results were not included as final quantitative result cases.

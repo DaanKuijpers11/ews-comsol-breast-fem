@@ -606,50 +606,53 @@ class COMSOLRunner:
         last_progress_pct: int | None = None
         last_log_activity = started
         last_no_progress_notice = started
+        stdout_path = debug_path.with_suffix(debug_path.suffix + ".stdout.txt")
+        stderr_path = debug_path.with_suffix(debug_path.suffix + ".stderr.txt")
         try:
-            process = subprocess.Popen(
-                proc_args,
-                cwd=str(cwd),
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True,
-                encoding="utf-8",
-                errors="replace",
-            )
-            deadline = time.time() + timeout_s if timeout_s and timeout_s > 0 else None
-            while process.poll() is None:
-                previous_log_position = log_position
-                log_position, last_progress, last_progress_pct = cls._tail_progress_log(
-                    log_path=progress_log,
-                    position=log_position,
-                    last_message=last_progress,
-                    last_progress_pct=last_progress_pct,
-                    label=label,
+            with stdout_path.open("w", encoding="utf-8", errors="replace") as stdout_file, stderr_path.open(
+                "w", encoding="utf-8", errors="replace"
+            ) as stderr_file:
+                process = subprocess.Popen(
+                    proc_args,
+                    cwd=str(cwd),
+                    stdout=stdout_file,
+                    stderr=stderr_file,
+                    text=True,
+                    encoding="utf-8",
+                    errors="replace",
                 )
-                now = time.time()
-                if log_position != previous_log_position:
-                    last_log_activity = now
-                if (
-                    no_progress_notice_s is not None
-                    and no_progress_notice_s > 0
-                    and now - last_log_activity >= no_progress_notice_s
-                    and now - last_no_progress_notice >= no_progress_notice_s
-                ):
-                    cls._console(
-                        f"{label}: geen nieuwe COMSOL batchlog-output sinds "
-                        f"{(now - last_log_activity) / 60:.1f} min"
+                deadline = time.time() + timeout_s if timeout_s and timeout_s > 0 else None
+                while process.poll() is None:
+                    previous_log_position = log_position
+                    log_position, last_progress, last_progress_pct = cls._tail_progress_log(
+                        log_path=progress_log,
+                        position=log_position,
+                        last_message=last_progress,
+                        last_progress_pct=last_progress_pct,
+                        label=label,
                     )
-                    last_no_progress_notice = now
-                if deadline is not None and time.time() > deadline:
-                    process.kill()
-                    stdout, stderr = process.communicate()
-                    code = 124
-                    stderr = ((stderr or "") + "\nCommand timed out.").strip()
-                    break
-                time.sleep(5.0)
-            else:
-                stdout, stderr = process.communicate()
-                code = process.returncode
+                    now = time.time()
+                    if log_position != previous_log_position:
+                        last_log_activity = now
+                    if (
+                        no_progress_notice_s is not None
+                        and no_progress_notice_s > 0
+                        and now - last_log_activity >= no_progress_notice_s
+                        and now - last_no_progress_notice >= no_progress_notice_s
+                    ):
+                        cls._console(
+                            f"{label}: geen nieuwe COMSOL batchlog-output sinds "
+                            f"{(now - last_log_activity) / 60:.1f} min"
+                        )
+                        last_no_progress_notice = now
+                    if deadline is not None and time.time() > deadline:
+                        process.kill()
+                        process.wait()
+                        code = 124
+                        break
+                    time.sleep(5.0)
+                else:
+                    code = process.returncode
             log_position, last_progress, last_progress_pct = cls._tail_progress_log(
                 log_path=progress_log,
                 position=log_position,
@@ -657,8 +660,10 @@ class COMSOLRunner:
                 last_progress_pct=last_progress_pct,
                 label=label,
             )
-            stdout = stdout or ""
-            stderr = stderr or ""
+            stdout = stdout_path.read_text(encoding="utf-8", errors="replace") if stdout_path.exists() else ""
+            stderr = stderr_path.read_text(encoding="utf-8", errors="replace") if stderr_path.exists() else ""
+            if code == 124:
+                stderr = ((stderr or "") + "\nCommand timed out.").strip()
         except subprocess.TimeoutExpired as exc:
             code = 124
             if isinstance(exc.stdout, bytes):
@@ -955,11 +960,14 @@ class COMSOLRunner:
                 str(class_file.with_name(f"{java_file.stem}_output.mph").resolve()),
             ]
         class_debug = logs_dir / f"{case_name}_{java_file.stem}_debug.log"
+        postprocess_timeout_s = _normalize_timeout_seconds(settings.comsol.postprocess_timeout_s, 60)
+        if postprocess_timeout_s is None and phase_label == "postprocess":
+            postprocess_timeout_s = 1800
         class_code, class_out, class_err = self._run_logged_command(
             class_args,
             case_dir,
             class_debug,
-            timeout_s=_normalize_timeout_seconds(settings.comsol.postprocess_timeout_s, 60),
+            timeout_s=postprocess_timeout_s,
             progress_log=run_log,
             progress_label=phase_label,
             no_progress_notice_s=120.0,
