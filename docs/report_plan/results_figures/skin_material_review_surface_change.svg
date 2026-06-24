@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="760" viewBox="0 0 1300 760">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#111827}.small{font-size:17px}.label{font-size:19px}.title{font-size:24px;font-weight:700}</style>
+<text class="title" x="145" y="46">Skin/material effect at review surface time</text>
+<line x1="145" y1="555.00" x2="1240" y2="555.00" stroke="#e5e7eb"/>
+<text class="small" x="58" y="561.00">-76.7</text>
+<line x1="145" y1="461.00" x2="1240" y2="461.00" stroke="#e5e7eb"/>
+<text class="small" x="58" y="467.00">-60.2</text>
+<line x1="145" y1="367.00" x2="1240" y2="367.00" stroke="#e5e7eb"/>
+<text class="small" x="58" y="373.00">-43.7</text>
+<line x1="145" y1="273.00" x2="1240" y2="273.00" stroke="#e5e7eb"/>
+<text class="small" x="58" y="279.00">-27.3</text>
+<line x1="145" y1="179.00" x2="1240" y2="179.00" stroke="#e5e7eb"/>
+<text class="small" x="58" y="185.00">-10.8</text>
+<line x1="145" y1="85.00" x2="1240" y2="85.00" stroke="#e5e7eb"/>
+<text class="small" x="58" y="91.00">5.7</text>
+<line x1="145" y1="117.41" x2="1240" y2="117.41" stroke="#111827" stroke-width="2"/>
+<line x1="145" y1="85" x2="145" y2="555" stroke="#111827" stroke-width="2"/>
+<rect x="204.50" y="117.41" width="100.00" height="0.00" fill="#737373"/>
+<text class="small" x="236.50" y="110.41">0.0%</text>
+<text class="small" x="174.50" y="590">Reference 1.5 mm soft</text>
+<text class="small" x="240.00" y="610">skin</text>
+<rect x="423.50" y="117.41" width="100.00" height="126.12" fill="#2563eb"/>
+<text class="small" x="448.50" y="266.53">-22.1%</text>
+<text class="small" x="463.00" y="590">No</text>
+<text class="small" x="459.00" y="610">skin</text>
+<rect x="642.50" y="117.41" width="100.00" height="107.86" fill="#2563eb"/>
+<text class="small" x="667.50" y="248.27">-18.9%</text>
+<text class="small" x="651.50" y="590">0.1 mm soft</text>
+<text class="small" x="678.00" y="610">skin</text>
+<rect x="861.50" y="117.41" width="100.00" height="60.49" fill="#2563eb"/>
+<text class="small" x="886.50" y="200.90">-10.6%</text>
+<text class="small" x="839.50" y="590">1.5 mm intermediate</text>
+<text class="small" x="897.00" y="610">skin</text>
+<rect x="1080.50" y="117.41" width="100.00" height="405.17" fill="#2563eb"/>
+<text class="small" x="1105.50" y="545.59">-71.0%</text>
+<text class="small" x="1090.00" y="590">1.5 mm stiff</text>
+<text class="small" x="1116.00" y="610">skin</text>
+<text class="label" transform="translate(28 320.00) rotate(-90)" text-anchor="middle">Review surface change relative to reference (%)</text>
+</svg>

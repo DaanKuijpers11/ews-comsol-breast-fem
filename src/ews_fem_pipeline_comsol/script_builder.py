@@ -4693,7 +4693,7 @@ public class {postprocess_class_name} {{
     postprocessStatus("load_complete");
     String postprocessMode = "{postprocess_mode_java}";
     boolean tumorMetricsEnabled = {str(tumor_enabled).lower()};
-    boolean exportTumorMetrics = tumorMetricsEnabled && (postprocessMode.equals("full") || postprocessMode.equals("internal_tumor"));
+    boolean exportTumorMetrics = tumorMetricsEnabled && (postprocessMode.equals("full") || postprocessMode.equals("internal_tumor") || postprocessMode.equals("global"));
     boolean exportSurfaceMetrics = postprocessMode.equals("full") || postprocessMode.equals("ews_surface");
     boolean exportLandmarkMetrics = postprocessMode.equals("full") || postprocessMode.equals("ews_surface");
     boolean exportStressStdMetrics = postprocessMode.equals("full");
@@ -4720,22 +4720,155 @@ public class {postprocess_class_name} {{
       : 0.0;
     postprocessStatus("volume_scalars_ready");
 
+    if ({postprocess_quick_mode_java}) {{
+      postprocessStatus("quick_global_displacement_start");
+      double[] timeValues = getTimeValues(model);
+      double[] maxDispBreastSeries = evalMaxVolumeSeries(model, "mvDispBreastSeries", "geom1_breast_union_dom", "solid.disp");
+      double[] intDispBreastSeries = evalIntVolumeSeries(model, "ivDispBreastSeries", "geom1_breast_union_dom", "solid.disp");
+      double[] maxDispTumorSeries = exportTumorMetrics ? evalMaxVolumeSeries(model, "mvDispTumorSeries", "geom1_breast_union_dom", "if(tumor_mask>0.5,solid.disp,0)") : new double[0];
+      double[] intDispTumorSeries = exportTumorMetrics ? evalIntVolumeSeries(model, "ivDispTumorSeries", "geom1_breast_union_dom", "tumor_mask*solid.disp") : new double[0];
+      int seriesLength = minLength(timeValues, maxDispBreastSeries, intDispBreastSeries);
+      double[] avgDispBreastSeries = new double[seriesLength];
+      double[] avgDispTumorSeries = new double[seriesLength];
+      for (int i = 0; i < seriesLength; i++) {{
+        avgDispBreastSeries[i] = breastVolume != 0.0 ? intDispBreastSeries[i] / breastVolume : Double.NaN;
+        avgDispTumorSeries[i] = tumorVolume != 0.0 ? safeAt(intDispTumorSeries, i) / tumorVolume : Double.NaN;
+      }}
+      double[] nanSeries = nanArray(seriesLength);
+      int peakDispIdxQuick = peakIndex(maxDispBreastSeries);
+      int peakTumorDispIdxQuick = peakIndex(maxDispTumorSeries);
+      int reviewIdxQuick = closestTimeIndexOneBased(timeValues, {report_review_time_s:.12f}) - 1;
+      double maxDispBreast = peakDispIdxQuick >= 0 ? safeAt(maxDispBreastSeries, peakDispIdxQuick) : Double.NaN;
+      double avgDispBreast = maxFinite(avgDispBreastSeries);
+      double maxDispTumor = peakTumorDispIdxQuick >= 0 ? safeAt(maxDispTumorSeries, peakTumorDispIdxQuick) : Double.NaN;
+      double avgDispTumor = maxFinite(avgDispTumorSeries);
+      double peakDispTimeQuick = (peakDispIdxQuick >= 0 && peakDispIdxQuick < timeValues.length) ? timeValues[peakDispIdxQuick] : Double.NaN;
+      double peakTumorDispTimeQuick = (peakTumorDispIdxQuick >= 0 && peakTumorDispIdxQuick < timeValues.length) ? timeValues[peakTumorDispIdxQuick] : Double.NaN;
+      String q = Character.toString((char)34);
+      String nl = System.lineSeparator();
+      String json = ""
+        + "{{" + nl
+        + "  " + q + "case_name" + q + ": " + q + "{case_name}" + q + "," + nl
+        + "  " + q + "source" + q + ": " + q + "COMSOL" + q + "," + nl
+        + "  " + q + "coordinate_convention" + q + ": " + q + "x/u = left-right lateral; y/v = anterior-posterior; z/w = vertical. Signed report displacement uses w, with negative values indicating downward motion." + q + "," + nl
+        + "  " + q + "configured_dynamic_motion_mode" + q + ": " + q + "{dynamic_motion_mode}" + q + "," + nl
+        + "  " + q + "configured_dynamic_motion_profile" + q + ": " + q + "{dynamic_motion_profile}" + q + "," + nl
+        + "  " + q + "postprocess_mode" + q + ": " + q + postprocessMode + q + "," + nl
+        + "  " + q + "postprocess_quick_mode" + q + ": true," + nl
+        + "  " + q + "postprocess_export_plot_images" + q + ": false," + nl
+        + "  " + q + "postprocess_save_postprocessed_mph" + q + ": {postprocess_save_postprocessed_mph_java}," + nl
+        + "  " + q + "dynamic_start_time_s" + q + ": {dynamic_start_s:.12f}," + nl
+        + "  " + q + "dynamic_end_time_s" + q + ": {dynamic_end_s:.12f}," + nl
+        + "  " + q + "configured_review_time_s" + q + ": {report_review_time_s:.12f}," + nl
+        + "  " + q + "jump_start_time_s" + q + ": {jump_start_s:.12f}," + nl
+        + "  " + q + "jump_duration_s" + q + ": {jump_duration_s:.12f}," + nl
+        + "  " + q + "jump_max_height_m" + q + ": {jump_max_height_m:.12f}," + nl
+        + "  " + q + "support_displacement_amplitude_m" + q + ": {support_displacement_amplitude_m:.12f}," + nl
+        + "  " + q + "support_displacement_duration_s" + q + ": {support_displacement_duration_s:.12f}," + nl
+        + "  " + q + "pulse_duration_s" + q + ": {pulse_duration_s:.12f}," + nl
+        + "  " + q + "pulse_acceleration_amplitude_g" + q + ": {dynamic_acceleration_amplitude_g:.12f}," + nl
+        + "  " + q + "dynamic_motion_boundary_selection" + q + ": " + q + "breast_attach_bnd" + q + "," + nl
+        + "  " + q + "surface_displacement_selection" + q + ": " + q + "not_exported_global_quick_mode" + q + "," + nl
+        + "  " + q + "support_displacement_selection" + q + ": " + q + "not_exported_global_quick_mode" + q + "," + nl
+        + "  " + q + "tumor_enabled" + q + ": {str(tumor_enabled).lower()}," + nl
+        + "  " + q + "tumor_radius_m" + q + ": {tumor_radius:.12f}," + nl
+        + "  " + q + "tumor_diameter_mm" + q + ": {2000.0 * tumor_radius:.12f}," + nl
+        + "  " + q + "tumor_position_m" + q + ": [{tumor_x:.12f}, {tumor_y:.12f}, {tumor_z:.12f}]," + nl
+        + "  " + q + "tumor_nominal_sphere_volume" + q + ": {((4.0 / 3.0) * 3.141592653589793 * tumor_radius**3):.12e}," + nl
+        + "  " + q + "breast_volume" + q + ": " + breastVolume + "," + nl
+        + "  " + q + "glandular_volume" + q + ": " + glandVolume + "," + nl
+        + "  " + q + "adipose_volume" + q + ": " + adiposeVolume + "," + nl
+        + "  " + q + "tumor_volume" + q + ": " + tumorVolume + "," + nl
+        + "  " + q + "max_displacement_breast" + q + ": " + maxDispBreast + "," + nl
+        + "  " + q + "avg_displacement_breast" + q + ": " + avgDispBreast + "," + nl
+        + "  " + q + "max_displacement_tumor" + q + ": " + maxDispTumor + "," + nl
+        + "  " + q + "avg_displacement_tumor" + q + ": " + avgDispTumor + "," + nl
+        + "  " + q + "max_von_mises_breast" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "max_von_mises_glandular" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "max_von_mises_adipose" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "max_von_mises_tumor" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "avg_von_mises_breast" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "avg_von_mises_glandular" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "avg_von_mises_adipose" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "avg_von_mises_tumor" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "hotspot_factor_breast_at_peak_vm" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "hotspot_factor_glandular_at_peak_gland_vm" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "series_length" + q + ": " + seriesLength + "," + nl
+        + "  " + q + "surface_series_length" + q + ": 0," + nl
+        + "  " + q + "support_series_length" + q + ": 0," + nl
+        + "  " + q + "surface_area_outer_skin" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "time_of_peak_displacement_breast" + q + ": " + peakDispTimeQuick + "," + nl
+        + "  " + q + "time_of_peak_von_mises_breast" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "time_of_peak_von_mises_glandular" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "time_of_peak_von_mises_adipose" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "time_of_peak_displacement_tumor" + q + ": " + peakTumorDispTimeQuick + "," + nl
+        + "  " + q + "time_of_peak_von_mises_tumor" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "review_time_s" + q + ": " + safeAt(timeValues, reviewIdxQuick) + "," + nl
+        + "  " + q + "review_max_displacement_breast" + q + ": " + safeAt(maxDispBreastSeries, reviewIdxQuick) + "," + nl
+        + "  " + q + "review_avg_displacement_breast" + q + ": " + safeAt(avgDispBreastSeries, reviewIdxQuick) + "," + nl
+        + "  " + q + "review_max_displacement_tumor" + q + ": " + safeAt(maxDispTumorSeries, reviewIdxQuick) + "," + nl
+        + "  " + q + "review_avg_displacement_tumor" + q + ": " + safeAt(avgDispTumorSeries, reviewIdxQuick) + "," + nl
+        + "  " + q + "review_max_von_mises_breast" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "review_max_von_mises_glandular" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "review_max_von_mises_adipose" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "review_max_von_mises_tumor" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "review_avg_von_mises_breast" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "review_avg_von_mises_glandular" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "review_avg_von_mises_adipose" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "review_avg_von_mises_tumor" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "review_surface_disp_mag_mean" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "review_surface_disp_mag_max" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "review_surface_signed_w_mean" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "review_surface_signed_w_min" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "review_surface_signed_w_max" + q + ": " + Double.NaN + "," + nl
+        + "  " + q + "time_s" + q + ": " + formatArray(timeValues, seriesLength) + "," + nl
+        + "  " + q + "max_displacement_breast_series" + q + ": " + formatArray(maxDispBreastSeries, seriesLength) + "," + nl
+        + "  " + q + "avg_displacement_breast_series" + q + ": " + formatArray(avgDispBreastSeries, seriesLength) + "," + nl
+        + "  " + q + "max_displacement_tumor_series" + q + ": " + formatArray(maxDispTumorSeries, seriesLength) + "," + nl
+        + "  " + q + "avg_displacement_tumor_series" + q + ": " + formatArray(avgDispTumorSeries, seriesLength) + "," + nl
+        + "  " + q + "max_von_mises_breast_series" + q + ": " + formatArray(nanSeries, seriesLength) + "," + nl
+        + "  " + q + "max_von_mises_glandular_series" + q + ": " + formatArray(nanSeries, seriesLength) + "," + nl
+        + "  " + q + "max_von_mises_adipose_series" + q + ": " + formatArray(nanSeries, seriesLength) + "," + nl
+        + "  " + q + "max_von_mises_tumor_series" + q + ": " + formatArray(nanSeries, seriesLength) + "," + nl
+        + "  " + q + "avg_von_mises_breast_series" + q + ": " + formatArray(nanSeries, seriesLength) + "," + nl
+        + "  " + q + "avg_von_mises_glandular_series" + q + ": " + formatArray(nanSeries, seriesLength) + "," + nl
+        + "  " + q + "avg_von_mises_adipose_series" + q + ": " + formatArray(nanSeries, seriesLength) + "," + nl
+        + "  " + q + "avg_von_mises_tumor_series" + q + ": " + formatArray(nanSeries, seriesLength) + "," + nl
+        + "  " + q + "stress_percentiles_status" + q + ": " + q + "global quick mode: displacement and tumor displacement exported; von Mises, surface and landmark metrics not exported." + q + nl
+        + "}}" + nl;
+      System.out.println("COMSOL_METRICS_JSON_BEGIN");
+      System.out.print(json);
+      System.out.println("COMSOL_METRICS_JSON_END");
+      postprocessStatus("quick_global_metrics_ready");
+      return model;
+    }}
+
     postprocessStatus("scalar_review_metrics_start");
+    postprocessStatus("scalar_review_max_disp_breast_start");
     double maxDispBreast = evalMaxVolume(model, "mvDispBreast", "geom1_breast_union_dom", "solid.disp");
+    postprocessStatus("scalar_review_max_disp_breast_ready");
+    postprocessStatus("scalar_review_int_disp_breast_start");
     double intDispBreast = evalIntVolume(model, "ivDispBreast", "geom1_breast_union_dom", "solid.disp");
+    postprocessStatus("scalar_review_int_disp_breast_ready");
     double avgDispBreast = breastVolume != 0.0 ? intDispBreast / breastVolume : Double.NaN;
+    postprocessStatus("scalar_review_tumor_disp_start");
     double maxDispTumor = exportTumorMetrics ? evalMaxVolume(model, "mvDispTumor", "geom1_breast_union_dom", "if(tumor_mask>0.5,solid.disp,0)") : Double.NaN;
     double intDispTumor = exportTumorMetrics ? evalIntVolume(model, "ivDispTumor", "geom1_breast_union_dom", "tumor_mask*solid.disp") : Double.NaN;
+    postprocessStatus("scalar_review_tumor_disp_ready");
     double avgDispTumor = tumorVolume != 0.0 ? intDispTumor / tumorVolume : Double.NaN;
 
+    postprocessStatus("scalar_review_mises_max_start");
     double maxMisesBreast = evalMaxVolume(model, "mvMisesBreast", "geom1_breast_union_dom", "solid.mises");
     double maxMisesGland = evalMaxVolume(model, "mvMisesGland", "geom1_gland_clip_dom", "solid.mises");
     double maxMisesAdipose = evalMaxVolume(model, "mvMisesAdipose", "geom1_adipose_diff_dom", "solid.mises");
     double maxMisesTumor = exportTumorMetrics ? evalMaxVolume(model, "mvMisesTumor", "geom1_breast_union_dom", "if(tumor_mask>0.5,solid.mises,0)") : Double.NaN;
+    postprocessStatus("scalar_review_mises_max_ready");
+    postprocessStatus("scalar_review_mises_int_start");
     double intMisesBreast = evalIntVolume(model, "ivMisesBreast", "geom1_breast_union_dom", "solid.mises");
     double intMisesGland = evalIntVolume(model, "ivMisesGland", "geom1_gland_clip_dom", "solid.mises");
     double intMisesAdipose = evalIntVolume(model, "ivMisesAdipose", "geom1_adipose_diff_dom", "solid.mises");
     double intMisesTumor = exportTumorMetrics ? evalIntVolume(model, "ivMisesTumor", "geom1_breast_union_dom", "tumor_mask*solid.mises") : Double.NaN;
+    postprocessStatus("scalar_review_mises_int_ready");
     double avgMisesBreast = breastVolume != 0.0 ? intMisesBreast / breastVolume : Double.NaN;
     double avgMisesGland = glandVolume != 0.0 ? intMisesGland / glandVolume : Double.NaN;
     double avgMisesAdipose = adiposeVolume != 0.0 ? intMisesAdipose / adiposeVolume : Double.NaN;
