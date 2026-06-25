@@ -31,7 +31,7 @@ The purpose of this workflow was to make model changes traceable. Instead of man
 
 The model was developed by adding and testing one modelling component at a time. The development was organised around six main modelling themes: dynamic excitation, posterior chestwall geometry, internal fibroglandular tissue distribution, outer-shape variation, mechanical support representation and tumor sensitivity. This structure was used to reduce the risk of interpreting multiple model changes at once.
 
-The first part of the workflow focused on establishing a stable dynamic input and a controlled anatomical reference geometry. The posterior support was then refined using a curved chestwall representation, followed by a more detailed fibroglandular tissue distribution. After this anatomical route was established, additional model variants were used to investigate outer-shape asymmetry, Cooper-ligament support approximations, and skin and material sensitivity. Tumor sensitivity was treated as a separate final extension of the workflow. In this extension, spherical tumor inclusions were added to matched reference models to evaluate the effect of local stiffness changes on the simulated response. The overall model-development route is summarised in Figure~\ref{fig:model_development_route}.
+The first part of the workflow focused on establishing a stable dynamic input and a controlled anatomical reference geometry. The posterior support was then refined using a curved chestwall representation, followed by a more detailed fibroglandular tissue distribution. After this anatomical route was established, additional model variants were used to investigate outer-shape asymmetry, Cooper-ligament support approximations, and skin and material sensitivity. Tumor sensitivity was treated as a separate final extension of the workflow. In this extension, spherical tumor-overlay definitions were prepared for different sizes and locations to test whether local stiffness inclusions could be added consistently to the existing COMSOL model. The overall model-development route is summarised in Figure~\ref{fig:model_development_route}.
 
 \begin{figure}[H]
 \centering
@@ -411,11 +411,11 @@ m_{\mathrm{tumor}}\Delta C_{01,\mathrm{tumor}}.
 \label{tumor_effective_c01_coefficient}
 \end{equation}
 
-The current tumor material settings include both modest stiffness-contrast cases and a harder diagnostic-contrast case. Because the Early Warning Scan concept is aimed at detecting malignant breast tumors, the harder tumor-overlay setting was included to test a clear local stiffness contrast relative to normal breast tissue. In this high-contrast setting, the analytic overlay used $E_{\mathrm{tumor}}=100~\mathrm{kPa}$ together with local Mooney--Rivlin coefficient increments of $\Delta C_{10,\mathrm{tumor}}=\Delta C_{01,\mathrm{tumor}}=8333~\mathrm{Pa}$. These values should be interpreted as a simplified stiffness target for a sensitivity case rather than as a patient-specific tumor material definition, because malignant breast tumor stiffness values reported in elastography and mechanical testing can vary strongly with measurement modality, region of interest and tumor type \cite{Samani2007,McKnight2002,Patel2021,Patel2022}.
+The current tumor material settings include both modest stiffness-contrast cases and a harder diagnostic-contrast case. Because the Early Warning Scan is aimed at detecting malignant breast tumors, the harder tumor-overlay setting was included to test a clear local stiffness contrast relative to normal breast tissue. In this high-contrast setting, the analytic overlay used $E_{\mathrm{tumor}}=100~\mathrm{kPa}$ together with local Mooney--Rivlin coefficient increments of $\Delta C_{10,\mathrm{tumor}}=\Delta C_{01,\mathrm{tumor}}=8333~\mathrm{Pa}$. These values should be interpreted as a simplified stiffness target for a sensitivity case rather than as a patient-specific tumor material definition, because malignant breast tumor stiffness values reported in elastography and mechanical testing can vary strongly with measurement modality, region of interest and tumor type \cite{Samani2007,McKnight2002,Patel2021,Patel2022}.
 
+The tumor-overlay route was prepared for multiple tumor sizes and locations. The tested size settings used small, medium and large spherical overlays with radii of $3~\mathrm{mm}$, $6~\mathrm{mm}$ and $10~\mathrm{mm}$, respectively. 
 
-
-
+The reported solved tumor cases focused on a medium upper-outer tumor, because the upper-outer breast quadrant is frequently reported as the most common tumor location \cite{Rummel2015}. Additional build-level placements were generated in central, subareolar, posterior and surface-proximal positions to test whether the analytic tumor mask could be positioned consistently across different anatomical regions.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -566,6 +566,8 @@ where $q$ is the evaluated displacement or stress quantity and $A_{S}$ is the su
 For prescribed support-displacement cases, the support-relative vertical displacement defined in Equation~\ref{support_relative_vertical_displacement} was used in addition to the absolute displacement. Landmark-patch displacements were also exported for selected surface regions, including the nipple and superior, inferior, left and right breast-surface patches. These patch-averaged values were used as robust surface-motion measures, because they are less sensitive to individual mesh nodes than single-point displacement values.
 
 Stress was evaluated using the exported von Mises stress field. This was used as a mechanical diagnostic for comparing stress concentration between model variants. For the tumor cases, local displacement and stress measures were additionally evaluated using the tumor mask region.
+
+COMSOL animations were also generated for qualitative inspection of the time-dependent deformation patterns. These animations were not used as quantitative evidence; the reported Results are based on the exported displacement, stress, surface and tumor-mask metrics. The post-processing quantities used for the main model comparisons are summarised in Table~\ref{post_processing_metrics_table}.
 
 \begin{table}[H]
 \centering
