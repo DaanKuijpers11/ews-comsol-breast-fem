@@ -1,15 +1,9 @@
-% Proposed Discussion structure:
-% 1. Contribution to an EWS-oriented FEM modelling workflow
-% 2. Anatomical realism and glandular representation
-% 3. Material-parameter uncertainty and response realism
-% 4. Dynamic loading and surface-motion interpretation
-% 5. Skin and Cooper-like support modelling choices
-% 6. Tumor-overlay route and future tumor sensitivity
-% 7. Computational limitations and reproducibility
-% 8. Overall perspective and future work
-
 \section{Discussion}
 \label{discussion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 5.1 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Contribution to an EWS-oriented FEM modelling workflow}
 \label{discussion_ews_fem_workflow}
@@ -18,77 +12,102 @@ This project developed a progressively more complete COMSOL finite-element route
 
 Compared with a simplified breast representation, the final model route introduced a curved posterior support geometry, a more realistic glandular distribution, optional volumetric skin representation, material-parameter sensitivity cases, Cooper-like support approximations, dynamic loading variants and analytic tumor-overlay placements. These additions increased the anatomical and mechanical richness of the model and made it possible to evaluate which components most strongly affect the simulated surface response. The framework therefore provides a basis for future EWS-oriented surface-motion studies, but the present results should be interpreted as model-development outcomes rather than as evidence of diagnostic performance.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 5.2 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Anatomical realism and glandular representation}
 \label{discussion_anatomical_realism_glandular}
 
-A central aim of the project was to move toward a more anatomically realistic FEM breast model. The realistic glandular route improved on a simple glandular approximation by introducing a spatially distributed fibroglandular structure within the breast volume. This is relevant because breast tissue is mechanically heterogeneous: adipose and fibroglandular tissue differ in stiffness, density and spatial distribution, and the resulting deformation response can depend on both the amount and location of fibroglandular tissue \cite{Samani2007,Ramiao2016,Goodbrake2022,Teixeira2023}.
+A central aim of this project was to improve the anatomical realism of the FEM breast model. The realistic glandular route added a spatially distributed fibroglandular structure instead of representing the internal breast tissue with a single simplified region. This is relevant because breast deformation depends not only on total breast size, but also on the relative amount and spatial distribution of adipose and fibroglandular tissue \cite{Samani2007,Ramiao2016,Goodbrake2022,Teixeira2023}.
 
-The current glandular implementation also introduced a practical limitation. A detailed glandular structure is more representative than a single simple inclusion, but it increases geometric and meshing complexity and therefore solver cost. Future work should investigate whether a reduced glandular representation can preserve the relevant mechanical effects while being faster to mesh and solve. Possible routes include controlled glandular-fraction models, smoothed glandular masks, clustered glandular regions or subject-specific segmentations with simplified surfaces. Such comparisons would help determine whether the full glandular structure is required for EWS-relevant surface-motion prediction, or whether a computationally cheaper approximation is sufficient for parameter sweeps.
+The current glandular implementation also introduced a practical limitation. A detailed glandular structure is mechanically more representative, but it increases geometric complexity, meshing difficulty and solver cost. Similar anatomical complexity was a limiting factor in previous internal FEBio-based model-development routes \cite{EngelsEWSReport,StormEWSReport}. The current COMSOL workflow was able to build and solve the realistic glandular route, but running many dynamic variants on a local laptop remained computationally demanding. This suggests that the modelling strategy is technically feasible, but that further studies require access to stronger computational resources.
 
-Anatomical variability should also be included more systematically. Breast size, glandular fraction, glandular asymmetry, posterior attachment geometry and tissue distribution vary strongly between individuals. The current model should therefore be interpreted as one anatomical route rather than a population-level model. A stronger future study would run the same loading and material assumptions across multiple anatomies and would separate the influence of geometry from the influence of material parameters.
+Anatomical variability should therefore become a larger part of future model development. Breast size and shape, glandular fraction, glandular asymmetry, posterior attachment geometry and tissue distribution vary strongly between individuals \cite{Ramiao2016,Goodbrake2022,Teixeira2023}. The current model can be used as a first step for building such population-level model sets, but this would require many additional variants and more validation. Future work should therefore vary the relevant anatomical, mechanical and loading parameters in a systematic way to quantify their influence on the simulated surface response. For future AI-based analysis, this type of systematic variation could support the construction of synthetic datasets with controlled differences in anatomy, tissue properties, loading conditions and tumor characteristics.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 5.3 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Material-parameter uncertainty and response realism}
 \label{discussion_material_uncertainty_response_realism}
 
-Material parameters remain one of the largest sources of uncertainty in breast FEM modelling. Reported stiffness values for adipose tissue, fibroglandular tissue, skin and tumor tissue vary substantially across studies because they depend on measurement method, tissue preparation, preload, strain level, loading direction, constitutive model and pathology \cite{Samani2007,Ramiao2016,Goodbrake2022,Teixeira2023}. The material settings used in this project should therefore be interpreted as controlled reference and sensitivity values rather than as patient-specific tissue properties.
+Material parameters remain one of the largest sources of uncertainty in breast FEM modelling. Reported stiffness values for adipose tissue, fibroglandular tissue, skin and tumor tissue vary substantially across studies because they depend strongly on experimental protocol, tissue condition and constitutive assumptions \cite{Samani2007,Ramiao2016,Goodbrake2022,Teixeira2023}. The material settings used in this project should therefore be interpreted as controlled reference and sensitivity values rather than as patient-specific tissue properties.
 
-This uncertainty affects how the displacement results should be read. A simulated displacement amplitude is only physically meaningful when the material parameters, boundary conditions and loading route are all plausible for the intended experimental situation. The current results show that the model can produce measurable dynamic surface motion, but the exact displacement scale still requires comparison with experimental or EWS-like motion data. In future work, the simulated surface displacements should be compared with phantom measurements, optical surface tracking or in-vivo breast-motion data under a known loading condition. Such validation would make it possible to determine whether the selected stiffness range reproduces realistic breast motion.
+This uncertainty affects how the displacement results should be read. A simulated displacement amplitude is only physically meaningful when the material parameters, boundary conditions and loading route are plausible for the intended experimental situation. The current results show that the model can produce measurable dynamic surface motion, but the exact displacement scale still requires comparison with experimental or EWS-like motion data. Such validation would make it possible to determine whether the selected stiffness range reproduces realistic breast motion.
 
-The von Mises stress results should be interpreted even more cautiously. In this project, von Mises stress was useful as a scalar diagnostic for comparing stress concentrations between variants, especially near support and attachment regions. However, stress is not directly measured by the EWS concept and should not be treated as a direct detection output. Stress concentrations near the posterior support are more likely to reflect the imposed boundary condition and support geometry than a clinically meaningful tissue response. For EWS interpretation, free-surface displacement and landmark motion are therefore more relevant than internal stress metrics.
+The von Mises stress results should be interpreted with caution. In this project, von Mises stress was useful as a scalar diagnostic for comparing stress concentrations between variants, especially near support and attachment regions. However, stress is not directly measured by the EWS concept and should not be treated as a direct detection output. Stress concentrations near the posterior support are more likely to reflect the imposed boundary condition and support geometry than a clinically meaningful tissue response. For EWS interpretation, surface displacement and landmark motion are therefore more relevant than internal stress metrics.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 5.4 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Dynamic loading and surface-motion interpretation}
 \label{discussion_dynamic_loading_surface_motion}
 
-The dynamic loading route is another key modelling choice. The fixed-support acceleration input and the prescribed support-displacement route represent different idealisations of how breast motion could be generated during an EWS-like measurement. The fixed-support acceleration route is useful because it applies a controlled global excitation while keeping the support geometry fixed. The prescribed support-displacement route is more directly related to a physical situation in which the chestwall or support moves up and down, for example during a jump-like motion.
+The dynamic loading definition is an important part of the model, because the simulated breast response depends strongly on how motion is introduced. The fixed-support acceleration input and the prescribed support-displacement route represent different idealisations of how breast motion could be generated during an EWS-like measurement. The fixed-support acceleration route applies a controlled global excitation while keeping the support geometry fixed. The prescribed support-displacement route is more directly related to a physical situation in which the chestwall or support moves up and down, for example during a jump-like motion.
 
-Further work is needed to determine which representation best matches the intended EWS measurement setting. Relevant parameters include acceleration amplitude, pulse duration, frequency content, damping, gravity preload, support-displacement amplitude and coupling between the support and breast volume. The most appropriate dynamic input should be selected based on measurable surface response, not only numerical stability. Because EWS observes external motion, the main comparison quantity should remain the displacement of the free breast surface, supported by landmark regions such as the nipple and other visible surface patches.
+In the current project, most quantitative dynamic comparisons focused on the fixed-support acceleration route. This provided a controlled way to compare model variants, but it does not necessarily mean that this route is the most realistic representation of the final EWS setup. Further work should therefore compare the fixed-support acceleration route with prescribed support-motion approaches in more detail. The resulting motion depends on the amplitude, timing, damping, gravity preload and support coupling of the model. These factors should therefore be selected or calibrated against the intended EWS motion setting, because they directly influence whether the simulated breast response is physically representative.
 
 The current dynamic results should therefore be interpreted as proof that different loading routes can be implemented and compared within the COMSOL workflow. They do not yet define an experimentally validated EWS loading protocol. A future validation study should record the motion applied in an EWS-like setup and use that measured motion as the input or calibration target for the FEM model.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 5.5 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Skin and Cooper-like support modelling choices}
 \label{discussion_skin_cooper_support}
 
-The skin representation had a clear mechanical role in the model because the skin layer adds a relatively stiff outer structure around softer internal breast tissue. This is consistent with multi-component breast modelling approaches in which skin, adipose tissue, fibroglandular tissue, pectoral support and fibrous support structures are treated as separate mechanical components \cite{Chen2025,Teixeira2023,Mazier2024}. The current COMSOL route used a $1.5~\mathrm{mm}$ volumetric skin layer as a controlled modelling choice. This improved interpretability compared with earlier shell or scaffold attempts, but it is still not a patient-specific skin reconstruction.
+The skin representation had a clear mechanical role in the model because it added a relatively stiff outer layer around the softer internal breast tissues. This is consistent with multi-component breast FEM studies, where the breast is represented using separate anatomical and mechanical components rather than as one homogeneous soft-tissue volume \cite{Chen2025,Teixeira2023,Mazier2024}. In the current COMSOL route, the $1.5~\mathrm{mm}$ volumetric skin layer was therefore an important step toward a more anatomically representative model. This thickness is also within reported breast-skin thickness ranges, although skin thickness and mechanical properties vary between subjects and measurement locations \cite{Huang2008,Sutradhar2012}.
 
-The skin route should be developed further by varying both thickness and stiffness. Skin thickness and mechanical properties vary between individuals and body locations, and the effective contribution of skin in a breast model depends on how it is coupled to the internal tissue. A future parameter sweep should therefore test whether the same qualitative response is obtained for a realistic range of skin thicknesses and stiffnesses. This would also help separate the mechanical effect of a true skin layer from numerical effects caused by a stiff outer domain.
+The volumetric skin route should still be interpreted as a controlled modelling choice rather than as a patient-specific skin reconstruction. Its mechanical effect depends not only on the selected skin stiffness and thickness, but also on how the layer is coupled to the internal breast tissue. Future work should therefore include a more systematic skin-parameter study to determine how robust the simulated surface response is across realistic skin properties.
 
-The Cooper-like support implementation should be interpreted as a simplified support approximation. Cooper's ligaments form a distributed fibrous network that is difficult to segment and parameterise patient-specifically. The current model therefore used simplified restoring support contributions to test the effect of additional anterior support, not to reconstruct the true ligament anatomy. Future work could improve this route through distributed support fields, fibre-reinforced material formulations, image-based ligament approximations or better anatomical placement of support regions. Such developments should be validated against surface-motion data before Cooper-like support is used for strong physical conclusions.
+The Cooper-like support implementation should also be interpreted as an approximation. Cooper's ligaments form a distributed fibrous support structure in the breast, while the current COMSOL route represented their influence through simplified support terms rather than explicit anatomical ligament reconstruction \cite{Chen2025}. This made it possible to test the mechanical influence of additional support, but future versions should use a more anatomically support representation for the Cooper's ligaments.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 5.6 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Tumor-overlay route and future tumor sensitivity}
 \label{discussion_tumor_overlay_future_sensitivity}
 
-The tumor-overlay route successfully added a build-level mechanism for placing analytic spherical stiffness inclusions inside the existing breast volume. This is a useful first step because it allows tumor size and location to be varied without requiring separate Boolean geometry operations for each case. The current implementation is therefore suitable for preparing systematic tumor-sensitivity studies.
+The tumor-overlay route successfully added a build-level mechanism for placing analytic spherical stiffness inclusions inside the existing breast volume. This is a useful first step because tumor size and location can be changed without rebuilding the full breast geometry for every variant. The current implementation is therefore suitable for preparing systematic tumor-sensitivity studies.
 
-The current tumor representation is still highly simplified. Real breast tumors can differ in size, shape, margin irregularity, stiffness, heterogeneity, depth, local attachment and surrounding tissue context. A spherical homogeneous overlay can test the effect of a controlled stiffness contrast, but it cannot represent the full range of malignant tumor morphology. This limitation is especially important for EWS, because a tumor would only be detectable through its effect on the externally observable surface motion. The relevant question is therefore not only whether a stiff inclusion changes the internal mechanical field, but whether it changes the surface response enough to be measured robustly.
+The current tumor representation is still simplified. Real breast tumors can differ in morphology, stiffness, depth and interaction with surrounding tissue, and reported tumor stiffness values vary strongly between measurement methods and tumor types \cite{Samani2007,McKnight2002,Patel2021,Patel2022}. A spherical homogeneous overlay can test the effect of a controlled stiffness contrast, but it cannot represent the full range of malignant tumor morphology. This limitation is especially important for EWS, because a tumor would only be detectable through its effect on the externally observable surface motion. The relevant question is therefore not only whether a stiff inclusion changes the internal mechanical field, but whether it changes the surface response enough to be measured robustly.
 
-Future tumor studies should systematically vary tumor shape, diameter, stiffness contrast, depth and anatomical location. Central, subareolar, upper-outer, posterior and surface-proximal locations should be compared, and the interaction with fibroglandular tissue and skin should be included. These studies should be run as complete dynamic simulations with tumor-mask post-processing, surface-motion metrics and matched no-tumor controls. Only after such a solved and validated case set is available can the tumor-overlay route be used to discuss potential EWS detectability.
+Future tumor studies should therefore test a broader range of tumor geometries, stiffness contrasts and anatomical locations. These studies should be run as complete dynamic simulations with tumor-mask post-processing, surface-motion metrics and matched no-tumor controls. Only after such a solved and validated case set is available can the tumor-overlay route be used to discuss potential EWS detectability.
 
-\subsection{Computational limitations and solver strategy}
-\label{discussion_computational_limitations_solver_strategy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 5.7 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A major limitation of the current project was the available solver environment. All COMSOL model builds and time-dependent solves were run on a local laptop/workstation setup. This was sufficient for developing the pipeline, testing individual model routes and generating selected solved cases, but it limited the size and completeness of the final simulation set. Time-dependent FEM simulations with realistic glandular structure, volumetric skin, Cooper-like support, tumor overlays and parameter sweeps are computationally expensive, especially when solver stability and post-processing completeness are required.
+\subsection{Computational limitations and reproducibility}
+\label{discussion_computational_limitations_reproducibility}
 
-Access to faster external computational resources or high-performance computing would substantially strengthen the study. It would make it possible to run larger material-parameter sweeps, complete dynamic tumor-overlay simulations, more robust Cooper-support comparisons, mesh-sensitivity checks, longer simulation windows and repeated simulations for sensitivity analysis. It would also allow more systematic comparison of dynamic loading routes and solver settings. The current computational limitation should therefore be understood as a limitation of project resources rather than as a fundamental limitation of the modelling framework.
+A major limitation of the current project was that all COMSOL model builds and time-dependent simulations were run on a personal laptop. This was workable for developing the pipeline and generating geometry build-only cases, but it strongly limited the number of complete dynamic solves that could be included. For the more realistic model variants, individual dynamic simulations could take approximately $12~\mathrm{h}$ per case, not including the additional time required for post-processing. This made large parameter sweeps and complete dynamic testing of the more complex model routes impractical within the project timeframe.
 
-Future work should include a clear solver strategy before expanding the model further. This should include mesh-convergence checks, consistent time-stepping settings, automated post-processing for all result groups and predefined criteria for accepting or excluding solved cases. Such a strategy would reduce the risk that model comparisons are influenced by inconsistent solver completion or incomplete output extraction.
+Access to faster external computational resources would improve the study by allowing larger sweeps, more realistic model variants and full post-processing to be run more efficiently. This would be especially important for systematic testing of material parameters, dynamic loading routes, Cooper-like support and tumor-overlay cases. The current computational limitation should therefore be interpreted as a practical limitation of the project setup and timeframe, rather than as a limitation of the modelling framework itself. Future work should account for this by running the simulations on stronger computational hardware.
 
-\subsection{Reproducibility and data management}
-\label{discussion_reproducibility_data_management}
+The repository structure helped keep the model-development workflow traceable. The scripted case definitions, compact outputs, report notes and figure sources made it possible to track how the model variants were generated and evaluated \cite{KuijpersEWSComsolGitHub}. Future work should keep this level of traceability, especially when larger simulation sets are generated on external computational resources.
 
-The project repository supported reproducibility by storing the Python COMSOL pipeline, TOML case definitions, post-processing scripts, compact outputs and report notes in a traceable structure \cite{KuijpersEWSComsolGitHub}. This was important because the project involved many related model variants, including material, skin, Cooper-support, loading and tumor-overlay routes. Scripted case definitions made it possible to document which assumptions belonged to each variant and reduced the risk of manually losing track of model changes.
 
-At the same time, full computational reproducibility depends on the COMSOL version, license environment and available hardware. Large COMSOL models and generated intermediate files are not always practical to store completely in a report repository. For future work, the most important reproducibility improvement would be to preserve the exact case definitions, solver settings, post-processing scripts and compact numerical outputs for every final result case. This would allow the study to be repeated or extended on a stronger computational system without relying on manual reconstruction of model settings.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 5.8 BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Overall perspective and future work}
 \label{discussion_overall_perspective_future_work}
 
-Overall, this project produced a more anatomically detailed and reproducible COMSOL FEM framework for studying EWS-relevant breast deformation. The model now includes the main components needed for future surface-motion studies: realistic glandular structure, posterior support geometry, material sensitivity routes, volumetric skin, simplified Cooper-like support, dynamic loading variants and analytic tumor-overlay placement. The current work should be viewed as a model-development step rather than a completed validation study.
+Overall, the project extended the COMSOL FEM breast model in several directions that are relevant for future EWS-oriented deformation studies:
 
-The most important next step is to run systematic, fully solved dynamic simulations on stronger computational hardware and compare the simulated surface response with experimental or EWS-like measurement data. This should be combined with controlled variation of material parameters, glandular anatomy, skin properties, loading route and tumor properties. If those future simulations show that tumor-related stiffness contrasts produce measurable and repeatable differences in breast-surface motion, the model could become a useful tool for exploring EWS sensitivity and design choices. Until then, the main conclusion is that the project established a technically traceable and anatomically richer FEM platform for future deformation-based breast-imaging research.
+\begin{itemize}
+    \item a more anatomically detailed breast geometry with chestwall curvature, asymmetry options and a realistic glandular tissue distribution;
+    \item controlled material-parameter and volumetric-skin variants;
+    \item simplified Cooper-like support and dynamic loading routes;
+    \item analytic tumor-overlay placement for future stiffness-sensitivity studies;
+    \item a traceable workflow for case definition, model building and automatic post-processing.
+\end{itemize}
 
-% Manual checks before final submission:
-% 1. Check BibTeX keys: Samani2007, Ramiao2016, Goodbrake2022, Teixeira2023, Chen2025, Mazier2024 and KuijpersEWSComsolGitHub.
-% 2. Suggested additional source needed for: experimental or clinical breast-motion data under EWS-like dynamic loading, if available.
-% 3. Suggested additional source needed for: skin thickness/mechanical-property ranges if Huang2008 and Sutradhar2012 are not already included in the bibliography.
-% 4. Update the discussion references to exact Results subsection labels after the final Results chapter is fixed.
-% 5. Update the wording around material, skin, Cooper and tumor trends once the final tables and figures are locked.
+The most important next step is to run systematic, fully solved dynamic simulations on stronger computational hardware and compare the simulated surface response with experimental or EWS-like measurement data. This should be combined with controlled variation of material parameters, glandular anatomy, skin properties, loading route and tumor properties. If those future simulations show that tumor-related stiffness contrasts produce measurable and repeatable differences in breast-surface motion, the model could become a useful tool for exploring EWS sensitivity and design choices.
+
