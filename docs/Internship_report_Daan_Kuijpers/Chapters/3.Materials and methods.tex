@@ -25,7 +25,7 @@ The finite element model was implemented in COMSOL Multiphysics and controlled u
 \label{fig:comsol_pipeline_overview}
 \end{figure}
 
-The purpose of this workflow was to make model changes traceable. Instead of manually modifying a COMSOL model for each comparison, the relevant modelling assumptions were stored in version-controlled case definitions. This allowed related model variants to be generated from a consistent structure and made it easier to identify which modelling change was responsible for a difference in the simulated displacement or stress response. The project repository contains the implementation of the Python workflow, the active case definitions and the compact evaluation outputs used for the comparisons \cite{KuijpersEWSComsolGitHub}. A simplified example of a case definition is provided in Appendix~\ref{sec:appendix_example_case_definition}.
+The purpose of this workflow was to make model changes traceable. Instead of manually modifying a COMSOL model for each comparison, the relevant modelling assumptions were stored in version-controlled case definitions. This allowed related model variants to be generated from a consistent structure and made it easier to identify which modelling change was responsible for a difference in the simulated displacement or stress response. The project repository contains the implementation of the Python workflow, the active TOML case definitions and the compact evaluation outputs used for the comparisons \cite{KuijpersEWSComsolGitHub}. These case definitions were used to keep the modelling assumptions for each variant traceable without relying on manual edits to a single COMSOL model file.
 
 \subsubsection{Model-development strategy}
 
@@ -84,7 +84,7 @@ In the selected reference route, the posterior support was implemented as a tran
 \includegraphics[width=\linewidth]{Figures/M&M/Superior_chestwallcurve.png}
 \caption{COMSOL-rendered superior view}
 \end{subfigure}
-\caption{Posterior chestwall representation used in the selected reference route. The schematic view illustrates the transverse curved support geometry, including the curvature depth and the $x$-offset of the cylinder centre. The COMSOL-rendered view shows the corresponding curved posterior support geometry for the selected xoffset055 case.}
+\caption{Posterior chestwall representation used in the selected reference route. The schematic view illustrates the transverse curved support geometry, including the curvature depth and the $x$-offset of the cylinder centre. The COMSOL-rendered view shows the corresponding curved posterior support geometry for the selected $+55~\mathrm{mm}$ chestwall-offset configuration.}
 \label{fig:chestwall_reference_geometry}
 \end{figure}
 
@@ -100,7 +100,7 @@ The selected reference route was guided mainly by the multi-component breast-mod
 
 Three spread variants were retained: compact, reference and wide. These variants changed the spatial spread of the lobules while keeping the selected Stage~2 chestwall geometry and the same general model setup. The reference spread was used as the main anatomical route for later comparisons, while the compact and wide variants were used to check the geometric effect of the assumed fibroglandular spread. The compact and wide variants are shown in Figure~\ref{fig:fibroglandular_spread_variants}.
 
-The current reference model had a total breast volume of $\sim$585~mL and used a glandular fraction of $\sim$24.3\%, corresponding to a glandular volume of $\sim$142.2~mL. This value was considered acceptable for the reference route after comparison with literature on volumetric breast density and fibroglandular tissue quantification \cite{Sartor2016,Nie2010,Lu2012}. Because volumetric fibroglandular fraction is not directly equivalent to projected mammographic density or to the Breast Imaging Reporting and Data System (BI-RADS) breast-composition categories, the literature context is summarised separately in Appendix~\ref{sec:appendix_glandular_fraction_reference} \cite{ACRBIRADS}.
+The current reference model had a total breast volume of $\sim$585~mL and used a glandular fraction of $\sim$24.3\%, corresponding to a glandular volume of $\sim$142.2~mL. This value was considered acceptable for the reference route after comparison with literature on volumetric breast density and fibroglandular tissue quantification \cite{Sartor2016,Nie2010,Lu2012}. Because volumetric fibroglandular fraction is not directly equivalent to projected mammographic density or to the Breast Imaging Reporting and Data System (BI-RADS) breast-composition categories, the literature context is summarised separately in Appendix~\ref{sec:appendix_glandular_fraction_reference} \cite{ACRBIRADS}. The resulting reference and spread-variation layouts are shown in Figure~\ref{fig:fibroglandular_distribution_variants}.
 
 \begin{figure}[H]
 \centering
@@ -126,7 +126,7 @@ The current reference model had a total breast volume of $\sim$585~mL and used a
 \label{fig:fibroglandular_spread_variants}
 \end{subfigure}
 
-\caption{COMSOL-rendered fibroglandular tissue configurations used in the Stage~3 anatomical route. The reference lateral view shows the chestwall-aware lobule and duct structure inside the selected xoffset055 geometry. The compact and wide anterior views illustrate the spread variants used to evaluate the effect of fibroglandular spatial distribution.}
+\caption{COMSOL-rendered fibroglandular tissue configurations used in the Stage~3 anatomical route. The reference lateral view shows the chestwall-aware lobule and duct structure inside the selected $+55~\mathrm{mm}$ chestwall-offset geometry. The compact and wide anterior views illustrate the spread variants used to evaluate the effect of fibroglandular spatial distribution.}
 \label{fig:fibroglandular_distribution_variants}
 \end{figure}
 
@@ -413,9 +413,7 @@ m_{\mathrm{tumor}}\Delta C_{01,\mathrm{tumor}}.
 
 The current tumor material settings include both modest stiffness-contrast cases and a harder diagnostic-contrast case. Because the Early Warning Scan is aimed at detecting malignant breast tumors, the harder tumor-overlay setting was included to test a clear local stiffness contrast relative to normal breast tissue. In this high-contrast setting, the analytic overlay used $E_{\mathrm{tumor}}=100~\mathrm{kPa}$ together with local Mooney--Rivlin coefficient increments of $\Delta C_{10,\mathrm{tumor}}=\Delta C_{01,\mathrm{tumor}}=8333~\mathrm{Pa}$. These values should be interpreted as a simplified stiffness target for a sensitivity case rather than as a patient-specific tumor material definition, because malignant breast tumor stiffness values reported in elastography and mechanical testing can vary strongly with measurement modality, region of interest and tumor type \cite{Samani2007,McKnight2002,Patel2021,Patel2022}.
 
-The tumor-overlay route was prepared for multiple tumor sizes and locations. The tested size settings used small, medium and large spherical overlays with radii of $3~\mathrm{mm}$, $6~\mathrm{mm}$ and $10~\mathrm{mm}$, respectively. 
-
-The reported solved tumor cases focused on a medium upper-outer tumor, because the upper-outer breast quadrant is frequently reported as the most common tumor location \cite{Rummel2015}. Additional build-level placements were generated in central, subareolar, posterior and surface-proximal positions to test whether the analytic tumor mask could be positioned consistently across different anatomical regions.
+The tumor-overlay route was prepared for multiple tumor sizes and locations. The tested size settings used small, medium and large spherical overlays with radii of $3~\mathrm{mm}$, $6~\mathrm{mm}$ and $10~\mathrm{mm}$, respectively. Build-level placements were generated for central, upper-outer, subareolar, posterior and surface-proximal positions to test whether the analytic tumor mask could be positioned consistently inside the anatomical breast model. The upper-outer placement was retained as one representative location because breast tumors are frequently reported in the upper-outer quadrant \cite{Rummel2015}. These cases were used as implementation and placement checks; complete dynamic tumor-overlay sensitivity results with matched no-tumor controls were left for future work.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%

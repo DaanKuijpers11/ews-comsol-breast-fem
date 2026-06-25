@@ -227,7 +227,7 @@ In the simple-gland scout, the gland-to-skin support variants changed peak avera
 \subsubsection{Fixed-support acceleration amplitude}
 \label{fixed_support_acceleration_amplitude_results}
 
-The fixed-support acceleration response was evaluated on the no-Cooper full-glandular model route. The $0.25g$ and $0.50g$ cases reached the expected final time of $2.2~\mathrm{s}$, while the $0.75g$ case did not produce a valid solved output. The compact review metrics are summarised in Table~\ref{dynamic_amplitude_scout_results_table}.
+The fixed-support acceleration response was evaluated on the no-Cooper, $+55~\mathrm{mm}$ chestwall-offset, full-glandular model route. The $0.25g$ and $0.50g$ cases reached the expected final time of $2.2~\mathrm{s}$, while the $0.75g$ case did not produce a valid solved output. The compact review metrics are summarised in Table~\ref{dynamic_amplitude_scout_results_table}.
 
 \begin{table}[H]
 \centering
@@ -245,13 +245,13 @@ The fixed-support acceleration response was evaluated on the no-Cooper full-glan
 Case & End time & Review avg. disp. & Surface signed $w$ & Output status \\
 & $(\mathrm{s})$ & $(\mathrm{mm})$ & $(\mathrm{mm})$ & \\
 \midrule
-No Cooper xoffset055, $0.25g$ 
+No Cooper, $+55~\mathrm{mm}$ offset, $0.25g$ 
 & 2.20 & 3.00 & 0.161 & Solved \\
 
-No Cooper xoffset055, $0.50g$ 
+No Cooper, $+55~\mathrm{mm}$ offset, $0.50g$ 
 & 2.20 & 2.86 & 0.310 & Solved \\
 
-No Cooper xoffset055, $0.75g$ 
+No Cooper, $+55~\mathrm{mm}$ offset, $0.75g$ 
 & -- & -- & -- & Failed/not valid \\
 \bottomrule
 \end{tabular}
@@ -262,7 +262,7 @@ The surface signed vertical response increased from $0.161~\mathrm{mm}$ for the 
 \subsubsection{Prescribed support-displacement route}
 \label{prescribed_support_displacement_results}
 
-A prescribed support-displacement route was evaluated as a separate motion variant. This case used the xoffset055 chestwall geometry with a simple glandular structure, no Cooper-like support, a $1.5~\mathrm{mm}$ volumetric skin layer and soft internal material settings. For the $40~\mathrm{mm}$, $0.60~\mathrm{s}$ support-displacement case, support-relative displacement metrics were extracted from the free outer surface and nipple landmark region.
+A prescribed support-displacement route was evaluated as a separate motion variant. This case used the $+55~\mathrm{mm}$ chestwall-offset geometry with a simple glandular structure, no Cooper-like support, a $1.5~\mathrm{mm}$ volumetric skin layer and soft internal material settings. For the $40~\mathrm{mm}$, $0.60~\mathrm{s}$ support-displacement case, support-relative displacement metrics were extracted from the free outer surface and nipple landmark region. The extracted support-relative metrics are summarised in Table~\ref{prescribed_support_displacement_results_table}.
 
 \begin{table}[H]
 \centering
@@ -298,10 +298,11 @@ This route was evaluated as a separate motion variant and was not directly compa
 % SECTION 4.7 BELOW
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \subsection{Tumor-overlay placement}
 \label{tumor_overlay_results}
 
-The tumor-overlay route was successfully implemented as a build-level model variant. The analytic tumor mask could be placed inside the existing breast volume and visualised for different tumor positions and sizes. Figure~\ref{fig:tumor_overlay_placement_examples} shows representative examples of central, upper-outer surface-proximal and subareolar tumor-overlay placements.
+The tumor-overlay route was implemented as a build-level model variant. The analytic tumor mask could be placed inside the existing breast volume and visualised for different tumor positions and sizes. Figure~\ref{fig:tumor_overlay_placement_examples} shows representative central, upper-outer surface-proximal and subareolar tumor-overlay placements.
 
 \begin{figure}[H]
 \centering
@@ -322,64 +323,24 @@ The tumor-overlay route was successfully implemented as a build-level model vari
 \includegraphics[height=0.24\textheight,width=\linewidth,keepaspectratio]{Figures/results/report_small_subareolar.png}
 \caption{Small subareolar}
 \end{subfigure}
-\caption{Representative build-level tumor-overlay placements generated in COMSOL. The breast volume and glandular structures are shown transparently, while the analytic spherical tumor overlay is highlighted in red.}
+\caption{Representative tumor-overlay placements generated in COMSOL. The breast volume and glandular structures are shown transparently, while the analytic spherical tumor overlay is highlighted in red.}
 \label{fig:tumor_overlay_placement_examples}
 \end{figure}
 
-The build-level tumor variants included central, upper-outer, subareolar, posterior and surface-proximal placements. These variants confirmed that the tumor mask could be positioned and visually inspected within the anatomical breast model. Due to local solver-capacity and project-time limitations, complete dynamic tumor-overlay solves were not included as final quantitative result cases in this report.
-
-The tumor-overlay results in this chapter are therefore limited to successful build-level placement examples. Complete dynamic tumor-overlay sensitivity results require a larger solved case set with complete tumor-mask post-processing.
-
-\subsection{Tumor-overlay placement}
-\label{tumor_overlay_results}
-
-The tumor-overlay route was successfully implemented as a build-level model variant. The analytic tumor mask could be placed inside the existing breast volume and visualised for different tumor positions and sizes. Figure~\ref{fig:tumor_overlay_placement_examples} shows representative examples of central, upper-outer surface-proximal and subareolar tumor-overlay placements.
-
-\begin{figure}[H]
-\centering
-\begin{subfigure}{0.29\linewidth}
-\centering
-\includegraphics[height=0.24\textheight,width=\linewidth,keepaspectratio]{Figures/results/report_large_central.png}
-\caption{Large central}
-\end{subfigure}
-\hfill
-\begin{subfigure}{0.36\linewidth}
-\centering
-\includegraphics[height=0.24\textheight,width=\linewidth,keepaspectratio]{Figures/results/report_medium_upper_outer_surface.png}
-\caption{Medium upper-outer surface-proximal}
-\end{subfigure}
-\hfill
-\begin{subfigure}{0.29\linewidth}
-\centering
-\includegraphics[height=0.24\textheight,width=\linewidth,keepaspectratio]{Figures/results/report_small_subareolar.png}
-\caption{Small subareolar}
-\end{subfigure}
-\caption{Representative build-level tumor-overlay placements generated in COMSOL. The breast volume and glandular structures are shown transparently, while the analytic spherical tumor overlay is highlighted in red.}
-\label{fig:tumor_overlay_placement_examples}
-\end{figure}
-
-Solved tumor-output was available for the medium upper-outer tumor case. In the simple-gland route, the tumor volume was $0.897~\mathrm{mL}$. This case reached a peak breast displacement of $45.486~\mathrm{mm}$, a peak tumor-region displacement of $37.294~\mathrm{mm}$ and a peak tumor-region von Mises stress of $13.070~\mathrm{kPa}$. The review maximum displacement on the evaluated surface was $11.674~\mathrm{mm}$.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.92\linewidth]{Figures/results/tumor_breast_vs_tumor_displacement_timeseries.png}
-\caption{Time-dependent peak breast displacement and peak tumor-region displacement for the simple-gland medium upper-outer tumor case.}
-\label{fig:tumor_breast_tumor_displacement_timeseries}
-\end{figure}
-
-A corresponding realistic/volumetric-skin tumor route was also solved with compact global output. This case had a tumor volume of $0.912~\mathrm{mL}$, a peak breast displacement of $10.916~\mathrm{mm}$ and a peak tumor-region displacement of $8.496~\mathrm{mm}$. Complete surface and stress post-processing for this larger realistic result model was not practical within the available local computation time. The tumor-overlay results are therefore reported as successful placement and selected solved tumor-mask output, rather than as a complete dynamic tumor-sensitivity study.
-
+The build-level tumor variants included central, upper-outer, subareolar, posterior and surface-proximal placements. These variants confirmed that the tumor mask could be positioned and visually inspected within the anatomical breast model. Complete dynamic tumor-overlay sensitivity results were not retained as final quantitative result cases in this report. The tumor-overlay results are therefore limited to implementation and placement checks; quantitative tumor-sensitivity analysis requires a larger solved case set with matched no-tumor controls and complete tumor-mask post-processing.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SECTION 4.8 BELOW
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 \subsection{Summary of main result trends}
 \label{summary_main_result_trends}
 
-The strongest quantitative sensitivity was observed for material and skin-parameter variation. Across the simple-gland skin/material result set, peak displacement changed by approximately $+35.0\%$ to $-75.6\%$ relative to the selected reference case. The volumetric skin layer reduced displacement compared with the no-skin case at the same $1.25g$ input, while the stiffer skin-enabled variants also produced higher local von Mises stress concentrations.
+The strongest quantitative sensitivity was observed for the material and skin-parameter variants. Across the simple-gland skin/material result set, peak displacement changed by approximately $+35.0\%$ to $-75.6\%$ relative to the selected reference case. The volumetric skin layer and its stiffness therefore had a larger effect on the global displacement response than the other tested model routes.
 
-The simplified Cooper-like support variants produced a much smaller global response change. In the available scout results, global peak displacement changed by approximately $-1.4\%$ to $+0.1\%$ relative to the no-Cooper baseline. The dynamic-loading results showed that the fixed-support acceleration route and prescribed support-displacement route could both be evaluated, but they should be interpreted as separate motion definitions.
+The simplified Cooper-like support variants produced a much smaller global response change. In the available scout results, global peak displacement changed by approximately $-1.4\%$ to $+0.1\%$ relative to the no-Cooper baseline. This indicates that the current Cooper-like support implementation mainly served as a controlled support-sensitivity check rather than as a dominant mechanical effect.
 
-The tumor-overlay route was successfully implemented at build level for several tumor sizes and locations. These results demonstrate that analytic spherical tumor masks can be placed and visually inspected inside the anatomical breast model. However, complete dynamic tumor-overlay sensitivity results were not retained as final quantitative results in this report.
+The dynamic-loading results showed that both the fixed-support acceleration route and the prescribed support-displacement route could be evaluated, but these routes should be interpreted separately because their imposed motion definitions are different. The tumor-overlay route was implemented at build level for several tumor sizes and locations, but complete dynamic tumor-sensitivity results were not retained as final quantitative results. 
+Additional time-dependent comparison plots for the skin/material, model-development and dynamic-loading outputs are provided in Appendix~\ref{sec:appendix_additional_results}.

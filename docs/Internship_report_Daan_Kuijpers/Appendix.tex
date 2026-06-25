@@ -48,49 +48,6 @@ Repository component & Role in the project \\
 The COMSOL simulations were run using a licensed COMSOL Multiphysics installation available through TU/e. Most model builds and dynamic solves were executed on local hardware during model development. Because time-dependent COMSOL solves can be computationally expensive, especially for second-order elements, volumetric skin layers and larger parameter sweeps, access to stronger computational resources such as TU/e high-performance computing facilities is relevant for future large-scale studies. In this project, the repository was therefore organised to preserve the reproducible case definitions and compact outputs, while allowing heavy generated artefacts to remain outside version control.
 
 \newpage
-\section{Simplified example of a COMSOL case definition}
-\label{sec:appendix_example_case_definition}
-
-The COMSOL pipeline uses TOML case definitions to specify the main model settings. The full case files contain more detailed options than shown below. Listing~\ref{lst:appendix_simplified_toml} gives a simplified example to illustrate how geometry, material, loading and evaluation settings are defined in a traceable format.
-
-\begin{lstlisting}[
-caption={Simplified example of a COMSOL case definition. Only the main settings are shown; the complete case definitions are stored in the project repository.},
-label={lst:appendix_simplified_toml}
-]
-[case]
-name = "example_reference_case"
-description = "Simplified reference case for documentation"
-
-[geometry]
-breast_volume_ml = 585
-chestwall_variant = "xoffset055"
-glandular_distribution = "realistic_reference"
-outer_shape_asymmetry = "none"
-
-[materials]
-adipose_set = "reference"
-glandular_set = "reference"
-skin_layer = "none"
-cooper_support = "none"
-
-[loading]
-type = "fixed_support_acceleration"
-amplitude_g = 0.25
-duration_s = 0.60
-mass_damping_alpha = 60
-
-[tumor]
-enabled = false
-
-[evaluation]
-export_displacement = true
-export_von_mises_stress = true
-export_surface_metrics = true
-\end{lstlisting}
-
-The purpose of these case definitions is not only to automate COMSOL runs, but also to make the modelling assumptions explicit. When a model variant is changed, the corresponding TOML file records which geometry, material, loading or evaluation setting was modified. This makes comparisons between model variants more transparent than manually editing a single COMSOL model file for each simulation.
-
-\newpage
 \section{Breast-volume reference data}
 \label{sec:appendix_breast_volume_reference}
 
@@ -185,43 +142,33 @@ Posterior support
 
 Overall, the selected parameters should be interpreted as a controlled modelling set for comparing material routes and sensitivity cases. The values define consistent stiffness scales for the COMSOL workflow, while acknowledging that breast tissue, skin and tumor properties cannot be represented by a single universally accepted parameter value.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Appendix part below
+%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% eruit of veranderen appendix hieronder
 \newpage
-\section{Figure and metric sources}
-\label{sec:appendix_figure_metric_sources}
+\section{Additional result figures}
+\label{sec:appendix_additional_results}
 
-The figures and quantitative values in the main report are based on selected COMSOL outputs, compact post-processing files and generated plots. The complete figure and metric source index is stored in \texttt{docs/report\_notes/comsol\_pipeline/report\_figures\_metrics\_index.md}. This index records the relevant COMSOL output folders, metric files and source images used to create the report figures.
-
-The appendix figures below are included as provenance material. They document the source contact sheets and geometry screenshots used during model development. They are not all intended to carry the same quantitative interpretation as the main results.
+This appendix provides additional time-dependent result figures that support the main Results chapter. These plots are included as supplementary material because the main Results section focuses on compact tables and selected peak-response figures. The additional figures show examples of the broader post-processing output that can be generated from the COMSOL pipeline.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\linewidth,height=0.78\textheight,keepaspectratio]{Figures/comsol_contact_sheets/stage2_chestwall_contact_sheet.png}
-\caption{Source contact sheet for the selected chestwall-geometry route. The figure documents displacement and von Mises stress panels used during the evaluation of the curved posterior support geometry.}
-\label{fig:appendix_stage2_figures}
+\includegraphics[width=0.95\linewidth]{Figures/results/appendix_skin_material_peak_displacement_timeseries.png}
+\caption{Time-dependent peak breast displacement for the simple-gland skin/material sensitivity cases. The no-skin and thin soft-skin cases show larger displacement amplitudes, while the stiffer volumetric-skin variants show reduced displacement.}
+\label{fig:appendix_skin_material_peak_displacement_timeseries}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\linewidth,height=0.78\textheight,keepaspectratio]{Figures/comsol_contact_sheets/stage3_glandular_fraction_contact_sheet.png}
-\caption{Source contact sheet for the glandular-distribution comparison. The figure documents the solved simple glandular fraction sensitivity and supports the transition toward a more realistic glandular reference.}
-\label{fig:appendix_stage3_fraction_figures}
+\includegraphics[width=0.95\linewidth]{Figures/results/appendix_stage2_to_stage5_displacement_magnitude.png}
+\caption{Time-dependent displacement-magnitude response for selected model-development stages. The figure is included as a development-stage comparison and shows how the response changed after introducing the curved chestwall route, realistic glandular distribution and no-Cooper Stage~5 reference case.}
+\label{fig:appendix_stage2_to_stage5_displacement_magnitude}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.95\linewidth,height=0.78\textheight,keepaspectratio]{Figures/comsol_contact_sheets/stage4_asymmetry_contact_sheet.png}
-\caption{Source contact sheet for outer-shape and nipple-position sensitivity checks. These cases are used as geometry-development context and should be interpreted separately from the matched reference comparisons.}
-\label{fig:appendix_stage4_figures}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.95\linewidth,height=0.78\textheight,keepaspectratio]{Figures/comsol_contact_sheets/stage5_cooper_contact_sheet.png}
-\caption{Source contact sheet for the Cooper-support development branch. The stable reference interpretation uses the no-Cooper control unless a Cooper-support variant solves robustly and produces complete post-processing output.}
-\label{fig:appendix_stage5_figures}
+\includegraphics[width=0.95\linewidth]{Figures/results/appendix_dynamic_amplitude_surface_signed_vertical.png}
+\caption{Time-dependent signed vertical surface displacement for the fixed-support acceleration-amplitude scout. The plot illustrates the surface-motion response for the $0.25g$ and $0.50g$ cases and supports the dynamic-loading results reported in Section~\ref{dynamic_loading_results}.}
+\label{fig:appendix_dynamic_amplitude_surface_signed_vertical}
 \end{figure}
