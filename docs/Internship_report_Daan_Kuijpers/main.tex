@@ -75,7 +75,12 @@
 \input{General/Titlepage.tex}
 
 \newpage
-\tableofcontents\thispagestyle{empty}
+\begingroup
+\small
+\setlength{\parskip}{0pt}
+\setlength{\baselineskip}{11pt}
+\tableofcontents
+\endgroup
 
 \newpage
 \input{Chapters/1.Abstract}
@@ -95,9 +100,10 @@
 \bibliographystyle{IEEEtran}
 \bibliography{references.bib}
 \newpage
+\addcontentsline{toc}{section}{Appendix}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
 \input{Appendix}
-
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
 
 
 \end{document}
-
