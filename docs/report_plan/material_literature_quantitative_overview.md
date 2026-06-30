@@ -24,6 +24,34 @@ Purpose: provide a compact quantitative literature overview for Appendix E and f
 | Fitzjohn et al. (2022) | DIET surface-motion diagnostic assumption | Tumors are described as approximately `4-10x` stiffer than healthy tissue in the frequency-decomposition rationale. | Useful for explaining why stiffness contrast could affect surface motion, without claiming direct clinical detectability from this model. |
 | Goodbrake et al. (2022) | 3D anisotropic constitutive fitting | Fitted model parameters are given for adipose and fibroglandular tissue, but the study is not reducible to a single Young's modulus. Fibroglandular tissue showed stronger direction-dependent behaviour. | Best used as a caveat: real breast tissue is heterogeneous and anisotropic, while this COMSOL model uses simplified isotropic material scales. |
 
+## Min/max tracing for broad literature ranges
+
+This table is useful if the Appendix or presentation mentions broad ranges such as `0.08-272 kPa`. The main point is that these extremes are not all from one harmonised experiment. They combine values from different studies, test protocols and modelling assumptions.
+
+| Tissue / component | Minimum value | Maximum value | Where the bound comes from | How to phrase it safely |
+|---|---:|---:|---|---|
+| Adipose tissue | `0.5 kPa` | `25 kPa` | Reported by Hsu et al. (2011) as a literature range for breast biomechanical models. | "Hsu et al. reported adipose values in previous biomechanical models ranging from 0.5 to 25 kPa." |
+| Fibroglandular / glandular tissue | `0.08 kPa` | `272 kPa` | Hsu et al. (2011) reports the full range as `0.08-272 kPa`. The upper bound is consistent with Wellman et al. (1999), reported in review form by Teixeira et al. as glandular stiffness up to `271.8 +/- 167.7 kPa` and also noted by Ruggiero et al. as `271.8 kPa`. The lower bound is not separately traced in Hsu's text to one named original study; it should be treated as the lower bound of Hsu's compiled model/literature range. | "Hsu et al. reported a very broad glandular range of 0.08-272 kPa across prior biomechanical models; the high end reflects Wellman-style indentation values and should not be treated as a typical glandular stiffness." |
+| Skin | `0.088 kPa` | `3 MPa` | Reported by Hsu et al. (2011) as a literature range; Hsu cites Pailler-Mattei et al. (2008) for in-vivo skin indentation among the relevant skin-property references. | "Skin values span orders of magnitude in the literature, so the skin layer was treated as a sensitivity parameter." |
+| Normal breast tissue, ex vivo | `3.24 kPa` | `3.25 kPa` | Samani et al. (2007): normal fibroglandular tissue `3.24 +/- 0.61 kPa`; normal fat `3.25 +/- 0.91 kPa`. | "Samani et al. measured normal fat and fibroglandular samples around 3.25 kPa under their ex-vivo small-deformation protocol." |
+| Pathological breast tissue, ex vivo | `6.41 kPa` | `42.52 kPa` | Samani et al. (2007): fibroadenoma `6.41 +/- 2.86 kPa`; high-grade IDC `42.52 +/- 12.47 kPa`. | "Samani et al. reported benign and malignant pathological samples as stiffer than normal tissue, with high-grade IDC around 42.5 kPa." |
+| Tumor / malignant mass, MRE/SWE context | about `18 kPa` | above `100 kPa` in elastography studies | McKnight et al. (2002) reported carcinoma MRE regions around `18-94 kPa`; comb-push/shear-wave elastography literature can report malignant masses around `115 kPa` or higher, depending on method and ROI. | "Tumor stiffness values in elastography literature commonly fall in the tens to hundreds of kPa, but these are not direct Mooney-Rivlin input values." |
+
+## Tumor upper-bound context
+
+Use this if a slide or appendix needs to justify why the tumor-overlay sensitivity case used a `100 kPa` stiffness scale.
+
+| Source | Method | Reported tumor / malignant stiffness | Best use in this project |
+|---|---|---:|---|
+| Samani et al. (2007) | Ex-vivo indentation / Young's modulus | High-grade IDC: `42.52 +/- 12.47 kPa`; intermediate-grade IDC: `19.99 +/- 4.2 kPa`; low-grade IDC: `10.40 +/- 2.60 kPa` | Conservative ex-vivo evidence that pathological tissue is stiffer than normal fat/fibroglandular tissue. |
+| McKnight et al. (2002) | MR elastography shear stiffness | Carcinoma regions approximately `18-94 kPa`, mean about `33 kPa`; surrounding tissue about `4-16 kPa`, mean about `8 kPa` | Useful for tumor-to-surrounding-tissue contrast in an imaging context. |
+| Denis et al. (2015) | Comb-push ultrasound shear elastography | Malignant masses: `114.9 +/- 40.6 kPa`; benign masses: `39.4 +/- 28.1 kPa`; normal breast tissue: `14.1 +/- 11.8 kPa` | Clearest compact support for saying malignant breast masses can be around or above `100 kPa`. Add `Denis2015` to `references.bib` if used. |
+| Song et al. (2018) | Shear wave elastography | Breast cancers: `Emax ~= 169 +/- 70 kPa`, `Emean ~= 131 +/- 53 kPa` | Supports a `100-200 kPa` malignant-lesion stiffness context. Add `Song2018` to `references.bib` if used. |
+| Kashif et al. (2013) | Phantom / DIET context and literature comparison | DIET phantom used healthy tissue around `E'=9 kPa` and tumor inclusion around `E'=35 kPa`, nearly `4x` contrast; the paper also notes carcinoma literature values around `460 +/- 178 kPa` at 20% compression. | Useful for EWS/DIET-style surface-motion context, but storage/compression modulus is not identical to the COMSOL stiffness scale. |
+| Teixeira and Martins (2023) | Review of breast mechanical properties | Summarises multiple studies ranging from low tens of kPa to much higher ex-vivo compression/indentation values for carcinoma, depending on strain/precompression and method. | Use as a review source to explain why one universal tumor stiffness does not exist. |
+
+Presentation-safe phrasing: "Tumor stiffness values are method-dependent. Some indentation and MRE studies report values mainly in the tens of kPa, while shear-wave elastography studies report malignant masses around or above 100 kPa. The `100 kPa` tumor setting was therefore used as a strong stiffness-contrast sensitivity value, not as a patient-specific calibration."
+
 ## Current COMSOL material scales to show beside the literature
 
 | Component / route | Input definition in this project | Approximate stiffness scale |
