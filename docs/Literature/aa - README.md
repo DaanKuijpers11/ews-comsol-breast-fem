@@ -15,7 +15,11 @@ These sources should be treated as the most important technical foundation for t
 | Hsu 2011 - Mechanical Parameters for Finite Element Compression of a Breast | Medium-high citation / strong relevance | Influence of mesh, material, and compression parameters in breast FE modelling. |
 | Goodbrake 2022 - On the Three-Dimensional Mechanical Behavior of Human Breast Tissue | Strong recent tissue mechanics | 3D anisotropic and heterogeneous behaviour of human breast tissue. |
 | Babarenda Gamage 2017 - Clinical Applications of Breast Biomechanics | Strong review/book chapter | Clinical context and state of breast biomechanics modelling. |
+| Rajagopal 2006 - Finite Element Modelling of Breast Biomechanics | Foundational breast FEM source | Breast biomechanics modelling, gravity/loading context and early FE methodology. |
+| Eder 2014 - Comparison of Different Material Models to Simulate 3-D Breast Deformations | Material-model comparison | Supports the discussion of material-model assumptions and their effect on simulated breast deformation. |
+| Ruggiero 2014 - Effect of Material Modeling on FE Analysis of Human Breast Biomechanics | Material-model sensitivity | Shows how different constitutive material choices can affect breast FE results. |
 | Mazier 2024 - Breast Simulation Pipeline from Medical Imaging to Patient-Specific Simulations | Strong recent pipeline source | Patient-specific simulation direction and realistic limitations. |
+| Zhang 2022 - Non-linear FE Model Established on Pectoralis Major Muscle to Investigate Large Breast | Recent anatomy/support FEM source | Pectoralis/chest support modelling and large-breast FE deformation context. |
 
 ## Dynamic Breast Motion and Activity FEM
 
@@ -54,6 +58,8 @@ These sources support the material sensitivity discussion. They should be used c
 | Patel 2022 - Association of Breast Cancer Risk Density and Stiffness on MRE | Good clinical relevance | Breast stiffness and risk/density relation. |
 | Aloufi 2025 - Differentiating Breast Tissue Stiffness with MRE | Recent, use cautiously | Fatty vs fibroglandular tissue stiffness by MRE. |
 | Song 2018 - Tumor Stiffness Measured by Shear Wave Elastography of Breast Cancer | Good clinical relevance | Tumor stiffness and elastography context. |
+| Denis 2015 - Update on Breast Cancer Detection Using Comb-Push Ultrasound Shear Elastography | Good clinical elastography source | Supports high malignant breast-mass stiffness values around or above 100 kPa. |
+| Olgun 2014 - Use of Shear Wave Elastography to Differentiate Benign and Malignant Breast Lesions | Clinical elastography context | Benign/malignant stiffness contrast and lesion elastography background. |
 | Goddi 2012 - Breast Elastography A Literature Review | Review/context | General elastography background. |
 | Jamshidi 2024 - Magnetic Resonance Elastography for Breast Cancer Diagnosis | Recent review/context | MRE diagnostic context. |
 | Teixeira 2023 - Bioengineering Mechanical Properties of Human Breast Tissue Review | Review/context | Mechanical properties, tissue engineering, and FE modelling background. |
@@ -100,6 +106,8 @@ These are useful for introduction or discussion, but should not carry the mechan
 | Adapa 2025 - AI Tool for Population-Level Breast Cancer Screening | Recent, indirect | AI screening context, not FEM validation. |
 | Mukhmetov 2025 - PINNs with Thermal Imaging | Recent, indirect | Future physics-informed modelling context. |
 | Santos 2025 - Elastography Research and Phantoms | Very recent review | Phantom/elastography background. |
+| Brazy 2020 - Gradient Based Elastic Property Reconstruction in Digital Image Correlation Elastography | Technical inverse-method source | Digital-image-based elastography and elastic property reconstruction context. |
+| Barufaldi 2021 - Computational Breast Anatomy Simulation Using Multi-Scale Perlin Noise | Anatomy simulation context | Synthetic breast anatomy generation and computational phantom context. |
 
 ## How to Use This Literature in the Report
 
@@ -109,4 +117,3 @@ These are useful for introduction or discussion, but should not carry the mechan
 - Use tumor-location sources for Stage 6 tumor placement and size choices.
 - Use recent 2024-2026 papers carefully: low citation count is expected, so rely on them for current direction rather than as the only evidence.
 - Avoid presenting website sources as scientific validation. Use them only for public information, project context, or software descriptions.
-
