@@ -1,7 +1,0 @@
-\section{Conclusion}
-
-This project developed a reproducible COMSOL finite-element workflow for EWS-oriented breast deformation modelling. The final workflow supports controlled variation of anatomical geometry, tissue distribution, material parameters, skin representation, support assumptions, loading route and tumor-overlay placement.
-
-The strongest quantitative effects were found for the material and skin-parameter variants. Volumetric skin representation and skin stiffness had a large influence on peak displacement and local von Mises stress concentrations. In contrast, the simplified Cooper-like support variants produced only small global displacement changes in the available scout results, so they should be interpreted as support-sensitivity implementation checks rather than as validated anatomical ligament models.
-
-The tumor-overlay route was implemented at build level and visualised for different tumor sizes and locations. This confirms that analytic spherical tumor masks can be placed inside the anatomical breast model, but it does not yet provide quantitative evidence for tumor detectability. Complete tumor-sensitivity studies require matched no-tumor controls, fully solved dynamic cases, surface-based post-processing and validation against experimental or EWS-like surface-motion data. Overall, the project provides a traceable COMSOL FEM platform for future EWS model development, while showing that stronger computational resources are needed for systematic large-scale simulation and validation.
