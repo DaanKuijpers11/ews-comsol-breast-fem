@@ -72,5 +72,4 @@ Future work should consider shorter paths, clearer case names, selected output r
 - `parameter_overview.md`
 - `pipeline_notes/comsol_pipeline_guide.md`
 - `literature_overviews/material_parameter_literature_overview.md`
-- `model_justification/comsol_vs_febio_model_positioning.md`
 - `model_justification/tumor_overlay_plan.md`
