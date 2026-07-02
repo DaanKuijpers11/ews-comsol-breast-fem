@@ -1,7 +1,0 @@
-| label | peak_breast_displacement_mm | mean_breast_displacement_mm | peak_von_mises_kpa | review_surface_max_displacement_mm | peak_displacement_change_percent | review_surface_change_percent |
-| --- | --- | --- | --- | --- | --- | --- |
-| Reference 1.5 mm soft skin | 45.582 | 22.554 | 19.283 | 11.603 | 0.0 | 0.0 |
-| No skin | 61.531 | 27.556 | 3.127 | 9.038 | 35.0 | -22.1 |
-| 0.1 mm soft skin | 60.032 | 27.200 | 44.583 | 9.413 | 31.7 | -18.9 |
-| 1.5 mm intermediate skin | 25.490 | 13.242 | 42.897 | 10.375 | -44.1 | -10.6 |
-| 1.5 mm stiff skin | 11.144 | 5.704 | 69.671 | 3.362 | -75.6 | -71.0 |
