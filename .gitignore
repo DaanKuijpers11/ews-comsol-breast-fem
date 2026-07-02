@@ -49,7 +49,6 @@ output/
 
 # Keep active lightweight analysis, ignore older duplicate analysis outputs
 analysis_output/figures/
-analysis_output/figures_Febio_pipeline/
 analysis_output/metrics_compare/
 analysis_output/legacy_benchmark/
 
@@ -63,8 +62,8 @@ analysis_output/**/*_surface.csv
 !analysis_output/**/stage5_manual_postprocess_summary.csv
 
 # Local archive/delete staging areas are intentionally not versioned.
-runs/_archive_delete_candidates/
-analysis_output/_archive_delete_candidates/
+**/delete_candidates/
+**/_archive_delete_candidates/
 
 # OS/editor noise
 .DS_Store

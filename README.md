@@ -41,14 +41,18 @@ Higher acceleration amplitudes such as `0.50g`, `1.00g`, and `1.25g` are used as
 
 - `runs/comsol_testcases/`
   - small settings templates and testcase references
-  - `all_default_settings.toml` lists the full default COMSOL pipeline settings
+  - `all_settings.toml` gives a readable overview of the main editable settings
+  - `all_default_settings.toml` lists the raw default COMSOL pipeline settings
 
 - `analysis_output/comsol_pipeline/`
   - lightweight report-oriented evaluation output
-  - summary CSV/Markdown tables, comparison plots, sources, and figure indexes
+  - summary CSV/Markdown tables and comparison plots
 
-- `docs/report_notes/comsol_pipeline/`
-  - report notes, stage interpretation, and model-justification documents
+- `docs/internship_deliverables/`
+  - current internship report and presentation deliverables
+
+- `docs/report_working_notes/`
+  - compact handover notes, literature overviews, parameter summaries, and model-justification documents
 
 - `docs/Literature/`
   - literature PDFs used for model assumptions and report justification
@@ -78,10 +82,13 @@ For new users, the most useful entry points are:
    - manually exported COMSOL Derived Values CSVs for solve-only scouts
    - useful when automated postprocess is slow or unreliable
 
-5. `docs/report_notes/comsol_pipeline/model_justification/`
+5. `docs/report_working_notes/`
+   - compact parameter overview, current limitations, literature overviews, and model-justification notes
+
+6. `docs/report_working_notes/model_justification/`
    - model assumptions and literature justification notes
 
-6. `pictures/`
+7. `pictures/`
    - screenshots and animations used to judge geometry and motion visually
 
 ## Active Stage Structure
@@ -115,6 +122,27 @@ The main COMSOL stage definitions are kept in:
 ## Typical Commands
 
 Run these commands from the repository root in the configured `ews-fem` Anaconda environment.
+
+The expected environment is a local Anaconda/Conda environment with the package
+installed from this repository and the dependencies needed for TOML loading,
+mesh/source-case preparation, plotting, and COMSOL batch orchestration. COMSOL
+Multiphysics and a valid COMSOL license are required for build, solve, and
+post-processing commands. If you recreate the environment, first confirm that:
+
+- Python can import the local `src/` package, for example by running commands
+  from an environment where `src` is on `PYTHONPATH`;
+- the main Python packages are available: `numpy`, `pydantic`, `pydantic-core`,
+  `gmsh`, `matplotlib`, and `Pillow`; these are also listed in
+  `requirements.txt`;
+- `python -m ews_fem_pipeline_comsol --help` works from the repository root;
+- COMSOL batch is available through the configured TOML paths or system PATH;
+- the relevant TOML case points to an accessible COMSOL/JDK installation when Java compilation is enabled.
+
+For a temporary PowerShell session, the local source package can be exposed with:
+
+```powershell
+$env:PYTHONPATH = "$PWD\src"
+```
 
 Build one or more COMSOL cases without solving:
 
@@ -230,11 +258,12 @@ Stage 6 tumor cases are currently designed as controlled sensitivity experiments
 
 Start with:
 
-- `docs/report_notes/comsol_pipeline/report_status_overview_2026-05-26.md`
-- `docs/report_notes/comsol_pipeline/tier1_case_definition_summary_2026-05-26.md`
-- `docs/report_notes/comsol_pipeline/report_figures_metrics_index.md`
-- `docs/report_notes/comsol_pipeline/model_justification/stage6_tumor_lesion_plan_2026-05-26.md`
-- `docs/report_notes/comsol_pipeline/model_justification/breast_volume_literature_context_2026-05-26.md`
+- `docs/report_working_notes/parameter_overview.md`
+- `docs/report_working_notes/current_limitations.md`
+- `docs/report_working_notes/pipeline_notes/comsol_pipeline_guide.md`
+- `docs/report_working_notes/model_justification/comsol_vs_febio_model_positioning.md`
+- `docs/report_working_notes/model_justification/tumor_overlay_plan.md`
+- `docs/report_working_notes/literature_overviews/material_parameter_literature_overview.md`
 
 ## Main Limitations
 

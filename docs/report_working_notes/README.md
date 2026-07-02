@@ -24,7 +24,4 @@ Start here:
 - `pipeline_notes/`  
   Technical notes on COMSOL pipeline usage, exports, and manual CSV workflows.
 
-- `delete_candidates/`  
-  Old plans, status logs, result inventories, and other working files that are not recommended as first-read material.
-
 The final report and presentation are stored in `docs/internship_deliverables/`.
