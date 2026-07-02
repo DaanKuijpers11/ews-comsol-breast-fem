@@ -1,8 +1,7 @@
 # COMSOL analysis output
 
 This folder contains cleaned figures and tables generated from the current COMSOL
-pipeline post-processing outputs. The files are intended for quick inspection,
-report figure selection and comparison between model-development cases.
+pipeline post-processing outputs.
 
 Most subfolders follow the same structure:
 
@@ -22,6 +21,3 @@ The most report-relevant folders are:
 - `manual_postprocess/`: manually collected/exported post-processing summaries
   and comparison figures.
 
-Older metadata-only index files and duplicate per-folder README files were moved
-to `analysis_output/delete_candidates/comsol_pipeline_metadata/`. The result
-figures and tables were left in place.
