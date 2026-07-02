@@ -106,10 +106,6 @@ follows this path:
 - `metrics_compare.py`
   - Lightweight comparison helper for COMSOL metrics and older FEBio-style summaries.
 
-- `prepare_from_febio.py`
-  - Compatibility alias for older local scripts.
-  - New code should use `prepare_source_case.py`.
-
 ## Source-Case Subpackage
 
 The `source_case/` folder contains the source anatomy/material schema and helper generation code:
@@ -132,7 +128,6 @@ The `source_case/` folder contains the source anatomy/material schema and helper
 ## Important Design Notes
 
 - The active package is `ews_fem_pipeline_comsol`.
-- `ews_fem_pipeline_clean` is legacy/source-reference code and should not be required for normal COMSOL runs.
 - TOMLs are the main reproducibility layer. Generated `.mph`, build, solve, and cache artefacts are intentionally not tracked by Git.
 - Tumor/lesion modelling currently uses an analytical `tumor_mask` material overlay plus a separate preview sphere for visual inspection.
 - Cooper ligaments are currently implemented as mechanical support sensitivity scaffolds, not as fully validated anatomical ligament reconstruction.
@@ -146,4 +141,3 @@ These are documentation/maintenance priorities, not requirements before running 
 2. Split `comsol_runner.py` into command execution, build/solve, and postprocess helpers.
 3. Group `ComsolSettings` into clearer nested setting classes after existing TOMLs are stable.
 4. Replace user-facing `assert` checks with explicit `ValueError` or CLI errors.
-5. Keep `prepare_from_febio.py` only as a temporary compatibility shim.

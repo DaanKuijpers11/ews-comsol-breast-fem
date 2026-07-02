@@ -39,6 +39,10 @@ Higher acceleration amplitudes such as `0.50g`, `1.00g`, and `1.25g` are used as
   - TOML files are kept for provenance
   - generated build/solve artefacts are intentionally ignored by Git
 
+- `runs/comsol_testcases/`
+  - small settings templates and testcase references
+  - `all_default_settings.toml` lists the full default COMSOL pipeline settings
+
 - `analysis_output/comsol_pipeline/`
   - lightweight report-oriented evaluation output
   - summary CSV/Markdown tables, comparison plots, sources, and figure indexes
@@ -52,12 +56,8 @@ Higher acceleration amplitudes such as `0.50g`, `1.00g`, and `1.25g` are used as
 - `tools/`
   - evaluation and plotting utilities, including COMSOL comparison plots
 
-- `model_pictures/`
+- `pictures/`
   - local model screenshots and animations used while preparing report figures
-
-- `src/ews_fem_pipeline_clean/`
-  - legacy/source-reference code from the earlier FEM pipeline
-  - normal COMSOL development should use `src/ews_fem_pipeline_comsol`
 
 ## Where To Look First
 
@@ -81,7 +81,7 @@ For new users, the most useful entry points are:
 5. `docs/report_notes/comsol_pipeline/model_justification/`
    - model assumptions and literature justification notes
 
-6. `model_pictures/`
+6. `pictures/`
    - screenshots and animations used to judge geometry and motion visually
 
 ## Active Stage Structure

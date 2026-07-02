@@ -43,7 +43,7 @@ def _build_parser() -> argparse.ArgumentParser:
     sweep_parser = subparsers.add_parser("sweep", help="Batch run multiple TOML cases through COMSOL pipeline.")
     sweep_parser.add_argument("input_files", nargs="+", type=Path)
 
-    compare_parser = subparsers.add_parser("compare-metrics", help="Compare COMSOL and optional legacy metrics across runs.")
+    compare_parser = subparsers.add_parser("compare-metrics", help="Compare COMSOL metrics across runs.")
     compare_parser.add_argument("input_files", nargs="+", type=Path)
     compare_parser.add_argument("--baseline", type=str, default=None, help="Case name to use as baseline.")
 

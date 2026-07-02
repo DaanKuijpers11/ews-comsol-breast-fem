@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Iterable
 
 ROOT = Path(__file__).resolve().parents[1]
-VENDOR = ROOT / "scripts" / "_vendor"
+VENDOR = ROOT / "tools" / "_vendor"
 if VENDOR.exists():
     sys.path.insert(0, str(VENDOR))
 
