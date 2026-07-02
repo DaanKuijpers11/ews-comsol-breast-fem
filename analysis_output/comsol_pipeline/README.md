@@ -1,22 +1,27 @@
-# Clean COMSOL Evaluation Output
+# COMSOL analysis output
 
-This folder is the proposed clean replacement for the old mixed `analysis_output/figures` tree.
-It contains figures and tables generated from current COMSOL `*_metrics.json` and `*_time_series.csv` outputs.
-When available, it also consumes `*_surface_displacement.csv`, `*_landmark_displacement.csv`, and `*_tissue_stress_stats.csv`.
+This folder contains cleaned figures and tables generated from the current COMSOL
+pipeline post-processing outputs. The files are intended for quick inspection,
+report figure selection and comparison between model-development cases.
 
-The plot set emphasizes signed surface/landmark displacement when exported, average response metrics, and max values as hotspot indicators.
-Use `figure_index.md` or `figure_index.csv` to trace every generated figure to its stage source table.
+Most subfolders follow the same structure:
 
-Stages generated:
+- `figures/`: generated PNG/SVG plots for visual comparison.
+- `tables/`: CSV/Markdown summary tables used to create the figures.
 
-- `tier1_comparison`
-- `tier1_comparison_without_stage1`
-- `stage1_baseline`
-- `stage2_chestwall`
-- `stage3_glandular_fraction`
-- `stage4_asymmetry`
-- `report_fixed_material_suite`
-- `stage5_cooper`
-- `stage5_dynamic_amplitude_scout`
-- `stage6_fast_tumor_screening`
-- `stage6_tumor_preview`
+The most report-relevant folders are:
+
+- `report_fixed_material_suite/`: material and volumetric-skin sensitivity
+  comparisons used in the Results section.
+- `stage5_cooper/`: Cooper-like support comparison figures and tables.
+- `stage5_dynamic_amplitude_scout/`: dynamic loading amplitude scout outputs.
+- `stage6_fast_tumor_screening/` and `stage6_tumor_preview/`: tumor placement
+  and lightweight tumor-output checks.
+- `tier1_comparison/` and `tier1_comparison_without_stage1/`: broader overview
+  comparisons across the main model-development stages.
+- `manual_postprocess/`: manually collected/exported post-processing summaries
+  and comparison figures.
+
+Older metadata-only index files and duplicate per-folder README files were moved
+to `analysis_output/delete_candidates/comsol_pipeline_metadata/`. The result
+figures and tables were left in place.
