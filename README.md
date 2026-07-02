@@ -138,6 +138,11 @@ post-processing commands. If you recreate the environment, first confirm that:
 - COMSOL batch is available through the configured TOML paths or system PATH;
 - the relevant TOML case points to an accessible COMSOL/JDK installation when Java compilation is enabled.
 
+Java/JDK is only needed when `java_compile_first = true` in the TOML case. In
+that case, `jdk_root` should point to a local JDK installation, for example an
+Eclipse Temurin/Adoptium JDK. If `java_compile_first = false`, COMSOL batch can
+usually compile and run the generated Java model through its own Java tooling.
+
 For a temporary PowerShell session, the local source package can be exposed with:
 
 ```powershell
