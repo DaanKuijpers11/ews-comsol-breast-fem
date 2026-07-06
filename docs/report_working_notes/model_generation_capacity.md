@@ -13,27 +13,26 @@ build-only checks, sensitivity cases and post-processing targets. They should be
 interpreted as a case library, not as 113 fully solved and validated final
 models.
 
-The third column gives an approximate count of cases for which a run or
-post-processing trace is retained in `analysis_output/comsol_pipeline/`. This
-includes evidence such as result-MPH references, metrics JSON files, time-series
-CSV files and manually exported post-processing tables. Because many generated
-outputs were cleaned from the repository, this is a trace-based estimate rather
-than a complete audit of every COMSOL run that was ever started.
+Many of these cases were built, solved or post-processed during development, but
+not all generated output folders were retained after repository cleanup. The
+counts below therefore describe the preserved case-definition library. For
+completed result evidence, use the retained analysis summaries in
+`analysis_output/comsol_pipeline/` and the final report figures/tables.
 
-| Case group | Number of TOML cases | Retained run/postprocess traces |
-|---|---:|---:|
-| `dynamic_realism_branch` | 7 | 0 |
-| `geometry_stage1` | 11 | 7 |
-| `geometry_stage2_chestwall` | 11 | 4 |
-| `geometry_stage3` | 3 | 1 |
-| `geometry_stage4` | 4 | 2 |
-| `geometry_stage5` | 38 | approximately 18 |
-| `geometry_stage5_1_motion_scout` | 8 | 2 |
-| `geometry_stage6` | 9 | at least 4 |
-| `material_parameter_sensitivity` | 6 | 0 |
-| `report_fixed_material_suite` | 6 | 2 |
-| `sandbox_testcases` | 10 | 0 |
-| **Total** | **113** | **at least 40** |
+| Case group | Number of TOML cases |
+|---|---:|
+| `dynamic_realism_branch` | 7 |
+| `geometry_stage1` | 11 |
+| `geometry_stage2_chestwall` | 11 |
+| `geometry_stage3` | 3 |
+| `geometry_stage4` | 4 |
+| `geometry_stage5` | 38 |
+| `geometry_stage5_1_motion_scout` | 8 |
+| `geometry_stage6` | 9 |
+| `material_parameter_sensitivity` | 6 |
+| `report_fixed_material_suite` | 6 |
+| `sandbox_testcases` | 10 |
+| **Total** | **113** |
 
 ## Discrete Variant Families
 
@@ -135,19 +134,20 @@ For reporting and handover, it is therefore clearer to separate:
 - **Completed result cases:** the subset of TOML cases that were actually built,
   solved and post-processed.
 
-## Suggested Report or Presentation Wording
+## Interpretation
 
-The COMSOL pipeline now supports a combinatorial set of model variants rather
-than a single manually edited model. In the cleaned repository, 113 TOML case
-definitions are stored as reference, scout, build-check and sensitivity cases,
-with retained run or post-processing traces for at least 40 cases. When the
-implemented anatomical, support, loading and tumor-option families are combined
-conservatively, the pipeline can define on the order of tens of thousands of
-discrete model configurations. If the finite skin/material routes used in the
-report are also included, this rises to approximately 2.5e5 possible discrete
-definitions. The true parameter space is larger because many settings, such as
-geometry offsets, tissue stiffnesses, tumor locations and loading amplitudes, are
-numerical inputs that can be sampled continuously. These numbers should
-therefore be interpreted as model-generation capacity only; the completed
-quantitative results remain limited to the solved and post-processed case
-subset.
+The case counts and combination estimates in this note describe model-generation
+capacity. They should not be used as counts of validated models or final result
+cases. The main practical distinction is:
+
+- The 113 TOML files describe the preserved case-definition library.
+- The discrete combination count describes how many model definitions can be
+  created by recombining the implemented option families.
+- The actual parameter space is larger because many settings are numerical and
+  can be sampled at arbitrary values.
+- The quantitative result set is smaller and is limited to the cases that were
+  selected for solving, post-processing and reporting.
+
+This makes the pipeline useful for systematic future model generation: new cases
+can be created by copying an existing TOML file, changing one or more parameters
+and rerunning the same build/solve/post-processing route.
