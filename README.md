@@ -179,6 +179,19 @@ Check CLI options:
 python -m ews_fem_pipeline_comsol --help
 ```
 
+## Computational Notes
+
+Small build checks and lightweight post-processing can usually be run on a local
+workstation. Full COMSOL solves, volumetric-skin cases, tumor-overlay cases and
+large surface/stress exports can become slow or memory-limited on a laptop. For
+larger sweeps, the TU/e HPC COMSOL environment is the preferred next step because
+it can provide more CPU cores, more memory and stable long-duration jobs.
+
+HPC execution should be treated as a compute-capacity improvement, not as a
+different model definition. The same TOML case definitions should be used where
+possible, with only machine-specific paths such as COMSOL executables, JDK paths
+and output locations adjusted for the server environment.
+
 ## Manual COMSOL Workflow
 
 The normal route is to run COMSOL through the Python CLI. For diagnostic cases,
