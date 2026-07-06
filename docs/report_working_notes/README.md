@@ -10,7 +10,10 @@ Start here:
 2. `current_limitations.md`  
    Main modelling limitations, interpretation caveats, and recommended next steps.
 
-3. `pipeline_notes/comsol_pipeline_guide.md`  
+3. `model_generation_capacity.md`  
+   Estimate of the implemented COMSOL model-variant capacity and how to interpret it.
+
+4. `pipeline_notes/comsol_pipeline_guide.md`  
    Practical guide for running and post-processing COMSOL cases.
 
 ## Folder Overview
