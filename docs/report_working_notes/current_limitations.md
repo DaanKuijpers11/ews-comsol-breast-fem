@@ -58,6 +58,8 @@ Some solved `.mph` files are large, and full `ews_surface` post-processing can b
 
 Future work should consider shorter paths, clearer case names, selected output reduction, and TU/e - HPC servers execution for large sweeps.
 
+An initial TU/e HPC setup test was performed after repository cleanup. The HPC environment was reached and the Python environment was configured successfully using Python 3.11 and Java 17. Because the COMSOL module did not expose separate `comsolbatch` or `comsolcompile` executables, small wrapper scripts were used around `comsol batch` and `comsol compile`. This allowed the generated Java builder to be executed in batch mode. However, Stage 2 and Stage 5 COMSOL geometries failed during geometry boolean operations (`Intersection` / `Difference`) on the HPC Linux setup, while the same Stage 5 case built successfully on the local Windows COMSOL 6.4.0.378 installation. This suggests a platform or headless-batch geometry robustness issue. Before using HPC for larger parameter sweeps, the COMSOL geometry construction should be made more robust across platforms.
+
 ## Recommended Next Steps
 
 1. Define one clean reference case with short case naming and complete post-processing.
