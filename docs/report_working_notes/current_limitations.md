@@ -56,7 +56,7 @@ Previous FEBio results are useful as project context and mechanical benchmarks, 
 
 Some solved `.mph` files are large, and full `ews_surface` post-processing can be slow or impractical on a local laptop. The lightweight `global` mode is useful for smoke tests, but it cannot replace full surface/stress export when those outputs are needed.
 
-Future work should consider shorter paths, clearer case names, selected output reduction, and possibly TU/e/HPC execution for large sweeps.
+Future work should consider shorter paths, clearer case names, selected output reduction, and TU/e - HPC servers execution for large sweeps.
 
 ## Recommended Next Steps
 
@@ -66,6 +66,7 @@ Future work should consider shorter paths, clearer case names, selected output r
 4. Build a compact surface-evaluation workflow that produces report-ready metrics without manual COMSOL interaction.
 5. Revisit the skin and Cooper-support definitions after the dynamic input and surface metrics are stable.
 6. Extend tumor analysis only after matched controls and full surface/tumor-mask post-processing are reliable.
+7. Consider looking at faster ways to run the model, e.g. through the TU/e - HPC servers
 
 ## Files Worth Reading
 
